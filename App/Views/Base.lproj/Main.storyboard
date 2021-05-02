@@ -89,6 +89,9 @@
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="My Shop"/>
+                                <connections>
+                                    <action selector="myShopButton:" destination="OtB-wM-eYN" eventType="touchUpInside" id="j3v-h0-Y1I"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-29-380">
                                 <rect key="frame" x="81" y="464" width="253" height="105"/>
@@ -96,6 +99,9 @@
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Manage My Shop"/>
+                                <connections>
+                                    <action selector="manageShopButton:" destination="OtB-wM-eYN" eventType="touchUpInside" id="pjJ-yu-84W"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PyT-w0-gBd"/>
@@ -104,11 +110,43 @@
                     <tabBarItem key="tabBarItem" title="My Shop" id="mpm-CP-kgB" userLabel="My Shop"/>
                     <connections>
                         <segue destination="4dw-qu-spj" kind="show" identifier="toSignIn" id="KqS-h4-euR"/>
+                        <segue destination="aoZ-0o-xQf" kind="presentation" identifier="goTomyShopView" id="yMX-7A-p0m"/>
+                        <segue destination="ZZ9-07-fEV" kind="presentation" identifier="goToManageShop" id="b9P-Sa-IzF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ejh-aV-Quo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-175.36231884057972" y="375"/>
+        </scene>
+        <!--ManageStoreView-->
+        <scene sceneID="ubV-0j-Jwr">
+            <objects>
+                <viewController id="ZZ9-07-fEV" userLabel="ManageStoreView" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4u2-B4-ej8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xBT-PV-gZf"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIt-ZD-639" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="948" y="851"/>
+        </scene>
+        <!--MyStoreView-->
+        <scene sceneID="zfz-85-5Pc">
+            <objects>
+                <viewController id="aoZ-0o-xQf" userLabel="MyStoreView" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vrb-IY-FHk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5Pw-UN-4Hz"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJk-jB-J5n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="-11"/>
         </scene>
         <!--Entry-->
         <scene sceneID="KYV-ft-ht1">
@@ -288,7 +326,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hzI-25-c6j"/>
+        <segue reference="KqS-h4-euR"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">

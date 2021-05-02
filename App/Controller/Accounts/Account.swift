@@ -9,7 +9,7 @@ import UIKit
 import Parse
 
 class Account: UIViewController {
-
+    
     @IBOutlet weak var accountTable: UITableView!
     @IBOutlet weak var accountTitle: UITextField!
     
@@ -53,7 +53,7 @@ class Account: UIViewController {
             accountTable.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
-
+    
 }
 
 extension Account: UITableViewDelegate{
