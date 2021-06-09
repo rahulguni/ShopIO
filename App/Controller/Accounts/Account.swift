@@ -60,13 +60,13 @@ extension Account: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        switch indexPath {
         //Perform Segue to Sign In Page if Sign In is clicked.
-        if(indexPath == [0,0]){
-            performSegue(withIdentifier: "goToSignIn", sender: self)
-        }
-        
+        case [0,0]:
+            performSegue(withIdentifier: "goToSignIn", sender: self);
+            
         //Sign out the user if Sign Out is selected
-        if(indexPath == [4,0]) {
+        case [4,0]:
             let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
                 alert.dismiss(animated: true, completion: nil)
@@ -79,10 +79,11 @@ extension Account: UITableViewDelegate{
                 }
             }))
             self.present(alert, animated: true, completion: nil)
+            
+        default:
+            return;
         }
     }
-    
-    
 }
 
 extension Account: UITableViewDataSource{
@@ -101,6 +102,12 @@ extension Account: UITableViewDataSource{
         return headers.cells.count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
+        cell.textLabel?.text = headers.cells[indexPath.section][indexPath.row]
+        return cell
+    }
+    
     //Render sign in and sign out options from table sections according to current user
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(currentUser != nil && section == 0) {
@@ -111,13 +118,5 @@ extension Account: UITableViewDataSource{
         }
         return headers.cells[section].count
     }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
-        cell.textLabel?.text = headers.cells[indexPath.section][indexPath.row]
-        return cell
-    }
-    
     
 }

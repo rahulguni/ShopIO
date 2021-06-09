@@ -24,6 +24,13 @@ class SignUp: UIViewController {
     //Add user to table
     @IBAction func signUp(_ sender: Any) {
         let user = PFUser()
+        if(lastName.text == "" || email.text == "" || password.text == "" || phone.text == ""){
+            let alert = UIAlertController(title: "Error Signing Up", message: "One or more entry field missing. Please fill out all the details.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         if(password.text == passwordRe.text){
             //Using email as username
             user.username = email.text
@@ -53,7 +60,13 @@ class SignUp: UIViewController {
         }
         else{
             //throw error
-            print("Passwords do not match.");
+            password.text = "";
+            passwordRe.text = "";
+            let alert = UIAlertController(title: "Error Signing Up", message: "Passwords do not match.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

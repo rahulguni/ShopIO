@@ -67,6 +67,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DE2477CA266B1EDC00B53151 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DE8358C02636518F00E3F1A7 /* AppDelegate.swift */,
+				DE8358C22636518F00E3F1A7 /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DE2477CB266B20EB00B53151 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DE8358C62636518F00E3F1A7 /* Main.storyboard */,
+				DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		DE3718BB26369D73001CF554 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,13 +124,11 @@
 		DE8358BF2636518F00E3F1A7 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DE8358CE2636518F00E3F1A7 /* Info.plist */,
+				DE2477CA266B1EDC00B53151 /* Resources */,
 				DE3E66742637A4B600128755 /* Model */,
 				DE8358D6263655B400E3F1A7 /* Controller */,
 				DE8358D5263655AE00E3F1A7 /* Views */,
-				DE8358C02636518F00E3F1A7 /* AppDelegate.swift */,
-				DE8358C22636518F00E3F1A7 /* SceneDelegate.swift */,
-				DE8358C92636518F00E3F1A7 /* Assets.xcassets */,
-				DE8358CE2636518F00E3F1A7 /* Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -120,8 +136,8 @@
 		DE8358D5263655AE00E3F1A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DE8358C62636518F00E3F1A7 /* Main.storyboard */,
-				DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */,
+				DE8358C92636518F00E3F1A7 /* Assets.xcassets */,
+				DE2477CB266B20EB00B53151 /* Storyboards */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -414,6 +430,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HQ9LH2Q762;
 				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,7 +438,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rahul.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -434,6 +451,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HQ9LH2Q762;
 				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,7 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rahul.App;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

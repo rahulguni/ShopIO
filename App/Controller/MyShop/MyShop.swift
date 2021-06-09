@@ -62,6 +62,4 @@ class MyShop: UIViewController{
         performSegue(withIdentifier: "goTomyShopView", sender: self)
     }
     
-    
-    
 }
