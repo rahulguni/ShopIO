@@ -8,6 +8,10 @@
 import Foundation
 
 struct AccountTableOptions {
+    let headers = [
+        "", "Personal Info", "Settings", "ShopIO", ""
+    ]
+    
     let cells = [
         ["Sign In"],
         ["Shipping Address", "Payment Methods", "Order History"],

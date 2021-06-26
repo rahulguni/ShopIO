@@ -38,22 +38,20 @@ class SignUp: UIViewController {
             user.password = password.text
             user["fName"] = firstName.text
             user["lName"] = lastName.text
-            user["phone"] = phone.text
+            user["phone"] = Int(phone.text!)
+            user["lastLogin"] = NSDate()
             
             user.signUpInBackground {
                 (succeeded: Bool, error: Error?) -> Void in
                 if let error = error {
                   let errorString = error.localizedDescription
                   // Show the errorString somewhere and let the user try again.
-                    let alert = UIAlertController(title: "Error Signing Up", message: errorString, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                    }))
+                    let alert = networkErrorAlert(title: "Error Signing Up", errorString: errorString)
                     self.present(alert, animated: true, completion: nil)
                 } else {
                   // Hooray! Let them use the app now.
                     currentUser = PFUser.current()
-                    self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                    self.performSegue(withIdentifier: "goToAddress", sender: self)
                 }
             }
             
@@ -62,10 +60,7 @@ class SignUp: UIViewController {
             //throw error
             password.text = "";
             passwordRe.text = "";
-            let alert = UIAlertController(title: "Error Signing Up", message: "Passwords do not match.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-            }))
+            let alert = networkErrorAlert(title: "Error Signing Up", errorString: "Passwords do not match. Please try again.")
             self.present(alert, animated: true, completion: nil)
         }
     }

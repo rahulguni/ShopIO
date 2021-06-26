@@ -13,6 +13,10 @@ class SignIn: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     
+    /* Since Sign In gets called from different places, declare a variable to perform
+      segue accordingly. */
+    var dismiss : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,15 +28,29 @@ class SignIn: UIViewController {
             (user: PFUser?, error: Error?) -> Void in
             if user != nil {
                 currentUser = PFUser.current()
-                self.performSegue(withIdentifier: "reloadAccount", sender: self)
-            } else {
+                
+                //Save last login data
+                user!["lastLogin"] = NSDate()
+                user?.saveInBackground{(success, error) in
+                    if(success) {
+                        if !self.dismiss {
+                            self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                        }
+                        else{
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                    else {
+                        let alert = networkErrorAlert(title: "Error Signing In.", errorString: error!.localizedDescription)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+            else {
                 if let error = error {
                     let errorString = error.localizedDescription
                     // Show the errorString somewhere and let the user try again.
-                    let alert = UIAlertController(title: "Error Loggin In", message: errorString, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                        NSLog("The \"OK\" alert occured.")
-                    }))
+                    let alert = networkErrorAlert(title: "Error Signing In.", errorString: errorString)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
@@ -40,7 +58,7 @@ class SignIn: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "reloadAccount", sender: self)
+        dismiss(animated: true, completion: nil)
     }
     
     

@@ -8,6 +8,7 @@
 import UIKit
 import Parse
 
+// MARK: - UIView
 class Account: UIViewController {
     
     @IBOutlet weak var accountTable: UITableView!
@@ -56,50 +57,55 @@ class Account: UIViewController {
     
 }
 
+//MARK: - UITableDelegate
 extension Account: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath {
-        //Perform Segue to Sign In Page if Sign In is clicked.
-        case [0,0]:
-            performSegue(withIdentifier: "goToSignIn", sender: self);
-            
-        //Sign out the user if Sign Out is selected
-        case [4,0]:
-            let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
-                alert.dismiss(animated: true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Sign Out", comment: "Sign Out Button"), style: .default, handler: { _ in
-                PFUser.logOut()
-                currentUser = PFUser.current()
-                DispatchQueue.main.async{
-                    self.reloadViewData()
-                }
-            }))
-            self.present(alert, animated: true, completion: nil)
-            
-        default:
-            return;
+        
+            //Perform Segue to Sign In Page if Sign In is clicked.
+            case [0,0]:
+                performSegue(withIdentifier: "goToSignIn", sender: self);
+                
+            //Sign out the user if Sign Out is selected
+            case [4,0]:
+                let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Sign Out", comment: "Sign Out Button"), style: .default, handler: { _ in
+                    PFUser.logOut()
+                    currentUser = PFUser.current()
+                    DispatchQueue.main.async{
+                        self.reloadViewData()
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+                
+            default:
+                return;
         }
     }
 }
 
+//MARK: - UITableDataSource
 extension Account: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if(currentUser != nil && section == 0) {
-            return 0.0
+        if(section == 0){
+            return CGFloat.leastNormalMagnitude
         }
-        if(currentUser == nil && section == 4) {
-            return 0.0
-        }
-        return 40.0;
+        return 20.0;
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return headers.cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+        return headers.headers[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

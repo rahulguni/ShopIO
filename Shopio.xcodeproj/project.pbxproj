@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6A5B9145287AFE088DD0AB2C /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C630384B2A734E972FA5C16 /* Pods_App.framework */; };
+		DE1F3596268682F3005195CA /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* Address.swift */; };
+		DE1F35982686891B005195CA /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F35972686891B005195CA /* StateModel.swift */; };
+		DE1F359A26869F89005195CA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F359926869F89005195CA /* Alerts.swift */; };
 		DE3718BE2636A051001CF554 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignIn.swift */; };
 		DE3718C12636A063001CF554 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUp.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
@@ -24,6 +27,9 @@
 		14FBC875224EB524A94A8ADC /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		5C630384B2A734E972FA5C16 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1EC63427575DA26D5E1497D /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		DE1F3595268682F3005195CA /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		DE1F35972686891B005195CA /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		DE1F359926869F89005195CA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		DE3718BD2636A051001CF554 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		DE3718C02636A063001CF554 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 				DE8358C42636518F00E3F1A7 /* Account.swift */,
 				DE3718BD2636A051001CF554 /* SignIn.swift */,
 				DE3718C02636A063001CF554 /* SignUp.swift */,
+				DE1F3595268682F3005195CA /* Address.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -99,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				DE3E66752637A4E900128755 /* AccountTableOptions.swift */,
+				DE1F35972686891B005195CA /* StateModel.swift */,
+				DE1F359926869F89005195CA /* Alerts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,7 +204,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DE8358B82636518E00E3F1A7 /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = DE8358B82636518E00E3F1A7 /* Build configuration list for PBXProject "Shopio" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -278,7 +287,10 @@
 				DE3718BE2636A051001CF554 /* SignIn.swift in Sources */,
 				DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */,
 				DE8358C32636518F00E3F1A7 /* SceneDelegate.swift in Sources */,
+				DE1F35982686891B005195CA /* StateModel.swift in Sources */,
+				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUp.swift in Sources */,
+				DE1F3596268682F3005195CA /* Address.swift in Sources */,
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -411,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -466,7 +478,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DE8358B82636518E00E3F1A7 /* Build configuration list for PBXProject "App" */ = {
+		DE8358B82636518E00E3F1A7 /* Build configuration list for PBXProject "Shopio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DE8358CF2636518F00E3F1A7 /* Debug */,
