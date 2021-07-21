@@ -14,7 +14,7 @@ struct AccountTableOptions {
     
     let cells = [
         ["Sign In"],
-        ["Shipping Address", "Payment Methods", "Order History"],
+        ["My Address", "Payment Methods", "Order History"],
         ["Privacy", "Security", "Edit Profile"],
         ["About Us", "Contact Us", "Privacy Policy"],
         ["Sign Out"]

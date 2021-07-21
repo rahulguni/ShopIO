@@ -9,7 +9,7 @@ import UIKit
 import Parse
 
 
-class SignIn: UIViewController {
+class SignInViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     
@@ -28,7 +28,6 @@ class SignIn: UIViewController {
             (user: PFUser?, error: Error?) -> Void in
             if user != nil {
                 currentUser = PFUser.current()
-                
                 //Save last login data
                 user!["lastLogin"] = NSDate()
                 user?.saveInBackground{(success, error) in
@@ -37,7 +36,7 @@ class SignIn: UIViewController {
                             self.performSegue(withIdentifier: "reloadAccount", sender: self)
                         }
                         else{
-                            self.dismiss(animated: true, completion: nil)
+                            self.performSegue(withIdentifier: "reloadMyShop", sender: self)
                         }
                     }
                     else {

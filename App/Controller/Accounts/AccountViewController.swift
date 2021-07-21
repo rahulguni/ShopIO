@@ -9,7 +9,7 @@ import UIKit
 import Parse
 
 // MARK: - UIView
-class Account: UIViewController {
+class AccountViewController: UIViewController {
     
     @IBOutlet weak var accountTable: UITableView!
     @IBOutlet weak var accountTitle: UITextField!
@@ -58,7 +58,7 @@ class Account: UIViewController {
 }
 
 //MARK: - UITableDelegate
-extension Account: UITableViewDelegate{
+extension AccountViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -90,7 +90,7 @@ extension Account: UITableViewDelegate{
 }
 
 //MARK: - UITableDataSource
-extension Account: UITableViewDataSource{
+extension AccountViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if(section == 0){

@@ -8,40 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		6A5B9145287AFE088DD0AB2C /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C630384B2A734E972FA5C16 /* Pods_App.framework */; };
-		DE1F3596268682F3005195CA /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* Address.swift */; };
+		DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* AddressViewController.swift */; };
 		DE1F35982686891B005195CA /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F35972686891B005195CA /* StateModel.swift */; };
 		DE1F359A26869F89005195CA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F359926869F89005195CA /* Alerts.swift */; };
-		DE3718BE2636A051001CF554 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignIn.swift */; };
-		DE3718C12636A063001CF554 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUp.swift */; };
+		DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278924268D8D57009CD37C /* MyStoreViewController.swift */; };
+		DE278927268D8DF4009CD37C /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278926268D8DF4009CD37C /* Shop.swift */; };
+		DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignInViewController.swift */; };
+		DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUpViewController.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
+		DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56B5BC269FF84B005E68E2 /* Product.swift */; };
+		DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */; };
+		DE768903269FFF3400F0C888 /* EditShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE768902269FFF3400F0C888 /* EditShopViewController.swift */; };
+		DE76890526A004E200F0C888 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890426A004E200F0C888 /* General.swift */; };
+		DE76890726A007F300F0C888 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890626A007F300F0C888 /* Address.swift */; };
+		DE76890926A016F400F0C888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890826A016F400F0C888 /* User.swift */; };
 		DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358C02636518F00E3F1A7 /* AppDelegate.swift */; };
 		DE8358C32636518F00E3F1A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358C22636518F00E3F1A7 /* SceneDelegate.swift */; };
-		DE8358C52636518F00E3F1A7 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358C42636518F00E3F1A7 /* Account.swift */; };
+		DE8358C52636518F00E3F1A7 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8358C42636518F00E3F1A7 /* AccountViewController.swift */; };
 		DE8358C82636518F00E3F1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE8358C62636518F00E3F1A7 /* Main.storyboard */; };
 		DE8358CA2636518F00E3F1A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE8358C92636518F00E3F1A7 /* Assets.xcassets */; };
 		DE8358CD2636518F00E3F1A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */; };
-		DE916453263CFAA200312D35 /* MyShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE916452263CFAA200312D35 /* MyShop.swift */; };
+		DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE916452263CFAA200312D35 /* MyShopViewController.swift */; };
+		DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */; };
+		DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14FBC875224EB524A94A8ADC /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		5C630384B2A734E972FA5C16 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1EC63427575DA26D5E1497D /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
-		DE1F3595268682F3005195CA /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		DE1F3595268682F3005195CA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		DE1F35972686891B005195CA /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DE1F359926869F89005195CA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
-		DE3718BD2636A051001CF554 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
-		DE3718C02636A063001CF554 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		DE278924268D8D57009CD37C /* MyStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreViewController.swift; sourceTree = "<group>"; };
+		DE278926268D8DF4009CD37C /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		DE3718BD2636A051001CF554 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DE3718C02636A063001CF554 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
+		DE56B5BC269FF84B005E68E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductExtraViewController.swift; sourceTree = "<group>"; };
+		DE768902269FFF3400F0C888 /* EditShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopViewController.swift; sourceTree = "<group>"; };
+		DE76890426A004E200F0C888 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		DE76890626A007F300F0C888 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		DE76890826A016F400F0C888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DE8358BD2636518F00E3F1A7 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE8358C02636518F00E3F1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE8358C22636518F00E3F1A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DE8358C42636518F00E3F1A7 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		DE8358C42636518F00E3F1A7 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		DE8358C72636518F00E3F1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE8358C92636518F00E3F1A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE8358CC2636518F00E3F1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE8358CE2636518F00E3F1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE916452263CFAA200312D35 /* MyShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShop.swift; sourceTree = "<group>"; };
+		DE916452263CFAA200312D35 /* MyShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopViewController.swift; sourceTree = "<group>"; };
+		DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +114,10 @@
 		DE3718BB26369D73001CF554 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				DE8358C42636518F00E3F1A7 /* Account.swift */,
-				DE3718BD2636A051001CF554 /* SignIn.swift */,
-				DE3718C02636A063001CF554 /* SignUp.swift */,
-				DE1F3595268682F3005195CA /* Address.swift */,
+				DE8358C42636518F00E3F1A7 /* AccountViewController.swift */,
+				DE3718BD2636A051001CF554 /* SignInViewController.swift */,
+				DE3718C02636A063001CF554 /* SignUpViewController.swift */,
+				DE1F3595268682F3005195CA /* AddressViewController.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -108,6 +128,11 @@
 				DE3E66752637A4E900128755 /* AccountTableOptions.swift */,
 				DE1F35972686891B005195CA /* StateModel.swift */,
 				DE1F359926869F89005195CA /* Alerts.swift */,
+				DE278926268D8DF4009CD37C /* Shop.swift */,
+				DE56B5BC269FF84B005E68E2 /* Product.swift */,
+				DE76890426A004E200F0C888 /* General.swift */,
+				DE76890626A007F300F0C888 /* Address.swift */,
+				DE76890826A016F400F0C888 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,7 +188,12 @@
 		DE916451263CFA8400312D35 /* MyShop */ = {
 			isa = PBXGroup;
 			children = (
-				DE916452263CFAA200312D35 /* MyShop.swift */,
+				DE916452263CFAA200312D35 /* MyShopViewController.swift */,
+				DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */,
+				DE278924268D8D57009CD37C /* MyStoreViewController.swift */,
+				DE768902269FFF3400F0C888 /* EditShopViewController.swift */,
+				DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */,
+				DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */,
 			);
 			path = MyShop;
 			sourceTree = "<group>";
@@ -282,16 +312,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE916453263CFAA200312D35 /* MyShop.swift in Sources */,
-				DE8358C52636518F00E3F1A7 /* Account.swift in Sources */,
-				DE3718BE2636A051001CF554 /* SignIn.swift in Sources */,
+				DE76890726A007F300F0C888 /* Address.swift in Sources */,
+				DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */,
+				DE8358C52636518F00E3F1A7 /* AccountViewController.swift in Sources */,
+				DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */,
+				DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */,
+				DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */,
 				DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */,
+				DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */,
+				DE768903269FFF3400F0C888 /* EditShopViewController.swift in Sources */,
 				DE8358C32636518F00E3F1A7 /* SceneDelegate.swift in Sources */,
 				DE1F35982686891B005195CA /* StateModel.swift in Sources */,
+				DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */,
+				DE278927268D8DF4009CD37C /* Shop.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
-				DE3718C12636A063001CF554 /* SignUp.swift in Sources */,
-				DE1F3596268682F3005195CA /* Address.swift in Sources */,
+				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
+				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
+				DE76890926A016F400F0C888 /* User.swift in Sources */,
+				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
+				DE76890526A004E200F0C888 /* General.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +415,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
