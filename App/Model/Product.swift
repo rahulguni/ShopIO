@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Parse
 
-struct Product {
+class Product {
     private var objectId: String?
     private var userId: String?
     private var title: String?
@@ -31,9 +31,20 @@ struct Product {
         self.price = productObject!["price"] as? Double
         self.quantity = productObject!["quantity"] as? Int
         self.shopId = productObject!["shopId"] as? String
+        self.discount = productObject!["discount"] as? Float
+        self.content = productObject!["content"] as? String
     }
     
-    mutating func setObjectId(product productObject: PFObject?){
+    func setProduct(product productObject: Product) {
+        self.title = productObject.getTitle()
+        self.summary = productObject.getSummary()
+        self.price = productObject.getOriginalPriceDouble()
+        self.quantity = productObject.getQuantity()
+        self.discount = productObject.getDiscount()
+        self.content = productObject.getContent()
+    }
+    
+    func setObjectId(product productObject: PFObject?){
         self.objectId = productObject?.objectId
     }
     
@@ -57,11 +68,40 @@ struct Product {
         return self.summary!
     }
     
-    func getPrice() -> Double {
+    func getContent() -> String {
+        return self.content!
+    }
+    
+    func getDiscount() -> Float {
+        return self.discount!
+    }
+    
+    func getOriginalPrice() -> String {
+        return "$" + String(self.price!)
+    }
+    
+    func getOriginalPriceDouble() -> Double {
         return self.price!
     }
     
-    func getQuantity() -> String {
+    func getPrice() -> Double {
+        let discount = getDiscount()
+        var newPrice = self.price! - ((Double(discount) / 100) * self.price!)
+        newPrice = (newPrice * 100).rounded() / 100
+        return newPrice
+    }
+    
+    func getPriceAsString() -> String {
+        let currPrice = getPrice()
+        return "$" + String(currPrice)
+    }
+    
+    func getQuantityAsString() -> String {
         return String(self.quantity!)
     }
+    
+    func getQuantity() -> Int {
+        return self.quantity!
+    }
 }
+

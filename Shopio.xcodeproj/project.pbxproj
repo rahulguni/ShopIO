@@ -17,8 +17,9 @@
 		DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUpViewController.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
 		DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56B5BC269FF84B005E68E2 /* Product.swift */; };
+		DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6717E226A90EA700FE60DA /* MyProductViewController.swift */; };
 		DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */; };
-		DE768903269FFF3400F0C888 /* EditShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE768902269FFF3400F0C888 /* EditShopViewController.swift */; };
+		DE768903269FFF3400F0C888 /* ManageShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE768902269FFF3400F0C888 /* ManageShopViewController.swift */; };
 		DE76890526A004E200F0C888 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890426A004E200F0C888 /* General.swift */; };
 		DE76890726A007F300F0C888 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890626A007F300F0C888 /* Address.swift */; };
 		DE76890926A016F400F0C888 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE76890826A016F400F0C888 /* User.swift */; };
@@ -30,6 +31,10 @@
 		DE8358CD2636518F00E3F1A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */; };
 		DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE916452263CFAA200312D35 /* MyShopViewController.swift */; };
 		DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */; };
+		DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */; };
+		DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */; };
+		DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */; };
+		DED520B526ABCAB000B77652 /* MyInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */; };
 		DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +51,9 @@
 		DE3718C02636A063001CF554 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
 		DE56B5BC269FF84B005E68E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		DE6717E226A90EA700FE60DA /* MyProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductViewController.swift; sourceTree = "<group>"; };
 		DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductExtraViewController.swift; sourceTree = "<group>"; };
-		DE768902269FFF3400F0C888 /* EditShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShopViewController.swift; sourceTree = "<group>"; };
+		DE768902269FFF3400F0C888 /* ManageShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageShopViewController.swift; sourceTree = "<group>"; };
 		DE76890426A004E200F0C888 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		DE76890626A007F300F0C888 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		DE76890826A016F400F0C888 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -61,6 +67,10 @@
 		DE8358CE2636518F00E3F1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE916452263CFAA200312D35 /* MyShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopViewController.swift; sourceTree = "<group>"; };
 		DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
+		DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsCollectionViewCell.swift; sourceTree = "<group>"; };
+		DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInventoryViewController.swift; sourceTree = "<group>"; };
 		DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +143,8 @@
 				DE76890426A004E200F0C888 /* General.swift */,
 				DE76890626A007F300F0C888 /* Address.swift */,
 				DE76890826A016F400F0C888 /* User.swift */,
+				DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */,
+				DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -179,6 +191,7 @@
 		DE8358D6263655B400E3F1A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */,
 				DE916451263CFA8400312D35 /* MyShop */,
 				DE3718BB26369D73001CF554 /* Accounts */,
 			);
@@ -191,9 +204,11 @@
 				DE916452263CFAA200312D35 /* MyShopViewController.swift */,
 				DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */,
 				DE278924268D8D57009CD37C /* MyStoreViewController.swift */,
-				DE768902269FFF3400F0C888 /* EditShopViewController.swift */,
+				DE768902269FFF3400F0C888 /* ManageShopViewController.swift */,
 				DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */,
 				DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */,
+				DE6717E226A90EA700FE60DA /* MyProductViewController.swift */,
+				DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */,
 			);
 			path = MyShop;
 			sourceTree = "<group>";
@@ -312,6 +327,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */,
+				DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */,
 				DE76890726A007F300F0C888 /* Address.swift in Sources */,
 				DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */,
 				DE8358C52636518F00E3F1A7 /* AccountViewController.swift in Sources */,
@@ -320,16 +337,19 @@
 				DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */,
 				DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */,
 				DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */,
-				DE768903269FFF3400F0C888 /* EditShopViewController.swift in Sources */,
+				DE768903269FFF3400F0C888 /* ManageShopViewController.swift in Sources */,
 				DE8358C32636518F00E3F1A7 /* SceneDelegate.swift in Sources */,
 				DE1F35982686891B005195CA /* StateModel.swift in Sources */,
+				DED520B526ABCAB000B77652 /* MyInventoryViewController.swift in Sources */,
 				DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */,
 				DE278927268D8DF4009CD37C /* Shop.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
 				DE76890926A016F400F0C888 /* User.swift in Sources */,
+				DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */,
 				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,
+				DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */,
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
 				DE76890526A004E200F0C888 /* General.swift in Sources */,
 			);

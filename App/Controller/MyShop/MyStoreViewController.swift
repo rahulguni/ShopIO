@@ -8,25 +8,71 @@
 import UIKit
 import Parse
 
-class MyStoreViewController: UIViewController {
 
+//MARK: - UIViewController
+class MyStoreViewController: UIViewController {
+    
     @IBOutlet weak var shopSlogan: UITextField!
     @IBOutlet weak var shopTitle: UITextField!
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var noProductText: UITextField!
     @IBOutlet weak var addProduct: UIButton!
-    @IBOutlet weak var productsField: UITextView!
+    @IBOutlet weak var productsCollection: UICollectionView!
+    @IBOutlet weak var editSwitch: UISwitch!
+    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var editLabel: UILabel!
     
     //Build a shop model
     private var currShop : Shop?
     
     //a dictionary to store all products of the shop
-    private var myProducts: [String: Product]?
+    private var myProducts: [Product] = []
+    //selected product
+    private var currProduct: Product?
+    //Editable switch variable
+    private var forEdit: Bool = false
+    //view mode for owner and customers
+    private var forOwner: Bool = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Set up products collection view
+        productsCollection.delegate = self
+        productsCollection.dataSource = self
+        
+        //set up edit field
+        if(forOwner) {
+            editSwitch.isHidden = false
+            editLabel.isHidden = false
+            followButton.isHidden = true
+            if(myProducts.count == 0) {
+                hasProduct(false)
+            }
+            else {
+                hasProduct(true)
+            }
+        }
+        
+        //Set up other buttons and labels
+        modifyButton(button: addProduct)
+        shopSlogan.text = currShop?.getShopSlogan()
+        shopTitle.text = currShop?.getShopTitle()
+        productsCollection.layer.borderWidth = 0.5
+        productsCollection.layer.borderColor = UIColor.black.cgColor
+        
+        editSwitch.isOn = false
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "toAddProduct") {
             let destination = segue.destination as! AddProductViewController
             destination.setShop(shop: currShop)
+        }
+        if(segue.identifier! == "goToMyProduct") {
+            let destination = segue.destination as! MyProductViewController
+            destination.setMyProduct(product: currProduct!)
+            destination.setEditMode(forEdit, forOwner)
         }
     }
     
@@ -34,56 +80,79 @@ class MyStoreViewController: UIViewController {
     @IBAction func unwindToMyStoreWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                self.hasProduct(true)
-                self.viewDidLoad()
-                self.viewDidAppear(true)
+                self.productsCollection.reloadData()
             }
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        modifyButton(button: addProduct)
-        shopSlogan.text = currShop?.getShopSlogan()
-        shopTitle.text = currShop?.getShopTitle()
-        fillMyProducts()
-    }
-
-    func fillMyProducts() {
-        //find all products from the store and put it in the dictionary
-        let query = PFQuery(className: "Product")
-        query.whereKey("shopId", equalTo: currShop!.getShopId())
-        query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
-            if let error = error {
-                //Request failed
-                print(error.localizedDescription)
-            }
-            else if let products = products {
-                //products found in parse cloud database
-                if(products.count == 0) {
-                    self.hasProduct(false)
-                }
-                else {
-                    for currProduct in products {
-                        let tempProduct = Product(product: currProduct)
-                        self.myProducts?[tempProduct.getTitle()] = tempProduct
-                        self.productsField.text! += tempProduct.getTitle() + " Quantity: " + tempProduct.getQuantity() + " Price: " + String(tempProduct.getPrice()) + "\n"
-                    }
-                }
-            }
-        }
+    func fillMyProducts(productsList products: [Product]) {
+        self.myProducts = products
     }
     
     func setShop(shop: Shop?){
         self.currShop = shop
     }
     
+    func setOwner(_ bool: Bool) {
+        if(bool) {
+            self.forOwner = true
+        }
+        else {
+            self.forOwner = false
+        }
+    }
+    
     func hasProduct(_ bool: Bool) {
         self.addProduct.isHidden = bool
         self.noProductText.isHidden = bool
-        self.productsField.isHidden = !bool
+        self.productsCollection.isHidden = !bool
     }
+    
+    func replaceProduct(with updateProduct: Product) {
+        for product in myProducts {
+            if product.getObjectId() == updateProduct.getObjectId() {
+                product.setProduct(product: updateProduct)
+            }
+        }
+    }
+    
+    @IBAction func editMode(_ sender: UISwitch) {
+        if(editSwitch.isOn) {
+            forEdit = true
+        }
+        else {
+            forEdit = false
+        }
+    }
+}
+
+//MARK: - ColectionViewDelegate
+extension MyStoreViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        currProduct = myProducts[indexPath.row]
+        performSegue(withIdentifier: "goToMyProduct", sender: self)
+    }
+}
+
+//MARK: - CollectionViewDatasource
+extension MyStoreViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myProducts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var productCell = ProductsCollectionViewCell()
+        if let tempCell = productsCollection.dequeueReusableCell(withReuseIdentifier: "ProductsReusableCell", for: indexPath) as? ProductsCollectionViewCell {
+            tempCell.setParameters(Product: myProducts[indexPath.row])
+            productCell = tempCell
+            highlightCell(productCell)
+        }
+        return productCell
+    }
+    
+    
+    
 
 }
+

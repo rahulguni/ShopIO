@@ -51,7 +51,8 @@ class AddProductViewController: UIViewController {
                 self.performSegue(withIdentifier: "goToAddProductsExtra", sender: self)
             }
             else{
-                print("failed")
+                let alert = networkErrorAlert(title: "Could not save Product", errorString: "Please try again later.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

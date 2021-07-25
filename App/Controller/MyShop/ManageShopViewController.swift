@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditShopViewController: UIViewController {
+class ManageShopViewController: UIViewController {
     @IBOutlet weak var addProduct: UIButton!
     @IBOutlet weak var updateInventory: UIButton!
     @IBOutlet weak var orders: UIButton!

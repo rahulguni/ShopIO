@@ -25,7 +25,7 @@ class AddProductExtraViewController: UIViewController {
         headerLabel.text = myProduct?.getTitle()
     }
     
-    @IBAction func saveButtonPressed(_ sender: Any) {
+    @IBAction func saveButtonPressed(_ sender: UIButton) {
         
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: myProduct!.getObjectId())
@@ -34,13 +34,19 @@ class AddProductExtraViewController: UIViewController {
                 // The query failed
                 print(error.localizedDescription)
             } else if let object = object {
-                object["discount"] = Float(self.discount!.text!)
+                
+                if(self.discount.text != "") {
+                    object["discount"] = Float(self.discount!.text!)
+                }
+                else{
+                    object["discount"] = Float(0.0)
+                }
                 object["content"] = self.contents.text
                 object.saveInBackground {(success, error) in
                     if(success) {
                         //go to main
                         self.performSegue(withIdentifier: "reloadEditShop", sender: self)
-                        self.performSegue(withIdentifier: "reloadMyStore", sender: self)
+                        self.performSegue(withIdentifier: "reloadMyShop", sender: self)
                     }
                     else{
                         let alert = networkErrorAlert(title: "Error", errorString: "Failed to save.")
@@ -48,16 +54,12 @@ class AddProductExtraViewController: UIViewController {
                     }
                 }
             } else {
-                //Should not get down here
+                //Should not get down here because a product cannot be added without a product id which was created in the last view.
                 // The query succeeded but no matching result was found
+                
             }
         }
         
-    }
-    
-    @IBAction func backButtonPressed(_ sender: Any) {
-        //segue to main
-        performSegue(withIdentifier: "reloadEditShop", sender: self)
     }
     
     func setProduct(product: Product?) {

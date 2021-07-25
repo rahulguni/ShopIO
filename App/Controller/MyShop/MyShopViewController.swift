@@ -15,6 +15,7 @@ class MyShopViewController: UIViewController{
     @IBOutlet weak var AddNewShop: UIButton!
     
     private var currShop: Shop?
+    private var currProducts: [Product] = []
     
     override func viewDidLoad() {
         let currentButtons: [UIButton] = [myShopButton, editMyShopButton, AddNewShop]
@@ -54,10 +55,12 @@ class MyShopViewController: UIViewController{
         if(segue.identifier! == "goTomyShopView") {
             let destination = segue.destination as! MyStoreViewController
             destination.setShop(shop: currShop)
+            destination.fillMyProducts(productsList: currProducts)
+            destination.setOwner(true)
         }
         
         if(segue.identifier! == "goToManageShop") {
-            let destination = segue.destination as! EditShopViewController
+            let destination = segue.destination as! ManageShopViewController
             destination.setShop(shop: currShop)
         }
         
@@ -74,6 +77,7 @@ class MyShopViewController: UIViewController{
     
     @IBAction func myShopButton(_ sender: UIButton) {
         if currentUser != nil {
+            currProducts = []
             checkShop(identifier: "goTomyShopView")
         }
         else {
@@ -99,13 +103,32 @@ class MyShopViewController: UIViewController{
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if object != nil {
                 self.currShop = Shop(shop: object)
-                self.performSegue(withIdentifier: identifier, sender: self)
+                self.getProducts(identifier: identifier)
             }
             else {
                 self.performSegue(withIdentifier: "goToAddShopView", sender: self)
             }
         }
-
+    }
+    
+    private func getProducts(identifier: String) {
+        //check if the user has products to load up in the next view
+        let query = PFQuery(className: "Product")
+        query.whereKey("shopId", equalTo: self.currShop!.getShopId())
+        query.order(byAscending: "title")
+        query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
+            if let error = error {
+                //Request failed
+                print(error.localizedDescription)
+            }
+            else if let products = products {
+                for currProduct in products {
+                    let tempProduct = Product(product: currProduct)
+                    self.currProducts.append(tempProduct)
+                }
+                self.performSegue(withIdentifier: identifier, sender: self)
+            }
+        }
     }
     
     func setShop(shop: Shop?) {
