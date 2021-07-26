@@ -103,5 +103,11 @@ class Product {
     func getQuantity() -> Int {
         return self.quantity!
     }
+    
+    func getDiscountAmount() -> Double {
+        let discount = getDiscount()
+        let discountAmount = ((Double(discount) / 100) * self.price!)
+        return (discountAmount * 100).rounded() / 100
+    }
 }
 

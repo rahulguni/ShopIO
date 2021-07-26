@@ -7,6 +7,7 @@
 
 import UIKit
 import Parse
+import RealmSwift
 
 class MyProductViewController: UIViewController {
     @IBOutlet weak var productTitle: UITextField!
@@ -118,6 +119,47 @@ class MyProductViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func addToCart(_ sender: Any) {
+        if(currentUser != nil) {
+            var forUpdate: Bool = false
+            
+            let realm = try! Realm()
+            let cartItem = CartItem()
+            cartItem.userId = currentUser?.objectId
+            cartItem.productId = myProduct?.getObjectId()
+            cartItem.price = myProduct?.getPrice()
+            cartItem.discount = myProduct?.getDiscountAmount()
+            
+            //search if same item already exists in cart
+            let myCartItems = realm.objects(CartItem.self)
+            
+            for item in myCartItems {
+                //if exists in cart for current user, only update the quantity
+                if(item["productId"] as! String == myProduct!.getObjectId()) {
+                    if((item["userId"] as! String) == currentUser!.objectId) {
+                        let quantity = item["quantity"] as! Int
+                        forUpdate = true
+                        try! realm.write{
+                            item.quantity = quantity + 1
+                        }
+                    }
+                }
+            }
+            
+            if(!forUpdate) {
+                cartItem.quantity = 1
+                try! realm.write{
+                    realm.add(cartItem)
+                }
+            }
+        }
+        else {
+            let alert = networkErrorAlert(title: "Cannot add to cart", errorString: "Please sign in to continue.")
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     @IBAction func amountStepperChange(_ sender: UIStepper) {
         self.quantityField.text = (Int)(sender.value).description
