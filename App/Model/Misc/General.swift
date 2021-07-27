@@ -24,7 +24,7 @@ func modifyButton(button: UIButton) {
 }
 
 //function to highlight uicollectionviewcell
-func highlightCell(_ cell: ProductsCollectionViewCell) {
+func highlightCell(_ cell: UICollectionViewCell) {
     cell.contentView.layer.cornerRadius = 2.0
     cell.contentView.layer.borderWidth = 1.0
     cell.contentView.layer.borderColor = UIColor.black.cgColor
@@ -36,13 +36,6 @@ func highlightCell(_ cell: ProductsCollectionViewCell) {
 //    cell.layer.shadowOpacity = 0.5
 //    cell.layer.masksToBounds = false
 //    cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-}
-
-func highlightCell(_ cell: ShopsCollectionViewCell) {
-    cell.contentView.layer.cornerRadius = 2.0
-    cell.contentView.layer.borderWidth = 1.0
-    cell.contentView.layer.borderColor = UIColor.black.cgColor
-    cell.contentView.layer.masksToBounds = true
 }
 
 //function to make strikethrough text for product discount

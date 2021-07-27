@@ -15,4 +15,6 @@ class CartItem: Object {
     @Persisted var discount: Double?
     @Persisted var quantity: Int?
     @Persisted var content: String?
+    @Persisted var productTitle: String?
+    @Persisted var productShop: String?
 }

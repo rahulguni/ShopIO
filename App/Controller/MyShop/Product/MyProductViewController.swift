@@ -122,6 +122,7 @@ class MyProductViewController: UIViewController {
     
     @IBAction func addToCart(_ sender: Any) {
         if(currentUser != nil) {
+            print(Realm.Configuration.defaultConfiguration.fileURL)
             var forUpdate: Bool = false
             
             let realm = try! Realm()
@@ -130,6 +131,7 @@ class MyProductViewController: UIViewController {
             cartItem.productId = myProduct?.getObjectId()
             cartItem.price = myProduct?.getPrice()
             cartItem.discount = myProduct?.getDiscountAmount()
+            cartItem.productTitle = myProduct?.getTitle()
             
             //search if same item already exists in cart
             let myCartItems = realm.objects(CartItem.self)

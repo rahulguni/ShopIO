@@ -37,6 +37,13 @@ class AccountViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "goToSignIn") {
+            let destination = segue.destination as! SignInViewController
+            destination.dismiss = false
+        }
+    }
+    
     //function to reload the view according to if a user is signed in
     func reloadViewData(){
         if let user = currentUser {

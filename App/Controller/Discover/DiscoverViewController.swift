@@ -29,7 +29,6 @@ class DiscoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.reloadInputViews()
         // Do any additional setup after loading the view.
         shopCollection.delegate = self
         shopCollection.dataSource = self
@@ -43,6 +42,7 @@ class DiscoverViewController: UIViewController {
         self.shops = []
         let shopQuery = PFQuery(className: "Shop")
         shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
+        shopQuery.order(byAscending: "title")
         shopQuery.findObjectsInBackground{ (objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 for object in objects {

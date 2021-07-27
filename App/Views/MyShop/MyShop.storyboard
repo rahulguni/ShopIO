@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="81j-wy-KfD">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My Shop-->
+        <scene sceneID="LcQ-1r-jUs">
+            <objects>
+                <viewController id="81j-wy-KfD" customClass="MyShopViewController" customModule="App" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Klg-sR-pMz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hq-Dm-lnt">
+                                <rect key="frame" x="81" y="457" width="253" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Manage My Shop"/>
+                                <connections>
+                                    <action selector="manageShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="MHG-S9-lvu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-yV-uwy">
+                                <rect key="frame" x="81" y="656" width="253" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Open A New Shop"/>
+                                <connections>
+                                    <action selector="AddNewShop:" destination="81j-wy-KfD" eventType="touchUpInside" id="x4x-5j-eEm"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX3-fv-sFQ">
+                                <rect key="frame" x="81" y="307" width="253" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="My Shop"/>
+                                <connections>
+                                    <action selector="myShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="g53-Nq-qRf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jbr-Lv-4Ic"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Shop" id="q9G-r8-ciD"/>
+                    <connections>
+                        <outlet property="AddNewShop" destination="HCp-yV-uwy" id="4gm-Wm-i7W"/>
+                        <outlet property="editMyShopButton" destination="1hq-Dm-lnt" id="DTd-CD-V2t"/>
+                        <outlet property="myShopButton" destination="pX3-fv-sFQ" id="3Xk-7y-o51"/>
+                        <segue destination="T7V-J9-qOC" kind="presentation" identifier="toSignIn" id="IS2-j0-vRy"/>
+                        <segue destination="9nc-a3-XAx" kind="presentation" identifier="goToAddShopView" id="uFV-oT-5Qr"/>
+                        <segue destination="hkV-az-daJ" kind="presentation" identifier="goTomyShopView" id="Y8t-xw-hAc"/>
+                        <segue destination="xzV-rf-38l" kind="show" identifier="goToManageShop" id="qfN-sm-v3t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yif-oF-ZRx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2880" y="613"/>
+        </scene>
+        <!--AddShop-->
+        <scene sceneID="taj-vM-ffY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddShop" id="9nc-a3-XAx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jfk-UZ-m6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3784" y="383"/>
+        </scene>
+        <!--SignIn-->
+        <scene sceneID="m9q-NC-fvH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignIn" id="T7V-J9-qOC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGD-Uz-fDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3794" y="612"/>
+        </scene>
+        <!--MyStore-->
+        <scene sceneID="6bC-rc-tmv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyStore" id="hkV-az-daJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BfE-ZR-6vO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3809" y="742"/>
+        </scene>
+        <!--ManageMyShop-->
+        <scene sceneID="5q1-1F-qGB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ManageShop" referencedIdentifier="ManageMyShop" id="xzV-rf-38l" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KHO-A5-Xn3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7vL-D0-TOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3825" y="826"/>
+        </scene>
+    </scenes>
+</document>

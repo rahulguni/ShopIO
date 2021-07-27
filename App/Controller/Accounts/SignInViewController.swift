@@ -15,7 +15,7 @@ class SignInViewController: UIViewController {
     
     /* Since Sign In gets called from different places, declare a variable to perform
       segue accordingly. */
-    var dismiss : Bool = false
+    var dismiss : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()

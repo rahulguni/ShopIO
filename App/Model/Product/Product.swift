@@ -77,7 +77,7 @@ class Product {
     }
     
     func getOriginalPrice() -> String {
-        return "$" + String(self.price!)
+        return "$" + String(format: "%.2f", self.price!)
     }
     
     func getOriginalPriceDouble() -> Double {
@@ -93,7 +93,7 @@ class Product {
     
     func getPriceAsString() -> String {
         let currPrice = getPrice()
-        return "$" + String(currPrice)
+        return "$" + String(format: "%.2f", currPrice)
     }
     
     func getQuantityAsString() -> String {
