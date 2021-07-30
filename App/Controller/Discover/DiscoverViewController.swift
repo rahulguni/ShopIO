@@ -70,8 +70,6 @@ extension DiscoverViewController: UICollectionViewDelegate{
         query.order(byAscending: "title")
         query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
             if let error = error {
-                //Request failed
-                print("here")
                 print(error.localizedDescription)
             }
             else if let products = products {

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MyStore-->
+        <!--myProduct-->
         <scene sceneID="5Bx-bY-H4k">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="myProduct" storyboardName="MyStore" id="Vbg-fE-gdG" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="MyStore" referencedIdentifier="myProduct" id="Vbg-fE-gdG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQ2-fq-GIu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2420" y="-11"/>

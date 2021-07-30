@@ -23,8 +23,13 @@ class CartItemCollectionViewCell: UICollectionViewCell {
         
         self.productTitle.text = currProduct.productTitle!
         self.productQuantity.text = String(currProduct.quantity!)
-        self.productPrice.text = "$" + String(format: "%.2f", totalPrice) + " (@ $" + String(currProduct.price!) + "/each)"
         self.productDiscount.text = String(format: "%.2f", totalDiscount)
+        if(currProduct.quantity! > 1) {
+            self.productPrice.text = "$" + String(format: "%.2f", totalPrice) + " (@ $" + String(currProduct.price!) + "/each)"
+        }
+        else {
+            self.productPrice.text = "$" + String(format: "%.2f", totalPrice)
+        }
     }
     
 }

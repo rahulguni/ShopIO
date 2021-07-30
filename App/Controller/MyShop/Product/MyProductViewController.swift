@@ -47,8 +47,13 @@ class MyProductViewController: UIViewController {
             let attributeString = makeStrikethroughText(product: myProduct!)
             self.discountField.attributedText = attributeString
         }
-    
+
         editAbleProduct(editMode, ownerMode)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewDidLoad()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,7 +91,7 @@ class MyProductViewController: UIViewController {
             self.updateButton.isHidden = false
             self.discountPerLabel.isHidden = false
         }
-        if(shopMode) {
+        else if(shopMode) {
             self.addToCartButton.isHidden = true
         }
     }
@@ -122,7 +127,7 @@ class MyProductViewController: UIViewController {
     
     @IBAction func addToCart(_ sender: Any) {
         if(currentUser != nil) {
-            print(Realm.Configuration.defaultConfiguration.fileURL)
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
             var forUpdate: Bool = false
             
             let realm = try! Realm()

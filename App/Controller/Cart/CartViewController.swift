@@ -48,12 +48,15 @@ class CartViewController: UIViewController {
         }
         else {
             performSegue(withIdentifier: "goToSignIn", sender: self)
+            myItems = []
+            self.myCartItems.reloadData()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToMyProduct") {
             let destination = segue.destination as! MyProductViewController
+            //destination.editAbleProduct(false, true)
             destination.setMyProduct(product: myProduct!)
         }
     }
