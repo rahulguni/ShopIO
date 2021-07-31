@@ -54,25 +54,32 @@ class AddressViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
-        if(forShop){            
-            let address = fillForm(className: "Shop_Address")
-            address.saveInBackground {(success, error) in
-                if(success) {
-                    self.performSegue(withIdentifier: "reloadMyShop", sender: self)
-                } else {
-                    let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
-                    self.present(alert, animated: true, completion: nil)
+        if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty) {
+            let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        else {
+            if(forShop){
+                let address = fillForm(className: "Shop_Address")
+                address.saveInBackground {(success, error) in
+                    if(success) {
+                        self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+                    } else {
+                        let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
-        }
-        else {
-            let address = fillForm(className: "Address")
-            address.saveInBackground {(success, error) in
-                if(success) {
-                    self.performSegue(withIdentifier: "reloadAccount", sender: self)
-                } else {
-                    let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
-                    self.present(alert, animated: true, completion: nil)
+            else {
+                let address = fillForm(className: "Address")
+                address.saveInBackground {(success, error) in
+                    if(success) {
+                        self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                    } else {
+                        let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }

@@ -112,6 +112,8 @@
                         <outlet property="password" destination="Rkj-Z5-j7f" id="5dO-aN-TmT"/>
                         <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadAccount" unwindAction="unwindToAccountsWithSegueWithSegue:" id="JaB-U7-Rb2"/>
                         <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyShop" unwindAction="unwindToMyShopWithSegueWithSegue:" id="Za6-hV-P8N"/>
+                        <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="Dwk-em-GOk"/>
+                        <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyProduct" unwindAction="unwindToMyProductWithSegueWithSegue:" id="ReC-Qx-6fB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lU7-aD-gOj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

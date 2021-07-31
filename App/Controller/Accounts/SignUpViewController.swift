@@ -23,7 +23,7 @@ class SignUpViewController: UIViewController {
 
     //Add user to table
     @IBAction func signUp(_ sender: UIButton) {
-        if(lastName.text! == "" || email.text! == "" || password.text! == "" || phone.text! == ""){
+        if(lastName.text!.isEmpty || email.text!.isEmpty || password.text!.isEmpty || phone.text!.isEmpty){
             let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }

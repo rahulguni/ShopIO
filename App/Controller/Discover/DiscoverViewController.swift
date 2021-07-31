@@ -24,6 +24,7 @@ class DiscoverViewController: UIViewController {
             let destination = segue.destination as! MyStoreViewController
             destination.setShop(shop: currShop)
             destination.fillMyProducts(productsList: currProducts)
+            destination.setForShop(forProducts.forPublic)
         }
     }
     

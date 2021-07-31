@@ -47,6 +47,8 @@
 		DEBBA85026AE9A880073D33E /* AddProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */; };
 		DEBBA85226AE9AD10073D33E /* MyStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85126AE9AD10073D33E /* MyStore.storyboard */; };
 		DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85326AE9B020073D33E /* AddShop.storyboard */; };
+		DEC9E4F126B4AE5A002891A9 /* ShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9E4F026B4AE5A002891A9 /* ShopManager.swift */; };
+		DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */; };
 		DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */; };
 		DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */; };
 		DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */; };
@@ -99,6 +101,8 @@
 		DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddProduct.storyboard; sourceTree = "<group>"; };
 		DEBBA85126AE9AD10073D33E /* MyStore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyStore.storyboard; sourceTree = "<group>"; };
 		DEBBA85326AE9B020073D33E /* AddShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddShop.storyboard; sourceTree = "<group>"; };
+		DEC9E4F026B4AE5A002891A9 /* ShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopManager.swift; sourceTree = "<group>"; };
+		DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumFiles.swift; sourceTree = "<group>"; };
 		DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 			children = (
 				DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */,
 				DE278926268D8DF4009CD37C /* Shop.swift */,
+				DEC9E4F026B4AE5A002891A9 /* ShopManager.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				DE1F359926869F89005195CA /* Alerts.swift */,
 				DE1F35972686891B005195CA /* StateModel.swift */,
 				DE3E66752637A4E900128755 /* AccountTableOptions.swift */,
+				DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */,
+				DEC9E4F126B4AE5A002891A9 /* ShopManager.swift in Sources */,
 				DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */,
 				DE76890726A007F300F0C888 /* Address.swift in Sources */,
 				DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */,
@@ -529,6 +536,7 @@
 				DE76890926A016F400F0C888 /* User.swift in Sources */,
 				DE6A6A3C26AFDBC2006B4D04 /* CartViewController.swift in Sources */,
 				DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */,
+				DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */,
 				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,
 				DE87FE4626AD05D500F996C7 /* CartItemModel.swift in Sources */,
 				DE87FE4A26AD0D4A00F996C7 /* OrderModel.swift in Sources */,

@@ -18,7 +18,6 @@ class Shop {
     private var shopImage: UIImage?
     private var shopOwner: String?
     
-    
     init(shop shopObject: PFObject?){
         self.objectId = shopObject!.objectId
         self.userId = shopObject!["userId"] as? String
@@ -49,5 +48,5 @@ class Shop {
     func getShopUserid() -> String {
         return self.userId!
     }
- 
+    
 }

@@ -19,6 +19,8 @@ class CartViewController: UIViewController {
     private var currItem: CartItem?
     private var myProduct: Product?
     
+    let realm = try! Realm()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,36 +30,80 @@ class CartViewController: UIViewController {
         modifyButton(button: checkOut)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if(currentUser == nil) {
+            performSegue(withIdentifier: "toSignIn", sender: self)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //render all products
-        myItems = []
+        myItems.removeAll()
         
-        let realm = try! Realm()
         //let cart = Cart()
         
         if(currentUser != nil) {
             let myCartItems = realm.objects(CartItem.self)
             for item in myCartItems {
                 if((item["userId"] as! String) == currentUser!.objectId) {
-                    myItems.append(item)
+                    //check product before viewing cart in case the shop has modified its product
+                    checkProduct(item)
                 }
             }
-            self.myCartItems.reloadData()
         }
         else {
-            performSegue(withIdentifier: "goToSignIn", sender: self)
-            myItems = []
-            self.myCartItems.reloadData()
+            myItems.removeAll()
         }
+        self.myCartItems.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "goToSignIn") {
+            let destination = segue.destination as! SignInViewController
+            destination.dismiss = forSignIn.forMyCart
+        }
+        
         if(segue.identifier! == "goToMyProduct") {
             let destination = segue.destination as! MyProductViewController
             //destination.editAbleProduct(false, true)
             destination.setMyProduct(product: myProduct!)
+            destination.productMode = forProducts.forCart
+        }
+    }
+    
+    //Function to unwind the segue and reload view
+    @IBAction func unwindToMyCartWithSegue(segue: UIStoryboardSegue) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.viewWillAppear(true)
+            }
+        }
+    }
+    
+    private func checkProduct(_ myItem: CartItem){
+        let query = PFQuery(className: "Product")
+        query.whereKey("objectId", equalTo: myItem.productId!)
+        query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
+            if let error = error {
+                // The query failed
+                print(error.localizedDescription)
+            } else if let object = object {
+                let currProduct = Product(product: object)
+                try! self.realm.write {
+                    myItem.productTitle = currProduct.getTitle()
+                    myItem.price = currProduct.getPrice()
+                    myItem.discount = currProduct.getDiscountAmount()
+                    //check if the total quantity left is less than cart quantity. If so, update cart quantity.
+                    if(myItem.quantity! > currProduct.getQuantity()) {
+                        myItem.quantity = currProduct.getQuantity()
+                    }
+                }
+                self.myItems.append(myItem)
+            }
+            self.myCartItems.reloadData()
         }
     }
 }
@@ -96,4 +142,5 @@ extension CartViewController: UICollectionViewDataSource {
         }
         return itemCell
     }
+    
 }

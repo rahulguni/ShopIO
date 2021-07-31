@@ -218,7 +218,7 @@
                                                 <rect key="frame" x="20" y="8" width="374" height="208"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dux-R1-5I0">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dux-R1-5I0">
                                                 <rect key="frame" x="20" y="739" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -272,6 +272,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add more to cart?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-3A-gAp">
+                                                <rect key="frame" x="280" y="321" width="114" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -300,9 +307,10 @@
                     </view>
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
+                        <outlet property="addMoreLabel" destination="Rh6-3A-gAp" id="8Kd-Ln-hNu"/>
                         <outlet property="addToCartButton" destination="dux-R1-5I0" id="OIS-rZ-kzy"/>
                         <outlet property="discountField" destination="hpr-oC-DjN" id="6fn-dP-Xf9"/>
-                        <outlet property="discountPerLabel" destination="9AS-Yt-Skf" id="Zu4-8O-OYa"/>
+                        <outlet property="discountPerLabel" destination="Rh6-3A-gAp" id="L4L-Ai-mty"/>
                         <outlet property="priceField" destination="igL-UJ-FKV" id="zom-Uk-Bri"/>
                         <outlet property="productContent" destination="9PI-tO-hPx" id="t0I-9s-8lR"/>
                         <outlet property="productDescription" destination="gQU-vo-iQ3" id="Iq1-8d-L50"/>
@@ -311,12 +319,22 @@
                         <outlet property="quantityStepper" destination="HAB-Od-0OD" id="517-sS-Aef"/>
                         <outlet property="updateButton" destination="NuC-IO-Kyi" id="EyH-Of-Xbj"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyStore" unwindAction="unwindToMyStoreWithSegueWithSegue:" id="brp-9w-ipV"/>
+                        <segue destination="5O0-wh-kT7" kind="presentation" identifier="goToSignIn" id="jU0-B8-qk6"/>
+                        <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="EvD-eC-ugC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cga-DH-3uD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="O8b-F0-OMg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5197" y="1671"/>
+            <point key="canvasLocation" x="5195.652173913044" y="1670.7589285714284"/>
+        </scene>
+        <!--SignIn-->
+        <scene sceneID="TIk-5x-PLp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignIn" id="5O0-wh-kT7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dgG-cM-s70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6228" y="1679"/>
         </scene>
     </scenes>
     <resources>

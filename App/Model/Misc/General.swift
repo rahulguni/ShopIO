@@ -47,3 +47,12 @@ func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedS
     
     return attributeString
 }
+
+//make double from textfield
+func makeDouble(_ textField: String) -> Double? {
+    var temp = textField
+    if(textField.first == "$") {
+        temp = String(textField.dropFirst())
+    }
+    return Double(temp)
+}

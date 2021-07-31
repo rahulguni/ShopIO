@@ -40,7 +40,7 @@ class AccountViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToSignIn") {
             let destination = segue.destination as! SignInViewController
-            destination.dismiss = false
+            destination.dismiss = forSignIn.forAccount
         }
     }
     

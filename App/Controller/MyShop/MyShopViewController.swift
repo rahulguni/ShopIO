@@ -14,13 +14,12 @@ class MyShopViewController: UIViewController{
     @IBOutlet weak var editMyShopButton: UIButton!
     @IBOutlet weak var AddNewShop: UIButton!
     
-    private var currShop: Shop?
-    private var currProducts: [Product] = []
+    var shopManager = ShopManager()
     
     override func viewDidLoad() {
         let currentButtons: [UIButton] = [myShopButton, editMyShopButton, AddNewShop]
         modifyButtons(buttons: currentButtons)
-        
+        shopManager.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,26 +48,26 @@ class MyShopViewController: UIViewController{
         //function to dismiss the signIn view after login when called from myshop view.
         if(segue.identifier! == "toSignIn") {
             let destination = segue.destination as! SignInViewController
-            destination.dismiss = true
+            destination.dismiss = forSignIn.forMyShop
         }
         
         if(segue.identifier! == "goTomyShopView") {
             let destination = segue.destination as! MyStoreViewController
-            destination.setShop(shop: currShop)
-            destination.fillMyProducts(productsList: currProducts)
-            destination.setOwner(true)
+            destination.setShop(shop: shopManager.getCurrShop())
+            destination.fillMyProducts(productsList: shopManager.getCurrProducts())
+            destination.setForShop(forProducts.forMyShop)
         }
         
         if(segue.identifier! == "goToManageShop") {
             let destination = segue.destination as! ManageShopViewController
-            destination.setShop(shop: currShop)
+            destination.setShop(shop: shopManager.getCurrShop())
         }
         
     }
     
     @IBAction func manageShopButton(_ sender: UIButton) {
         if currentUser != nil{
-            checkShop(identifier: "goToManageShop")
+            self.shopManager.checkShop(identifier: "goToManageShop")
         }
         else{
             performSegue(withIdentifier: "toSignIn", sender: self)
@@ -77,8 +76,7 @@ class MyShopViewController: UIViewController{
     
     @IBAction func myShopButton(_ sender: UIButton) {
         if currentUser != nil {
-            currProducts = []
-            checkShop(identifier: "goTomyShopView")
+            self.shopManager.checkShop(identifier: "goTomyShopView")
         }
         else {
             performSegue(withIdentifier: "toSignIn", sender: self)
@@ -96,43 +94,12 @@ class MyShopViewController: UIViewController{
         editMyShopButton.isHidden = !bool;
     }
     
-    private func checkShop(identifier: String) {
-        //see if user already has a shop, if not go to register shop option.
-        let query = PFQuery(className: "Shop")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
-        query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
-            if object != nil {
-                self.currShop = Shop(shop: object)
-                self.getProducts(identifier: identifier)
-            }
-            else {
-                self.performSegue(withIdentifier: "goToAddShopView", sender: self)
-            }
-        }
-    }
+}
+
+extension MyShopViewController: shopManagerDelegate {
     
-    private func getProducts(identifier: String) {
-        //check if the user has products to load up in the next view
-        let query = PFQuery(className: "Product")
-        query.whereKey("shopId", equalTo: self.currShop!.getShopId())
-        query.order(byAscending: "title")
-        query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
-            if let error = error {
-                //Request failed
-                print(error.localizedDescription)
-            }
-            else if let products = products {
-                for currProduct in products {
-                    let tempProduct = Product(product: currProduct)
-                    self.currProducts.append(tempProduct)
-                }
-                self.performSegue(withIdentifier: identifier, sender: self)
-            }
-        }
+    func goToViewController(identifier: String) {
+        self.performSegue(withIdentifier: identifier, sender: self)
     }
-    
-    func setShop(shop: Shop?) {
-        self.currShop = shop
-    }
-    
+        
 }

@@ -15,7 +15,7 @@ class SignInViewController: UIViewController {
     
     /* Since Sign In gets called from different places, declare a variable to perform
       segue accordingly. */
-    var dismiss : Bool = true
+    var dismiss : forSignIn?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
+        
         PFUser.logInWithUsername(inBackground:email.text!, password:password.text!) {
             (user: PFUser?, error: Error?) -> Void in
             if user != nil {
@@ -32,11 +33,17 @@ class SignInViewController: UIViewController {
                 user!["lastLogin"] = NSDate()
                 user?.saveInBackground{(success, error) in
                     if(success) {
-                        if !self.dismiss {
+                        if(self.dismiss == forSignIn.forAccount) {
                             self.performSegue(withIdentifier: "reloadAccount", sender: self)
                         }
-                        else{
+                        else if(self.dismiss == forSignIn.forMyShop){
                             self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+                        }
+                        else if(self.dismiss == forSignIn.forMyCart) {
+                            self.performSegue(withIdentifier: "reloadMyCart", sender: self)
+                        }
+                        else if(self.dismiss == forSignIn.forMyProduct) {
+                            self.performSegue(withIdentifier: "reloadMyProduct", sender: self)
                         }
                     }
                     else {

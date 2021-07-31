@@ -35,26 +35,33 @@ class AddProductViewController: UIViewController {
     
     
     @IBAction func saveProduct(_ sender: Any) {
-        let currProduct = PFObject(className: "Product")
-        currProduct["userId"] = currentUser?.objectId
-        currProduct["title"] = titleField.text!
-        currProduct["price"] = Double(priceField.text!)
-        currProduct["quantity"] = Int(quantityField.text!)
-        currProduct["summary"] = summaryField.text!
-        currProduct["shopId"] = myShop?.getShopId()
-        
-        myProduct = Product(product: currProduct)
-        
-        currProduct.saveInBackground{(success, error) in
-            if(success) {
-                self.myProduct?.setObjectId(product: currProduct)
-                self.performSegue(withIdentifier: "goToAddProductsExtra", sender: self)
-            }
-            else{
-                let alert = networkErrorAlert(title: "Could not save Product", errorString: "Please try again later.")
-                self.present(alert, animated: true, completion: nil)
+        if(titleField.text!.isEmpty || priceField.text!.isEmpty || quantityField.text!.isEmpty ){
+            let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            let currProduct = PFObject(className: "Product")
+            currProduct["userId"] = currentUser?.objectId
+            currProduct["title"] = titleField.text!
+            currProduct["price"] = Double(priceField.text!)
+            currProduct["quantity"] = Int(quantityField.text!)
+            currProduct["summary"] = summaryField.text!
+            currProduct["shopId"] = myShop?.getShopId()
+            
+            myProduct = Product(product: currProduct)
+            
+            currProduct.saveInBackground{(success, error) in
+                if(success) {
+                    self.myProduct?.setObjectId(product: currProduct)
+                    self.performSegue(withIdentifier: "goToAddProductsExtra", sender: self)
+                }
+                else{
+                    let alert = networkErrorAlert(title: "Could not save Product", errorString: "Please try again later.")
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
+        
     }
     
     @IBAction func backPressed(_ sender: Any) {

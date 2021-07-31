@@ -222,7 +222,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9R-zC-S0k">
-                                <rect key="frame" x="17" y="235" width="372" height="431"/>
+                                <rect key="frame" x="17" y="276" width="372" height="431"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -259,7 +259,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HC-mV-ILB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="rvK-Ry-KHu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7390" y="613"/>
+            <point key="canvasLocation" x="7389.8550724637689" y="612.72321428571422"/>
         </scene>
     </scenes>
     <resources>

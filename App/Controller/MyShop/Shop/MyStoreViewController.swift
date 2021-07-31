@@ -29,10 +29,8 @@ class MyStoreViewController: UIViewController {
     private var myProducts: [Product] = []
     //selected product
     private var currProduct: Product?
-    //Editable switch variable
-    private var forEdit: Bool = false
-    //view mode for owner and customers
-    private var forOwner: Bool = false
+    
+    private var productMode : forProducts?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,7 @@ class MyStoreViewController: UIViewController {
         productsCollection.dataSource = self
         
         //set up edit field
-        if(forOwner) {
+        if(productMode == forProducts.forMyShop) {
             editSwitch.isHidden = false
             editLabel.isHidden = false
             followButton.isHidden = true
@@ -72,7 +70,7 @@ class MyStoreViewController: UIViewController {
         if(segue.identifier! == "goToMyProduct") {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: currProduct!)
-            destination.setEditMode(forEdit, forOwner)
+            destination.productMode = self.productMode
         }
     }
     
@@ -94,13 +92,8 @@ class MyStoreViewController: UIViewController {
         self.currShop = shop
     }
     
-    func setOwner(_ bool: Bool) {
-        if(bool) {
-            self.forOwner = true
-        }
-        else {
-            self.forOwner = false
-        }
+    func setForShop(_ productMode: forProducts ) {
+        self.productMode = productMode
     }
     
     func hasProduct(_ bool: Bool) {
@@ -119,10 +112,10 @@ class MyStoreViewController: UIViewController {
     
     @IBAction func editMode(_ sender: UISwitch) {
         if(editSwitch.isOn) {
-            forEdit = true
+            self.productMode = forProducts.forOwner
         }
         else {
-            forEdit = false
+            self.productMode = forProducts.forMyShop
         }
     }
 }

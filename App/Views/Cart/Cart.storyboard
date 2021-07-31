@@ -113,7 +113,7 @@
                     <connections>
                         <outlet property="checkOut" destination="aGq-5j-Oeh" id="Xfe-6X-RxJ"/>
                         <outlet property="myCartItems" destination="srH-tG-AzI" id="lrd-ed-17E"/>
-                        <segue destination="CxC-Qc-RA2" kind="presentation" identifier="goToSignIn" id="LHw-pk-VGH"/>
+                        <segue destination="CxC-Qc-RA2" kind="presentation" identifier="toSignIn" id="LHw-pk-VGH"/>
                         <segue destination="Vbg-fE-gdG" kind="presentation" identifier="goToMyProduct" id="cTq-uG-fS3"/>
                     </connections>
                 </viewController>
