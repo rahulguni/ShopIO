@@ -272,13 +272,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add more to cart?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh6-3A-gAp">
-                                                <rect key="frame" x="280" y="321" width="114" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -307,10 +300,9 @@
                     </view>
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
-                        <outlet property="addMoreLabel" destination="Rh6-3A-gAp" id="8Kd-Ln-hNu"/>
                         <outlet property="addToCartButton" destination="dux-R1-5I0" id="OIS-rZ-kzy"/>
                         <outlet property="discountField" destination="hpr-oC-DjN" id="6fn-dP-Xf9"/>
-                        <outlet property="discountPerLabel" destination="Rh6-3A-gAp" id="L4L-Ai-mty"/>
+                        <outlet property="discountPerLabel" destination="9AS-Yt-Skf" id="eQf-Zq-WlN"/>
                         <outlet property="priceField" destination="igL-UJ-FKV" id="zom-Uk-Bri"/>
                         <outlet property="productContent" destination="9PI-tO-hPx" id="t0I-9s-8lR"/>
                         <outlet property="productDescription" destination="gQU-vo-iQ3" id="Iq1-8d-L50"/>

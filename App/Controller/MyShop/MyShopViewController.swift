@@ -55,7 +55,7 @@ class MyShopViewController: UIViewController{
             let destination = segue.destination as! MyStoreViewController
             destination.setShop(shop: shopManager.getCurrShop())
             destination.fillMyProducts(productsList: shopManager.getCurrProducts())
-            destination.setForShop(forProducts.forMyShop)
+            destination.setForShop(ProductMode.forMyShop)
         }
         
         if(segue.identifier! == "goToManageShop") {

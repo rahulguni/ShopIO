@@ -61,7 +61,7 @@ class CartViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier! == "goToSignIn") {
+        if(segue.identifier! == "toSignIn") {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forMyCart
         }
@@ -70,10 +70,10 @@ class CartViewController: UIViewController {
             let destination = segue.destination as! MyProductViewController
             //destination.editAbleProduct(false, true)
             destination.setMyProduct(product: myProduct!)
-            destination.productMode = forProducts.forCart
+            destination.productMode = ProductMode.forCart
         }
     }
-    
+
     //Function to unwind the segue and reload view
     @IBAction func unwindToMyCartWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -126,6 +126,7 @@ extension CartViewController: UICollectionViewDelegate {
                 }
         }
     }
+    
 }
 
 extension CartViewController: UICollectionViewDataSource {
@@ -144,3 +145,4 @@ extension CartViewController: UICollectionViewDataSource {
     }
     
 }
+

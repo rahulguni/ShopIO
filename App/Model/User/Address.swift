@@ -20,7 +20,7 @@ struct Address {
     private var phone: Int?
     
     init(address addressObject: PFObject?){
-        self.objectId = addressObject!["objectId"] as? String
+        self.objectId = addressObject!.objectId
         self.userId = addressObject!["userId"] as? String
         self.line_1 = addressObject!["line_1"] as? String
         self.line_2 = addressObject!["line_2"] as? String
@@ -28,6 +28,10 @@ struct Address {
         self.state = addressObject!["state"] as? String
         self.zip = addressObject!["zip"] as? String
         self.phone = addressObject!["phone"] as? Int
+    }
+    
+    func getObjectId() -> String {
+        return self.objectId!
     }
     
     func getLine1() -> String? {

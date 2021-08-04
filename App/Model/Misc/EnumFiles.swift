@@ -14,7 +14,7 @@ enum forSignIn {
     case forMyProduct
 }
 
-enum forProducts {
+enum ProductMode {
     case forMyShop
     case forCart
     case forOwner

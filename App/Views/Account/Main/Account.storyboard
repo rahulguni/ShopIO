@@ -57,11 +57,23 @@
                         <outlet property="accountTable" destination="AIT-dv-CFA" id="DA1-52-rcj"/>
                         <outlet property="accountTitle" destination="2Nu-qd-hC9" id="gdE-Rj-Wdt"/>
                         <segue destination="BdN-ra-DbN" kind="presentation" identifier="goToSignIn" id="GbM-JU-9yQ"/>
+                        <segue destination="dvt-kA-gf2" kind="show" identifier="goToEditProfile" id="hS1-y4-ENV"/>
+                        <segue destination="xel-6o-y2E" kind="show" identifier="goToMyAddresses" id="oS6-NQ-QGG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkj-v5-bVU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1374" y="-895"/>
+        </scene>
+        <!--MyAddresses-->
+        <scene sceneID="tuy-uk-4QO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyAddresses" id="xel-6o-y2E" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="myu-uP-GGl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gs-rJ-o9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111" y="-1024"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="hUa-ay-2Mw">
@@ -70,6 +82,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddV-ee-QSN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2106" y="-903"/>
+        </scene>
+        <!--EditProfile-->
+        <scene sceneID="V13-kN-L6y">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditProfile" id="dvt-kA-gf2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uLc-MB-EQT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJ4-Yc-Zm3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2123" y="-791"/>
         </scene>
     </scenes>
     <resources>

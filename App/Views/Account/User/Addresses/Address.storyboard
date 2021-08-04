@@ -154,6 +154,19 @@
                                     <action selector="primaryAddressSwitch:" destination="pGs-ET-sB9" eventType="valueChanged" id="QcX-06-VRi"/>
                                 </connections>
                             </switch>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fO3-f3-Aef">
+                                <rect key="frame" x="42" y="642" width="330" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="pGs-ET-sB9" eventType="touchUpInside" id="wKM-Y6-91g"/>
+                                    <action selector="updateButtonPressed:" destination="pGs-ET-sB9" eventType="touchUpInside" id="F4m-ni-SdS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SQW-v4-nUj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -161,13 +174,16 @@
                     <navigationItem key="navigationItem" id="qlr-Nh-l0P"/>
                     <connections>
                         <outlet property="city" destination="qmK-y1-erZ" id="kPr-Bx-ZOq"/>
+                        <outlet property="doThisLaterButton" destination="WUl-9b-PFi" id="7nG-dy-YZV"/>
                         <outlet property="line_1" destination="KJ8-8S-tIR" id="50U-nN-VEr"/>
                         <outlet property="line_2" destination="uEN-w7-s0y" id="DdQ-wA-ayc"/>
                         <outlet property="phone_sec" destination="Pxt-hS-fQu" id="UsO-x4-609"/>
                         <outlet property="primaryAddress" destination="hrX-h7-hHg" id="xHT-oc-vg0"/>
+                        <outlet property="saveButton" destination="fxA-Hf-ZsO" id="xj1-Km-31T"/>
                         <outlet property="state" destination="6vV-xK-w9a" id="kRr-ez-bKl"/>
                         <outlet property="subtitle" destination="ib0-CJ-ljw" id="hx0-KN-uij"/>
                         <outlet property="titleLabel" destination="5kn-o4-Xft" id="aBE-Lt-Lgh"/>
+                        <outlet property="updateButton" destination="fO3-f3-Aef" id="0C6-zk-dja"/>
                         <outlet property="zip" destination="OU2-ER-FnL" id="uHm-Tm-YFi"/>
                         <segue destination="cPl-ab-bJh" kind="unwind" identifier="reloadAccount" unwindAction="unwindToAccountsWithSegueWithSegue:" id="MIO-U5-QCj"/>
                         <segue destination="cPl-ab-bJh" kind="unwind" identifier="reloadMyShop" unwindAction="unwindToMyShopWithSegueWithSegue:" id="WdO-Fx-tPG"/>

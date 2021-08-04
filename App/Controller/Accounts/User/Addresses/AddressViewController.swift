@@ -19,13 +19,22 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var subtitle: UITextField!
     @IBOutlet weak var primaryAddress: UISwitch!
+    @IBOutlet weak var doThisLaterButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var updateButton: UIButton!
     
     let states = State()
     
     /* Since Address gets called from different places, declare a variable to perform
       segue and add address accordingly. */
+    //To save address
     var forShop : Bool = false
+    var forEdit: Bool = false
     var shopId: String?
+    
+    //To Update address
+    var forShopEdit: Bool = false
+    var addressId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +59,13 @@ class AddressViewController: UIViewController {
             subtitle.textAlignment = NSTextAlignment.left
             primaryAddress.isOn = false
             primaryAddress.isHidden = false
+            doThisLaterButton.isHidden = true
+        }
+        if(forEdit) {
+            saveButton.isHidden = true
+            updateButton.isHidden = false
+            subtitle.text = "Edit your address and click on update"
+            fillformForEdit()
         }
     }
     
@@ -85,13 +101,48 @@ class AddressViewController: UIViewController {
         }
     }
     
-    @IBAction func doThisLaterButton(_ sender: UIButton) {
-        if(forShop) {
-            self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+    @IBAction func updateButtonPressed(_ sender: Any) {
+        if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty || phone_sec.text!.isEmpty) {
+            let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
+            self.present(alert, animated: true, completion: nil)
         }
         else{
-            self.performSegue(withIdentifier: "reloadAccount", sender: self)
+            let query: PFQuery<PFObject>
+            if(forShopEdit) {
+                query = PFQuery(className: "Shop_Address")
+            }
+            else {
+                query = PFQuery(className: "Address")
+            }
+            query.getObjectInBackground(withId: self.addressId!){(address: PFObject?, error: Error?) in
+                if let error = error {
+                    let alert = networkErrorAlert(title: "Error updating address.", errorString: error.localizedDescription)
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if let address = address {
+                    address["line_1"] = self.line_1.text
+                    address["line_2"] = self.line_2.text
+                    address["city"] = self.city.text
+                    address["state"] = self.state.text
+                    address["zip"] = self.zip.text
+                    address["phone"] = Int(self.phone_sec.text!)
+                    address.saveInBackground{(success, error) in
+                        if(success) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        else{
+                            let alert = networkErrorAlert(title: "Error updating address.", errorString: "Error updating address. Please try later.")
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
         }
+    }
+    
+    
+    @IBAction func doThisLaterButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "reloadAccount", sender: self)
     }
     
     //function to fill address field with primary options if switched on
@@ -157,6 +208,29 @@ class AddressViewController: UIViewController {
         }
         
         return address
+    }
+    
+    private func fillformForEdit(){
+        var query: PFQuery<PFObject>?
+        if(forShopEdit) {
+            query = PFQuery(className: "Shop_Address")
+        }
+        else {
+            query = PFQuery(className: "Address")
+        }
+        
+        query!.whereKey("objectId", contains: addressId!)
+        query!.getFirstObjectInBackground{(object, error) in
+            if let object = object {
+                let address = Address(address: object)
+                self.line_1.text = address.getLine1()
+                self.line_2.text = address.getLine2()
+                self.city.text = address.getCity()
+                self.state.text = address.getState()
+                self.zip.text = address.getZip()
+                self.phone_sec.text = address.getPhone()!.description
+            }
+        }
     }
     
 }

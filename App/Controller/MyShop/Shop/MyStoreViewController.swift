@@ -30,7 +30,7 @@ class MyStoreViewController: UIViewController {
     //selected product
     private var currProduct: Product?
     
-    private var productMode : forProducts?
+    private var productMode : ProductMode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class MyStoreViewController: UIViewController {
         productsCollection.dataSource = self
         
         //set up edit field
-        if(productMode == forProducts.forMyShop) {
+        if(productMode == ProductMode.forMyShop) {
             editSwitch.isHidden = false
             editLabel.isHidden = false
             followButton.isHidden = true
@@ -92,7 +92,7 @@ class MyStoreViewController: UIViewController {
         self.currShop = shop
     }
     
-    func setForShop(_ productMode: forProducts ) {
+    func setForShop(_ productMode: ProductMode ) {
         self.productMode = productMode
     }
     
@@ -100,6 +100,8 @@ class MyStoreViewController: UIViewController {
         self.addProduct.isHidden = bool
         self.noProductText.isHidden = bool
         self.productsCollection.isHidden = !bool
+        self.editLabel.isHidden = !bool
+        self.editSwitch.isHidden = !bool
     }
     
     func replaceProduct(with updateProduct: Product) {
@@ -112,10 +114,10 @@ class MyStoreViewController: UIViewController {
     
     @IBAction func editMode(_ sender: UISwitch) {
         if(editSwitch.isOn) {
-            self.productMode = forProducts.forOwner
+            self.productMode = ProductMode.forOwner
         }
         else {
-            self.productMode = forProducts.forMyShop
+            self.productMode = ProductMode.forMyShop
         }
     }
 }

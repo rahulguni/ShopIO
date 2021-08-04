@@ -20,12 +20,11 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var discountPerLabel: UILabel!
-    @IBOutlet weak var addMoreLabel: UILabel!
     
     //Get the product from shop view
     private var myProduct: Product?
     
-    var productMode: forProducts?
+    var productMode: ProductMode?
     
     let realm = try! Realm()
     
@@ -49,7 +48,7 @@ class MyProductViewController: UIViewController {
             self.discountField.attributedText = attributeString
         }
 
-        editAbleProduct(productMode!)
+        setProductsPage(productMode!)
     }
     
     //Function to unwind the segue and reload view
@@ -76,28 +75,6 @@ class MyProductViewController: UIViewController {
         self.myProduct = myProduct
     }
     
-    
-    func editAbleProduct(_ editMode: forProducts) {
-        if(editMode == forProducts.forOwner) {
-            setOwnerDisplay()
-        }
-        else if(editMode == forProducts.forMyShop) {
-            self.addToCartButton.isHidden = true
-        }
-        else if (editMode == forProducts.forPublic){
-            let cartObject = isInCart()
-            if(cartObject != nil) {
-                setCartDisplay(cartObject!)
-            }
-            else {
-                setPublicDisplay()
-            }
-        }
-        else if (editMode == forProducts.forCart) {
-            let cartObject = isInCart()
-            setCartDisplay(cartObject!)
-        }
-    }
     
     @IBAction func updateProduct(_ sender: Any) {
         if(productTitle.text!.isEmpty || priceField.text!.isEmpty || discountField.text!.isEmpty || quantityField.text!.isEmpty){
@@ -143,7 +120,6 @@ class MyProductViewController: UIViewController {
                     cartObject!.quantity = Int(quantityStepper.value)
                 }
             }
-            
             //else add the object to local storage
             else {
                 let cartItem = CartItem()
@@ -158,11 +134,11 @@ class MyProductViewController: UIViewController {
                 }
             }
             
-            if(productMode == forProducts.forCart) {
+            if(productMode == ProductMode.forCart) {
                 performSegue(withIdentifier: "goToMyCart", sender: self)
             }
             
-            if(productMode == forProducts.forPublic) {
+            if(productMode == ProductMode.forPublic) {
                 performSegue(withIdentifier: "goToMyStore", sender: self)
             }
             
@@ -193,6 +169,28 @@ class MyProductViewController: UIViewController {
         return myItem
     }
     
+    func setProductsPage(_ editMode: ProductMode) {
+        if(editMode == ProductMode.forOwner) {
+            setOwnerDisplay()
+        }
+        else if(editMode == ProductMode.forMyShop) {
+            self.addToCartButton.isHidden = true
+        }
+        else if (editMode == ProductMode.forPublic){
+            let cartObject = isInCart()
+            if(cartObject != nil) {
+                setCartDisplay(cartObject!)
+            }
+            else {
+                setPublicDisplay()
+            }
+        }
+        else if (editMode == ProductMode.forCart) {
+            let cartObject = isInCart()
+            setCartDisplay(cartObject!)
+        }
+    }
+    
     private func setOwnerDisplay() {
         self.productTitle.isUserInteractionEnabled = true
         self.productDescription.isUserInteractionEnabled = true
@@ -214,6 +212,7 @@ class MyProductViewController: UIViewController {
     
     private func setCartDisplay(_ cartObject: CartItem) {
         self.addToCartButton.isHidden = false
+        self.addToCartButton.setTitle("Update Cart", for: .normal)
         self.quantityStepper.isHidden = false
         self.quantityField.text = String(cartObject.quantity!)
         self.quantityStepper.value = Double(cartObject.quantity!)

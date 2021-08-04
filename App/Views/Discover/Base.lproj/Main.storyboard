@@ -51,7 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmY-Dy-SqM">
-                                                    <rect key="frame" x="8" y="184" width="179" height="30"/>
+                                                    <rect key="frame" x="8" y="184" width="147" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Rating">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -61,11 +61,19 @@
                                                     <rect key="frame" x="8" y="8" width="357" height="168"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iq-nd-2U3">
+                                                    <rect key="frame" x="163" y="184" width="202" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <gestureRecognizers/>
                                         <size key="customSize" width="373" height="271"/>
                                         <connections>
+                                            <outlet property="shopOwner" destination="7iq-nd-2U3" id="vUV-y7-WCF"/>
                                             <outlet property="shopRating" destination="dmY-Dy-SqM" id="oQX-ta-tLb"/>
                                             <outlet property="shopTitle" destination="Jp7-4L-1NS" id="qdb-tq-sge"/>
                                         </connections>
@@ -84,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqQ-pi-cOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="770"/>
+            <point key="canvasLocation" x="192.75362318840581" y="769.41964285714278"/>
         </scene>
         <!--MyStore-->
         <scene sceneID="8lk-P1-261">

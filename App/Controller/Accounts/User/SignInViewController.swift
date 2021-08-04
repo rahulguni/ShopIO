@@ -40,6 +40,7 @@ class SignInViewController: UIViewController {
                             self.performSegue(withIdentifier: "reloadMyShop", sender: self)
                         }
                         else if(self.dismiss == forSignIn.forMyCart) {
+                            print("ere")
                             self.performSegue(withIdentifier: "reloadMyCart", sender: self)
                         }
                         else if(self.dismiss == forSignIn.forMyProduct) {

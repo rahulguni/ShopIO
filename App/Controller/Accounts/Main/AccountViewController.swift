@@ -75,6 +75,23 @@ extension AccountViewController: UITableViewDelegate{
             case [0,0]:
                 performSegue(withIdentifier: "goToSignIn", sender: self);
                 
+            case[1,0]:
+                if(currentUser != nil) {
+                    performSegue(withIdentifier: "goToMyAddresses", sender: self)
+                }
+                else {
+                    performSegue(withIdentifier: "goToSignIn", sender: self)
+                }
+                
+            case[2,2]:
+                if(currentUser != nil) {
+                    performSegue(withIdentifier: "goToEditProfile", sender: self)
+                }
+                else {
+                    performSegue(withIdentifier: "goToSignIn", sender: self)
+                }
+            
+                
             //Sign out the user if Sign Out is selected
             case [4,0]:
                 let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)

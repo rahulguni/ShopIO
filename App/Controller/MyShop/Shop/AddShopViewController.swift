@@ -13,8 +13,12 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var shopName: UITextField!
     @IBOutlet weak var shopSlogan: UITextField!
     @IBOutlet weak var shopImage: UIImageView!
+    @IBOutlet weak var titleLabel: UITextField!
+    @IBOutlet weak var subTitleLabel: UITextField!
+    @IBOutlet weak var continueButton: UIButton!
     
-    private var shopId: String?
+    private var myShop: Shop?
+    var forEdit: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +27,19 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.isModalInPresentation = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(forEdit){
+            loadEditShop()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //function to make address controller store address in shop database for shops
         if(segue.identifier! == "toAddress") {
             let destination = segue.destination as! AddressViewController
             destination.forShop = true
-            destination.shopId = shopId
+            destination.shopId = myShop!.getShopId()
         }
     }
     
@@ -39,24 +50,11 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         else {
-            let shop = PFObject(className: "Shop")
-            shop["userId"] = currentUser!.objectId!
-            shop["title"] = shopName.text
-            shop["slogan"] = shopSlogan.text
-            
-            /*let imageData = shopImage.image!.jpegData(compressionQuality: 0.1)!
-            let shopImage = PFFileObject(data: imageData)
-            shop["shopImage"] = shopImage*/
-            
-            shop.saveInBackground{(success, error) in
-                if(success) {
-                    self.shopId = shop.objectId!
-                    self.performSegue(withIdentifier: "toAddress", sender: self)
-                }
-                else{
-                    let alert = networkErrorAlert(title: "Network Error", errorString: "Could not save shop at this time. Please try again.")
-                    self.present(alert, animated: true, completion: nil)
-                }
+            if(myShop == nil) {
+                saveShop()
+            }
+            else {
+                updateShop()
             }
         }
     }
@@ -69,6 +67,63 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.showAlert()
     }
     
+    func setShop(shop myShop: Shop) {
+        self.myShop = myShop
+    }
+    
+    private func loadEditShop(){
+        titleLabel.text = "Welcome"
+        subTitleLabel.text = "Modify the fields below and press update."
+        let shopName = myShop?.getShopTitle()
+        let shopSlogan = myShop?.getShopSlogan()
+        self.shopName.text = shopName
+        self.shopSlogan.text = shopSlogan
+        self.continueButton.setTitle("Update", for: .normal)
+    }
+    
+    private func saveShop(){
+        let shop = PFObject(className: "Shop")
+        shop["userId"] = currentUser!.objectId!
+        shop["title"] = shopName.text
+        shop["slogan"] = shopSlogan.text
+        
+        /*let imageData = shopImage.image!.jpegData(compressionQuality: 0.1)!
+        print(type(of: imageData))
+        let shopImage = PFFileObject(data: imageData)
+        shop["shopImage"] = shopImage*/
+        
+        shop.saveInBackground{(success, error) in
+            if(success) {
+                self.myShop = Shop(shop: shop)
+                self.performSegue(withIdentifier: "toAddress", sender: self)
+            }
+            else{
+                let alert = networkErrorAlert(title: "Network Error", errorString: "Could not save shop at this time. Please try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func updateShop() {
+        let query = PFQuery(className: "Shop")
+        query.getObjectInBackground(withId: myShop!.getShopId()) { (shop: PFObject?, error: Error?) in
+            if let myShop = shop {
+                myShop["title"] = self.shopName.text
+                myShop["slogan"] = self.shopSlogan.text
+                myShop.saveInBackground{(success, error) in
+                    if(success) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    else{
+                        let alert = networkErrorAlert(title: "Error Updating", errorString: "Could not update shop at this time  Please try again.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK:- UIImagePickerViewDelegate.
     //Show alert to selected the media source type.
     private func showAlert() {
         
@@ -96,7 +151,6 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    //MARK:- UIImagePickerViewDelegate.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         self.dismiss(animated: true) { [weak self] in
@@ -110,5 +164,6 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
 }
 

@@ -16,7 +16,6 @@ class Shop {
     private var shopTitle: String?
     private var shopSlogan: String?
     private var shopImage: UIImage?
-    private var shopOwner: String?
     
     init(shop shopObject: PFObject?){
         self.objectId = shopObject!.objectId

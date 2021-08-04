@@ -24,7 +24,7 @@ class DiscoverViewController: UIViewController {
             let destination = segue.destination as! MyStoreViewController
             destination.setShop(shop: currShop)
             destination.fillMyProducts(productsList: currProducts)
-            destination.setForShop(forProducts.forPublic)
+            destination.setForShop(ProductMode.forPublic)
         }
     }
     
@@ -33,14 +33,11 @@ class DiscoverViewController: UIViewController {
         // Do any additional setup after loading the view.
         shopCollection.delegate = self
         shopCollection.dataSource = self
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        shopCollection.isHidden = true
         //Render all shops
-        self.shops = []
+        self.shops.removeAll()
+        
+        //can add to viewdidappear if reload after each view
         let shopQuery = PFQuery(className: "Shop")
         shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
         shopQuery.order(byAscending: "title")
@@ -58,6 +55,7 @@ class DiscoverViewController: UIViewController {
                     }
                 }
             }
+            self.shopCollection.isHidden = false
         }
     }
 }
@@ -65,7 +63,7 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currShop = shops[indexPath.row]
-        currProducts = []
+        currProducts.removeAll()
         let query = PFQuery(className: "Product")
         query.whereKey("shopId", equalTo: currShop!.getShopId())
         query.order(byAscending: "title")

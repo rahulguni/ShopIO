@@ -12,7 +12,7 @@
         <!--Add Shop View Controller-->
         <scene sceneID="nwW-gG-UC2">
             <objects>
-                <viewController id="lKa-Sa-BQ2" customClass="AddShopViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddNewShop" id="lKa-Sa-BQ2" customClass="AddShopViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sws-C7-uey">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,9 +107,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="Jrb-6V-92p"/>
                     <connections>
+                        <outlet property="continueButton" destination="0AA-te-qqn" id="owl-aw-Ujk"/>
                         <outlet property="shopImage" destination="Emi-BG-Vwg" id="qI8-n7-LcY"/>
                         <outlet property="shopName" destination="v1p-j2-rkS" id="Auq-Nm-K4V"/>
                         <outlet property="shopSlogan" destination="4SA-P6-Apj" id="ykS-nm-r21"/>
+                        <outlet property="subTitleLabel" destination="OjN-XR-4u6" id="w4x-ri-at3"/>
+                        <outlet property="titleLabel" destination="bp5-mj-DR3" id="Q1r-HI-Ztg"/>
                         <segue destination="2nF-vZ-Wam" kind="presentation" identifier="toAddress" id="ZEx-55-Syn"/>
                     </connections>
                 </viewController>
