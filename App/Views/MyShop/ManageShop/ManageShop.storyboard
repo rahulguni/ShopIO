@@ -85,6 +85,9 @@
                                 <state key="normal" title="Finances">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="financesClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="Kxf-hR-yzM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-O2-ecL">
                                 <rect key="frame" x="86" y="223" width="243" height="105"/>
@@ -93,6 +96,9 @@
                                 <state key="normal" title="Update Products">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="updateClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="PSc-gc-LWV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-S1-Lbn">
                                 <rect key="frame" x="86" y="566" width="243" height="105"/>
@@ -101,6 +107,9 @@
                                 <state key="normal" title="Requests">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="requestsClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="nwM-tp-sai"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6P3-NE-6tw"/>
@@ -111,11 +120,22 @@
                         <outlet property="finances" destination="XKr-b3-dvb" id="UdL-U8-0yj"/>
                         <outlet property="requests" destination="Aeb-S1-Lbn" id="Hxs-oQ-aoh"/>
                         <outlet property="updateProducts" destination="1WX-O2-ecL" id="L1v-ts-S51"/>
+                        <segue destination="WLw-b0-dNj" kind="show" identifier="goToUpdateProduct" id="5r9-88-DUh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uhX-XZ-muj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6105.7971014492759" y="612.72321428571422"/>
+        </scene>
+        <!--UpdateProduct-->
+        <scene sceneID="rZ2-uf-212">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UpdateProduct" id="WLw-b0-dNj" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ES5-pZ-Jhl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UvA-ke-vCU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7134" y="594"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dK0-ea-jAf">

@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 import SwipeCellKit
 
-class CartItemCollectionViewCell: UICollectionViewCell {
+class CartItemCollectionViewCell: SwipeCollectionViewCell {
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productDiscount: UILabel!

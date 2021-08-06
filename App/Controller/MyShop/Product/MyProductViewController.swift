@@ -65,6 +65,10 @@ class MyProductViewController: UIViewController {
             let destination = segue.destination as! MyStoreViewController
             destination.replaceProduct(with: myProduct!)
         }
+        if(segue.identifier! == "goToUpdateProducts") {
+            let destination = segue.destination as! UpdateProductCollectionViewController
+            destination.replaceProduct(with: myProduct!)
+        }
         if(segue.identifier! == "goToSignIn") {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forMyProduct
@@ -97,7 +101,12 @@ class MyProductViewController: UIViewController {
                         if(success) {
                             let tempProd = Product(product: product)
                             self.myProduct = tempProd
-                            self.performSegue(withIdentifier: "goToMyStore", sender: self)
+                            if(self.productMode == ProductMode.forUpdate) {
+                                self.performSegue(withIdentifier: "goToUpdateProducts", sender: self)
+                            }
+                            if(self.productMode == ProductMode.forOwner) {
+                                self.performSegue(withIdentifier: "goToMyStore", sender: self)
+                            }
                         }
                         else {
                             let alert = networkErrorAlert(title: "Could not save object", errorString: "Connection error. Please try again later.")
@@ -170,7 +179,7 @@ class MyProductViewController: UIViewController {
     }
     
     func setProductsPage(_ editMode: ProductMode) {
-        if(editMode == ProductMode.forOwner) {
+        if(editMode == ProductMode.forOwner || editMode == ProductMode.forUpdate) {
             setOwnerDisplay()
         }
         else if(editMode == ProductMode.forMyShop) {

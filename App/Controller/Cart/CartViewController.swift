@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import Parse
+import SwipeCellKit
 
 class CartViewController: UIViewController {
 
@@ -117,13 +118,13 @@ extension CartViewController: UICollectionViewDelegate {
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: productId!)
         query.getFirstObjectInBackground{ (object: PFObject?, error: Error?) in
-                if let error = error {
-                    let alert = networkErrorAlert(title: "Could not load item.", errorString: error.localizedDescription)
-                    self.present(alert, animated: true, completion: nil)
-                } else if let object = object {
-                    self.myProduct = Product(product: object)
-                    self.performSegue(withIdentifier: "goToMyProduct", sender: self)
-                }
+            if let error = error {
+                let alert = networkErrorAlert(title: "Could not load item.", errorString: error.localizedDescription)
+                self.present(alert, animated: true, completion: nil)
+            } else if let object = object {
+                self.myProduct = Product(product: object)
+                self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+            }
         }
     }
     
@@ -139,10 +140,45 @@ extension CartViewController: UICollectionViewDataSource {
         if let tempCell = myCartItems.dequeueReusableCell(withReuseIdentifier: "reusableItemCell", for: indexPath) as? CartItemCollectionViewCell {
             tempCell.setParameters(product: myItems[indexPath.row])
             itemCell = tempCell
+            itemCell.delegate = self
             highlightCell(itemCell)
+            itemCell.delegate = self
         }
         return itemCell
     }
     
+}
+
+extension CartViewController: SwipeCollectionViewCellDelegate{
+    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                // handle action by updating model with deletion
+                let deleteItem = self.myItems[indexPath.row]
+                let alert = UIAlertController(title: "Are you sure you want to remove this item from cart?", message: "Please select below", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Remove button"), style: .default, handler: { _ in
+                    do {
+                        try self.realm.write{
+                            self.realm.delete(deleteItem)
+                            self.myItems.remove(at: indexPath.row)
+                        }
+                    }catch {
+                        print("error deleting category")
+                    }
+                    self.myCartItems.reloadData()
+                }))
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+
+            // customize the action appearance
+            deleteAction.image = UIImage(named: "delete")
+
+            return [deleteAction]
+    }
 }
 

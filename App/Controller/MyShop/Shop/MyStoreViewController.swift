@@ -32,6 +32,9 @@ class MyStoreViewController: UIViewController {
     
     private var productMode : ProductMode?
     
+    //go to discover if only called from discover
+    private var willExit: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +61,7 @@ class MyStoreViewController: UIViewController {
         shopTitle.text = currShop?.getShopTitle()
         productsCollection.layer.borderWidth = 0.5
         productsCollection.layer.borderColor = UIColor.black.cgColor
+        checkFollowed()
         
         editSwitch.isOn = false
     }
@@ -74,16 +78,18 @@ class MyStoreViewController: UIViewController {
         }
     }
     
-    //Function to unwind the segue and reload view
-    @IBAction func unwindToMyStoreWithSegue(segue: UIStoryboardSegue) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            DispatchQueue.main.async {
-                self.productsCollection.reloadData()
-            }
+    override func viewWillDisappear(_ animated: Bool) {
+        if(willExit == false) {
+            performSegue(withIdentifier: "goToDiscover", sender: self)
         }
     }
     
+    func setExit(_ bool: Bool) {
+        self.willExit = bool
+    }
+}
 
+extension MyStoreViewController {
     func fillMyProducts(productsList products: [Product]) {
         self.myProducts = products
     }
@@ -96,7 +102,7 @@ class MyStoreViewController: UIViewController {
         self.productMode = productMode
     }
     
-    func hasProduct(_ bool: Bool) {
+    private func hasProduct(_ bool: Bool) {
         self.addProduct.isHidden = bool
         self.noProductText.isHidden = bool
         self.productsCollection.isHidden = !bool
@@ -112,12 +118,80 @@ class MyStoreViewController: UIViewController {
         }
     }
     
+    private func checkFollowed(){
+        if(currentUser != nil) {
+            let query = PFQuery(className: "Followings")
+            query.whereKey("userId", equalTo: String(currentUser!.objectId!))
+            query.whereKey("shopId", equalTo: currShop!.getShopId())
+            query.getFirstObjectInBackground {(success, error) in
+                if(success != nil) {
+                    self.followButton.setTitle("Unfollow", for: .normal)
+                }
+            }
+        }
+    }
+}
+
+extension MyStoreViewController {
+    //Function to unwind the segue and reload view
+    @IBAction func unwindToMyStoreWithSegue(segue: UIStoryboardSegue) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.productsCollection.reloadData()
+            }
+        }
+    }
+    
     @IBAction func editMode(_ sender: UISwitch) {
         if(editSwitch.isOn) {
             self.productMode = ProductMode.forOwner
         }
         else {
             self.productMode = ProductMode.forMyShop
+        }
+    }
+    
+    @IBAction func followClicked(_ sender: Any) {
+        if(currentUser != nil) {
+            if(self.followButton.titleLabel!.text == "Follow") {
+                let follower = PFObject(className: "Followings")
+                follower["userId"] = currentUser!.objectId!
+                follower["shopId"] = currShop!.getShopId()
+                follower.saveInBackground {(success, error) in
+                    if(success) {
+                        self.followButton.setTitle("Unfollow", for: .normal)
+                    }
+                    else {
+                        let alert = networkErrorAlert(title: "Network Error", errorString: "Error following this user. Please try later.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+            else {
+                let unfollower = PFQuery(className: "Followings")
+                unfollower.whereKey("userId", equalTo: String(currentUser!.objectId!))
+                unfollower.whereKey("shopId", equalTo: currShop!.getShopId())
+                unfollower.getFirstObjectInBackground{(obj, error) in
+                    if(obj != nil) {
+                        let alert = UIAlertController(title: "Are you sure you want to unfollow \(self.currShop!.getShopTitle())?", message: "Please select below", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                            alert.dismiss(animated: true, completion: nil)
+                        }))
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Unfollow", comment: "Sign Out Button"), style: .default, handler: { _ in
+                            obj!.deleteInBackground()
+                            self.followButton.setTitle("Follow", for: .normal)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        let alert = networkErrorAlert(title: "Network Error", errorString: "Error unfollowing this user. Please try later.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+        else{
+            performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
 }
@@ -145,9 +219,5 @@ extension MyStoreViewController: UICollectionViewDataSource {
         }
         return productCell
     }
-    
-    
-    
-
 }
 

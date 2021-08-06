@@ -18,11 +18,11 @@ struct User {
     private var lName: String?
     
     init(){
-        self.objectId = nil
-        self.email = nil
-        self.phone = nil
-        self.fName = nil
-        self.lName = nil
+        self.objectId = currentUser?.objectId!
+        self.email = currentUser?.value(forKey: "email") as? String
+        self.phone = currentUser?.value(forKey: "phone") as? Int
+        self.fName = currentUser?.value(forKey: "fName") as? String
+        self.lName = currentUser?.value(forKey: "lName") as? String
     }
         
 }

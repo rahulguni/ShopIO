@@ -19,4 +19,6 @@ enum ProductMode {
     case forCart
     case forOwner
     case forPublic
+    case forUpdate
+    case forRequest
 }

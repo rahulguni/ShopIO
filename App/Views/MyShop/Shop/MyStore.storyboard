@@ -18,6 +18,14 @@
             </objects>
             <point key="canvasLocation" x="4075" y="2087"/>
         </scene>
+        <!--SignIn-->
+        <scene sceneID="UVd-xX-UqB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignIn" id="ag2-9W-HeP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yFH-ff-hud" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4080" y="1115"/>
+        </scene>
         <!--My Store View Controller-->
         <scene sceneID="fHS-OV-j54">
             <objects>
@@ -133,12 +141,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRW-g4-Dw3">
-                                <rect key="frame" x="339" y="301" width="56" height="30"/>
+                                <rect key="frame" x="322" y="301" width="73" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Follow">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="followClicked:" destination="uZN-a4-WEw" eventType="touchUpInside" id="ill-X2-dg6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tq9-eF-JeX"/>
@@ -155,11 +166,14 @@
                         <outlet property="shopSlogan" destination="zOs-SW-GwE" id="Stn-bc-Us9"/>
                         <outlet property="shopTitle" destination="Uwh-u8-fdH" id="s5n-fS-lah"/>
                         <segue destination="paJ-WP-Dvl" kind="presentation" identifier="goToMyProduct" id="4eW-hB-tKo"/>
+                        <segue destination="ag2-9W-HeP" kind="presentation" identifier="goToSignIn" id="I22-wO-3Gy"/>
+                        <segue destination="eBk-a3-kDH" kind="unwind" identifier="goToDiscover" unwindAction="unwindToDiscoverWithSegueWithSegue:" id="uuY-7z-Y7e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTN-kA-4M6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="eBk-a3-kDH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4075" y="1570"/>
+            <point key="canvasLocation" x="4073.913043478261" y="1569.6428571428571"/>
         </scene>
         <!--My Product View Controller-->
         <scene sceneID="Cd8-Ko-z7l">
@@ -272,6 +286,17 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoS-sg-rEw">
+                                                <rect key="frame" x="20" y="739" width="374" height="65"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Request">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addToCart:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="415-9I-Bac"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -313,6 +338,7 @@
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyStore" unwindAction="unwindToMyStoreWithSegueWithSegue:" id="brp-9w-ipV"/>
                         <segue destination="5O0-wh-kT7" kind="presentation" identifier="goToSignIn" id="jU0-B8-qk6"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="EvD-eC-ugC"/>
+                        <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToUpdateProducts" unwindAction="unwindToUpdateProductsWithSegueWithSegue:" id="bkF-T1-iGs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cga-DH-3uD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
