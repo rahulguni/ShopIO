@@ -53,12 +53,16 @@
 		DEBBA85026AE9A880073D33E /* AddProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */; };
 		DEBBA85226AE9AD10073D33E /* MyStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85126AE9AD10073D33E /* MyStore.storyboard */; };
 		DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85326AE9B020073D33E /* AddShop.storyboard */; };
+		DEC59D5426BF58FB005EE1C5 /* Requests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC59D5326BF58FB005EE1C5 /* Requests.storyboard */; };
+		DEC59D5626BF6AF9005EE1C5 /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC59D5526BF6AF9005EE1C5 /* RequestsViewController.swift */; };
+		DEC59D5926BF6BA2005EE1C5 /* RequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */; };
 		DEC9E4F126B4AE5A002891A9 /* ShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9E4F026B4AE5A002891A9 /* ShopManager.swift */; };
 		DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */; };
 		DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */; };
 		DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */; };
 		DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */; };
 		DED520B526ABCAB000B77652 /* MyInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */; };
+		DEE2C3B326BF87D000CEDE15 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE2C3B226BF87D000CEDE15 /* Request.swift */; };
 		DEE7E12526B8F343008E429C /* MyAddresses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE7E12426B8F343008E429C /* MyAddresses.storyboard */; };
 		DEE7E12726B8F552008E429C /* AddressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE7E12626B8F552008E429C /* AddressCollectionViewCell.swift */; };
 		DEE7E12926B8F5DD008E429C /* MyAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE7E12826B8F5DD008E429C /* MyAddressViewController.swift */; };
@@ -116,12 +120,16 @@
 		DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddProduct.storyboard; sourceTree = "<group>"; };
 		DEBBA85126AE9AD10073D33E /* MyStore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyStore.storyboard; sourceTree = "<group>"; };
 		DEBBA85326AE9B020073D33E /* AddShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddShop.storyboard; sourceTree = "<group>"; };
+		DEC59D5326BF58FB005EE1C5 /* Requests.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Requests.storyboard; sourceTree = "<group>"; };
+		DEC59D5526BF6AF9005EE1C5 /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
+		DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTableViewCell.swift; sourceTree = "<group>"; };
 		DEC9E4F026B4AE5A002891A9 /* ShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopManager.swift; sourceTree = "<group>"; };
 		DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumFiles.swift; sourceTree = "<group>"; };
 		DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		DECE377526ABDC0000EB2406 /* ShopsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsCollectionViewCell.swift; sourceTree = "<group>"; };
 		DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInventoryViewController.swift; sourceTree = "<group>"; };
+		DEE2C3B226BF87D000CEDE15 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		DEE7E12426B8F343008E429C /* MyAddresses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyAddresses.storyboard; sourceTree = "<group>"; };
 		DEE7E12626B8F552008E429C /* AddressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCollectionViewCell.swift; sourceTree = "<group>"; };
 		DEE7E12826B8F5DD008E429C /* MyAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +187,7 @@
 		DE3E66742637A4B600128755 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DEC59D5726BF6B8A005EE1C5 /* Requests */,
 				DE87FE5026AD0DCC00F996C7 /* Misc */,
 				DE87FE4F26AD0DBD00F996C7 /* User */,
 				DE87FE4E26AD0D8D00F996C7 /* Product */,
@@ -276,9 +285,9 @@
 			children = (
 				DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */,
 				DE8358C92636518F00E3F1A7 /* Assets.xcassets */,
+				DEBBA83426AE90750073D33E /* Discover */,
 				DEBBA83626AE90950073D33E /* MyShop */,
 				DEBBA83526AE90830073D33E /* Cart */,
-				DEBBA83426AE90750073D33E /* Discover */,
 				DEBBA83326AE905E0073D33E /* Account */,
 			);
 			path = Views;
@@ -287,9 +296,9 @@
 		DE8358D6263655B400E3F1A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DE87FE5226AD0DFA00F996C7 /* Cart */,
-				DE87FE5126AD0DEE00F996C7 /* Discover */,
 				DE916451263CFA8400312D35 /* MyShop */,
+				DE87FE5126AD0DEE00F996C7 /* Discover */,
+				DE87FE5226AD0DFA00F996C7 /* Cart */,
 				DE3718BB26369D73001CF554 /* Accounts */,
 			);
 			path = Controller;
@@ -331,6 +340,7 @@
 				DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */,
 				DE56B5BC269FF84B005E68E2 /* Product.swift */,
 				DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */,
+				DEE2C3B226BF87D000CEDE15 /* Request.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -408,6 +418,7 @@
 			children = (
 				DEBBA84B26AE99F50073D33E /* ManageShop.storyboard */,
 				DE9978F426BD02DA0043AD8C /* UpdateProduct.storyboard */,
+				DEC59D5326BF58FB005EE1C5 /* Requests.storyboard */,
 			);
 			path = ManageShop;
 			sourceTree = "<group>";
@@ -418,6 +429,7 @@
 				DED520B426ABCAB000B77652 /* MyInventoryViewController.swift */,
 				DE768902269FFF3400F0C888 /* ManageShopViewController.swift */,
 				DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */,
+				DEC59D5526BF6AF9005EE1C5 /* RequestsViewController.swift */,
 			);
 			path = ManageShop;
 			sourceTree = "<group>";
@@ -474,6 +486,14 @@
 				DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */,
 			);
 			path = Product;
+			sourceTree = "<group>";
+		};
+		DEC59D5726BF6B8A005EE1C5 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		DEE7E12226B8F309008E429C /* Addresses */ = {
@@ -559,6 +579,7 @@
 				DE9978F526BD02DA0043AD8C /* UpdateProduct.storyboard in Resources */,
 				DEBBA83C26AE93380073D33E /* Account.storyboard in Resources */,
 				DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */,
+				DEC59D5426BF58FB005EE1C5 /* Requests.storyboard in Resources */,
 				DEBBA84826AE995B0073D33E /* Address.storyboard in Resources */,
 				DE6B714F26B7AB0E000EF674 /* EditProfile.storyboard in Resources */,
 				DE8358CA2636518F00E3F1A7 /* Assets.xcassets in Resources */,
@@ -631,6 +652,7 @@
 				DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */,
 				DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */,
 				DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */,
+				DEC59D5626BF6AF9005EE1C5 /* RequestsViewController.swift in Sources */,
 				DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */,
 				DE87FE4426AD040B00F996C7 /* CartModel.swift in Sources */,
 				DEE7E12926B8F5DD008E429C /* MyAddressViewController.swift in Sources */,
@@ -645,6 +667,7 @@
 				DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */,
 				DE278927268D8DF4009CD37C /* Shop.swift in Sources */,
 				DE87FE4C26AD0D5600F996C7 /* OrderItemModel.swift in Sources */,
+				DEE2C3B326BF87D000CEDE15 /* Request.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
@@ -659,6 +682,7 @@
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
 				DE76890526A004E200F0C888 /* General.swift in Sources */,
 				DE6A6A3E26AFDC9A006B4D04 /* CartItemCollectionViewCell.swift in Sources */,
+				DEC59D5926BF6BA2005EE1C5 /* RequestsTableViewCell.swift in Sources */,
 				DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

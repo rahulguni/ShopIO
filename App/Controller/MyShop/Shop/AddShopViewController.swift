@@ -86,12 +86,6 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         shop["userId"] = currentUser!.objectId!
         shop["title"] = shopName.text
         shop["slogan"] = shopSlogan.text
-        
-        /*let imageData = shopImage.image!.jpegData(compressionQuality: 0.1)!
-        print(type(of: imageData))
-        let shopImage = PFFileObject(data: imageData)
-        shop["shopImage"] = shopImage*/
-        
         shop.saveInBackground{(success, error) in
             if(success) {
                 self.myShop = Shop(shop: shop)

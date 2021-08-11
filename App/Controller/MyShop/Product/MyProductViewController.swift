@@ -20,9 +20,11 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var discountPerLabel: UILabel!
+    @IBOutlet weak var requestButton: UIButton!
     
     //Get the product from shop view
     private var myProduct: Product?
+    private var myShop: Shop?
     
     var productMode: ProductMode?
     
@@ -33,7 +35,7 @@ class MyProductViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //Fix Buttons
-        let currentButtons: [UIButton] = [updateButton, addToCartButton]
+        let currentButtons: [UIButton] = [updateButton, addToCartButton, requestButton]
         modifyButtons(buttons: currentButtons)
         
         self.productTitle.text = myProduct!.getTitle()
@@ -77,6 +79,10 @@ class MyProductViewController: UIViewController {
     
     func setMyProduct(product myProduct: Product) {
         self.myProduct = myProduct
+    }
+    
+    func setMyShop(shop myShop: Shop) {
+        self.myShop = myShop
     }
     
     
@@ -157,6 +163,37 @@ class MyProductViewController: UIViewController {
         }
     }
     
+    @IBAction func requestClicked(_ sender: Any) {
+        if(currentUser != nil) {
+            let alert = UIAlertController(title: "Send a request to \(myShop!.getShopTitle()) for \(myProduct!.getTitle())?", message: "Please select below", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Request", comment: "Request Button"), style: .default, handler: { _ in
+                let newRequest = PFObject(className: "Request")
+                newRequest["shopId"] = self.myShop!.getShopId()
+                newRequest["userId"] = currentUser!.objectId
+                newRequest["productId"] = self.myProduct!.getObjectId()
+                newRequest["fulfilled"] = false
+                newRequest.saveInBackground{(success, error) in
+                    if(success) {
+                        let alert = networkErrorAlert(title: "Request Sent!", errorString: "Wait for the shop to proceed with your request.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        let alert = networkErrorAlert(title: "Could not send request.", errorString: "Try again")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            self.requestButton.isEnabled = false
+            self.requestButton.alpha = 0.5
+        }
+        else {
+            self.performSegue(withIdentifier: "goToSignIn", sender: self)
+        }
+    }
     
     @IBAction func amountStepperChange(_ sender: UIStepper) {
         self.quantityField.text = (Int)(sender.value).description
@@ -230,12 +267,18 @@ class MyProductViewController: UIViewController {
     }
     
     private func setPublicDisplay(){
-        self.quantityField.text = "1"
         self.quantityStepper.isHidden = false
         self.quantityStepper.value = 1.0
+        self.quantityField.text = "1"
         self.quantityStepper.minimumValue = 1.0
         self.quantityStepper.maximumValue = Double(myProduct!.getQuantity())
         self.addToCartButton.isHidden = false
+        if(myProduct!.getQuantity() == 0) {
+            self.quantityField.text = "0"
+            self.addToCartButton.isHidden = true
+            self.updateButton.isHidden = true
+            self.requestButton.isHidden = false
+        }
     }
 
 }

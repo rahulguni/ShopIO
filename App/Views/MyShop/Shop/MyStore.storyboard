@@ -294,7 +294,18 @@
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addToCart:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="415-9I-Bac"/>
+                                                    <action selector="requestClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="8tu-bs-kFW"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiC-Yy-0ab">
+                                                <rect key="frame" x="20" y="1037" width="374" height="65"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Talk to the Shop">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="requestClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="buv-PR-de0"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -334,6 +345,7 @@
                         <outlet property="productTitle" destination="mMM-QR-2S1" id="s5R-kR-bh2"/>
                         <outlet property="quantityField" destination="OXv-SE-z9g" id="bma-vO-bWr"/>
                         <outlet property="quantityStepper" destination="HAB-Od-0OD" id="517-sS-Aef"/>
+                        <outlet property="requestButton" destination="CoS-sg-rEw" id="Hr1-KJ-qxc"/>
                         <outlet property="updateButton" destination="NuC-IO-Kyi" id="EyH-Of-Xbj"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyStore" unwindAction="unwindToMyStoreWithSegueWithSegue:" id="brp-9w-ipV"/>
                         <segue destination="5O0-wh-kT7" kind="presentation" identifier="goToSignIn" id="jU0-B8-qk6"/>

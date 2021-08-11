@@ -15,3 +15,4 @@ func networkErrorAlert(title myTitle: String, errorString error: String) -> UIAl
     }))
     return alert
 }
+

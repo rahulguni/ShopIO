@@ -36,8 +36,7 @@ class DiscoverViewController: UIViewController {
     @IBAction func unwindToDiscoverWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                self.followedList.removeAll()
-                self.followedShops.reloadData()
+                self.getAllShops()
                 self.getFollowedShops()
             }
         }
@@ -55,8 +54,6 @@ class DiscoverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.followedList.removeAll()
-        self.shops.removeAll()
         if(currentUser != nil) {
             getFollowedShops()
         }
@@ -65,6 +62,7 @@ class DiscoverViewController: UIViewController {
     
     func getAllShops(){
         //can add to viewdidappear if reload after each view
+        self.shops.removeAll()
         let shopQuery = PFQuery(className: "Shop")
         shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
         shopQuery.order(byAscending: "title")
@@ -78,7 +76,9 @@ class DiscoverViewController: UIViewController {
                         if(object != nil) {
                             self.shops.append(newShop)
                         }
-                        self.shopCollection.reloadData()
+                        DispatchQueue.main.async {
+                            self.shopCollection.reloadData()
+                        }
                     }
                 }
             }
@@ -87,12 +87,14 @@ class DiscoverViewController: UIViewController {
     }
     
     func getFollowedShops(){
+        self.followedList.removeAll()
         let query = PFQuery(className: "Followings")
         query.whereKey("userId", equalTo: currentUser!.objectId!)
         query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 for object in objects {
                     let followedShop = PFQuery(className: "Shop")
+                    followedShop.order(byAscending: "createdAt")
                     followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
                         if shop != nil {
                             let newShop = Shop(shop: shop)
@@ -101,7 +103,9 @@ class DiscoverViewController: UIViewController {
                         else {
                             print("No Shop in Store")
                         }
-                        self.followedShops.reloadData()
+                        DispatchQueue.main.async {
+                            self.followedShops.reloadData()
+                        }
                     }
                 }
             }

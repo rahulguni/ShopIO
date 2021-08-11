@@ -143,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqQ-pi-cOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.75362318840581" y="769.41964285714278"/>
+            <point key="canvasLocation" x="1102.8985507246377" y="769.41964285714278"/>
         </scene>
         <!--MyStore-->
         <scene sceneID="8lk-P1-261">
@@ -151,7 +151,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="goToShop" storyboardName="MyStore" id="bpA-eS-Fts" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7OZ-Zf-sfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="727"/>
+            <point key="canvasLocation" x="2109" y="769"/>
         </scene>
         <!--Entry-->
         <scene sceneID="KYV-ft-ht1">
@@ -165,14 +165,15 @@
                     </tabBar>
                     <connections>
                         <segue destination="avQ-Yo-veJ" kind="relationship" relationship="viewControllers" id="uks-ye-Cfe"/>
-                        <segue destination="5rc-Jd-If3" kind="relationship" relationship="viewControllers" id="fVN-Lp-gzf"/>
-                        <segue destination="JJ2-ec-Oqt" kind="relationship" relationship="viewControllers" id="8cG-kG-AgO"/>
-                        <segue destination="AHo-1h-ORZ" kind="relationship" relationship="viewControllers" id="jfa-Yo-SaK"/>
+                        <segue destination="5rc-Jd-If3" kind="relationship" relationship="viewControllers" id="0Sk-uI-hGv"/>
+                        <segue destination="JJ2-ec-Oqt" kind="relationship" relationship="viewControllers" id="kWk-ZW-eTG"/>
+                        <segue destination="Olc-BG-6dy" kind="relationship" relationship="viewControllers" id="uyr-Hf-V79"/>
+                        <segue destination="AHo-1h-ORZ" kind="relationship" relationship="viewControllers" id="LFI-lW-Uun"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIu-9d-JcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.75362318840581" y="-14.0625"/>
+            <point key="canvasLocation" x="1103" y="-65"/>
         </scene>
         <!--Account-->
         <scene sceneID="nNn-9H-4gl">
@@ -192,7 +193,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYM-Xr-Dby" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070" y="-14"/>
+            <point key="canvasLocation" x="2979.7101449275365" y="-14.0625"/>
         </scene>
         <!--MyShop-->
         <scene sceneID="w8A-3X-PTW">
@@ -202,7 +203,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fh9-Ic-SEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1142" y="-490"/>
+            <point key="canvasLocation" x="1536" y="-480"/>
         </scene>
         <!--Account-->
         <scene sceneID="3Pt-qA-7sd">
@@ -231,7 +232,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g5o-XD-pIu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="-14"/>
+            <point key="canvasLocation" x="2068.1159420289855" y="-14.0625"/>
         </scene>
         <!--Cart-->
         <scene sceneID="irT-Qq-kL2">
@@ -250,7 +251,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1d-11-1Id" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="1549"/>
+            <point key="canvasLocation" x="-183" y="769"/>
         </scene>
         <!--Cart-->
         <scene sceneID="5EU-1I-vcm">
@@ -260,7 +261,23 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYq-iG-tEc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="1990"/>
+            <point key="canvasLocation" x="-564" y="1383"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="FmM-9f-Hz7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Olc-BG-6dy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Inbox" id="Qk0-IF-3sd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gvm-kX-XR4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOq-1E-nrq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1103" y="1898"/>
         </scene>
     </scenes>
     <resources>

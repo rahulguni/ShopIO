@@ -74,6 +74,7 @@ class MyStoreViewController: UIViewController {
         if(segue.identifier! == "goToMyProduct") {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: currProduct!)
+            destination.setMyShop(shop: currShop!)
             destination.productMode = self.productMode
         }
     }
@@ -177,7 +178,7 @@ extension MyStoreViewController {
                         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
                             alert.dismiss(animated: true, completion: nil)
                         }))
-                        alert.addAction(UIAlertAction(title: NSLocalizedString("Unfollow", comment: "Sign Out Button"), style: .default, handler: { _ in
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Unfollow", comment: "Unfollow Button"), style: .default, handler: { _ in
                             obj!.deleteInBackground()
                             self.followButton.setTitle("Follow", for: .normal)
                         }))

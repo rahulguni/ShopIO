@@ -17,5 +17,4 @@ class Cart : Object {
     @Persisted var shipping: Double?
     @Persisted var total: Double?
     @Persisted var addressId: String?
-    
 }
