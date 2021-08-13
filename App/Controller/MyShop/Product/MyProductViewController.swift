@@ -76,16 +76,11 @@ class MyProductViewController: UIViewController {
             destination.dismiss = forSignIn.forMyProduct
         }
     }
-    
-    func setMyProduct(product myProduct: Product) {
-        self.myProduct = myProduct
-    }
-    
-    func setMyShop(shop myShop: Shop) {
-        self.myShop = myShop
-    }
-    
-    
+
+}
+
+//MARK:- IBOutlet Functions
+extension MyProductViewController {
     @IBAction func updateProduct(_ sender: Any) {
         if(productTitle.text!.isEmpty || priceField.text!.isEmpty || discountField.text!.isEmpty || quantityField.text!.isEmpty){
             let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
@@ -198,6 +193,17 @@ class MyProductViewController: UIViewController {
     @IBAction func amountStepperChange(_ sender: UIStepper) {
         self.quantityField.text = (Int)(sender.value).description
     }
+}
+
+//MARK:- Display Functions
+extension MyProductViewController {
+    func setMyProduct(product myProduct: Product) {
+        self.myProduct = myProduct
+    }
+    
+    func setMyShop(shop myShop: Shop) {
+        self.myShop = myShop
+    }
     
     //check if item is in cart and return cartobject
     private func isInCart() -> CartItem? {
@@ -280,5 +286,4 @@ class MyProductViewController: UIViewController {
             self.requestButton.isHidden = false
         }
     }
-
 }

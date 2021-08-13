@@ -20,7 +20,10 @@ class RequestsViewController: UIViewController, UITableViewDelegate, UITableView
         requestsTable.delegate = self
         requestsTable.dataSource = self
     }
-    
+}
+
+//MARK:- Display Functions
+extension RequestsViewController {
     func setRequests(requests currRequests: [Request]) {
         self.requests = currRequests
     }
@@ -34,5 +37,4 @@ class RequestsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.setParameters(request: requests[indexPath.row])
         return cell
     }
-
 }

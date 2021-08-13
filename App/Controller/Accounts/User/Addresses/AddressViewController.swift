@@ -68,7 +68,11 @@ class AddressViewController: UIViewController {
             fillformForEdit()
         }
     }
-    
+
+}
+
+//MARK: - IBOutlet Functions
+extension AddressViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty) {
             let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
@@ -178,7 +182,10 @@ class AddressViewController: UIViewController {
             zip.text = ""
         }
     }
-    
+}
+
+//MARK: - Display Functions
+extension AddressViewController {
     private func fillForm(className forClass: String) -> PFObject {
         let address = PFObject(className: forClass)
         if(forClass == "Shop_Address"){
@@ -232,7 +239,6 @@ class AddressViewController: UIViewController {
             }
         }
     }
-    
 }
 
 //MARK: - Picker Functions

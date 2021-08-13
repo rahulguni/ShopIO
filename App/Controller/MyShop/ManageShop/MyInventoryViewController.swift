@@ -38,6 +38,18 @@ class MyInventoryViewController: UIViewController {
         }
     }
     
+    
+
+}
+
+extension MyInventoryViewController: shopManagerDelegate {
+    func goToViewController(identifier: String) {
+        self.performSegue(withIdentifier: identifier, sender: self)
+    }
+}
+
+//MARK:- IBOutlet Functions
+extension MyInventoryViewController {
     @IBAction func updateClicked(_ sender: Any) {
         self.shopManager.checkShop(identifier: "goToUpdateProduct")
     }
@@ -70,11 +82,9 @@ class MyInventoryViewController: UIViewController {
             }
         }
     }
-
 }
 
-extension MyInventoryViewController: shopManagerDelegate {
-    func goToViewController(identifier: String) {
-        self.performSegue(withIdentifier: identifier, sender: self)
-    }
+//MARK:- Display Functions
+extension MyInventoryViewController {
+    
 }

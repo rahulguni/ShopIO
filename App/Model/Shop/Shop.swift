@@ -15,13 +15,22 @@ class Shop {
     private var userId: String?
     private var shopTitle: String?
     private var shopSlogan: String?
-    private var shopImage: UIImage?
+    private var shopImage: PFFileObject?
     
     init(shop shopObject: PFObject?){
         self.objectId = shopObject!.objectId
         self.userId = shopObject!["userId"] as? String
         self.shopTitle = shopObject!["title"] as? String
         self.shopSlogan = shopObject!["slogan"] as? String
+        self.shopImage = shopObject!["shopImage"] as? PFFileObject
+//        let tempImage = shopObject!["shopImage"] as? PFFileObject
+//        tempImage!.getDataInBackground{(imageData: Data?, error: Error?) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else if let imageData = imageData {
+//                self.shopImage = UIImage(data: imageData)
+//            }
+//        }
     }
     
     init(userId: String?) {
@@ -40,7 +49,7 @@ class Shop {
         return self.shopSlogan!
     }
     
-    func getShopImage() -> UIImage {
+    func getShopImage() -> PFFileObject {
         return self.shopImage!
     }
     

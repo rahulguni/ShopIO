@@ -24,7 +24,10 @@ class AddProductExtraViewController: UIViewController {
         // Do any additional setup after loading the view.
         headerLabel.text = myProduct?.getTitle()
     }
-    
+}
+
+//MARK:- IBOutlet Functions
+extension AddProductExtraViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if(discount.text!.isEmpty) {
             let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
@@ -61,9 +64,11 @@ class AddProductExtraViewController: UIViewController {
             }
         }
     }
-    
+}
+
+//MARK:- Display Functions
+extension AddProductExtraViewController {
     func setProduct(product: Product?) {
         self.myProduct = product
     }
-    
 }

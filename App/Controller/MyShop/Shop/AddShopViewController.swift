@@ -8,7 +8,7 @@
 import UIKit
 import Parse
 
-class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddShopViewController: UIViewController {
 
     @IBOutlet weak var shopName: UITextField!
     @IBOutlet weak var shopSlogan: UITextField!
@@ -42,7 +42,10 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
             destination.shopId = myShop!.getShopId()
         }
     }
-    
+}
+
+//MARK:- IBOutlet Functions
+extension AddShopViewController {
     @IBAction func continueButtonPressed(_ sender: Any) {
         if (shopName.text!.isEmpty){
             let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
@@ -66,7 +69,10 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func addPhoto(_ sender: Any) {
         self.showAlert()
     }
-    
+}
+
+//MARK: - Display Functions
+extension AddShopViewController {
     func setShop(shop myShop: Shop) {
         self.myShop = myShop
     }
@@ -76,6 +82,15 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
         subTitleLabel.text = "Modify the fields below and press update."
         let shopName = myShop?.getShopTitle()
         let shopSlogan = myShop?.getShopSlogan()
+        let shopImagecover = myShop?.getShopImage()
+        let tempImage = shopImagecover
+        tempImage!.getDataInBackground{(imageData: Data?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let imageData = imageData {
+                self.shopImage.image = UIImage(data: imageData)
+            }
+        }
         self.shopName.text = shopName
         self.shopSlogan.text = shopSlogan
         self.continueButton.setTitle("Update", for: .normal)
@@ -83,9 +98,18 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     private func saveShop(){
         let shop = PFObject(className: "Shop")
+
         shop["userId"] = currentUser!.objectId!
         shop["title"] = shopName.text
         shop["slogan"] = shopSlogan.text
+        let imageData = shopImage.image!.pngData()
+        
+        //for image naming
+        
+        let imageName = makeImageName(shopName.text!)
+        let imageFile = PFFileObject(name: imageName, data:imageData!)
+        shop["shopImage"] = imageFile
+        
         shop.saveInBackground{(success, error) in
             if(success) {
                 self.myShop = Shop(shop: shop)
@@ -104,6 +128,10 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
             if let myShop = shop {
                 myShop["title"] = self.shopName.text
                 myShop["slogan"] = self.shopSlogan.text
+                let imageData = self.shopImage.image!.pngData()
+                let imageName = myShop.objectId! as String + ".png"
+                let imageFile = PFFileObject(name: imageName, data:imageData!)
+                myShop["shopImage"] = imageFile
                 myShop.saveInBackground{(success, error) in
                     if(success) {
                         self.dismiss(animated: true, completion: nil)
@@ -116,8 +144,10 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
     }
-    
-    //MARK:- UIImagePickerViewDelegate.
+}
+
+//MARK:- UIImagePickerViewDelegate
+extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Show alert to selected the media source type.
     private func showAlert() {
         
@@ -158,6 +188,5 @@ class AddShopViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
 }
 

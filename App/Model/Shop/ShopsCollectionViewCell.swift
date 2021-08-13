@@ -13,6 +13,7 @@ class ShopsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shopTitle: UILabel!
     @IBOutlet weak var shopRating: UIButton!
     @IBOutlet weak var shopOwner: UILabel!
+    @IBOutlet weak var shopImage: UIImageView!
     
     
     func setParameters(shop currShop: Shop){
@@ -25,6 +26,15 @@ class ShopsCollectionViewCell: UICollectionViewCell {
                 let lname = myShop.value(forKey: "lName") as! String
                 self.shopOwner.text = "By: \(fname + lname)"
                 self.shopOwner.isHidden = false
+            }
+        }
+        let shopImagecover = currShop.getShopImage()
+        let tempImage = shopImagecover
+        tempImage.getDataInBackground{(imageData: Data?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let imageData = imageData {
+                self.shopImage.image = UIImage(data: imageData)
             }
         }
     }

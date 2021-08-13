@@ -65,6 +65,18 @@ class MyShopViewController: UIViewController{
         
     }
     
+}
+
+extension MyShopViewController: shopManagerDelegate {
+    
+    func goToViewController(identifier: String) {
+        self.performSegue(withIdentifier: identifier, sender: self)
+    }
+        
+}
+
+//MARK:- IBOutlet Functions
+extension MyShopViewController {
     @IBAction func manageShopButton(_ sender: UIButton) {
         if currentUser != nil{
             self.shopManager.checkShop(identifier: "goToManageShop")
@@ -87,19 +99,13 @@ class MyShopViewController: UIViewController{
     @IBAction func AddNewShop(_ sender: UIButton) {
         performSegue(withIdentifier: "toSignIn", sender: self)
     }
-    
+}
+
+//MARK:- Display Functions
+extension MyShopViewController {
     private func alterButtons(loggedIn bool: Bool) {
         AddNewShop.isHidden = bool;
         myShopButton.isHidden = !bool;
         editMyShopButton.isHidden = !bool;
     }
-    
-}
-
-extension MyShopViewController: shopManagerDelegate {
-    
-    func goToViewController(identifier: String) {
-        self.performSegue(withIdentifier: identifier, sender: self)
-    }
-        
 }

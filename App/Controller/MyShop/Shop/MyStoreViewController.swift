@@ -59,9 +59,19 @@ class MyStoreViewController: UIViewController {
         modifyButton(button: addProduct)
         shopSlogan.text = currShop?.getShopSlogan()
         shopTitle.text = currShop?.getShopTitle()
+        let shopImagecover = currShop?.getShopImage()
+        let tempImage = shopImagecover
+        tempImage!.getDataInBackground{(imageData: Data?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let imageData = imageData {
+                self.shopImage.image = UIImage(data: imageData)
+            }
+        }
         productsCollection.layer.borderWidth = 0.5
         productsCollection.layer.borderColor = UIColor.black.cgColor
         checkFollowed()
+        
         
         editSwitch.isOn = false
     }
@@ -80,9 +90,10 @@ class MyStoreViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if(willExit == false) {
+        /*Add later
+         if(willExit == false) {
             performSegue(withIdentifier: "goToDiscover", sender: self)
-        }
+        }*/
     }
     
     func setExit(_ bool: Bool) {
@@ -90,6 +101,7 @@ class MyStoreViewController: UIViewController {
     }
 }
 
+//MARK: - Regular Functions
 extension MyStoreViewController {
     func fillMyProducts(productsList products: [Product]) {
         self.myProducts = products
@@ -133,6 +145,7 @@ extension MyStoreViewController {
     }
 }
 
+//MARK: - IBOutlet Functions
 extension MyStoreViewController {
     //Function to unwind the segue and reload view
     @IBAction func unwindToMyStoreWithSegue(segue: UIStoryboardSegue) {

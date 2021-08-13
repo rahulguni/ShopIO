@@ -59,7 +59,15 @@ class DiscoverViewController: UIViewController {
         }
         getAllShops()
     }
+}
+
+//MARK:- IBOutlet Functions
+extension DiscoverViewController {
     
+}
+
+//MARK:- Display Functions
+extension DiscoverViewController {
     func getAllShops(){
         //can add to viewdidappear if reload after each view
         self.shops.removeAll()
@@ -117,6 +125,7 @@ class DiscoverViewController: UIViewController {
     }
 }
 
+//MARK:- UICollectionViewDelegate
 extension DiscoverViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == shopCollection {
@@ -144,6 +153,7 @@ extension DiscoverViewController: UICollectionViewDelegate{
     }
 }
 
+//MARK:- UICollectionViewDataSource
 extension DiscoverViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if(collectionView == shopCollection){

@@ -36,7 +36,16 @@ class MyAddressViewController: UIViewController {
             destination.forShopEdit = forShop
         }
     }
+
+}
+
+//MARK:- IBOutlet Functions
+extension MyAddressViewController {
     
+}
+
+//MARK:- Regular Functions
+extension MyAddressViewController {
     private func getAddresses() {
         getShopAddress()
         getPrimaryAddress()
@@ -87,6 +96,8 @@ class MyAddressViewController: UIViewController {
 
 }
 
+
+//MARK:- UICollectionViewDelegate
 extension MyAddressViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currAddress = Array(addresses)[indexPath.row].value
@@ -98,6 +109,7 @@ extension MyAddressViewController: UICollectionViewDelegate{
     
 }
 
+//MARK:- UICollectionViewDataSource
 extension MyAddressViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return addresses.count

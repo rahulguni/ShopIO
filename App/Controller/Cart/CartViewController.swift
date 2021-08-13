@@ -91,6 +91,9 @@ class CartViewController: UIViewController {
             if let error = error {
                 // The query failed
                 print(error.localizedDescription)
+                try! self.realm.write{
+                    self.realm.delete(myItem)
+                }
             } else if let object = object {
                 let currProduct = Product(product: object)
                 try! self.realm.write {
@@ -109,6 +112,7 @@ class CartViewController: UIViewController {
     }
 }
 
+//MARK:- UICollectionViewDelegate
 extension CartViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -130,6 +134,7 @@ extension CartViewController: UICollectionViewDelegate {
     
 }
 
+//MARK:- UICollectionViewDataSource
 extension CartViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myItems.count

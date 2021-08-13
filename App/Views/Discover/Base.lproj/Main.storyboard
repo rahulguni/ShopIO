@@ -73,6 +73,7 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="373" height="247"/>
                                         <connections>
+                                            <outlet property="shopImage" destination="LE0-gG-PhC" id="cSR-Ya-WFT"/>
                                             <outlet property="shopOwner" destination="7iq-nd-2U3" id="vUV-y7-WCF"/>
                                             <outlet property="shopRating" destination="dmY-Dy-SqM" id="oQX-ta-tLb"/>
                                             <outlet property="shopTitle" destination="Jp7-4L-1NS" id="qdb-tq-sge"/>
