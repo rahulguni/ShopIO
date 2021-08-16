@@ -14,6 +14,8 @@ class UpdateProductCollectionViewController: UICollectionViewController {
     
     private var myProducts: [Product] = []
     private var currProduct: Product?
+    private var currShop: Shop?
+    private var currProductImages: [ProductImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,8 @@ class UpdateProductCollectionViewController: UICollectionViewController {
             let destination = segue.destination as! MyProductViewController
             destination.productMode = ProductMode.forUpdate
             destination.setMyProduct(product: currProduct!)
+            destination.setMyShop(shop: currShop!)
+            destination.setImages(myImages: currProductImages)
         }
     }
     
@@ -49,6 +53,10 @@ class UpdateProductCollectionViewController: UICollectionViewController {
     
     func setProducts(products: [Product]) {
         self.myProducts = products
+    }
+    
+    func setShop(shop: Shop) {
+        self.currShop = shop
     }
     
     func replaceProduct(with updateProduct: Product) {
@@ -95,6 +103,21 @@ class UpdateProductCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currProduct = myProducts[indexPath.row]
-        performSegue(withIdentifier: "goToMyProduct", sender: self)
+        currProductImages.removeAll()
+        
+        let query = PFQuery(className: "Product_Images")
+        query.whereKey("productId", equalTo: currProduct!.getObjectId())
+        query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
+            if let error = error {
+                // Log details of the failure
+                print(error.localizedDescription)
+            } else if let objects = objects {
+                for object in objects {
+                    let productImage = ProductImage(image: object)
+                    self.currProductImages.append(productImage)
+                }
+            }
+            self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+        }
     }
 }

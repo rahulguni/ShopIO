@@ -53,7 +53,6 @@ class DiscoverViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         if(currentUser != nil) {
             getFollowedShops()
         }
@@ -111,16 +110,15 @@ extension DiscoverViewController {
                         else {
                             print("No Shop in Store")
                         }
-                        DispatchQueue.main.async {
-                            self.followedShops.reloadData()
-                        }
+                        self.followedShops.reloadData()
                     }
                 }
             }
             else {
                 self.followedList.removeAll()
-                self.followedShops.reloadData()
+                
             }
+            self.followedShops.reloadData()
         }
     }
 }

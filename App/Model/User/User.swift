@@ -16,6 +16,7 @@ struct User {
     private var phone: Int?
     private var fName: String?
     private var lName: String?
+    private var displayImage: PFFileObject?
     
     init(userID currUser: PFObject){
         self.objectId = currUser.objectId
@@ -23,6 +24,7 @@ struct User {
         self.phone = currUser.value(forKey: "phone") as? Int
         self.fName = currUser.value(forKey: "fName") as? String
         self.lName = currUser.value(forKey: "lName") as? String
+        self.displayImage = currUser.value(forKey: "displayImage") as? PFFileObject
     }
     
     func getObjectId() -> String {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Parse
 import RealmSwift
 import SwipeCellKit
 
@@ -15,6 +16,7 @@ class CartItemCollectionViewCell: SwipeCollectionViewCell {
     @IBOutlet weak var productDiscount: UILabel!
     @IBOutlet weak var productQuantity: UILabel!
     @IBOutlet weak var productShop: UILabel!
+    @IBOutlet weak var productImage: UIImageView!
     
     func setParameters(product currProduct: CartItem) {
         
@@ -30,6 +32,29 @@ class CartItemCollectionViewCell: SwipeCollectionViewCell {
         else {
             self.productPrice.text = "$" + String(format: "%.2f", totalPrice)
         }
+        
+        let query = PFQuery(className: "Product_Images")
+
+        query.whereKey("productId", equalTo: currProduct.productId!)
+        query.whereKey("isDefault", equalTo: "True")
+        
+        query.getFirstObjectInBackground{(object, error) in
+            if(object != nil) {
+                let productImage = object?.value(forKey: "productImage")
+                let tempImage = productImage as! PFFileObject
+                tempImage.getDataInBackground{(imageData: Data?, error: Error?) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else if let imageData = imageData {
+                        self.productImage.image = UIImage(data: imageData)
+                    }
+                }
+            }
+            else {
+               print("No default picture")
+            }
+        }
+
     }
     
 }

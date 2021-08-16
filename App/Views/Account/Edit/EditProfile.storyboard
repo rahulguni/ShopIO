@@ -23,6 +23,9 @@
                                 <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Edit Profile"/>
+                                <connections>
+                                    <action selector="editProfilePressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sTk-0R-giH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-5d-Zu2">
                                 <rect key="frame" x="81" y="499" width="253" height="105"/>

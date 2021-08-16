@@ -155,7 +155,7 @@ extension AddProductViewController: UICollectionViewDataSource {
 extension AddProductViewController: ImagePickerDelegate {
     
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        print("s")
+        
     }
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {

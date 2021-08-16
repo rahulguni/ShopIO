@@ -89,6 +89,7 @@
                                         <size key="customSize" width="374" height="148"/>
                                         <connections>
                                             <outlet property="productDiscount" destination="DOi-tf-gGS" id="k0Q-06-mqn"/>
+                                            <outlet property="productImage" destination="W7J-RY-CPJ" id="A0I-Ci-DVv"/>
                                             <outlet property="productPrice" destination="wYr-Jg-C5i" id="pEJ-y5-cls"/>
                                             <outlet property="productQuantity" destination="YJV-IZ-rka" id="Eq9-jK-z4U"/>
                                             <outlet property="productShop" destination="jye-ce-xYV" id="6KK-PT-BWV"/>

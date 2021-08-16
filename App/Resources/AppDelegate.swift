@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.server = "http://localhost:1337/parse"
         }
         Parse.initialize(with: parseConfig)
+        
+        let pageControl = UIPageControl.appearance()
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = .lightGray
+        
         return true
     }
 

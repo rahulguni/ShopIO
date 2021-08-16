@@ -64,3 +64,11 @@ func makeImageName(_ name: String) -> String {
     
     return (date + name + ".png")
 }
+
+//make picture rounded
+func makePictureRounded(picture: UIImageView) {
+    picture.layer.borderWidth = 1
+    picture.layer.masksToBounds = true
+    picture.layer.borderColor = UIColor.black.cgColor
+    picture.layer.cornerRadius = (picture.frame.size.height / 2)
+}

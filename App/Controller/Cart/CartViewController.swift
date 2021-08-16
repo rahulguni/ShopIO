@@ -19,6 +19,7 @@ class CartViewController: UIViewController {
     private var myItems: [CartItem] = []
     private var currItem: CartItem?
     private var myProduct: Product?
+    private var currProductImage: [ProductImage] = []
     
     let realm = try! Realm()
     
@@ -72,6 +73,7 @@ class CartViewController: UIViewController {
             //destination.editAbleProduct(false, true)
             destination.setMyProduct(product: myProduct!)
             destination.productMode = ProductMode.forCart
+            destination.setImages(myImages: currProductImage)
         }
     }
 
@@ -127,7 +129,22 @@ extension CartViewController: UICollectionViewDelegate {
                 self.present(alert, animated: true, completion: nil)
             } else if let object = object {
                 self.myProduct = Product(product: object)
-                self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+                //find product images and perform segue
+                self.currProductImage.removeAll()
+                let query = PFQuery(className: "Product_Images")
+                query.whereKey("productId", equalTo: self.currItem!.productId!)
+                query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
+                    if let error = error {
+                        // Log details of the failure
+                        print(error.localizedDescription)
+                    } else if let objects = objects {
+                        for object in objects {
+                            let productImage = ProductImage(image: object)
+                            self.currProductImage.append(productImage)
+                        }
+                    }
+                    self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+                }
             }
         }
     }

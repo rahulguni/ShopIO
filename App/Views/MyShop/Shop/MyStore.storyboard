@@ -195,46 +195,46 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1146"/>
                                         <subviews>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Example" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMM-QR-2S1" userLabel="productTitle">
-                                                <rect key="frame" x="20" y="224" width="374" height="52"/>
+                                                <rect key="frame" x="20" y="296" width="374" height="52"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRy-2Q-t52">
-                                                <rect key="frame" x="20" y="284" width="54" height="31"/>
+                                                <rect key="frame" x="20" y="356" width="54" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjm-RG-QeZ">
-                                                <rect key="frame" x="20" y="323" width="68" height="31"/>
+                                                <rect key="frame" x="20" y="400" width="68" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQU-vo-iQ3">
-                                                <rect key="frame" x="20" y="400" width="374" height="119"/>
+                                                <rect key="frame" x="20" y="478" width="374" height="119"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-rB-jbb">
-                                                <rect key="frame" x="20" y="362" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="440" width="374" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Rating:">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PI-tO-hPx">
-                                                <rect key="frame" x="20" y="527" width="374" height="204"/>
+                                                <rect key="frame" x="20" y="605" width="374" height="204"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dux-R1-5I0">
-                                                <rect key="frame" x="20" y="739" width="374" height="65"/>
+                                                <rect key="frame" x="20" y="817" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Add To Cart">
@@ -245,7 +245,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuC-IO-Kyi">
-                                                <rect key="frame" x="20" y="739" width="374" height="65"/>
+                                                <rect key="frame" x="20" y="817" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Update">
@@ -256,39 +256,39 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igL-UJ-FKV" userLabel="Price">
-                                                <rect key="frame" x="74" y="282" width="97" height="34"/>
+                                                <rect key="frame" x="74" y="356" width="97" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OXv-SE-z9g">
-                                                <rect key="frame" x="89" y="321" width="82" height="34"/>
+                                                <rect key="frame" x="89" y="398" width="82" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Discount" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpr-oC-DjN" userLabel="Discount">
-                                                <rect key="frame" x="172" y="282" width="97" height="34"/>
+                                                <rect key="frame" x="172" y="356" width="97" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <stepper hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10000000" translatesAutoresizingMaskIntoConstraints="NO" id="HAB-Od-0OD">
-                                                <rect key="frame" x="175" y="321" width="94" height="32"/>
+                                                <rect key="frame" x="172" y="400" width="94" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <action selector="amountStepperChange:" destination="paJ-WP-Dvl" eventType="valueChanged" id="vVH-a7-y5m"/>
                                                 </connections>
                                             </stepper>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AS-Yt-Skf">
-                                                <rect key="frame" x="280" y="284" width="5754" height="31"/>
+                                                <rect key="frame" x="271" y="356" width="5755" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoS-sg-rEw">
-                                                <rect key="frame" x="20" y="739" width="374" height="65"/>
+                                                <rect key="frame" x="20" y="817" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Request">
@@ -298,8 +298,17 @@
                                                     <action selector="requestClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="8tu-bs-kFW"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hlt-Xp-nkd">
+                                                <rect key="frame" x="8" y="8" width="400" height="280"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="472-hA-C6C" appends="YES" id="LCb-zH-3g9"/>
+                                                </connections>
+                                            </view>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiC-Yy-0ab">
-                                                <rect key="frame" x="20" y="1037" width="374" height="65"/>
+                                                <rect key="frame" x="20" y="890" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Talk to the Shop">
@@ -309,10 +318,6 @@
                                                     <action selector="requestClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="buv-PR-de0"/>
                                                 </connections>
                                             </button>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="SZ9-cp-zWl">
-                                                <rect key="frame" x="20" y="188" width="374" height="28"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -344,6 +349,7 @@
                         <outlet property="addToCartButton" destination="dux-R1-5I0" id="OIS-rZ-kzy"/>
                         <outlet property="discountField" destination="hpr-oC-DjN" id="6fn-dP-Xf9"/>
                         <outlet property="discountPerLabel" destination="9AS-Yt-Skf" id="eQf-Zq-WlN"/>
+                        <outlet property="imageView" destination="Hlt-Xp-nkd" id="she-Rh-X58"/>
                         <outlet property="priceField" destination="igL-UJ-FKV" id="zom-Uk-Bri"/>
                         <outlet property="productContent" destination="9PI-tO-hPx" id="t0I-9s-8lR"/>
                         <outlet property="productDescription" destination="gQU-vo-iQ3" id="Iq1-8d-L50"/>
@@ -356,12 +362,80 @@
                         <segue destination="5O0-wh-kT7" kind="presentation" identifier="goToSignIn" id="jU0-B8-qk6"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="EvD-eC-ugC"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToUpdateProducts" unwindAction="unwindToUpdateProductsWithSegueWithSegue:" id="bkF-T1-iGs"/>
+                        <segue destination="X0a-MG-LYL" kind="presentation" identifier="goToProductPhoto" id="aP1-Un-LT2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cga-DH-3uD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="O8b-F0-OMg" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="472-hA-C6C">
+                    <connections>
+                        <action selector="goToProductPhoto:" destination="paJ-WP-Dvl" id="tqf-dW-Zkb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5195.652173913044" y="1670.7589285714284"/>
+        </scene>
+        <!--Product Image View Controller-->
+        <scene sceneID="Gq4-fb-0ip">
+            <objects>
+                <viewController storyboardIdentifier="ProductImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="X0a-MG-LYL" customClass="ProductImageViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KO8-F2-OI9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E03-2K-kUe">
+                                <rect key="frame" x="8" y="8" width="400" height="280"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdG-h1-2HY">
+                                <rect key="frame" x="8" y="20" width="400" height="742"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMg-gV-rcM">
+                                <rect key="frame" x="209" y="770" width="199" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Set Display Picture">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="setDisplayPictureClick:" destination="X0a-MG-LYL" eventType="touchUpInside" id="7Mr-2j-ZxP"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQ0-jz-DMi">
+                                <rect key="frame" x="20" y="770" width="181" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="editClick:" destination="X0a-MG-LYL" eventType="touchUpInside" id="3FW-EZ-eah"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hPy-Gb-eXT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PRv-V0-Kfn"/>
+                    <connections>
+                        <outlet property="editButton" destination="xQ0-jz-DMi" id="LHD-wy-brj"/>
+                        <outlet property="productImage" destination="E03-2K-kUe" id="lGR-Bd-Vx1"/>
+                        <outlet property="productImageLarge" destination="xdG-h1-2HY" id="fpP-Ik-Qze"/>
+                        <outlet property="setDisplayButton" destination="pMg-gV-rcM" id="1vj-Q8-r49"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKO-U8-sIU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6224.6376811594209" y="1186.6071428571429"/>
+        </scene>
+        <!--Image Page View Controller-->
+        <scene sceneID="ZPZ-UZ-2JR">
+            <objects>
+                <pageViewController storyboardIdentifier="ImagePageViewController" autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="R7H-nR-XLy" customClass="ImagePageViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kfs-SB-cmE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6939" y="1187"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="TIk-5x-PLp">

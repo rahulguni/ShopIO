@@ -17,7 +17,6 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         let myButtons: [UIButton] = [editShopButton,editProfileButton]
         modifyButtons(buttons: myButtons)
@@ -47,6 +46,11 @@ class EditProfileViewController: UIViewController {
             self.performSegue(withIdentifier: "goToEditShop", sender: self)
         }
     }
+    
+    @IBAction func editProfilePressed(_ sender: Any) {
+        //self.performSegue(withIdentifier: "goToEditProfile", sender: self)
+    }
+    
     
 
 }

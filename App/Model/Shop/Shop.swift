@@ -23,14 +23,7 @@ class Shop {
         self.shopTitle = shopObject!["title"] as? String
         self.shopSlogan = shopObject!["slogan"] as? String
         self.shopImage = shopObject!["shopImage"] as? PFFileObject
-//        let tempImage = shopObject!["shopImage"] as? PFFileObject
-//        tempImage!.getDataInBackground{(imageData: Data?, error: Error?) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else if let imageData = imageData {
-//                self.shopImage = UIImage(data: imageData)
-//            }
-//        }
+
     }
     
     init(userId: String?) {

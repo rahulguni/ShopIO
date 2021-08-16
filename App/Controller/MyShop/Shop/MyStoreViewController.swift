@@ -32,6 +32,8 @@ class MyStoreViewController: UIViewController {
     
     private var productMode : ProductMode?
     
+    private var currProductImage: [ProductImage] = []
+    
     //go to discover if only called from discover
     private var willExit: Bool = true
     
@@ -85,6 +87,7 @@ class MyStoreViewController: UIViewController {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: currProduct!)
             destination.setMyShop(shop: currShop!)
+            destination.setImages(myImages: currProductImage)
             destination.productMode = self.productMode
         }
     }
@@ -214,7 +217,22 @@ extension MyStoreViewController {
 extension MyStoreViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currProduct = myProducts[indexPath.row]
-        performSegue(withIdentifier: "goToMyProduct", sender: self)
+        //find product images and perform segue
+        currProductImage.removeAll()
+        let query = PFQuery(className: "Product_Images")
+        query.whereKey("productId", equalTo: currProduct!.getObjectId())
+        query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
+            if let error = error {
+                // Log details of the failure
+                print(error.localizedDescription)
+            } else if let objects = objects {
+                for object in objects {
+                    let productImage = ProductImage(image: object)
+                    self.currProductImage.append(productImage)
+                }
+            }
+            self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+        }
     }
 }
 

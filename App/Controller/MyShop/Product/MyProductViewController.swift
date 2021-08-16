@@ -8,6 +8,7 @@
 import UIKit
 import Parse
 import RealmSwift
+import ImagePicker
 
 class MyProductViewController: UIViewController {
     @IBOutlet weak var productTitle: UITextField!
@@ -21,14 +22,18 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var updateButton: UIButton!
     @IBOutlet weak var discountPerLabel: UILabel!
     @IBOutlet weak var requestButton: UIButton!
+    @IBOutlet weak var imageView: UIView!
     
     //Get the product from shop view
     private var myProduct: Product?
+    private var productImages: [ProductImage] = []
     private var myShop: Shop?
-    
     var productMode: ProductMode?
     
     let realm = try! Realm()
+    
+    //keep track of imageview
+    var currentImageIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +54,8 @@ class MyProductViewController: UIViewController {
             let attributeString = makeStrikethroughText(product: myProduct!)
             self.discountField.attributedText = attributeString
         }
-
+        
+        getImages()
         setProductsPage(productMode!)
     }
     
@@ -75,8 +81,18 @@ class MyProductViewController: UIViewController {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forMyProduct
         }
+        if(segue.identifier! == "goToProductPhoto") {
+            let destination = segue.destination as! ProductImageViewController
+            destination.setImage(displayImage: productImages[currentImageIndex].getUIImage()!)
+            destination.setProductMode(productMode: self.productMode!)
+            destination.setCurrentPictureId(objectId: productImages[currentImageIndex].getObjectId())
+            for product in productImages {
+                if product.getDefaultStatus() == true {
+                    destination.setDisplayPic(objectId: product.getObjectId())
+                }
+            }
+        }
     }
-
 }
 
 //MARK:- IBOutlet Functions
@@ -149,7 +165,7 @@ extension MyProductViewController {
             }
             
             if(productMode == ProductMode.forPublic) {
-                performSegue(withIdentifier: "goToMyStore", sender: self)
+                self.dismiss(animated: true, completion: nil)
             }
             
         }
@@ -193,16 +209,30 @@ extension MyProductViewController {
     @IBAction func amountStepperChange(_ sender: UIStepper) {
         self.quantityField.text = (Int)(sender.value).description
     }
+    
+    @IBAction func goToProductPhoto(_ sender: Any) {
+        if(productMode == ProductMode.forOwner || productMode == ProductMode.forUpdate) {
+            imageOptions()
+        }
+        else {
+            self.performSegue(withIdentifier: "goToProductPhoto", sender: self)
+        }
+    }
 }
 
 //MARK:- Display Functions
 extension MyProductViewController {
+    
     func setMyProduct(product myProduct: Product) {
         self.myProduct = myProduct
     }
     
     func setMyShop(shop myShop: Shop) {
         self.myShop = myShop
+    }
+    
+    func setImages(myImages currImages: [ProductImage]) {
+        self.productImages = currImages
     }
     
     //check if item is in cart and return cartobject
@@ -241,6 +271,130 @@ extension MyProductViewController {
             let cartObject = isInCart()
             setCartDisplay(cartObject!)
         }
+    }
+    
+    private func imageOptions() {
+        let alert = UIAlertController(title: "Edit Image", message: "Choose what you want to do with this image.", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Edit Photo", style: .default, handler: {(action: UIAlertAction) in
+            self.performSegue(withIdentifier: "goToProductPhoto", sender: self)
+        }))
+        if(self.productImages.count < 4) {
+            alert.addAction(UIAlertAction(title: "Add Photo", style: .default, handler: {(action: UIAlertAction) in
+                self.addPhoto()
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Delete Photo", style: .default, handler: {(action: UIAlertAction) in
+            self.deletePhoto()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func addPhoto() {
+        let imagePickerController = ImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.imageLimit = 4 - productImages.count
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    private func deletePhoto(){
+        let alert = UIAlertController(title: "Are you sure you want to delete this image?", message: "Please select below", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "No Delete Image"), style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Delete Image"), style: .default, handler: { _ in
+            if(self.productImages[self.currentImageIndex].getDefaultStatus() == false) {
+                let query = PFQuery(className: "Product_Images")
+                query.whereKey("objectId", contains: self.productImages[self.currentImageIndex].getObjectId())
+                query.getFirstObjectInBackground{(object, error) in
+                    if(object != nil) {
+                        object?.deleteInBackground{(success, error) in
+                            if(success) {
+                                self.productImages.remove(at: self.currentImageIndex)
+                                let alert = networkErrorAlert(title: "Successfully Deleted Photo", errorString: "Your Photo has been deleted from \(self.myShop!.getShopTitle())")
+                                self.getImages()
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            else {
+                                let alert = networkErrorAlert(title: "Cannot delete image", errorString: "This image cannot be deleted at this moment. Please try later")
+                                self.present(alert, animated: true, completion: nil)
+                            }
+
+                        }
+                    }
+                    else {
+                        print(error.debugDescription)
+                    }
+                }
+            }
+            else {
+                let alert = networkErrorAlert(title: "Cannot Delete", errorString: "This is your display picture. Change your display picture if you want to delete this photo.")
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func getImages() {
+        for image in productImages {
+            image.getImage().getDataInBackground{ (imageData: Data?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else if let imageData = imageData {
+                    let myimage = UIImage(data:imageData)
+                    image.setImage(image: myimage!)
+                }
+                self.imageView.reloadInputViews()
+                self.configurePageViewController()
+            }
+        }
+    }
+    
+    private func configurePageViewController() {
+        guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "ImagePageViewController") as? ImagePageViewController else {
+            return
+        }
+        
+        pageViewController.delegate = self
+        pageViewController.dataSource = self
+        
+        addChild(pageViewController)
+        pageViewController.didMove(toParent: self)
+        
+        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.addSubview(pageViewController.view)
+        
+        let views: [String: Any] = ["pageView" : pageViewController.view!]
+
+        imageView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+
+        imageView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
+        
+        guard let startingViewController = detailViewControllerAt(index: currentImageIndex) else {
+            return
+        }
+        
+        pageViewController.setViewControllers([startingViewController], direction: .forward, animated: true, completion: nil)
+    }
+    
+    func detailViewControllerAt(index: Int) -> ProductImageViewController? {
+        
+        if(index >= productImages.count || productImages.count == 0) {
+            return nil
+        }
+        
+        guard let productImageViewController = storyboard?.instantiateViewController(withIdentifier: "ProductImageViewController") as? ProductImageViewController else {
+            return nil
+        }
+        
+        productImageViewController.setIndex(index: index)
+        productImageViewController.setImage(displayImage: productImages[index].getUIImage())
+
+        return productImageViewController
     }
     
     private func setOwnerDisplay() {
@@ -285,5 +439,93 @@ extension MyProductViewController {
             self.updateButton.isHidden = true
             self.requestButton.isHidden = false
         }
+    }
+}
+
+//MARK: - UIPageViewControllerDelegate
+extension MyProductViewController: UIPageViewControllerDelegate {
+    /*func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        print(currentImageIndex)
+        return currentImageIndex
+    }*/
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return self.productImages.count
+    }
+}
+
+
+//MARK: - UIPageViewControllerDataSource
+extension MyProductViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let productImageViewController = viewController as? ProductImageViewController
+        
+        guard var currentIndex = productImageViewController?.getIndex() else {
+            return nil
+        }
+        
+        currentImageIndex = currentIndex
+        
+        if(currentIndex == 0) {
+            return nil
+        }
+        
+        currentIndex -= 1
+        return detailViewControllerAt(index: currentIndex)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let productImageViewController = viewController as? ProductImageViewController
+        
+        guard var currentIndex = productImageViewController?.getIndex() else {
+            return nil
+        }
+        
+        if(currentIndex == productImages.count) {
+            return nil
+        }
+        
+        
+        currentImageIndex = currentIndex
+        currentIndex += 1
+        
+        return detailViewControllerAt(index: currentIndex)
+    }
+}
+
+//MARK:- ImagePicker Delegate
+
+extension MyProductViewController: ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        for image in images {
+            //upload image to the database
+            let newImage = PFObject(className: "Product_Images")
+            let imageData = image.pngData()
+            let imageName = makeImageName(self.myProduct!.getTitle())
+            let imageFile = PFFileObject(name: imageName, data: imageData!)
+            
+            newImage["productId"] = self.myProduct?.getObjectId()
+            newImage["productImage"] = imageFile
+            
+            newImage.saveInBackground{(success, error) in
+                if(success) {
+                    let newImage = ProductImage(image: newImage)
+                    self.productImages.append(newImage)
+                }
+                else {
+                    print(error.debugDescription)
+                }
+                self.getImages()
+            }
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
     }
 }

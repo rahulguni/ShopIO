@@ -16,6 +16,8 @@
 		DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignInViewController.swift */; };
 		DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUpViewController.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
+		DE4FEFAB26C6154500BAD3E6 /* ProductImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */; };
+		DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */; };
 		DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56B5BC269FF84B005E68E2 /* Product.swift */; };
 		DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6717E226A90EA700FE60DA /* MyProductViewController.swift */; };
 		DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */; };
@@ -67,6 +69,7 @@
 		DEE7E12526B8F343008E429C /* MyAddresses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE7E12426B8F343008E429C /* MyAddresses.storyboard */; };
 		DEE7E12726B8F552008E429C /* AddressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE7E12626B8F552008E429C /* AddressCollectionViewCell.swift */; };
 		DEE7E12926B8F5DD008E429C /* MyAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE7E12826B8F5DD008E429C /* MyAddressViewController.swift */; };
+		DEF4895326C794B7002AABDC /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF4895226C794B7002AABDC /* ProductImage.swift */; };
 		DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +85,8 @@
 		DE3718BD2636A051001CF554 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DE3718C02636A063001CF554 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
+		DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageViewController.swift; sourceTree = "<group>"; };
+		DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePageViewController.swift; sourceTree = "<group>"; };
 		DE56B5BC269FF84B005E68E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		DE6717E226A90EA700FE60DA /* MyProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductViewController.swift; sourceTree = "<group>"; };
 		DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductExtraViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 		DEE7E12426B8F343008E429C /* MyAddresses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyAddresses.storyboard; sourceTree = "<group>"; };
 		DEE7E12626B8F552008E429C /* AddressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCollectionViewCell.swift; sourceTree = "<group>"; };
 		DEE7E12826B8F5DD008E429C /* MyAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressViewController.swift; sourceTree = "<group>"; };
+		DEF4895226C794B7002AABDC /* ProductImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImage.swift; sourceTree = "<group>"; };
 		DEF6CC3E268C013600DD6887 /* AddShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,6 +204,15 @@
 				DE87FE4726AD0D0800F996C7 /* Cart */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DE4FEFA926C6151700BAD3E6 /* ProductImage */ = {
+			isa = PBXGroup;
+			children = (
+				DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */,
+				DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */,
+			);
+			path = ProductImage;
 			sourceTree = "<group>";
 		};
 		DE6B715326B7AF26000EF674 /* Main */ = {
@@ -339,6 +354,7 @@
 		DE87FE4E26AD0D8D00F996C7 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				DEF4895126C7948D002AABDC /* ProductImage */,
 				DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */,
 				DE56B5BC269FF84B005E68E2 /* Product.swift */,
 				DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */,
@@ -398,6 +414,7 @@
 		DE87FE5426AD0E0D00F996C7 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				DE4FEFA926C6151700BAD3E6 /* ProductImage */,
 				DE6717E226A90EA700FE60DA /* MyProductViewController.swift */,
 				DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */,
 				DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */,
@@ -515,6 +532,14 @@
 				DEE7E12426B8F343008E429C /* MyAddresses.storyboard */,
 			);
 			path = Addresses;
+			sourceTree = "<group>";
+		};
+		DEF4895126C7948D002AABDC /* ProductImage */ = {
+			isa = PBXGroup;
+			children = (
+				DEF4895226C794B7002AABDC /* ProductImage.swift */,
+			);
+			path = ProductImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -662,6 +687,7 @@
 				DEE7E12926B8F5DD008E429C /* MyAddressViewController.swift in Sources */,
 				DEE7E12726B8F552008E429C /* AddressCollectionViewCell.swift in Sources */,
 				DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */,
+				DEF4895326C794B7002AABDC /* ProductImage.swift in Sources */,
 				DE768903269FFF3400F0C888 /* ManageShopViewController.swift in Sources */,
 				DE6B715226B7AB2E000EF674 /* EditProfileViewController.swift in Sources */,
 				DE81F39126BC9FE9001C1E94 /* FollowedShopCollectionViewCell.swift in Sources */,
@@ -669,6 +695,7 @@
 				DE1F35982686891B005195CA /* StateModel.swift in Sources */,
 				DED520B526ABCAB000B77652 /* MyInventoryViewController.swift in Sources */,
 				DEF6CC3F268C013600DD6887 /* AddShopViewController.swift in Sources */,
+				DE4FEFAB26C6154500BAD3E6 /* ProductImageViewController.swift in Sources */,
 				DE278927268D8DF4009CD37C /* Shop.swift in Sources */,
 				DE87FE4C26AD0D5600F996C7 /* OrderItemModel.swift in Sources */,
 				DEE2C3B326BF87D000CEDE15 /* Request.swift in Sources */,
@@ -677,6 +704,7 @@
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
 				DE76890926A016F400F0C888 /* User.swift in Sources */,
 				DE6A6A3C26AFDBC2006B4D04 /* CartViewController.swift in Sources */,
+				DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */,
 				DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */,
 				DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */,
 				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,

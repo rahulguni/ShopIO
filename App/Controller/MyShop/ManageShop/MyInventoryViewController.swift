@@ -28,6 +28,7 @@ class MyInventoryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier! == "goToUpdateProduct" {
             let destination = segue.destination as! UpdateProductCollectionViewController
+            destination.setShop(shop: shopManager.getCurrShop())
             destination.setProducts(products: shopManager.getCurrProducts())
         }
         
