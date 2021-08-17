@@ -12,6 +12,7 @@ enum forSignIn {
     case forMyShop
     case forMyCart
     case forMyProduct
+    case forInbox
 }
 
 enum ProductMode {

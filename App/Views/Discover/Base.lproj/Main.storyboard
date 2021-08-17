@@ -275,10 +275,23 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KQU-3R-6uS" kind="relationship" relationship="rootViewController" id="BwO-Hs-LER"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cOq-1E-nrq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1103" y="1898"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="qOd-Xh-Cfc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Inbox" id="KQU-3R-6uS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LRj-eo-PsN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2gc-nr-Nwe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="1900"/>
         </scene>
     </scenes>
     <resources>

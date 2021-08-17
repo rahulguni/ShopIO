@@ -114,6 +114,7 @@
                         <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyShop" unwindAction="unwindToMyShopWithSegueWithSegue:" id="Za6-hV-P8N"/>
                         <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="Dwk-em-GOk"/>
                         <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadMyProduct" unwindAction="unwindToMyProductWithSegueWithSegue:" id="ReC-Qx-6fB"/>
+                        <segue destination="CZW-OC-Eod" kind="unwind" identifier="reloadInbox" unwindAction="unwindToInboxWithSegueWithSegue:" id="xNC-6G-adz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lU7-aD-gOj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

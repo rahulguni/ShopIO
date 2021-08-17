@@ -45,6 +45,9 @@ class SignInViewController: UIViewController {
                         else if(self.dismiss == forSignIn.forMyProduct) {
                             self.performSegue(withIdentifier: "reloadMyProduct", sender: self)
                         }
+                        else if(self.dismiss == forSignIn.forInbox) {
+                            self.performSegue(withIdentifier: "reloadInbox", sender: self)
+                        }
                         else{
                             self.dismiss(animated: true, completion: nil)
                         }
