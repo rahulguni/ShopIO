@@ -355,6 +355,7 @@ extension MyProductViewController {
     
     private func configurePageViewController() {
         guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "ImagePageViewController") as? ImagePageViewController else {
+            print("pageViewController")
             return
         }
         
@@ -375,6 +376,8 @@ extension MyProductViewController {
         imageView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
         
         guard let startingViewController = detailViewControllerAt(index: currentImageIndex) else {
+            //2. error
+            print("startingViewController")
             return
         }
         
@@ -383,11 +386,16 @@ extension MyProductViewController {
     
     func detailViewControllerAt(index: Int) -> ProductImageViewController? {
         
+        print(index)
+        
         if(index >= productImages.count || productImages.count == 0) {
+            //1. error
+            print("Index error")
             return nil
         }
         
         guard let productImageViewController = storyboard?.instantiateViewController(withIdentifier: "ProductImageViewController") as? ProductImageViewController else {
+            print("productImageViewController")
             return nil
         }
         

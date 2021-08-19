@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6A5B9145287AFE088DD0AB2C /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C630384B2A734E972FA5C16 /* Pods_App.framework */; };
+		DE1048F126CB9E47003F5D11 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1048F026CB9E47003F5D11 /* MessageModel.swift */; };
 		DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* AddressViewController.swift */; };
 		DE1F35982686891B005195CA /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F35972686891B005195CA /* StateModel.swift */; };
 		DE1F359A26869F89005195CA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F359926869F89005195CA /* Alerts.swift */; };
+		DE21B56B26CCC15300B2FB42 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE21B56A26CCC15300B2FB42 /* Messages.storyboard */; };
+		DE21B56D26CCC96200B2FB42 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */; };
 		DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278924268D8D57009CD37C /* MyStoreViewController.swift */; };
 		DE278927268D8DF4009CD37C /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278926268D8DF4009CD37C /* Shop.swift */; };
 		DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignInViewController.swift */; };
@@ -39,6 +42,7 @@
 		DE8358CA2636518F00E3F1A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE8358C92636518F00E3F1A7 /* Assets.xcassets */; };
 		DE8358CD2636518F00E3F1A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE8358CB2636518F00E3F1A7 /* LaunchScreen.storyboard */; };
 		DE84039C26C4F2B500910F17 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE84039B26C4F2B500910F17 /* ImageCollectionViewCell.swift */; };
+		DE85144F26CE12D9009C60C3 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE85144E26CE12D9009C60C3 /* MessagesViewController.swift */; };
 		DE87FE4426AD040B00F996C7 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE87FE4326AD040B00F996C7 /* CartModel.swift */; };
 		DE87FE4626AD05D500F996C7 /* CartItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE87FE4526AD05D500F996C7 /* CartItemModel.swift */; };
 		DE87FE4A26AD0D4A00F996C7 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE87FE4926AD0D4A00F996C7 /* OrderModel.swift */; };
@@ -47,6 +51,7 @@
 		DE9978F526BD02DA0043AD8C /* UpdateProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9978F426BD02DA0043AD8C /* UpdateProduct.storyboard */; };
 		DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */; };
 		DE9978F926BD070A0043AD8C /* UpdateProductCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */; };
+		DEAA14F126CB874D00ED2D33 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAA14F026CB874D00ED2D33 /* Messages.swift */; };
 		DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */; };
 		DEBBA83A26AE92F00073D33E /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA83926AE92F00073D33E /* Cart.storyboard */; };
 		DEBBA83C26AE93380073D33E /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA83B26AE93380073D33E /* Account.storyboard */; };
@@ -79,9 +84,12 @@
 		14FBC875224EB524A94A8ADC /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		5C630384B2A734E972FA5C16 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1EC63427575DA26D5E1497D /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		DE1048F026CB9E47003F5D11 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		DE1F3595268682F3005195CA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		DE1F35972686891B005195CA /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DE1F359926869F89005195CA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		DE21B56A26CCC15300B2FB42 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DE278924268D8D57009CD37C /* MyStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreViewController.swift; sourceTree = "<group>"; };
 		DE278926268D8DF4009CD37C /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		DE3718BD2636A051001CF554 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +120,7 @@
 		DE8358CC2636518F00E3F1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE8358CE2636518F00E3F1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE84039B26C4F2B500910F17 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		DE85144E26CE12D9009C60C3 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		DE87FE4326AD040B00F996C7 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		DE87FE4526AD05D500F996C7 /* CartItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemModel.swift; sourceTree = "<group>"; };
 		DE87FE4926AD0D4A00F996C7 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
@@ -120,6 +129,7 @@
 		DE9978F426BD02DA0043AD8C /* UpdateProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UpdateProduct.storyboard; sourceTree = "<group>"; };
 		DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewController.swift; sourceTree = "<group>"; };
+		DEAA14F026CB874D00ED2D33 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		DEBBA83926AE92F00073D33E /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		DEBBA83B26AE93380073D33E /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
@@ -199,7 +209,7 @@
 		DE3E66742637A4B600128755 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DE7FA7E526CB34000079D278 /* Inbox */,
+				DEAA14E926CB6F2000ED2D33 /* Messages */,
 				DEC59D5726BF6B8A005EE1C5 /* Requests */,
 				DE87FE5026AD0DCC00F996C7 /* Misc */,
 				DE87FE4F26AD0DBD00F996C7 /* User */,
@@ -276,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				DE7FA7E626CB34290079D278 /* Inbox.storyboard */,
+				DE21B56A26CCC15300B2FB42 /* Messages.storyboard */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -284,13 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				DE7FA7E826CB34CC0079D278 /* InboxViewController.swift */,
-			);
-			path = Inbox;
-			sourceTree = "<group>";
-		};
-		DE7FA7E526CB34000079D278 /* Inbox */ = {
-			isa = PBXGroup;
-			children = (
+				DE85144E26CE12D9009C60C3 /* MessagesViewController.swift */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -484,6 +489,16 @@
 			path = ManageShop;
 			sourceTree = "<group>";
 		};
+		DEAA14E926CB6F2000ED2D33 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				DEAA14F026CB874D00ED2D33 /* Messages.swift */,
+				DE1048F026CB9E47003F5D11 /* MessageModel.swift */,
+				DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		DEBBA83326AE905E0073D33E /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +649,7 @@
 				DEBBA83A26AE92F00073D33E /* Cart.storyboard in Resources */,
 				DE8358CD2636518F00E3F1A7 /* LaunchScreen.storyboard in Resources */,
 				DEBBA83E26AE94200073D33E /* MyShop.storyboard in Resources */,
+				DE21B56B26CCC15300B2FB42 /* Messages.storyboard in Resources */,
 				DE9978F526BD02DA0043AD8C /* UpdateProduct.storyboard in Resources */,
 				DEBBA83C26AE93380073D33E /* Account.storyboard in Resources */,
 				DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */,
@@ -702,7 +718,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DECE377626ABDC0000EB2406 /* ShopsCollectionViewCell.swift in Sources */,
+				DEAA14F126CB874D00ED2D33 /* Messages.swift in Sources */,
 				DEC9E4F126B4AE5A002891A9 /* ShopManager.swift in Sources */,
+				DE85144F26CE12D9009C60C3 /* MessagesViewController.swift in Sources */,
 				DE9978F926BD070A0043AD8C /* UpdateProductCollectionViewController.swift in Sources */,
 				DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */,
 				DE76890726A007F300F0C888 /* Address.swift in Sources */,
@@ -737,11 +755,13 @@
 				DE76890926A016F400F0C888 /* User.swift in Sources */,
 				DE6A6A3C26AFDBC2006B4D04 /* CartViewController.swift in Sources */,
 				DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */,
+				DE1048F126CB9E47003F5D11 /* MessageModel.swift in Sources */,
 				DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */,
 				DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */,
 				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,
 				DE87FE4626AD05D500F996C7 /* CartItemModel.swift in Sources */,
 				DE87FE4A26AD0D4A00F996C7 /* OrderModel.swift in Sources */,
+				DE21B56D26CCC96200B2FB42 /* MessageTableViewCell.swift in Sources */,
 				DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */,
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
 				DE76890526A004E200F0C888 /* General.swift in Sources */,

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Inbox View Controller-->
+        <!--Inbox-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="InboxViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,15 +43,28 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Inbox" id="Jb5-6o-Je8"/>
                     <connections>
                         <outlet property="myInboxButton" destination="kKv-6k-OeW" id="hUP-YP-2Fo"/>
                         <outlet property="shopInboxButton" destination="0iY-qC-Opu" id="7Dh-Ba-2nv"/>
                         <segue destination="60v-zf-KOi" kind="presentation" identifier="goToSignIn" id="lrl-rv-8PE"/>
+                        <segue destination="qpC-Ak-shv" kind="presentation" identifier="goToAddShop" id="17o-lu-xcG"/>
+                        <segue destination="Rco-I7-BsZ" kind="show" identifier="goToMessages" id="8pn-zP-c7D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="74"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="73.660714285714278"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="g4q-lk-ECd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="Rco-I7-BsZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WbD-Pa-wRh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61H-5w-ZTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1921.0144927536232" y="-46.205357142857139"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="WxK-9Q-yPQ">
@@ -59,7 +72,15 @@
                 <viewControllerPlaceholder storyboardName="SignIn" id="60v-zf-KOi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLp-fm-c7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="53"/>
+            <point key="canvasLocation" x="1945.6521739130437" y="52.901785714285715"/>
+        </scene>
+        <!--AddShop-->
+        <scene sceneID="2dW-oq-YUJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddShop" id="qpC-Ak-shv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="biT-eL-c3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1955.7971014492755" y="183.48214285714286"/>
         </scene>
     </scenes>
     <resources>

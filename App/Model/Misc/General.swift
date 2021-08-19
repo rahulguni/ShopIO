@@ -62,7 +62,7 @@ func makeImageName(_ name: String) -> String {
     let date = Date().description.split(separator: " ")[0].replacingOccurrences(of: "-", with: "")
     let name = "_" + name.replacingOccurrences(of: " ", with: "_")
     
-    return (date + name + ".png")
+    return (date + name + ".jpeg")
 }
 
 //make picture rounded

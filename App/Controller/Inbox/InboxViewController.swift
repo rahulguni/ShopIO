@@ -14,17 +14,31 @@ class InboxViewController: UIViewController {
     @IBOutlet weak var myInboxButton: UIButton!
     @IBOutlet weak var shopInboxButton: UIButton!
     
+    private var myMessages: [MessageModel] = []
+    private var forShop: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         modifyButtons(buttons: [myInboxButton, shopInboxButton])
+        Messages.registerSubclass()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToSignIn") {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forInbox
+        }
+        if(segue.identifier! == "goToMessages") {
+            let destination = segue.destination as! MessagesViewController
+            destination.setMessages(messages: self.myMessages)
+            destination.setForShop(bool: forShop)
         }
     }
     
@@ -43,8 +57,10 @@ class InboxViewController: UIViewController {
 extension InboxViewController {
     
     @IBAction func myInboxClicked(_ sender: Any) {
+        self.myMessages.removeAll()
+        self.forShop = false
         if(currentUser != nil) {
-            
+            getAllUserMessages(id: currentUser!.objectId!)
         }
         else {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
@@ -52,6 +68,19 @@ extension InboxViewController {
     }
     
     @IBAction func shopInboxClicked(_ sender: Any) {
+        self.myMessages.removeAll()
+        //get shop first
+        self.forShop = true
+        let query = PFQuery(className: "Shop")
+        query.whereKey("userId", equalTo: currentUser!.objectId!)
+        query.getFirstObjectInBackground{(object, error) in
+            if(object != nil) {
+                self.getAllUserMessages(id: object!.objectId! as String)
+            }
+            else {
+                self.performSegue(withIdentifier: "goToAddShop", sender: self)
+            }
+        }
     }
     
 }
@@ -59,13 +88,45 @@ extension InboxViewController {
 //MARK:- Diaplay functions
 extension InboxViewController{
     
-    func test() {
+    func getAllUserMessages(id userId: String){
         let query = PFQuery(className: "Messages")
-        query.whereKey("receiverId", equalTo: currentUser!.objectId!)
-        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
-            if(error != nil) {
-                
+        query.whereKey("receiverId", equalTo: userId)
+        
+        query.order(byDescending: "updatedAt")
+        
+
+        query.findObjectsInBackground{(messages: [PFObject]? , error: Error?) in
+            if let messages = messages {
+                for message in messages {
+                    let sender: String = message.value(forKey: "senderId") as! String
+                    let receiver: String = message.value(forKey: "receiverId") as! String
+                    let currMessage: String = message.value(forKey: "content") as! String
+                    let newMessage = MessageModel(sender: sender, receiver: receiver, message: currMessage)
+                    self.myMessages.append(newMessage)
+                }
+                self.performSegue(withIdentifier: "goToMessages", sender: self)
             }
+            else {
+                print(error.debugDescription)
+            }
+        }
+    }
+    
+    //check if sender already exists to append to messages array
+    func checkDuplicateSender(message: PFObject) -> Bool {
+//        for message in myMessages {
+//
+//        }
+        return true
+    }
+    
+
+    //LiveQuery Code
+    func getMessageUpdate() {
+        let myQuery = Messages.query()!.whereKey("receiverId", equalTo: currentUser!.objectId!) as! PFQuery<Messages>
+        let subscription: Subscription<Messages> = Client.shared.subscribe(myQuery)
+        subscription.handle(Event.created) { query, object in
+            
         }
     }
 }

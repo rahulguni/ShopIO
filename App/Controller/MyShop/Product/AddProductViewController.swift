@@ -63,7 +63,7 @@ extension AddProductViewController {
                     self.myProduct?.setObjectId(product: currProduct)
                     for image in self.myProductPhotos {
                         let productPhoto = PFObject(className: "Product_Images")
-                        let imageData = image.pngData()
+                        let imageData = image.jpegData(compressionQuality: 0.5)
                         let imageName = makeImageName(self.titleField.text!)
                         let imageFile = PFFileObject(name: imageName, data:imageData!)
                         

@@ -102,7 +102,7 @@ extension AddShopViewController {
         shop["userId"] = currentUser!.objectId!
         shop["title"] = shopName.text
         shop["slogan"] = shopSlogan.text
-        let imageData = shopImage.image!.pngData()
+        let imageData = shopImage.image!.jpegData(compressionQuality: 0.5)
         
         //for image naming
         
@@ -128,8 +128,8 @@ extension AddShopViewController {
             if let myShop = shop {
                 myShop["title"] = self.shopName.text
                 myShop["slogan"] = self.shopSlogan.text
-                let imageData = self.shopImage.image!.pngData()
-                let imageName = myShop.objectId! as String + ".png"
+                let imageData = self.shopImage.image!.jpegData(compressionQuality: 0.5)
+                let imageName = makeImageName(self.shopName.text!)
                 let imageFile = PFFileObject(name: imageName, data:imageData!)
                 myShop["shopImage"] = imageFile
                 myShop.saveInBackground{(success, error) in

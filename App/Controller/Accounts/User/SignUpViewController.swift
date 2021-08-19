@@ -50,7 +50,7 @@ extension SignUpViewController {
                 user["lastLogin"] = NSDate()
                 
                 //for display image
-                let imageData = displayPicture.image!.pngData()
+                let imageData = displayPicture.image!.jpegData(compressionQuality: 0.5)
                 let imageName = makeImageName(self.email.text!)
                 let imageFile = PFFileObject(name: imageName, data: imageData!)
                 user["displayImage"] = imageFile
