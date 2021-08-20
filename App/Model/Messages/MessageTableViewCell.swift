@@ -31,12 +31,16 @@ class MessageTableViewCell: UITableViewCell {
         self.forShop = bool
         let query: PFQuery<PFObject>
         if(forShop == false) {
+            //look for shops
             query = PFQuery(className: "Shop")
+            query.whereKey("objectId", equalTo: currMessage.getReceiverId())
         }
         else{
+            //look for users
             query = PFQuery(className: "_User")
+            query.whereKey("objectId", equalTo: currMessage.getSenderId())
         }
-        query.whereKey("objectId", equalTo: currMessage.getSenderId())
+        
         query.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
             if let object = object {
                 if(self.forShop!){
@@ -47,8 +51,27 @@ class MessageTableViewCell: UITableViewCell {
                     let newShop = Shop(shop: object)
                     currMessage.setSenderName(name: newShop.getShopTitle())
                 }
+                //set sender Name
                 self.senderName.text = currMessage.getSenderName()
-                self.message.text = currMessage.getMessage()
+                //set sender most recent Message to display (From chatRoom database)
+                let chatRoomQuery = PFQuery(className: "ChatRoom")
+                chatRoomQuery.whereKey("chatRoomId", equalTo: currMessage.getChatRoomId())
+                chatRoomQuery.order(byDescending: "updatedAt")
+                
+                chatRoomQuery.getFirstObjectInBackground{(chatRoom, error) in
+                    if let chatRoom = chatRoom {
+                        let id: String = chatRoom.objectId!
+                        let message: String = chatRoom.value(forKey: "message") as! String
+                        let senderId: String = chatRoom.value(forKey: "senderId") as! String
+                        
+                        let newRoom = ChatRoom(chatRoomId: id, message: message, senderId: senderId)
+                        self.message.text = newRoom.getMessage()
+                    }
+                    else {
+                        print(error.debugDescription)
+                    }
+                }
+                
             }
             else {
                 print(error.debugDescription)

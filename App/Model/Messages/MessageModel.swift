@@ -11,14 +11,14 @@ import Parse
 class MessageModel {
     private var senderId: String?
     private var receiverId: String?
-    private var message: String?
+    private var chatRoomId: String?
     private var senderName: String?
     private var senderImage: UIImage?
     
-    init(sender: String, receiver: String, message: String) {
+    init(sender: String, receiver: String, chatRoomId: String) {
         self.senderId = sender
         self.receiverId = receiver
-        self.message = message
+        self.chatRoomId = chatRoomId
     }
     
     func getSenderId() -> String {
@@ -29,8 +29,8 @@ class MessageModel {
         return self.receiverId!
     }
     
-    func getMessage() -> String {
-        return self.message!
+    func getChatRoomId() -> String {
+        return self.chatRoomId!
     }
     
     func setSenderName(name: String) {

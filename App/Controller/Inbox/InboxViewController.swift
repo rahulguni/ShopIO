@@ -60,7 +60,7 @@ extension InboxViewController {
         self.myMessages.removeAll()
         self.forShop = false
         if(currentUser != nil) {
-            getAllUserMessages(id: currentUser!.objectId!)
+            getAllUserMessages(id: currentUser!.objectId!, forShop: self.forShop)
         }
         else {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
@@ -75,7 +75,7 @@ extension InboxViewController {
         query.whereKey("userId", equalTo: currentUser!.objectId!)
         query.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
-                self.getAllUserMessages(id: object!.objectId! as String)
+                self.getAllUserMessages(id: object!.objectId! as String, forShop: self.forShop)
             }
             else {
                 self.performSegue(withIdentifier: "goToAddShop", sender: self)
@@ -88,20 +88,22 @@ extension InboxViewController {
 //MARK:- Diaplay functions
 extension InboxViewController{
     
-    func getAllUserMessages(id userId: String){
+    func getAllUserMessages(id userId: String, forShop: Bool){
         let query = PFQuery(className: "Messages")
-        query.whereKey("receiverId", equalTo: userId)
-        
+        if(forShop) {
+            query.whereKey("receiverId", equalTo: userId)
+        }
+        else {
+            query.whereKey("senderId", equalTo: userId)
+        }
         query.order(byDescending: "updatedAt")
-        
-
         query.findObjectsInBackground{(messages: [PFObject]? , error: Error?) in
             if let messages = messages {
                 for message in messages {
                     let sender: String = message.value(forKey: "senderId") as! String
                     let receiver: String = message.value(forKey: "receiverId") as! String
-                    let currMessage: String = message.value(forKey: "content") as! String
-                    let newMessage = MessageModel(sender: sender, receiver: receiver, message: currMessage)
+                    let chatRoomId: String = message.objectId!
+                    let newMessage = MessageModel(sender: sender, receiver: receiver, chatRoomId: chatRoomId)
                     self.myMessages.append(newMessage)
                 }
                 self.performSegue(withIdentifier: "goToMessages", sender: self)
@@ -112,15 +114,6 @@ extension InboxViewController{
         }
     }
     
-    //check if sender already exists to append to messages array
-    func checkDuplicateSender(message: PFObject) -> Bool {
-//        for message in myMessages {
-//
-//        }
-        return true
-    }
-    
-
     //LiveQuery Code
     func getMessageUpdate() {
         let myQuery = Messages.query()!.whereKey("receiverId", equalTo: currentUser!.objectId!) as! PFQuery<Messages>
