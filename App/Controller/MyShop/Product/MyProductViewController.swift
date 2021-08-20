@@ -23,6 +23,7 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var discountPerLabel: UILabel!
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var imageView: UIView!
+    @IBOutlet weak var messageShopButton: UIButton!
     
     //Get the product from shop view
     private var myProduct: Product?
@@ -40,7 +41,7 @@ class MyProductViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //Fix Buttons
-        let currentButtons: [UIButton] = [updateButton, addToCartButton, requestButton]
+        let currentButtons: [UIButton] = [updateButton, addToCartButton, requestButton, messageShopButton]
         modifyButtons(buttons: currentButtons)
         
         self.productTitle.text = myProduct!.getTitle()
@@ -93,6 +94,7 @@ class MyProductViewController: UIViewController {
             }
         }
     }
+    
 }
 
 //MARK:- IBOutlet Functions
@@ -218,6 +220,28 @@ extension MyProductViewController {
             self.performSegue(withIdentifier: "goToProductPhoto", sender: self)
         }
     }
+    
+    @IBAction func messageShopClicked(_ sender: Any) {
+        if(currentUser != nil) {
+            let alert = UIAlertController(title: "Send a message to \(myShop!.getShopTitle()).", message: "", preferredStyle: .alert)
+            alert.addTextField{(textField : UITextField!) -> Void in
+                textField.placeholder = "Enter Message"
+            }
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Send", comment: "Send Button"), style: .default, handler: { _ in
+                let firstTextField = alert.textFields![0] as UITextField
+                if(firstTextField.text != "") {
+                    self.sendMessage(currMessage: firstTextField.text!)
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            performSegue(withIdentifier: "goToSignIn", sender: self)
+        }
+    }
 }
 
 //MARK:- Display Functions
@@ -249,6 +273,47 @@ extension MyProductViewController {
             }
         }
         return myItem
+    }
+    
+    //function to send message
+    func sendMessage(currMessage: String){
+        //search if chatroom already exists
+        let query = PFQuery(className: "Messages")
+        query.whereKey("senderId", equalTo: currentUser!.objectId!)
+        query.whereKey("receiverId", contains: self.myShop?.getShopId())
+        query.getFirstObjectInBackground{(message, error) in
+            if let message = message {
+                //chatRoom already exists, add to chat.
+                let chatRoom = PFObject(className: "ChatRoom")
+                chatRoom["chatRoomId"] = message.objectId!
+                chatRoom["senderId"] = currentUser?.objectId!
+                chatRoom["message"] = currMessage
+                
+                chatRoom.saveEventually()
+            
+            }
+            //if not exists, create one and send message.
+            else {
+                let message = PFObject(className: "Messages")
+                message["senderId"] = currentUser!.objectId!
+                message["receiverId"] = self.myShop!.getShopId()
+                
+                message.saveInBackground{(success, error) in
+                    if(success) {
+                        let chatRoom = PFObject(className: "ChatRoom")
+                        chatRoom["chatRoomId"] = message.objectId!
+                        chatRoom["senderId"] = currentUser?.objectId!
+                        chatRoom["message"] = currMessage
+                        
+                        chatRoom.saveEventually()
+                    }
+                    else {
+                        let alert = networkErrorAlert(title: "Error", errorString: "Could not message at this time.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     func setProductsPage(_ editMode: ProductMode) {
@@ -441,6 +506,7 @@ extension MyProductViewController {
         self.quantityStepper.minimumValue = 1.0
         self.quantityStepper.maximumValue = Double(myProduct!.getQuantity())
         self.addToCartButton.isHidden = false
+        self.messageShopButton.isHidden = false
         if(myProduct!.getQuantity() == 0) {
             self.quantityField.text = "0"
             self.addToCartButton.isHidden = true

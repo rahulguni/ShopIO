@@ -48,4 +48,5 @@ class MessageModel {
     func getSenderImage() -> UIImage {
         return self.senderImage!
     }
+    
 }

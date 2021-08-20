@@ -16,6 +16,7 @@ class InboxViewController: UIViewController {
     
     private var myMessages: [MessageModel] = []
     private var forShop: Bool = false
+    private var currSender: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class InboxViewController: UIViewController {
             let destination = segue.destination as! MessagesViewController
             destination.setMessages(messages: self.myMessages)
             destination.setForShop(bool: forShop)
+            destination.setSender(currSender: self.currSender!)
         }
     }
     
@@ -61,6 +63,7 @@ extension InboxViewController {
         self.forShop = false
         if(currentUser != nil) {
             getAllUserMessages(id: currentUser!.objectId!, forShop: self.forShop)
+            self.currSender = currentUser!.objectId!
         }
         else {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
@@ -76,6 +79,7 @@ extension InboxViewController {
         query.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
                 self.getAllUserMessages(id: object!.objectId! as String, forShop: self.forShop)
+                self.currSender = object!.objectId!
             }
             else {
                 self.performSegue(withIdentifier: "goToAddShop", sender: self)

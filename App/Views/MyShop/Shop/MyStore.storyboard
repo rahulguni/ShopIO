@@ -315,7 +315,7 @@
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="requestClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="buv-PR-de0"/>
+                                                    <action selector="messageShopClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="iAR-9K-scj"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -350,6 +350,7 @@
                         <outlet property="discountField" destination="hpr-oC-DjN" id="6fn-dP-Xf9"/>
                         <outlet property="discountPerLabel" destination="9AS-Yt-Skf" id="eQf-Zq-WlN"/>
                         <outlet property="imageView" destination="Hlt-Xp-nkd" id="she-Rh-X58"/>
+                        <outlet property="messageShopButton" destination="WiC-Yy-0ab" id="l5U-Xo-Kpp"/>
                         <outlet property="priceField" destination="igL-UJ-FKV" id="zom-Uk-Bri"/>
                         <outlet property="productContent" destination="9PI-tO-hPx" id="t0I-9s-8lR"/>
                         <outlet property="productDescription" destination="gQU-vo-iQ3" id="Iq1-8d-L50"/>

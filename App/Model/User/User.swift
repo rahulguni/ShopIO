@@ -54,5 +54,9 @@ struct User {
     func getEmail() -> String {
         return self.email!
     }
+    
+    func getImage()-> PFFileObject {
+        return self.displayImage!
+    }
         
 }

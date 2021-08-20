@@ -43,16 +43,30 @@ class MessageTableViewCell: UITableViewCell {
         
         query.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
             if let object = object {
+                let displayImage: PFFileObject?
                 if(self.forShop!){
                     let newUser = User(userID: object)
                     currMessage.setSenderName(name: newUser.getName())
+                    displayImage = newUser.getImage()
                 }
                 else {
                     let newShop = Shop(shop: object)
                     currMessage.setSenderName(name: newShop.getShopTitle())
+                    displayImage = newShop.getShopImage()
                 }
                 //set sender Name
                 self.senderName.text = currMessage.getSenderName()
+                
+                displayImage?.getDataInBackground{(image, error) in
+                    if let image = image {
+                        self.senderImage.image = UIImage(data: image)
+                        currMessage.setSenderImage(image: UIImage(data: image)!)
+                    }
+                    else {
+                        print(error.debugDescription)
+                    }
+                }
+                
                 //set sender most recent Message to display (From chatRoom database)
                 let chatRoomQuery = PFQuery(className: "ChatRoom")
                 chatRoomQuery.whereKey("chatRoomId", equalTo: currMessage.getChatRoomId())
@@ -63,15 +77,15 @@ class MessageTableViewCell: UITableViewCell {
                         let id: String = chatRoom.objectId!
                         let message: String = chatRoom.value(forKey: "message") as! String
                         let senderId: String = chatRoom.value(forKey: "senderId") as! String
+                        let updateTime: Date = chatRoom.value(forKey: "updatedAt") as! Date
                         
-                        let newRoom = ChatRoom(chatRoomId: id, message: message, senderId: senderId)
+                        let newRoom = ChatRoom(chatRoomId: id, message: message, senderId: senderId, date: updateTime)
                         self.message.text = newRoom.getMessage()
                     }
                     else {
                         print(error.debugDescription)
                     }
                 }
-                
             }
             else {
                 print(error.debugDescription)

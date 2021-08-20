@@ -11,11 +11,13 @@ class ChatRoom {
     private var chatRoomId: String
     private var message: String
     private var senderId: String
+    private var updateTime: Date
     
-    init(chatRoomId: String, message: String, senderId: String) {
+    init(chatRoomId: String, message: String, senderId: String, date: Date) {
         self.chatRoomId = chatRoomId
         self.message = message
         self.senderId = senderId
+        self.updateTime = date
     }
     
     func getMessage() -> String {
@@ -24,5 +26,13 @@ class ChatRoom {
     
     func getChatRoomId() -> String {
         return self.chatRoomId
+    }
+    
+    func getTime() -> Date {
+        return self.updateTime
+    }
+    
+    func getSenderId() -> String {
+        return self.senderId
     }
 }
