@@ -7,7 +7,6 @@
 
 import UIKit
 import Parse
-import ParseLiveQuery
 
 class InboxViewController: UIViewController {
     
@@ -16,15 +15,13 @@ class InboxViewController: UIViewController {
     
     private var myMessages: [MessageModel] = []
     private var forShop: Bool = false
-    private var currSender: String?
+    private var currSender: Sender?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         modifyButtons(buttons: [myInboxButton, shopInboxButton])
-        Messages.registerSubclass()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +34,7 @@ class InboxViewController: UIViewController {
             destination.dismiss = forSignIn.forInbox
         }
         if(segue.identifier! == "goToMessages") {
-            let destination = segue.destination as! MessagesViewController
+            let destination = segue.destination as! MyMessagesViewController
             destination.setMessages(messages: self.myMessages)
             destination.setForShop(bool: forShop)
             destination.setSender(currSender: self.currSender!)
@@ -63,7 +60,7 @@ extension InboxViewController {
         self.forShop = false
         if(currentUser != nil) {
             getAllUserMessages(id: currentUser!.objectId!, forShop: self.forShop)
-            self.currSender = currentUser!.objectId!
+            self.currSender = Sender(senderId: currentUser!.objectId!, displayName: currentUser!.value(forKey: "fName") as! String)
         }
         else {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
@@ -79,7 +76,7 @@ extension InboxViewController {
         query.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
                 self.getAllUserMessages(id: object!.objectId! as String, forShop: self.forShop)
-                self.currSender = object!.objectId!
+                self.currSender = Sender(senderId: object!.objectId!, displayName: object!.value(forKey: "title") as! String)
             }
             else {
                 self.performSegue(withIdentifier: "goToAddShop", sender: self)
@@ -118,13 +115,6 @@ extension InboxViewController{
         }
     }
     
-    //LiveQuery Code
-    func getMessageUpdate() {
-        let myQuery = Messages.query()!.whereKey("receiverId", equalTo: currentUser!.objectId!) as! PFQuery<Messages>
-        let subscription: Subscription<Messages> = Client.shared.subscribe(myQuery)
-        subscription.handle(Event.created) { query, object in
-            
-        }
-    }
+    
 }
 

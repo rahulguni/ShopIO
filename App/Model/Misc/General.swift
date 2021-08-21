@@ -72,3 +72,11 @@ func makePictureRounded(picture: UIImageView) {
     picture.layer.borderColor = UIColor.black.cgColor
     picture.layer.cornerRadius = (picture.frame.size.height / 2)
 }
+
+//move array element to first for messages
+func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T>{
+    var arr = array
+    let element = arr.remove(at: fromIndex)
+    arr.insert(element, at: toIndex)
+    return arr
+}

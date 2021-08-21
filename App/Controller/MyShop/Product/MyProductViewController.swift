@@ -289,8 +289,9 @@ extension MyProductViewController {
                 chatRoom["senderId"] = currentUser?.objectId!
                 chatRoom["message"] = currMessage
                 
+                message["updatedAt"] = Date()
+                message.saveEventually()
                 chatRoom.saveEventually()
-            
             }
             //if not exists, create one and send message.
             else {

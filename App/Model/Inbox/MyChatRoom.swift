@@ -1,23 +1,20 @@
 //
-//  Messages.swift
+//  MyChatRoom.swift
 //  App
 //
-//  Created by Rahul Guni on 8/17/21.
+//  Created by Rahul Guni on 8/20/21.
 //
 
 import Foundation
-
 import Parse
 
-class Messages: PFObject, PFSubclassing {
+class MyChatRoom: PFObject, PFSubclassing {
     @NSManaged var senderId: String?
-    @NSManaged var receiverId: String?
     @NSManaged var content: String?
-    @NSManaged var productId: String?
-    @NSManaged var shopId: String?
+    @NSManaged var chatRoomId: String?
 
     //Returns the Parse database table where messages are stored
     class func parseClassName() -> String {
-        return "Messages"
+        return "ChatRoom"
     }
 }

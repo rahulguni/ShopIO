@@ -79,7 +79,7 @@ class MessageTableViewCell: UITableViewCell {
                         let senderId: String = chatRoom.value(forKey: "senderId") as! String
                         let updateTime: Date = chatRoom.value(forKey: "updatedAt") as! Date
                         
-                        let newRoom = ChatRoom(chatRoomId: id, message: message, senderId: senderId, date: updateTime)
+                        let newRoom = ChatRoom(objectId: chatRoom.objectId!, chatRoomId: id, message: message, senderId: senderId, date: updateTime)
                         self.message.text = newRoom.getMessage()
                     }
                     else {

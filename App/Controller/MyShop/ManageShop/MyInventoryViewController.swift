@@ -34,13 +34,9 @@ class MyInventoryViewController: UIViewController {
         
         if segue.identifier! == "goToRequests" {
             let destination = segue.destination as! RequestsViewController
-            print(self.myRequests.count)
             destination.setRequests(requests: self.myRequests)
         }
     }
-    
-    
-
 }
 
 extension MyInventoryViewController: shopManagerDelegate {

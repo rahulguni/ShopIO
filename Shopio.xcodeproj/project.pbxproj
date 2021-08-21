@@ -16,10 +16,9 @@
 		DE21B56D26CCC96200B2FB42 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */; };
 		DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278924268D8D57009CD37C /* MyStoreViewController.swift */; };
 		DE278927268D8DF4009CD37C /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278926268D8DF4009CD37C /* Shop.swift */; };
-		DE34920E26CF622400D9B640 /* MyMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE34920D26CF622400D9B640 /* MyMessageTableViewController.swift */; };
-		DE34921026CF7E2400D9B640 /* MyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE34920F26CF7E2400D9B640 /* MyMessageTableViewCell.swift */; };
 		DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718BD2636A051001CF554 /* SignInViewController.swift */; };
 		DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUpViewController.swift */; };
+		DE3B528B26D0853F007DF799 /* MyChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3B528A26D0853F007DF799 /* MyChatRoom.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
 		DE4FEFAB26C6154500BAD3E6 /* ProductImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */; };
 		DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */; };
@@ -54,6 +53,8 @@
 		DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */; };
 		DE9978F926BD070A0043AD8C /* UpdateProductCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */; };
 		DEAA14F126CB874D00ED2D33 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAA14F026CB874D00ED2D33 /* Messages.swift */; };
+		DEB57D5626CF963300514C4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB57D5526CF963300514C4C /* ChatViewController.swift */; };
+		DEB57D5826CF99EA00514C4C /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB57D5726CF99EA00514C4C /* ChatRoomModel.swift */; };
 		DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */; };
 		DEBBA83A26AE92F00073D33E /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA83926AE92F00073D33E /* Cart.storyboard */; };
 		DEBBA83C26AE93380073D33E /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA83B26AE93380073D33E /* Account.storyboard */; };
@@ -95,10 +96,9 @@
 		DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DE278924268D8D57009CD37C /* MyStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreViewController.swift; sourceTree = "<group>"; };
 		DE278926268D8DF4009CD37C /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
-		DE34920D26CF622400D9B640 /* MyMessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageTableViewController.swift; sourceTree = "<group>"; };
-		DE34920F26CF7E2400D9B640 /* MyMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageTableViewCell.swift; sourceTree = "<group>"; };
 		DE3718BD2636A051001CF554 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DE3718C02636A063001CF554 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		DE3B528A26D0853F007DF799 /* MyChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatRoom.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
 		DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageViewController.swift; sourceTree = "<group>"; };
 		DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePageViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +135,8 @@
 		DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewController.swift; sourceTree = "<group>"; };
 		DEAA14F026CB874D00ED2D33 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		DEB57D5526CF963300514C4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		DEB57D5726CF99EA00514C4C /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		DEBBA83926AE92F00073D33E /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		DEBBA83B26AE93380073D33E /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
@@ -215,7 +217,7 @@
 		DE3E66742637A4B600128755 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DEAA14E926CB6F2000ED2D33 /* Messages */,
+				DEAA14E926CB6F2000ED2D33 /* Inbox */,
 				DEC59D5726BF6B8A005EE1C5 /* Requests */,
 				DE87FE5026AD0DCC00F996C7 /* Misc */,
 				DE87FE4F26AD0DBD00F996C7 /* User */,
@@ -302,7 +304,7 @@
 			children = (
 				DE7FA7E826CB34CC0079D278 /* InboxViewController.swift */,
 				DE85144E26CE12D9009C60C3 /* MessagesViewController.swift */,
-				DE34920D26CF622400D9B640 /* MyMessageTableViewController.swift */,
+				DEB57D5526CF963300514C4C /* ChatViewController.swift */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -496,16 +498,17 @@
 			path = ManageShop;
 			sourceTree = "<group>";
 		};
-		DEAA14E926CB6F2000ED2D33 /* Messages */ = {
+		DEAA14E926CB6F2000ED2D33 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
 				DEAA14F026CB874D00ED2D33 /* Messages.swift */,
 				DE1048F026CB9E47003F5D11 /* MessageModel.swift */,
 				DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */,
 				DECA3D7726CF12ED0081C5EF /* ChatRoom.swift */,
-				DE34920F26CF7E2400D9B640 /* MyMessageTableViewCell.swift */,
+				DEB57D5726CF99EA00514C4C /* ChatRoomModel.swift */,
+				DE3B528A26D0853F007DF799 /* MyChatRoom.swift */,
 			);
-			path = Messages;
+			path = Inbox;
 			sourceTree = "<group>";
 		};
 		DEBBA83326AE905E0073D33E /* Account */ = {
@@ -739,15 +742,14 @@
 				DECA3D7826CF12ED0081C5EF /* ChatRoom.swift in Sources */,
 				DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */,
 				DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */,
+				DEB57D5626CF963300514C4C /* ChatViewController.swift in Sources */,
 				DE3718BE2636A051001CF554 /* SignInViewController.swift in Sources */,
 				DEC59D5626BF6AF9005EE1C5 /* RequestsViewController.swift in Sources */,
-				DE34921026CF7E2400D9B640 /* MyMessageTableViewCell.swift in Sources */,
 				DE7FA7E926CB34CC0079D278 /* InboxViewController.swift in Sources */,
 				DE8358C12636518F00E3F1A7 /* AppDelegate.swift in Sources */,
 				DE87FE4426AD040B00F996C7 /* CartModel.swift in Sources */,
 				DEE7E12926B8F5DD008E429C /* MyAddressViewController.swift in Sources */,
 				DEE7E12726B8F552008E429C /* AddressCollectionViewCell.swift in Sources */,
-				DE34920E26CF622400D9B640 /* MyMessageTableViewController.swift in Sources */,
 				DE6A507026A3B63C008B9427 /* AddProductExtraViewController.swift in Sources */,
 				DEF4895326C794B7002AABDC /* ProductImage.swift in Sources */,
 				DE768903269FFF3400F0C888 /* ManageShopViewController.swift in Sources */,
@@ -764,11 +766,13 @@
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
+				DE3B528B26D0853F007DF799 /* MyChatRoom.swift in Sources */,
 				DE76890926A016F400F0C888 /* User.swift in Sources */,
 				DE6A6A3C26AFDBC2006B4D04 /* CartViewController.swift in Sources */,
 				DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */,
 				DE1048F126CB9E47003F5D11 /* MessageModel.swift in Sources */,
 				DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */,
+				DEB57D5826CF99EA00514C4C /* ChatRoomModel.swift in Sources */,
 				DEC9E4F526B4BF18002891A9 /* EnumFiles.swift in Sources */,
 				DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */,
 				DE87FE4626AD05D500F996C7 /* CartItemModel.swift in Sources */,
