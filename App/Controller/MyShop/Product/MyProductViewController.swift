@@ -48,6 +48,7 @@ class MyProductViewController: UIViewController {
         self.priceField.text = myProduct!.getPriceAsString()
         self.quantityField.text = String(myProduct!.getQuantity())
         self.productDescription.text = myProduct!.getSummary()
+        self.productContent.text = myProduct!.getContent()
         self.quantityStepper.value = Double(myProduct!.getQuantity())
         
         if(myProduct?.getDiscount() != 0) {
