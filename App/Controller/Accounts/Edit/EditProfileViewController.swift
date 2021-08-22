@@ -51,7 +51,7 @@ extension EditProfileViewController {
     
     @IBAction func updateProfilePressed(_ sender: Any) {
         if(self.fName.text == nil || self.lName.text == nil) {
-            let alert = networkErrorAlert(title: "Cannot Update Profile", errorString: "Please fill out all fields.")
+            let alert = customNetworkAlert(title: "Cannot Update Profile", errorString: "Please fill out all fields.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
@@ -74,12 +74,12 @@ extension EditProfileViewController {
                             currentUser!["fName"] = self.fName.text!
                             currentUser!["lName"] = self.lName.text!
                             currentUser!["displayImage"] = imageFile
-                            let alert = networkErrorAlert(title: "Successfully updated profile", errorString: "Your profile has been updated")
+                            let alert = customNetworkAlert(title: "Successfully updated profile", errorString: "Your profile has been updated")
                             self.present(alert, animated: true, completion: nil)
                             self.fillForm()
                         }
                         else {
-                            let alert = networkErrorAlert(title: "Could not update profile", errorString: "Please try again later.")
+                            let alert = customNetworkAlert(title: "Could not update profile", errorString: "Please try again later.")
                             self.present(alert, animated: true, completion: nil)
                         }
                     }

@@ -54,7 +54,7 @@ extension ProductImageViewController {
                         self.setDisplayPic()
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Unable to set Display Picture", errorString: "There was an error setting up your display pic. Please try again.")
+                        let alert = customNetworkAlert(title: "Unable to set Display Picture", errorString: "There was an error setting up your display pic. Please try again.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -119,11 +119,11 @@ extension ProductImageViewController {
                 object!["isDefault"] = true
                 object?.saveInBackground {(success, error) in
                     if(success) {
-                        let alert = networkErrorAlert(title: "Display Picture Changed", errorString: "This picture has been set as your current display picture.")
+                        let alert = customNetworkAlert(title: "Display Picture Changed", errorString: "This picture has been set as your current display picture.")
                         self.present(alert, animated: true, completion: nil)
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Error Changing Display Pciture", errorString: "There was an error setting display picture. Please try again later.")
+                        let alert = customNetworkAlert(title: "Error Changing Display Pciture", errorString: "There was an error setting display picture. Please try again later.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

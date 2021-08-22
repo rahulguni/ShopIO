@@ -18,3 +18,4 @@ class CartItem: Object {
     @Persisted var productTitle: String?
     @Persisted var productShop: String?
 }
+

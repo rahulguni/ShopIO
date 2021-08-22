@@ -53,7 +53,7 @@ class SignInViewController: UIViewController {
                         }
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Error Signing In.", errorString: error!.localizedDescription)
+                        let alert = customNetworkAlert(title: "Error Signing In.", errorString: error!.localizedDescription)
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -62,7 +62,7 @@ class SignInViewController: UIViewController {
                 if let error = error {
                     let errorString = error.localizedDescription
                     // Show the errorString somewhere and let the user try again.
-                    let alert = networkErrorAlert(title: "Error Signing In.", errorString: errorString)
+                    let alert = customNetworkAlert(title: "Error Signing In.", errorString: errorString)
                     self.present(alert, animated: true, completion: nil)
                 }
             }

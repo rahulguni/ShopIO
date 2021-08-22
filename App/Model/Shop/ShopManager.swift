@@ -17,6 +17,10 @@ class ShopManager {
     private var currProducts: [Product] = []
     var delegate: shopManagerDelegate?
     
+    func setShop(shop: Shop) {
+        self.currShop = shop
+    }
+    
     func getCurrShop() -> Shop {
         return self.currShop!
     }

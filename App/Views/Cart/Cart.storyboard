@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="srH-tG-AzI">
-                                <rect key="frame" x="20" y="88" width="374" height="662"/>
+                                <rect key="frame" x="20" y="88" width="374" height="637"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gPM-KD-hBj">
@@ -105,13 +105,24 @@
                                 <state key="normal" title="Check Out">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOutButtonClick:" destination="Psf-5L-z7Y" eventType="touchUpInside" id="1BK-7r-g9h"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAn-bg-VpU">
+                                <rect key="frame" x="208" y="733" width="186" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PFk-ST-sSA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Cart" id="5FE-BT-F5U"/>
                     <connections>
+                        <outlet property="cartTotal" destination="MAn-bg-VpU" id="MdR-6I-uiG"/>
                         <outlet property="checkOut" destination="aGq-5j-Oeh" id="Xfe-6X-RxJ"/>
                         <outlet property="myCartItems" destination="srH-tG-AzI" id="lrd-ed-17E"/>
                         <segue destination="CxC-Qc-RA2" kind="presentation" identifier="toSignIn" id="LHw-pk-VGH"/>
@@ -120,7 +131,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nzl-Dn-fFJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2419" y="-498"/>
+            <point key="canvasLocation" x="-2420.289855072464" y="-498.21428571428567"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gko-gY-oTs">
+            <objects>
+                <viewController id="PVb-tK-bcL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0xN-kG-HvW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acf-Lm-zFz">
+                                <rect key="frame" x="20" y="761" width="374" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Confirm Check Out">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qoa-cP-bRp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U6m-UD-WmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1428" y="-498"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="T78-SA-T68">
@@ -128,7 +164,7 @@
                 <viewControllerPlaceholder storyboardName="SignIn" id="CxC-Qc-RA2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aqe-00-uWt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1579" y="-491"/>
+            <point key="canvasLocation" x="-2420" y="263"/>
         </scene>
     </scenes>
     <resources>

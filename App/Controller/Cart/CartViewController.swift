@@ -14,12 +14,14 @@ class CartViewController: UIViewController {
 
     @IBOutlet weak var myCartItems: UICollectionView!
     @IBOutlet weak var checkOut: UIButton!
+    @IBOutlet weak var cartTotal: UILabel!
     
     //A list to hold all cart items
     private var myItems: [CartItem] = []
     private var currItem: CartItem?
     private var myProduct: Product?
     private var currProductImage: [ProductImage] = []
+    private var myCart: Cart?
     
     let realm = try! Realm()
     
@@ -44,8 +46,6 @@ class CartViewController: UIViewController {
         
         //render all products
         myItems.removeAll()
-        
-        //let cart = Cart()
         
         if(currentUser != nil) {
             let myCartItems = realm.objects(CartItem.self)
@@ -85,7 +85,16 @@ class CartViewController: UIViewController {
             }
         }
     }
-    
+}
+
+//MARK:- IBOutlet Functions
+extension CartViewController {
+    @IBAction func checkOutButtonClick(_ sender: Any) {
+    }
+}
+
+//MARK:- Display Function
+extension CartViewController {
     private func checkProduct(_ myItem: CartItem){
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: myItem.productId!)
@@ -109,6 +118,8 @@ class CartViewController: UIViewController {
                 }
                 self.myItems.append(myItem)
             }
+            self.myCart = Cart(cartItems: self.myItems)
+            self.cartTotal.text = self.myCart!.getSubTotalAsString()
             self.myCartItems.reloadData()
         }
     }
@@ -125,7 +136,7 @@ extension CartViewController: UICollectionViewDelegate {
         query.whereKey("objectId", equalTo: productId!)
         query.getFirstObjectInBackground{ (object: PFObject?, error: Error?) in
             if let error = error {
-                let alert = networkErrorAlert(title: "Could not load item.", errorString: error.localizedDescription)
+                let alert = customNetworkAlert(title: "Could not load item.", errorString: error.localizedDescription)
                 self.present(alert, animated: true, completion: nil)
             } else if let object = object {
                 self.myProduct = Product(product: object)
@@ -191,7 +202,10 @@ extension CartViewController: SwipeCollectionViewCellDelegate{
                     }catch {
                         print("error deleting category")
                     }
+                    self.myCart = Cart(cartItems: self.myItems)
+                    self.cartTotal.text = self.myCart!.getSubTotalAsString()
                     self.myCartItems.reloadData()
+                    
                 }))
                 self.present(alert, animated: true, completion: nil)
                 

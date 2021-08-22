@@ -31,10 +31,10 @@ class MyInventoryViewController: UIViewController {
             destination.setShop(shop: shopManager.getCurrShop())
             destination.setProducts(products: shopManager.getCurrProducts())
         }
-        
-        if segue.identifier! == "goToRequests" {
+        if(segue.identifier! == "goToRequests") {
             let destination = segue.destination as! RequestsViewController
-            destination.setRequests(requests: self.myRequests)
+            destination.setRequests(requests: myRequests)
+            destination.setShop(shop: shopManager.getCurrShop())
         }
     }
 }
@@ -61,6 +61,7 @@ extension MyInventoryViewController {
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if object != nil {
                 let currShop = Shop(shop: object)
+                self.shopManager.setShop(shop: currShop)
                 let query = PFQuery(className: "Request")
                 query.whereKey("shopId", contains: currShop.getShopId())
                 query.whereKey("fulfilled", equalTo: false)

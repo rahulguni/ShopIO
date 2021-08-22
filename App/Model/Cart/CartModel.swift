@@ -6,15 +6,26 @@
 //
 
 import Foundation
-import RealmSwift
 
-class Cart : Object {
-    @Persisted var userId: String?
-    @Persisted var sessionId: String?
-    @Persisted var subTotal: Double?
-    @Persisted var itemDiscount: Double?
-    @Persisted var tax: Double?
-    @Persisted var shipping: Double?
-    @Persisted var total: Double?
-    @Persisted var addressId: String?
+class Cart {
+    private final var userId = currentUser!.objectId!
+    private var sessionId: String?
+    private var subTotal: Double?
+    private var itemDiscount: Double?
+    private var tax: Double?
+    private var shipping: Double?
+    private var total: Double?
+    private var addressId: String?
+    
+    init(cartItems: [CartItem]){
+        var currTotal = 0.0
+        for item in cartItems {
+            currTotal += (item.price!) * Double(item.quantity!)
+        }
+        self.subTotal = currTotal
+    }
+    
+    func getSubTotalAsString() -> String {
+        return "Subtotal: " + String(format: "%.2f" ,self.subTotal!)
+    }
 }

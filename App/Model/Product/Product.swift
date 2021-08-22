@@ -13,8 +13,6 @@ class Product {
     private var objectId: String?
     private var userId: String?
     private var title: String?
-    private var metaTitle: String?
-    private var slug: String?
     private var summary: String?
     private var type: Int?
     private var price: Double?

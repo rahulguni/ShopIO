@@ -34,7 +34,7 @@ extension SignUpViewController {
     //Add user to table
     @IBAction func signUp(_ sender: UIButton) {
         if(lastName.text!.isEmpty || email.text!.isEmpty || password.text!.isEmpty || phone.text!.isEmpty){
-            let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
+            let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }
         else{
@@ -60,7 +60,7 @@ extension SignUpViewController {
                     if let error = error {
                       let errorString = error.localizedDescription
                       // Show the errorString somewhere and let the user try again.
-                        let alert = networkErrorAlert(title: "Error Signing Up", errorString: errorString)
+                        let alert = customNetworkAlert(title: "Error Signing Up", errorString: errorString)
                         self.present(alert, animated: true, completion: nil)
                     } else {
                       // Hooray! Let them use the app now.
@@ -74,7 +74,7 @@ extension SignUpViewController {
                 //throw error
                 password.text = "";
                 passwordRe.text = "";
-                let alert = networkErrorAlert(title: "Error Signing Up", errorString: "Passwords do not match. Please try again.")
+                let alert = customNetworkAlert(title: "Error Signing Up", errorString: "Passwords do not match. Please try again.")
                 self.present(alert, animated: true, completion: nil)
             }
         }

@@ -402,7 +402,6 @@
 				DECB6F3026A8BC8600460EFE /* ProductsCollectionViewCell.swift */,
 				DE56B5BC269FF84B005E68E2 /* Product.swift */,
 				DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */,
-				DEE2C3B226BF87D000CEDE15 /* Request.swift */,
 				DE84039B26C4F2B500910F17 /* ImageCollectionViewCell.swift */,
 			);
 			path = Product;
@@ -568,6 +567,7 @@
 		DEC59D5726BF6B8A005EE1C5 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				DEE2C3B226BF87D000CEDE15 /* Request.swift */,
 				DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */,
 			);
 			path = Requests;

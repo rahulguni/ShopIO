@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-func networkErrorAlert(title myTitle: String, errorString error: String) -> UIAlertController {
+func customNetworkAlert(title myTitle: String, errorString error: String) -> UIAlertController {
     let alert = UIAlertController(title: myTitle, message: error, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
     }))

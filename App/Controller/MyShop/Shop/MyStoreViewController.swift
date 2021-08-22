@@ -179,7 +179,7 @@ extension MyStoreViewController {
                         self.followButton.setTitle("Unfollow", for: .normal)
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Network Error", errorString: "Error following this user. Please try later.")
+                        let alert = customNetworkAlert(title: "Network Error", errorString: "Error following this user. Please try later.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -201,7 +201,7 @@ extension MyStoreViewController {
                         self.present(alert, animated: true, completion: nil)
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Network Error", errorString: "Error unfollowing this user. Please try later.")
+                        let alert = customNetworkAlert(title: "Network Error", errorString: "Error unfollowing this user. Please try later.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

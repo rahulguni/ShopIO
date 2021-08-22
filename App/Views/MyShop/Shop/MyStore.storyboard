@@ -364,6 +364,7 @@
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="EvD-eC-ugC"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToUpdateProducts" unwindAction="unwindToUpdateProductsWithSegueWithSegue:" id="bkF-T1-iGs"/>
                         <segue destination="X0a-MG-LYL" kind="presentation" identifier="goToProductPhoto" id="aP1-Un-LT2"/>
+                        <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyRequests" unwindAction="unwindToMyRequestsWithSegueWithSegue:" id="m7s-cp-ar0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cga-DH-3uD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

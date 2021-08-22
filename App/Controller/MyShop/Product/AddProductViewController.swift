@@ -44,7 +44,7 @@ class AddProductViewController: UIViewController{
 extension AddProductViewController {
     @IBAction func saveProduct(_ sender: Any) {
         if(titleField.text!.isEmpty || priceField.text!.isEmpty || quantityField.text!.isEmpty || myProductPhotos.isEmpty){
-            let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
+            let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
@@ -78,7 +78,7 @@ extension AddProductViewController {
                     self.performSegue(withIdentifier: "goToAddProductsExtra", sender: self)
                 }
                 else{
-                    let alert = networkErrorAlert(title: "Could not save Product", errorString: "Please try again later.")
+                    let alert = customNetworkAlert(title: "Could not save Product", errorString: "Please try again later.")
                     self.present(alert, animated: true, completion: nil)
                 }
             }

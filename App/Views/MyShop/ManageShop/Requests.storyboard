@@ -72,11 +72,20 @@
                     </view>
                     <connections>
                         <outlet property="requestsTable" destination="PlV-FN-HCG" id="bwz-42-5fD"/>
+                        <segue destination="13w-M4-5Q1" kind="presentation" identifier="goToMyProduct" id="TEc-ac-xyD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-35" y="72"/>
+        </scene>
+        <!--myProduct-->
+        <scene sceneID="wBU-bt-mrB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyStore" referencedIdentifier="myProduct" id="13w-M4-5Q1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJ6-51-nHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="72"/>
         </scene>
     </scenes>
     <resources>

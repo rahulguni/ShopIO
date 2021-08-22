@@ -48,7 +48,7 @@ class AddShopViewController: UIViewController {
 extension AddShopViewController {
     @IBAction func continueButtonPressed(_ sender: Any) {
         if (shopName.text!.isEmpty){
-            let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
+            let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
         
@@ -116,7 +116,7 @@ extension AddShopViewController {
                 self.performSegue(withIdentifier: "toAddress", sender: self)
             }
             else{
-                let alert = networkErrorAlert(title: "Network Error", errorString: "Could not save shop at this time. Please try again.")
+                let alert = customNetworkAlert(title: "Network Error", errorString: "Could not save shop at this time. Please try again.")
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -137,7 +137,7 @@ extension AddShopViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                     else{
-                        let alert = networkErrorAlert(title: "Error Updating", errorString: "Could not update shop at this time  Please try again.")
+                        let alert = customNetworkAlert(title: "Error Updating", errorString: "Could not update shop at this time  Please try again.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

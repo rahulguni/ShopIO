@@ -101,7 +101,7 @@ class MyProductViewController: UIViewController {
 extension MyProductViewController {
     @IBAction func updateProduct(_ sender: Any) {
         if(productTitle.text!.isEmpty || priceField.text!.isEmpty || discountField.text!.isEmpty || quantityField.text!.isEmpty){
-            let alert = networkErrorAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
+            let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
@@ -126,9 +126,12 @@ extension MyProductViewController {
                             if(self.productMode == ProductMode.forOwner) {
                                 self.performSegue(withIdentifier: "goToMyStore", sender: self)
                             }
+                            if(self.productMode == ProductMode.forRequest) {
+                                self.performSegue(withIdentifier: "goToMyRequests", sender: self)
+                            }
                         }
                         else {
-                            let alert = networkErrorAlert(title: "Could not save object", errorString: "Connection error. Please try again later.")
+                            let alert = customNetworkAlert(title: "Could not save object", errorString: "Connection error. Please try again later.")
                             self.present(alert, animated: true, completion: nil)
                         }
                     }
@@ -190,11 +193,11 @@ extension MyProductViewController {
                 newRequest["fulfilled"] = false
                 newRequest.saveInBackground{(success, error) in
                     if(success) {
-                        let alert = networkErrorAlert(title: "Request Sent!", errorString: "Wait for the shop to proceed with your request.")
+                        let alert = customNetworkAlert(title: "Request Sent!", errorString: "Wait for the shop to proceed with your request.")
                         self.present(alert, animated: true, completion: nil)
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Could not send request.", errorString: "Try again")
+                        let alert = customNetworkAlert(title: "Could not send request.", errorString: "Try again")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -280,7 +283,7 @@ extension MyProductViewController {
         //search if chatroom already exists
         let query = PFQuery(className: "Messages")
         query.whereKey("senderId", equalTo: currentUser!.objectId!)
-        query.whereKey("receiverId", contains: self.myShop?.getShopId())
+        query.whereKey("receiverId", equalTo: self.myShop!.getShopId())
         query.getFirstObjectInBackground{(message, error) in
             if let message = message {
                 //chatRoom already exists, add to chat.
@@ -309,7 +312,7 @@ extension MyProductViewController {
                         chatRoom.saveEventually()
                     }
                     else {
-                        let alert = networkErrorAlert(title: "Error", errorString: "Could not message at this time.")
+                        let alert = customNetworkAlert(title: "Error", errorString: "Could not message at this time.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -318,7 +321,7 @@ extension MyProductViewController {
     }
     
     func setProductsPage(_ editMode: ProductMode) {
-        if(editMode == ProductMode.forOwner || editMode == ProductMode.forUpdate) {
+        if(editMode == ProductMode.forOwner || editMode == ProductMode.forUpdate || editMode == ProductMode.forRequest) {
             setOwnerDisplay()
         }
         else if(editMode == ProductMode.forMyShop) {
@@ -378,12 +381,12 @@ extension MyProductViewController {
                         object?.deleteInBackground{(success, error) in
                             if(success) {
                                 self.productImages.remove(at: self.currentImageIndex)
-                                let alert = networkErrorAlert(title: "Successfully Deleted Photo", errorString: "Your Photo has been deleted from \(self.myShop!.getShopTitle())")
+                                let alert = customNetworkAlert(title: "Successfully Deleted Photo", errorString: "Your Photo has been deleted from \(self.myShop!.getShopTitle())")
                                 self.getImages()
                                 self.present(alert, animated: true, completion: nil)
                             }
                             else {
-                                let alert = networkErrorAlert(title: "Cannot delete image", errorString: "This image cannot be deleted at this moment. Please try later")
+                                let alert = customNetworkAlert(title: "Cannot delete image", errorString: "This image cannot be deleted at this moment. Please try later")
                                 self.present(alert, animated: true, completion: nil)
                             }
 
@@ -395,7 +398,7 @@ extension MyProductViewController {
                 }
             }
             else {
-                let alert = networkErrorAlert(title: "Cannot Delete", errorString: "This is your display picture. Change your display picture if you want to delete this photo.")
+                let alert = customNetworkAlert(title: "Cannot Delete", errorString: "This is your display picture. Change your display picture if you want to delete this photo.")
                 self.present(alert, animated: true, completion: nil)
             }
             

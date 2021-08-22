@@ -75,7 +75,7 @@ class AddressViewController: UIViewController {
 extension AddressViewController {
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty) {
-            let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
+            let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }
         
@@ -86,7 +86,7 @@ extension AddressViewController {
                     if(success) {
                         self.performSegue(withIdentifier: "reloadMyShop", sender: self)
                     } else {
-                        let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                        let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -97,7 +97,7 @@ extension AddressViewController {
                     if(success) {
                         self.performSegue(withIdentifier: "reloadAccount", sender: self)
                     } else {
-                        let alert = networkErrorAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                        let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -107,7 +107,7 @@ extension AddressViewController {
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty || phone_sec.text!.isEmpty) {
-            let alert = networkErrorAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
+            let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }
         else{
@@ -120,7 +120,7 @@ extension AddressViewController {
             }
             query.getObjectInBackground(withId: self.addressId!){(address: PFObject?, error: Error?) in
                 if let error = error {
-                    let alert = networkErrorAlert(title: "Error updating address.", errorString: error.localizedDescription)
+                    let alert = customNetworkAlert(title: "Error updating address.", errorString: error.localizedDescription)
                     self.present(alert, animated: true, completion: nil)
                 }
                 else if let address = address {
@@ -135,7 +135,7 @@ extension AddressViewController {
                             self.dismiss(animated: true, completion: nil)
                         }
                         else{
-                            let alert = networkErrorAlert(title: "Error updating address.", errorString: "Error updating address. Please try later.")
+                            let alert = customNetworkAlert(title: "Error updating address.", errorString: "Error updating address. Please try later.")
                             self.present(alert, animated: true, completion: nil)
                         }
                     }
@@ -158,7 +158,7 @@ extension AddressViewController {
             query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
                     // The query succeeded but no matching result was found
-                    let alert = networkErrorAlert(title: "No Primary address", errorString: error.localizedDescription)
+                    let alert = customNetworkAlert(title: "No Primary address", errorString: error.localizedDescription)
                     self.present(alert, animated: true, completion: nil)
                     self.primaryAddress.isOn = false
                 }
