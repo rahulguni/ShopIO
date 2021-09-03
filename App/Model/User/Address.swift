@@ -62,4 +62,8 @@ struct Address {
         return self.phone
     }
     
+    func getAddressForCheckOut() -> String {
+        return self.line_1! + ", " + self.city!
+    }
+    
 }

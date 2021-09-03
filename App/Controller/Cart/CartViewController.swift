@@ -75,13 +75,22 @@ class CartViewController: UIViewController {
             destination.productMode = ProductMode.forCart
             destination.setImages(myImages: currProductImage)
         }
+        
+        if(segue.identifier! == "goToCheckOut") {
+            let destination = segue.destination as! CheckOutViewController
+            destination.setCart(cart: self.myCart!)
+            destination.setItems(items: self.myItems)
+        }
     }
 
     //Function to unwind the segue and reload view
     @IBAction func unwindToMyCartWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                self.viewWillAppear(true)
+                self.cartTotal.text = "Total"
+                let alert = customNetworkAlert(title: "Order Successful", errorString: "Your order has been successfully places. Please head over to my orders to know the status of your order.")
+                self.present(alert, animated: true, completion: nil)
+                self.myCartItems.reloadData()
             }
         }
     }
@@ -90,6 +99,14 @@ class CartViewController: UIViewController {
 //MARK:- IBOutlet Functions
 extension CartViewController {
     @IBAction func checkOutButtonClick(_ sender: Any) {
+        //continue forming the cart to put it in orders database and push it to next view
+        if self.myCart != nil && self.myCart?.getTotal() != 0 {
+            self.performSegue(withIdentifier: "goToCheckOut", sender: self)
+        }
+        else {
+            let alert = customNetworkAlert(title: "Empty Cart!", errorString: "Make sure your cart is not empty before checking out.")
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -119,7 +136,7 @@ extension CartViewController {
                 self.myItems.append(myItem)
             }
             self.myCart = Cart(cartItems: self.myItems)
-            self.cartTotal.text = self.myCart!.getSubTotalAsString()
+            self.cartTotal.text = self.myCart!.getTotalAsString()
             self.myCartItems.reloadData()
         }
     }
@@ -203,7 +220,7 @@ extension CartViewController: SwipeCollectionViewCellDelegate{
                         print("error deleting category")
                     }
                     self.myCart = Cart(cartItems: self.myItems)
-                    self.cartTotal.text = self.myCart!.getSubTotalAsString()
+                    self.cartTotal.text = self.myCart!.getTotalAsString()
                     self.myCartItems.reloadData()
                     
                 }))

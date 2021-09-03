@@ -72,15 +72,20 @@ extension InboxViewController {
         //get shop first
         self.forShop = true
         let query = PFQuery(className: "Shop")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
-        query.getFirstObjectInBackground{(object, error) in
-            if(object != nil) {
-                self.getAllUserMessages(id: object!.objectId! as String, forShop: self.forShop)
-                self.currSender = Sender(senderId: object!.objectId!, displayName: object!.value(forKey: "title") as! String)
+        if(currentUser != nil) {
+            query.whereKey("userId", equalTo: currentUser!.objectId!)
+            query.getFirstObjectInBackground{(object, error) in
+                if(object != nil) {
+                    self.getAllUserMessages(id: object!.objectId! as String, forShop: self.forShop)
+                    self.currSender = Sender(senderId: object!.objectId!, displayName: object!.value(forKey: "title") as! String)
+                }
+                else {
+                    self.performSegue(withIdentifier: "goToAddShop", sender: self)
+                }
             }
-            else {
-                self.performSegue(withIdentifier: "goToAddShop", sender: self)
-            }
+        }
+        else {
+            self.performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
     

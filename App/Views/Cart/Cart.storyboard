@@ -110,7 +110,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAn-bg-VpU">
-                                <rect key="frame" x="208" y="733" width="186" height="21"/>
+                                <rect key="frame" x="20" y="733" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -127,36 +127,120 @@
                         <outlet property="myCartItems" destination="srH-tG-AzI" id="lrd-ed-17E"/>
                         <segue destination="CxC-Qc-RA2" kind="presentation" identifier="toSignIn" id="LHw-pk-VGH"/>
                         <segue destination="Vbg-fE-gdG" kind="presentation" identifier="goToMyProduct" id="cTq-uG-fS3"/>
+                        <segue destination="PVb-tK-bcL" kind="show" identifier="goToCheckOut" id="bDr-kR-9zh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nzl-Dn-fFJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2420.289855072464" y="-498.21428571428567"/>
         </scene>
-        <!--View Controller-->
+        <!--Check Out View Controller-->
         <scene sceneID="gko-gY-oTs">
             <objects>
-                <viewController id="PVb-tK-bcL" sceneMemberID="viewController">
+                <viewController id="PVb-tK-bcL" customClass="CheckOutViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0xN-kG-HvW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acf-Lm-zFz">
-                                <rect key="frame" x="20" y="761" width="374" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyA-g5-eET">
+                                <rect key="frame" x="20" y="706" width="374" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Confirm Check Out">
+                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Order">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="orderButtonPressed:" destination="PVb-tK-bcL" eventType="touchUpInside" id="1Fq-eP-mEU"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9VG-7j-Rlr">
+                                <rect key="frame" x="20" y="162" width="160" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Pick Up">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectPickUp:" destination="PVb-tK-bcL" eventType="touchUpInside" id="RcE-bY-OHI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpU-DQ-jWr">
+                                <rect key="frame" x="234" y="162" width="160" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Ship it">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectShip:" destination="PVb-tK-bcL" eventType="touchUpInside" id="BC1-Xi-WSr"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose Shipping Address or Pick up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSy-F9-JPc">
+                                <rect key="frame" x="20" y="90" width="374" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8j-zi-bOG">
+                                <rect key="frame" x="20" y="677" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shipping:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWF-iO-77t">
+                                <rect key="frame" x="20" y="648" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tax:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zF-WZ-JU6">
+                                <rect key="frame" x="20" y="619" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qoa-cP-bRp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="asC-4a-pep"/>
+                    <connections>
+                        <outlet property="pickupButton" destination="9VG-7j-Rlr" id="L3v-kM-H4M"/>
+                        <outlet property="shipButton" destination="MpU-DQ-jWr" id="Hjq-3D-YxJ"/>
+                        <outlet property="shippingLabel" destination="EWF-iO-77t" id="OxS-a9-jo3"/>
+                        <outlet property="taxLabel" destination="7zF-WZ-JU6" id="Lti-xa-5lP"/>
+                        <outlet property="totalLabel" destination="x8j-zi-bOG" id="o9x-WR-vMq"/>
+                        <segue destination="9KY-sD-LUk" kind="presentation" identifier="goToAddAddress" id="PDE-yB-4m5"/>
+                        <segue destination="miP-g6-PFM" kind="presentation" identifier="goToMyAddresses" id="UZI-AH-FdN"/>
+                        <segue destination="8dW-D5-n3J" kind="unwind" identifier="reloadMyCart" unwindAction="unwindToMyCartWithSegueWithSegue:" id="ryM-zc-RUe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6m-UD-WmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="8dW-D5-n3J" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1428" y="-498"/>
+            <point key="canvasLocation" x="-1428.985507246377" y="-498.21428571428567"/>
+        </scene>
+        <!--MyAddresses-->
+        <scene sceneID="EOg-X6-kC4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyAddresses" id="miP-g6-PFM" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nfi-em-H2i"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aer-jz-kmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-635" y="-644"/>
+        </scene>
+        <!--Address-->
+        <scene sceneID="QAD-g5-fub">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Address" id="9KY-sD-LUk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nMj-MB-TIA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-645" y="-464"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="T78-SA-T68">

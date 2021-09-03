@@ -24,46 +24,51 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        
-        PFUser.logInWithUsername(inBackground:email.text!, password:password.text!) {
-            (user: PFUser?, error: Error?) -> Void in
-            if user != nil {
-                currentUser = PFUser.current()
-                //Save last login data
-                user!["lastLogin"] = NSDate()
-                user?.saveInBackground{(success, error) in
-                    if(success) {
-                        if(self.dismiss == forSignIn.forAccount) {
-                            self.performSegue(withIdentifier: "reloadAccount", sender: self)
+        if(self.email.text!.isEmpty || self.password.text!.isEmpty) {
+            let alert = customNetworkAlert(title: "Missing Fields", errorString: "Please fill out email and password to log in.")
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            PFUser.logInWithUsername(inBackground:email.text!, password:password.text!) {
+                (user: PFUser?, error: Error?) -> Void in
+                if user != nil {
+                    currentUser = PFUser.current()
+                    //Save last login data
+                    user!["lastLogin"] = NSDate()
+                    user?.saveInBackground{(success, error) in
+                        if(success) {
+                            if(self.dismiss == forSignIn.forAccount) {
+                                self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                            }
+                            else if(self.dismiss == forSignIn.forMyShop){
+                                self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+                            }
+                            else if(self.dismiss == forSignIn.forMyCart) {
+                                self.performSegue(withIdentifier: "reloadMyCart", sender: self)
+                            }
+                            else if(self.dismiss == forSignIn.forMyProduct) {
+                                self.performSegue(withIdentifier: "reloadMyProduct", sender: self)
+                            }
+                            else if(self.dismiss == forSignIn.forInbox) {
+                                self.performSegue(withIdentifier: "reloadInbox", sender: self)
+                            }
+                            else{
+                                self.dismiss(animated: true, completion: nil)
+                            }
                         }
-                        else if(self.dismiss == forSignIn.forMyShop){
-                            self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+                        else {
+                            let alert = customNetworkAlert(title: "Error Signing In.", errorString: error!.localizedDescription)
+                            self.present(alert, animated: true, completion: nil)
                         }
-                        else if(self.dismiss == forSignIn.forMyCart) {
-                            self.performSegue(withIdentifier: "reloadMyCart", sender: self)
-                        }
-                        else if(self.dismiss == forSignIn.forMyProduct) {
-                            self.performSegue(withIdentifier: "reloadMyProduct", sender: self)
-                        }
-                        else if(self.dismiss == forSignIn.forInbox) {
-                            self.performSegue(withIdentifier: "reloadInbox", sender: self)
-                        }
-                        else{
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                    else {
-                        let alert = customNetworkAlert(title: "Error Signing In.", errorString: error!.localizedDescription)
-                        self.present(alert, animated: true, completion: nil)
                     }
                 }
-            }
-            else {
-                if let error = error {
-                    let errorString = error.localizedDescription
-                    // Show the errorString somewhere and let the user try again.
-                    let alert = customNetworkAlert(title: "Error Signing In.", errorString: errorString)
-                    self.present(alert, animated: true, completion: nil)
+                else {
+                    if let error = error {
+                        let errorString = error.localizedDescription
+                        // Show the errorString somewhere and let the user try again.
+                        let alert = customNetworkAlert(title: "Error Signing In.", errorString: errorString)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }

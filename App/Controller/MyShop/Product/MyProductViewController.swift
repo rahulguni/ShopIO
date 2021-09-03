@@ -160,6 +160,7 @@ extension MyProductViewController {
                 cartItem.price = myProduct?.getPrice()
                 cartItem.discount = myProduct?.getDiscountAmount()
                 cartItem.productTitle = myProduct?.getTitle()
+                cartItem.productShop = myProduct?.getShopId()
                 cartItem.quantity = Int(quantityStepper.value)
                 try! realm.write{
                     realm.add(cartItem)

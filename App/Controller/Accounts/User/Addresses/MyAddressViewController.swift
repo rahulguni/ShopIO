@@ -12,9 +12,10 @@ class MyAddressViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressCollection: UICollectionView!
     
-    var addresses: [String: Address] = [:]
-    var currAddress: Address?
-    var forShop: Bool = false
+    private var addresses: [String: Address] = [:]
+    private var currAddress: Address?
+    private var forShop: Bool = false
+    private var forOrder: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,11 @@ class MyAddressViewController: UIViewController {
             destination.addressId = currAddress!.getObjectId()
             destination.forShopEdit = forShop
         }
+        
+        if(segue.identifier! == "goToCheckOut") {
+            let destination = segue.destination as! CheckOutViewController
+            destination.setAddressId(address: currAddress!.getObjectId())
+        }
     }
 
 }
@@ -47,8 +53,15 @@ extension MyAddressViewController {
 //MARK:- Regular Functions
 extension MyAddressViewController {
     private func getAddresses() {
-        getShopAddress()
         getPrimaryAddress()
+        getOtherAddresses()
+        if(!forOrder) {
+            getShopAddress()
+        }
+    }
+    
+    func setForOrder(bool: Bool) {
+        self.forOrder = bool
     }
     
     private func getPrimaryAddress() {
@@ -59,6 +72,25 @@ extension MyAddressViewController {
             if let address = address{
                 let tempAddress = Address(address: address)
                 self.addresses["Primary Address"] = tempAddress
+            }
+            else{
+                //write error cases
+                self.performSegue(withIdentifier: "goToAddAddress", sender: self)
+            }
+            self.addressCollection.reloadData()
+        }
+    }
+    
+    private func getOtherAddresses() {
+        let pQuery = PFQuery(className: "Address")
+        pQuery.whereKey("userId", equalTo: currentUser!.objectId!)
+        pQuery.whereKey("isDefault", equalTo: false)
+        pQuery.findObjectsInBackground{(addresses, error) in
+            if let addresses = addresses{
+                for address in addresses {
+                    let tempAddress = Address(address: address)
+                    self.addresses["Other"] = tempAddress
+                }
             }
             else{
                 //write error cases
@@ -101,10 +133,15 @@ extension MyAddressViewController {
 extension MyAddressViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currAddress = Array(addresses)[indexPath.row].value
-        if(Array(addresses)[indexPath.row].key == "Shop Address") {
-            forShop = true
+        if(!forOrder) {
+            if(Array(addresses)[indexPath.row].key == "Shop Address") {
+                forShop = true
+            }
+            performSegue(withIdentifier: "goToAddressEdit", sender: self)
         }
-        performSegue(withIdentifier: "goToAddressEdit", sender: self)
+        else {
+            performSegue(withIdentifier: "goToCheckOut", sender: self)
+        }
     }
     
 }

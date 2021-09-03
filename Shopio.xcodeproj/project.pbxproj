@@ -53,6 +53,7 @@
 		DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */; };
 		DE9978F926BD070A0043AD8C /* UpdateProductCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */; };
 		DEAA14F126CB874D00ED2D33 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAA14F026CB874D00ED2D33 /* Messages.swift */; };
+		DEB4B04426D382FE008095DE /* CheckOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB4B04326D382FE008095DE /* CheckOutViewController.swift */; };
 		DEB57D5626CF963300514C4C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB57D5526CF963300514C4C /* ChatViewController.swift */; };
 		DEB57D5826CF99EA00514C4C /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB57D5726CF99EA00514C4C /* ChatRoomModel.swift */; };
 		DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */; };
@@ -66,6 +67,7 @@
 		DEBBA85026AE9A880073D33E /* AddProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */; };
 		DEBBA85226AE9AD10073D33E /* MyStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85126AE9AD10073D33E /* MyStore.storyboard */; };
 		DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85326AE9B020073D33E /* AddShop.storyboard */; };
+		DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */; };
 		DEC59D5426BF58FB005EE1C5 /* Requests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC59D5326BF58FB005EE1C5 /* Requests.storyboard */; };
 		DEC59D5626BF6AF9005EE1C5 /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC59D5526BF6AF9005EE1C5 /* RequestsViewController.swift */; };
 		DEC59D5926BF6BA2005EE1C5 /* RequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */; };
@@ -135,6 +137,7 @@
 		DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE9978F826BD070A0043AD8C /* UpdateProductCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductCollectionViewController.swift; sourceTree = "<group>"; };
 		DEAA14F026CB874D00ED2D33 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		DEB4B04326D382FE008095DE /* CheckOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewController.swift; sourceTree = "<group>"; };
 		DEB57D5526CF963300514C4C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DEB57D5726CF99EA00514C4C /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
 		DEBB8A0926A2A08700DED17C /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddProduct.storyboard; sourceTree = "<group>"; };
 		DEBBA85126AE9AD10073D33E /* MyStore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyStore.storyboard; sourceTree = "<group>"; };
 		DEBBA85326AE9B020073D33E /* AddShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddShop.storyboard; sourceTree = "<group>"; };
+		DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartAddressTableViewCell.swift; sourceTree = "<group>"; };
 		DEC59D5326BF58FB005EE1C5 /* Requests.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Requests.storyboard; sourceTree = "<group>"; };
 		DEC59D5526BF6AF9005EE1C5 /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
 		DEC59D5826BF6BA2005EE1C5 /* RequestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTableViewCell.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 				DE87FE4526AD05D500F996C7 /* CartItemModel.swift */,
 				DE87FE4326AD040B00F996C7 /* CartModel.swift */,
 				DE6A6A3D26AFDC9A006B4D04 /* CartItemCollectionViewCell.swift */,
+				DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				DE6A6A3B26AFDBC2006B4D04 /* CartViewController.swift */,
+				DEB4B04326D382FE008095DE /* CheckOutViewController.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -763,6 +769,7 @@
 				DE278927268D8DF4009CD37C /* Shop.swift in Sources */,
 				DE87FE4C26AD0D5600F996C7 /* OrderItemModel.swift in Sources */,
 				DEE2C3B326BF87D000CEDE15 /* Request.swift in Sources */,
+				DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
@@ -781,6 +788,7 @@
 				DECE377426ABDBD800EB2406 /* DiscoverViewController.swift in Sources */,
 				DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */,
 				DE76890526A004E200F0C888 /* General.swift in Sources */,
+				DEB4B04426D382FE008095DE /* CheckOutViewController.swift in Sources */,
 				DE6A6A3E26AFDC9A006B4D04 /* CartItemCollectionViewCell.swift in Sources */,
 				DEC59D5926BF6BA2005EE1C5 /* RequestsTableViewCell.swift in Sources */,
 				DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */,
