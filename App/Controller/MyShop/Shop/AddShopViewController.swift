@@ -15,6 +15,7 @@ class AddShopViewController: UIViewController {
     @IBOutlet weak var shopImage: UIImageView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var subTitleLabel: UITextField!
+    @IBOutlet weak var shippingLabel: UITextField!
     @IBOutlet weak var continueButton: UIButton!
     
     private var myShop: Shop?
@@ -39,7 +40,7 @@ class AddShopViewController: UIViewController {
         if(segue.identifier! == "toAddress") {
             let destination = segue.destination as! AddressViewController
             destination.forShop = true
-            destination.shopId = myShop!.getShopId()
+            destination.setShopId(shopId: myShop!.getShopId())
         }
     }
 }
@@ -47,7 +48,7 @@ class AddShopViewController: UIViewController {
 //MARK:- IBOutlet Functions
 extension AddShopViewController {
     @IBAction func continueButtonPressed(_ sender: Any) {
-        if (shopName.text!.isEmpty){
+        if (shopName.text!.isEmpty || shippingLabel.text!.isEmpty){
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
@@ -83,6 +84,7 @@ extension AddShopViewController {
         let shopName = myShop?.getShopTitle()
         let shopSlogan = myShop?.getShopSlogan()
         let shopImagecover = myShop?.getShopImage()
+        let shippingCost = myShop?.getShippingCostAsString()
         let tempImage = shopImagecover
         tempImage!.getDataInBackground{(imageData: Data?, error: Error?) in
             if let error = error {
@@ -93,6 +95,7 @@ extension AddShopViewController {
         }
         self.shopName.text = shopName
         self.shopSlogan.text = shopSlogan
+        self.shippingLabel.text = shippingCost
         self.continueButton.setTitle("Update", for: .normal)
     }
     
@@ -102,6 +105,7 @@ extension AddShopViewController {
         shop["userId"] = currentUser!.objectId!
         shop["title"] = shopName.text
         shop["slogan"] = shopSlogan.text
+        shop["shippingCost"] = Double(shippingLabel.text!)
         let imageData = shopImage.image!.jpegData(compressionQuality: 0.5)
         
         //for image naming
@@ -128,6 +132,7 @@ extension AddShopViewController {
             if let myShop = shop {
                 myShop["title"] = self.shopName.text
                 myShop["slogan"] = self.shopSlogan.text
+                myShop["shippingCost"] = Double(self.shippingLabel.text!)
                 let imageData = self.shopImage.image!.jpegData(compressionQuality: 0.5)
                 let imageName = makeImageName(self.shopName.text!)
                 let imageFile = PFFileObject(name: imageName, data:imageData!)

@@ -38,7 +38,6 @@ class MyMessagesViewController: UIViewController{
         if(segue.identifier! == "goToChatView") {
             let destination = segue.destination as! ChatViewController
             destination.setMessages(messages: self.chatRooms)
-            destination.setImage(sender: senderImage!)
             destination.setCurrSender(currSender: self.currSender!)
             destination.title = self.titleForChatRoom!
         }
@@ -67,7 +66,6 @@ extension MyMessagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.chatRooms.removeAll()
         let chatRoom: String = myMessages[indexPath.row].getChatRoomId()
-        self.senderImage = myMessages[indexPath.row].getSenderImage()
         self.titleForChatRoom = myMessages[indexPath.row].getSenderName()
         let query = PFQuery(className: "ChatRoom")
         query.whereKey("chatRoomId", equalTo: chatRoom)

@@ -15,6 +15,7 @@ class Shop {
     private var userId: String?
     private var shopTitle: String?
     private var shopSlogan: String?
+    private var shippingCost: Double?
     private var shopImage: PFFileObject?
     
     init(shop shopObject: PFObject?){
@@ -22,6 +23,7 @@ class Shop {
         self.userId = shopObject!["userId"] as? String
         self.shopTitle = shopObject!["title"] as? String
         self.shopSlogan = shopObject!["slogan"] as? String
+        self.shippingCost = shopObject!["shippingCost"] as? Double
         self.shopImage = shopObject!["shopImage"] as? PFFileObject
 
     }
@@ -48,6 +50,14 @@ class Shop {
     
     func getShopUserid() -> String {
         return self.userId!
+    }
+    
+    func getShippingCost() -> Double {
+        return (self.shippingCost! * 100).rounded() / 100
+    }
+    
+    func getShippingCostAsString() -> String {
+        return String(getShippingCost())
     }
     
 }

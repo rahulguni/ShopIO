@@ -11,6 +11,7 @@ import Parse
 class MyAddressViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressCollection: UICollectionView!
+    @IBOutlet weak var addNewAddressButton: UIButton!
     
     private var addresses: [String: Address] = [:]
     private var currAddress: Address?
@@ -33,7 +34,7 @@ class MyAddressViewController: UIViewController {
         if(segue.identifier == "goToAddressEdit") {
             let destination = segue.destination as! AddressViewController
             destination.forEdit = true
-            destination.addressId = currAddress!.getObjectId()
+            destination.setAddressId(addressId: currAddress!.getObjectId()) 
             destination.forShopEdit = forShop
         }
         
@@ -41,13 +42,20 @@ class MyAddressViewController: UIViewController {
             let destination = segue.destination as! CheckOutViewController
             destination.setAddressId(address: currAddress!.getObjectId())
         }
+        
+        if(segue.identifier! == "goToAddAddress") {
+            let destination = segue.destination as! AddressViewController
+            destination.forAddNewShop = true
+        }
     }
-
+    
 }
 
 //MARK:- IBOutlet Functions
 extension MyAddressViewController {
-    
+    @IBAction func addNewAddressClicked(_ sender: Any) {
+        performSegue(withIdentifier: "goToAddAddress", sender: self)
+    }
 }
 
 //MARK:- Regular Functions

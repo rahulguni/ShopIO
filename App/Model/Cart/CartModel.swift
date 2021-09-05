@@ -27,7 +27,6 @@ class Cart {
         self.total = currTotal
         self.itemDiscount = currDiscount
         self.tax = (0.05 * self.total!)
-        self.subTotal = self.total! + self.tax!
     }
     
     func getTotalAsString() -> String {
@@ -41,13 +40,24 @@ class Cart {
     func setAddresId(addressId: String) {
         self.addressId = addressId
     }
-
     
     func getSubTotal() -> Double {
+        if(self.shipping != nil) {
+            self.subTotal = self.total! + self.tax! + self.shipping!
+        }
+        else{
+            self.subTotal = self.total! + self.tax!
+        }
         return (self.subTotal! * 100).rounded() / 100
     }
     
     func getSubTotalAsString() -> String {
+        if(self.shipping != nil) {
+            self.subTotal = self.total! + self.tax! + self.shipping!
+        }
+        else{
+            self.subTotal = self.total! + self.tax!
+        }
         return "SubTotal: $" + String(format: "%.2f" ,self.subTotal!)
     }
     
@@ -70,5 +80,16 @@ class Cart {
     func getSessionId() -> String {
         return self.sessionId
     }
+    
+    func getShippingPrice() -> Double {
+        return (self.shipping! * 100).rounded() / 100
+    }
+    
+    func getShippingAsString() -> String {
+        return "Tax: $" + String(format: "%.2f" ,self.shipping!)
+    }
  
+    func setShippingPrice(shipping: Double) {
+        self.shipping = shipping
+    }
 }

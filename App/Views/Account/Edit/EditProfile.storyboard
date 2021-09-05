@@ -72,15 +72,25 @@
                                     <action selector="updateProfilePressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4kr-2c-WJk"/>
                                 </connections>
                             </button>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Delivery Address" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1uY-uZ-Few">
+                                <rect key="frame" x="20" y="415" width="374" height="159"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="deliveryAddressLabel" destination="1uY-uZ-Few" id="wtY-rD-sYb"/>
                         <outlet property="displayPicture" destination="cHe-ig-jhV" id="Dzt-w9-JbU"/>
                         <outlet property="editShopButton" destination="3DS-5d-Zu2" id="fpo-Cz-7zH"/>
                         <outlet property="fName" destination="2Zr-Uj-m3j" id="Rhq-YW-t2s"/>
                         <outlet property="lName" destination="jNB-4y-QLl" id="I1x-Oa-uTf"/>
+                        <outlet property="updateProfileButton" destination="cOm-Ex-z4H" id="Bvg-C7-ef4"/>
                         <segue destination="Ppg-0w-LJm" kind="presentation" identifier="goToEditShop" id="pnW-lO-CPf"/>
                     </connections>
                 </viewController>
@@ -105,6 +115,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

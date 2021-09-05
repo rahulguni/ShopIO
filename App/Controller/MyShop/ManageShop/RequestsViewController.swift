@@ -157,6 +157,8 @@ extension RequestsViewController {
             if let message = message {
                 //chatRoom already exists, add to chat.
                 self.saveChat(message: message, currProduct: currProduct)
+                message["updatedAt"] = Date()
+                message.saveInBackground()
             }
             //if not exists, create one and send message.
             else {

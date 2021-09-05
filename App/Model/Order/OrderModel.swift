@@ -2,11 +2,68 @@
 //  OrderModel.swift
 //  App
 //
-//  Created by Rahul Guni on 7/24/21.
+//  Created by Rahul Guni on 9/3/21.
 //
 
 import Foundation
+import Parse
 
-struct Order {
+class Order {
+    private var objectId: String?
+    private var subTotal: Double?
+    private var total: Double?
+    private var userId: String?
+    private var tax: Double?
+    private var addressId: String?
+    private var itemDiscount: Double?
+    private var pickUp: Bool?
+    private var shopId: String?
     
+    init(order: PFObject) {
+        self.objectId = order.objectId!
+        self.subTotal = order.value(forKey: "subTotal") as? Double
+        self.total = order.value(forKey: "total") as? Double
+        self.userId = order.value(forKey: "userId") as? String
+        self.tax = order.value(forKey: "tax") as? Double
+        self.addressId = order.value(forKey: "addressId") as? String
+        self.itemDiscount = order.value(forKey: "itemDiscount") as? Double
+        self.pickUp = order.value(forKey: "pickUp") as? Bool
+        self.shopId = order.value(forKey: "shopId") as? String
+    }
+    
+    func getObjectId() -> String {
+        return self.objectId!
+    }
+    
+    func getSubTotal() -> Double {
+        return self.subTotal!
+    }
+    
+    func getTotal() -> Double {
+        return self.total!
+    }
+    
+    func getUsertId() -> String {
+        return self.userId!
+    }
+    
+    func getTax() -> Double {
+        return self.tax!
+    }
+    
+    func getAddressId() -> String {
+        return self.addressId!
+    }
+    
+    func getItemDiscount() -> Double {
+        return self.itemDiscount!
+    }
+    
+    func getShopId() -> String {
+        return self.shopId!
+    }
+    
+    func getPickUp() -> Bool {
+        return self.pickUp!
+    }
 }

@@ -41,7 +41,6 @@ class CheckOutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.getAddresses()
         self.makeCarts()
     }
     
@@ -52,6 +51,7 @@ class CheckOutViewController: UIViewController {
                 self.shipButton.layer.borderWidth = 1.0
                 self.shipButton.layer.borderColor = UIColor.black.cgColor
                 self.pickupButton.layer.borderWidth = 0.0
+                self.getShippingPrices()
             }
         }
     }
@@ -83,36 +83,51 @@ extension CheckOutViewController {
         self.deliveryAddressId = address
     }
     
-    func uploadCart() {
+    private func uploadCart() {
         //make cart objects first
         for (shop, items) in self.allCarts {
-            let myCart = Cart(cartItems: items)
-            let newCart = PFObject(className: "Order")
-            newCart["shopId"] = shop
-            newCart["total"] = myCart.getTotal()
-            newCart["subTotal"] = myCart.getSubTotal()
-            newCart["tax"] = myCart.getTax()
-            newCart["userId"] = currentUser!.objectId!
-            if(!pickUp!) {
-                newCart["addressId"] = self.deliveryAddressId!
-            }
-            newCart["itemDiscount"] = myCart.getItemDiscount()
-            newCart["pickUp"] = self.pickUp!
-            newCart["sessionId"] = myCart.getSessionId()
-            newCart.saveInBackground{(success, error) in
-                if(success) {
-                    //upload order products
-                    self.uploadCartItems(items:items, cartId: newCart.objectId!)
+            let query = PFQuery(className: "Shop")
+            query.whereKey("objectId", equalTo: shop)
+            query.getFirstObjectInBackground{(shop, error) in
+                if let shop = shop {
+                    let shippingPrice = shop.value(forKey: "shippingCost") as? Double
+                    let myCart = Cart(cartItems: items)
+                    let newCart = PFObject(className: "Order")
+                    newCart["shopId"] = shop.objectId!
+                    newCart["total"] = myCart.getTotal()
+                    newCart["tax"] = myCart.getTax()
+                    newCart["userId"] = currentUser!.objectId!
+                    if(!self.pickUp!) {
+                        myCart.setShippingPrice(shipping: shippingPrice!)
+                        newCart["addressId"] = self.deliveryAddressId!
+                        newCart["shipping"] = myCart.getShippingPrice()
+                    }
+                    else{
+                        newCart["shipping"] = 0.0
+                    }
+                    newCart["itemDiscount"] = myCart.getItemDiscount()
+                    newCart["pickUp"] = self.pickUp!
+                    newCart["sessionId"] = myCart.getSessionId()
+                    newCart["subTotal"] = myCart.getSubTotal()
+                    newCart.saveInBackground{(success, error) in
+                        if(success) {
+                            //upload order products
+                            self.uploadCartItems(items:items, cartId: newCart.objectId!)
+                        }
+                        else {
+                            let alert = customNetworkAlert(title: "Error ordering", errorString: "There was an error ordering your item. Please try again.")
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
                 }
                 else {
-                    let alert = customNetworkAlert(title: "Error ordering", errorString: "There was an error ordering your item. Please try again.")
-                    self.present(alert, animated: true, completion: nil)
+                    print(error.debugDescription)
                 }
             }
         }
     }
     
-    func uploadCartItems(items: [CartItem], cartId: String) {
+    private func uploadCartItems(items: [CartItem], cartId: String) {
         for item in items {
             let newItem = PFObject(className: "Order_Item")
             newItem["discount"] = item.discount
@@ -142,6 +157,26 @@ extension CheckOutViewController {
             }
         }
     }
+    
+    private func getShippingPrices(){
+        var total = self.myCart!.getSubTotal()
+        var shipTotal = 0.0
+        for(shop, _) in self.allCarts {
+            let query = PFQuery(className: "Shop")
+            query.whereKey("objectId", equalTo: shop)
+            query.getFirstObjectInBackground{(currShop, error) in
+                if let currShop = currShop {
+                    total = ((total + (currShop.value(forKey: "shippingCost") as! Double)) * 100).rounded() / 100
+                    shipTotal = ((shipTotal + (currShop.value(forKey: "shippingCost") as! Double)) * 100).rounded() / 100
+                }
+                else {
+                    print(error.debugDescription)
+                }
+                self.shippingLabel.text = "Shipping: $" + String(shipTotal)
+                self.totalLabel.text = "SubTotal: $" + String(total)
+            }
+        }
+    }
 }
 
 //MARK:- IBOutlet Functions
@@ -151,6 +186,9 @@ extension CheckOutViewController {
         self.pickupButton.layer.borderWidth = 1.0
         self.pickupButton.layer.borderColor = UIColor.black.cgColor
         self.shipButton.layer.borderWidth = 0.0
+        self.taxLabel.text = self.myCart!.getTaxAsString()
+        self.totalLabel.text = self.myCart!.getSubTotalAsString()
+        self.shippingLabel.text = "Shipping: $0"
     }
     
     @IBAction func selectShip(_ sender: Any) {

@@ -14,7 +14,6 @@ import InputBarAccessoryView
 class ChatViewController: MessagesViewController {
     
     private var myMessages: [ChatRoom] = []
-    private var senderImage: UIImage?
     private var currSender: Sender?
     
     final private var myChatRoomId: String?
@@ -40,9 +39,6 @@ class ChatViewController: MessagesViewController {
 
 //MARK:- Display Functions
 extension ChatViewController {
-    func setImage(sender: UIImage) {
-        self.senderImage = sender
-    }
     
     func setMessages(messages: [ChatRoom]) {
         self.myMessages = messages

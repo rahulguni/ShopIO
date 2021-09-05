@@ -10,11 +10,18 @@ import Parse
 
 class EditProfileViewController: UIViewController {
     @IBOutlet weak var editShopButton: UIButton!
+    @IBOutlet weak var updateProfileButton: UIButton!
     @IBOutlet weak var displayPicture: UIImageView!
     @IBOutlet weak var fName: UITextField!
     @IBOutlet weak var lName: UITextField!
-
+    @IBOutlet weak var deliveryAddressLabel: UITextView!
+    
     private var myShop: Shop?
+    private var currUser: User?
+    
+    //For Orders
+    private var forOrder: Bool = false
+    private var deliveryAddress: Address?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,18 +102,49 @@ extension EditProfileViewController {
 
 //MARK:- Display Functions
 extension EditProfileViewController {
-    private func fillForm() {
-        makePictureRounded(picture: self.displayPicture)
-        self.fName.text = currentUser!.value(forKey: "fName") as? String
-        self.lName.text = currentUser!.value(forKey: "lName") as? String
+    
+    func setUser(currUser: User) {
+        self.currUser = currUser
+    }
+    
+    func setForOrder(bool: Bool) {
+        self.forOrder = bool
+    }
+    
+    func setDeliveryAddress(address: Address) {
+        self.deliveryAddress = address
+    }
+    
+    private func getUser(currUser: User) {
+        self.fName.text = currUser.getFname()
+        self.lName.text = currUser.getLname()
         
-        let displayPic = currentUser!.value(forKey: "displayImage") as? PFFileObject
-        displayPic?.getDataInBackground{(imageData: Data?, error: Error?) in
+        let displayPic = currUser.getImage()
+        displayPic.getDataInBackground{(imageData: Data?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
             } else if let imageData = imageData {
                 self.displayPicture.image = UIImage(data: imageData)
             }
+        }
+    }
+    
+    private func fillForm() {
+        makePictureRounded(picture: self.displayPicture)
+        if(forOrder) {
+            self.fName.isUserInteractionEnabled = false
+            self.lName.isUserInteractionEnabled = false
+            self.displayPicture.isUserInteractionEnabled = false
+            self.editShopButton.isHidden = true
+            self.updateProfileButton.isHidden = true
+            if let address = deliveryAddress {
+                self.deliveryAddressLabel.isHidden = false
+                self.deliveryAddressLabel.text = "\(address.getAddressForOrder())"
+            }
+            getUser(currUser: currUser!)
+        }
+        else {
+            getUser(currUser: User(userID: currentUser!))
         }
     }
 }

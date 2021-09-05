@@ -513,7 +513,7 @@ extension MyProductViewController {
         self.quantityStepper.maximumValue = Double(myProduct!.getQuantity())
         self.addToCartButton.isHidden = false
         self.messageShopButton.isHidden = false
-        if(myProduct!.getQuantity() == 0) {
+        if(myProduct!.getQuantity() <= 0) {
             self.quantityField.text = "0"
             self.addToCartButton.isHidden = true
             self.updateButton.isHidden = true

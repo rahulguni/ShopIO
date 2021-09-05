@@ -30,11 +30,12 @@ class AddressViewController: UIViewController {
     //To save address
     var forShop : Bool = false
     var forEdit: Bool = false
-    var shopId: String?
+    var forAddNewShop: Bool = false
+    private var shopId: String?
     
     //To Update address
     var forShopEdit: Bool = false
-    var addressId: String?
+    private var addressId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,9 @@ class AddressViewController: UIViewController {
             updateButton.isHidden = false
             subtitle.text = "Edit your address and click on update"
             fillformForEdit()
+        }
+        if(forAddNewShop) {
+            subtitle.text = "Fill out the details below to add a new address"
         }
     }
 
@@ -186,6 +190,15 @@ extension AddressViewController {
 
 //MARK: - Display Functions
 extension AddressViewController {
+    
+    func setShopId(shopId: String) {
+        self.shopId = shopId
+    }
+    
+    func setAddressId(addressId: String) {
+        self.addressId = addressId
+    }
+    
     private func fillForm(className forClass: String) -> PFObject {
         let address = PFObject(className: forClass)
         if(forClass == "Shop_Address"){
@@ -206,7 +219,12 @@ extension AddressViewController {
         address["state"] = state.text
         address["zip"] = zip.text
         address["country"] = "USA"
-        address["isDefault"] = true;
+        if(!forAddNewShop) {
+            address["isDefault"] = true
+        }
+        else{
+            address["isDefault"] = false
+        }
         
         if phone_sec.text != "" {
             address["phone"] = Int(phone_sec.text!)

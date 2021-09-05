@@ -43,6 +43,9 @@
                                 <state key="normal" title="Orders">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="ordersButtonPressed:" destination="TUy-wL-grH" eventType="touchUpInside" id="yIl-dN-NoW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGk-4M-ciS">
                                 <rect key="frame" x="86" y="223" width="243" height="105"/>
@@ -64,11 +67,22 @@
                         <outlet property="addProduct" destination="IGk-4M-ciS" id="4jm-Fp-rVD"/>
                         <outlet property="orders" destination="b5G-Lu-GcQ" id="js1-zV-LU9"/>
                         <outlet property="updateInventory" destination="6uy-xI-6o3" id="fma-r2-pG7"/>
+                        <segue destination="bWM-Hw-IHV" kind="show" identifier="goToOrders" id="Fp9-Z0-TMf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AU1-Jn-yNH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4918.840579710145" y="612.72321428571422"/>
+        </scene>
+        <!--Orders-->
+        <scene sceneID="Xiy-C3-ZUy">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Orders" id="bWM-Hw-IHV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="QDD-kY-BTO"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qh-tU-t21" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4919" y="1102"/>
         </scene>
         <!--My Inventory-->
         <scene sceneID="fvQ-Fn-2DM">

@@ -19,9 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hi (name)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3LO-Kr-bfI">
-                                <rect key="frame" x="20" y="96" width="374" height="51"/>
+                                <rect key="frame" x="20" y="96" width="340" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -83,11 +83,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FNs-Ia-cwS">
+                                <rect key="frame" x="368" y="96" width="36" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="plus" catalog="system">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewAddressClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="xTK-eX-GZ6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="addNewAddressButton" destination="FNs-Ia-cwS" id="0Zv-3S-6co"/>
                         <outlet property="addressCollection" destination="Cy4-kb-7Iq" id="78t-sJ-DwK"/>
                         <outlet property="titleLabel" destination="3LO-Kr-bfI" id="fAZ-za-io1"/>
                         <segue destination="CM7-eV-vHJ" kind="presentation" identifier="goToAddAddress" id="w77-5d-OLR"/>
@@ -110,9 +121,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FYP-q2-NBL"/>
+        <segue reference="w77-5d-OLR"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
