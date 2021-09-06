@@ -15,6 +15,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var accountTitle: UITextField!
     
     let headers = AccountTableOptions()
+    var orders: [Order] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,12 @@ class AccountViewController: UIViewController {
         if(segue.identifier! == "goToSignIn") {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forAccount
+        }
+        
+        if(segue.identifier! == "goToMyOrders") {
+            let destination = segue.destination as! OrdersViewController
+            destination.setOrders(orders: self.orders)
+            destination.setMyOrders(bool: true)
         }
     }
     
@@ -81,6 +88,24 @@ extension AccountViewController: UITableViewDelegate{
                 }
                 else {
                     performSegue(withIdentifier: "goToSignIn", sender: self)
+                }
+                
+            case[1,2]:
+                if(currentUser != nil) {
+                    self.orders.removeAll()
+                    let query = PFQuery(className: "Order")
+                    query.whereKey("userId", equalTo: currentUser!.objectId!)
+                    query.findObjectsInBackground{(orders, error) in
+                        if let orders = orders {
+                            for order in orders {
+                                self.orders.append(Order(order: order))
+                            }
+                            self.performSegue(withIdentifier: "goToMyOrders", sender: self)
+                        }
+                        else {
+                            print(error.debugDescription)
+                        }
+                    }
                 }
                 
             case[2,2]:

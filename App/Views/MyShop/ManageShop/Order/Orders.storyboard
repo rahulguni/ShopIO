@@ -73,6 +73,7 @@
                         <outlet property="ordersTable" destination="ao6-JE-Whb" id="fwm-84-ZBh"/>
                         <segue destination="9Pv-FO-l3u" kind="show" identifier="goToMyOrder" id="C5w-wd-xCE"/>
                         <segue destination="Ec0-C8-Aw1" kind="show" identifier="goToProfile" id="pPB-27-3Bg"/>
+                        <segue destination="CmX-01-qPB" kind="presentation" identifier="goToShop" id="DGE-7z-nQP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -98,6 +99,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgB-8U-wTI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="480" y="11"/>
+        </scene>
+        <!--MyStore-->
+        <scene sceneID="wLj-71-fbJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyStore" id="CmX-01-qPB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="57A-5T-PeY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="484" y="93"/>
         </scene>
     </scenes>
     <resources>

@@ -36,11 +36,11 @@ class Order {
     }
     
     func getSubTotal() -> Double {
-        return self.subTotal!
+        return (self.subTotal! * 100).rounded() / 100
     }
     
     func getTotal() -> Double {
-        return self.total!
+        return (self.total! * 100).rounded() / 100
     }
     
     func getUsertId() -> String {
@@ -48,7 +48,7 @@ class Order {
     }
     
     func getTax() -> Double {
-        return self.tax!
+        return (self.tax! * 100).rounded() / 100
     }
     
     func getAddressId() -> String {
@@ -56,7 +56,7 @@ class Order {
     }
     
     func getItemDiscount() -> Double {
-        return self.itemDiscount!
+        return (self.itemDiscount! * 100).rounded() / 100
     }
     
     func getShopId() -> String {

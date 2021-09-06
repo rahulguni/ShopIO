@@ -117,6 +117,7 @@ extension MyProductViewController {
                     product["price"] = makeDouble(self.priceField.text!)
                     product["discount"] = (makeDouble(self.discountField.text!))
                     product["quantity"] = Int(self.quantityField.text!)
+                    product["content"] = self.productContent.text!
                     product.saveInBackground{(success, error) in
                         if(success) {
                             let tempProd = Product(product: product)

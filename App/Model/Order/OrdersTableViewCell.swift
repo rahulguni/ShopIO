@@ -25,7 +25,7 @@ class OrdersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setParameters(order: Order){
+    func setParameters(order: Order, forUser: Bool){
         self.orderTotal.text = "Total: " + String(order.getSubTotal())
         if(order.getPickUp()) {
             self.deliveryMethod.text = "Delivery Method: Pickup"
@@ -33,7 +33,12 @@ class OrdersTableViewCell: UITableViewCell {
         else{
             self.deliveryMethod.text = "Delivery Method: Ship"
         }
-        getOrderUser(order: order)
+        if(forUser) {
+            getOrderShop(order: order)
+        }
+        else{
+            getOrderUser(order: order)
+        }
     }
     
     func getOrderUser(order: Order){
@@ -54,6 +59,29 @@ class OrdersTableViewCell: UITableViewCell {
                 }
             }
             else {
+                print(error.debugDescription)
+            }
+        }
+    }
+    
+    func getOrderShop(order: Order) {
+        let query = PFQuery(className: "Shop")
+        query.whereKey("objectId", equalTo: order.getShopId())
+        query.getFirstObjectInBackground{(shop, error) in
+            if let shop = shop {
+                let currShop = Shop(shop: shop)
+                self.orderUser.text = currShop.getShopTitle()
+                let shopImage = currShop.getShopImage()
+                shopImage.getDataInBackground{(image, error) in
+                    if let image = image {
+                        self.orderUserImage.image = UIImage(data: image)
+                    }
+                    else {
+                        print(error.debugDescription)
+                    }
+                }
+            }
+            else{
                 print(error.debugDescription)
             }
         }

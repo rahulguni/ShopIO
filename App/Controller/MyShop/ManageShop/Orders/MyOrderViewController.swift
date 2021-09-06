@@ -23,13 +23,21 @@ class MyOrderViewController: UIViewController {
     private var currProductItem: Product?
     private var currProductImage: [ProductImage] = []
     
+    private var forMyOrders: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         orderTable.delegate = self
         orderTable.dataSource = self
-        modifyButtons(buttons: [confirmOrderButton, deleteOrderButton])
+        if(forMyOrders) {
+            confirmOrderButton.isHidden = true
+            deleteOrderButton.isHidden = true
+        }
+        else {
+            modifyButtons(buttons: [confirmOrderButton, deleteOrderButton])
+        }
         setLabels()
     }
     
@@ -84,11 +92,21 @@ extension MyOrderViewController {
         self.orderItems = items
     }
     
+    func setMyOrders(bool: Bool) {
+        self.forMyOrders = bool
+    }
+    
     private func setLabels(){
         self.totalLabel.text = "Total: " + String(currOrder!.getTotal())
         self.discountLabel.text = "Discount: " + String(currOrder!.getItemDiscount())
         self.taxLabel.text = "Tax: " + String(currOrder!.getTax())
-        self.subTotalLabel.text = "Subtotal (inc. Shipping): " + String(currOrder!.getSubTotal())
+        let shippingCost = ((currOrder!.getSubTotal() - currOrder!.getTotal() - currOrder!.getTax())*100).rounded() / 100
+        if(shippingCost > 0) {
+            self.subTotalLabel.text = "Subtotal (inc. $\(shippingCost) shipping): " + String(currOrder!.getSubTotal())
+        }
+        else {
+            self.subTotalLabel.text = "Subtotal: " + String(currOrder!.getSubTotal())
+        }
     }
     
     private func goToMyProduct() {

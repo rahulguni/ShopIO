@@ -44,6 +44,18 @@ class ShopManager {
         }
     }
     
+    func goToShop(shop: Shop, identifier: String) {
+        //see if user already has a shop, if not go to register shop option.
+        let query = PFQuery(className: "Shop")
+        query.whereKey("objectId", equalTo: shop.getShopId())
+        query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
+            if object != nil {
+                self.currShop = Shop(shop: object)
+                self.getProducts(identifier: identifier)
+            }
+        }
+    }
+    
     func getProducts(identifier: String) {
         //check if the user has products to load up in the next view
         self.currProducts.removeAll()

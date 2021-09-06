@@ -8,7 +8,8 @@
 import UIKit
 import Parse
 
-class OrdersViewController: UIViewController {
+class OrdersViewController: UIViewController, shopManagerDelegate {
+    
     @IBOutlet weak var ordersTable: UITableView!
     
     private var myShopId: String?
@@ -16,9 +17,11 @@ class OrdersViewController: UIViewController {
     private var currOrder: Order?
     private var currOrderItems: [OrderItem] = []
     private var currProfile: User?
+    private var currShop = ShopManager()
     private var shippingAddress: Address?
     
     private var currIndex: Int?
+    private var forMyOrders: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,7 @@ class OrdersViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.ordersTable.delegate = self
         self.ordersTable.dataSource = self
+        currShop.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,6 +37,7 @@ class OrdersViewController: UIViewController {
             let destination = segue.destination as! MyOrderViewController
             destination.setCurrOrder(order: self.currOrder!)
             destination.setOrderItems(items: self.currOrderItems)
+            destination.setMyOrders(bool: self.forMyOrders)
         }
         if(segue.identifier! == "goToProfile") {
             let destination = segue.destination as! EditProfileViewController
@@ -41,6 +46,12 @@ class OrdersViewController: UIViewController {
             if let address = shippingAddress {
                 destination.setDeliveryAddress(address: address)
             }
+        }
+        if(segue.identifier! == "goToShop") {
+            let destination = segue.destination as! MyStoreViewController
+            destination.setShop(shop: currShop.getCurrShop())
+            destination.fillMyProducts(productsList: currShop.getCurrProducts())
+            destination.setForShop(ProductMode.forPublic)
         }
     }
     
@@ -67,6 +78,14 @@ extension OrdersViewController {
     
     func deleteOrder() {
         self.myOrders.remove(at: self.currIndex!)
+    }
+    
+    func setMyOrders(bool: Bool) {
+        self.forMyOrders = bool
+    }
+    
+    func goToViewController(identifier: String) {
+        self.performSegue(withIdentifier: identifier, sender: self)
     }
     
     private func getOrderItems() {
@@ -115,6 +134,20 @@ extension OrdersViewController {
         }
     }
     
+    private func getShop(){
+        let query = PFQuery(className: "Shop")
+        query.whereKey("objectId", equalTo: self.currOrder!.getShopId())
+        query.getFirstObjectInBackground{(shop, error) in
+            if let shop = shop {
+                self.currShop.setShop(shop: Shop(shop: shop))
+                self.currShop.goToShop(shop: self.currShop.getCurrShop() ,identifier: "goToShop")
+            }
+            else {
+                print(error.debugDescription)
+            }
+        }
+    }
+    
     private func showAlert() {
         let alert = UIAlertController(title: "Order Item Details", message: "Choose what you want to do with this order.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Show Order Details", style: .default, handler: {(action: UIAlertAction) in
@@ -123,6 +156,11 @@ extension OrdersViewController {
         alert.addAction(UIAlertAction(title: "Show Profile", style: .default, handler: {(action: UIAlertAction) in
             self.getProfile()
         }))
+        if(self.forMyOrders) {
+            alert.addAction(UIAlertAction(title: "Show Shop", style: .default, handler: {(action: UIAlertAction) in
+                self.getShop()
+            }))
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -147,7 +185,7 @@ extension OrdersViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reusableOrdersCell", for: indexPath) as! OrdersTableViewCell
-        cell.setParameters(order: self.myOrders[indexPath.row])
+        cell.setParameters(order: self.myOrders[indexPath.row], forUser: self.forMyOrders)
         makePictureRounded(picture: cell.orderUserImage)
         return cell
     }

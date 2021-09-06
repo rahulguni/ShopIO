@@ -59,6 +59,7 @@
                         <segue destination="BdN-ra-DbN" kind="presentation" identifier="goToSignIn" id="GbM-JU-9yQ"/>
                         <segue destination="dvt-kA-gf2" kind="show" identifier="goToEditProfile" id="hS1-y4-ENV"/>
                         <segue destination="xel-6o-y2E" kind="show" identifier="goToMyAddresses" id="oS6-NQ-QGG"/>
+                        <segue destination="cBl-Io-AZ4" kind="show" identifier="goToMyOrders" id="ggg-kM-DSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkj-v5-bVU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -74,6 +75,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gs-rJ-o9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2111" y="-1024"/>
+        </scene>
+        <!--Orders-->
+        <scene sceneID="BP5-Cj-Hd5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Orders" id="cBl-Io-AZ4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JFc-Yn-RzG"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pmv-fd-gOA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2090" y="-956"/>
         </scene>
         <!--SignIn-->
         <scene sceneID="hUa-ay-2Mw">

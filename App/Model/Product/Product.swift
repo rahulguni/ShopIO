@@ -16,7 +16,7 @@ class Product {
     private var summary: String?
     private var type: Int?
     private var price: Double?
-    private var discount: Float?
+    private var discount: Double?
     private var quantity: Int?
     private var content: String?
     private var shopId: String?
@@ -29,7 +29,7 @@ class Product {
         self.price = productObject!["price"] as? Double
         self.quantity = productObject!["quantity"] as? Int
         self.shopId = productObject!["shopId"] as? String
-        self.discount = productObject!["discount"] as? Float
+        self.discount = productObject!["discount"] as? Double
         self.content = productObject!["content"] as? String
     }
     
@@ -70,7 +70,7 @@ class Product {
         return self.content!
     }
     
-    func getDiscount() -> Float {
+    func getDiscount() -> Double {
         return self.discount!
     }
     
