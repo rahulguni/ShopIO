@@ -8,7 +8,6 @@
 import UIKit
 import Parse
 
-
 //MARK: - UIViewController
 class MyStoreViewController: UIViewController {
     
@@ -21,6 +20,7 @@ class MyStoreViewController: UIViewController {
     @IBOutlet weak var editSwitch: UISwitch!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var editLabel: UILabel!
+    @IBOutlet weak var mapButton: UIButton!
     
     //Build a shop model
     private var currShop : Shop?
@@ -33,6 +33,8 @@ class MyStoreViewController: UIViewController {
     private var productMode : ProductMode?
     
     private var currProductImage: [ProductImage] = []
+    
+    private var shopLocation: CLLocationCoordinate2D?
     
     //go to discover if only called from discover
     private var willExit: Bool = true
@@ -83,6 +85,13 @@ class MyStoreViewController: UIViewController {
             let destination = segue.destination as! AddProductViewController
             destination.setShop(shop: currShop)
         }
+        
+        if(segue.identifier! == "goToMaps") {
+            let destination = segue.destination as! MapViewController
+            destination.setLocation(coordinates: self.shopLocation!)
+            destination.setShop(shop: self.currShop!)
+        }
+        
         if(segue.identifier! == "goToMyProduct") {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: currProduct!)
@@ -165,6 +174,30 @@ extension MyStoreViewController {
         }
         else {
             self.productMode = ProductMode.forMyShop
+        }
+    }
+    
+    @IBAction func mapButtonClicked(_ sender: Any) {
+        let query = PFQuery(className: "Shop_Address")
+        query.whereKey("shopId", equalTo: self.currShop!.getShopId())
+        query.getFirstObjectInBackground{(shopAddress, error) in
+            if let shopAddress = shopAddress {
+                let address = Address(address: shopAddress)
+                //find CLLocationDegrees of Shop Address
+                let geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(address.getFullAddress()) { (placemarks, error) in
+                    if error == nil {
+                        if let placemark = placemarks?[0] {
+                            self.shopLocation = placemark.location!.coordinate
+                            self.performSegue(withIdentifier: "goToMaps", sender: self)
+                        }
+                    }
+                    else{
+                        let alert = customNetworkAlert(title: "Cannot find Shop Location", errorString: "The shop does not have a valid location. Please talk to the shop.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
         }
     }
     

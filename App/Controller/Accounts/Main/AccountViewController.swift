@@ -107,6 +107,9 @@ extension AccountViewController: UITableViewDelegate{
                         }
                     }
                 }
+                else{
+                    performSegue(withIdentifier: "goToSignIn", sender: self)
+                }
                 
             case[2,2]:
                 if(currentUser != nil) {

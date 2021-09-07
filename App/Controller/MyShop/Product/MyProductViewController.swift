@@ -24,6 +24,7 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var imageView: UIView!
     @IBOutlet weak var messageShopButton: UIButton!
+    @IBOutlet weak var ratingsButton: UIButton!
     
     //Get the product from shop view
     private var myProduct: Product?

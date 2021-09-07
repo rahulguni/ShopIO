@@ -22,11 +22,14 @@ class EditProfileViewController: UIViewController {
     //For Orders
     private var forOrder: Bool = false
     private var deliveryAddress: Address?
+    private var userLocation: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         modifyButton(button: editShopButton)
+        self.deliveryAddressLabel.layer.borderWidth = 1.0
+        self.deliveryAddressLabel.layer.borderColor = UIColor.black.cgColor
         fillForm()
     }
     
@@ -38,8 +41,13 @@ class EditProfileViewController: UIViewController {
                 destination.setShop(shop: myShop!)
             }
         }
+        
+        if(segue.identifier! == "goToMaps"){
+            let destination = segue.destination as! MapViewController
+            destination.setCurrProfile(user: self.currUser!)
+            destination.setLocation(coordinates: self.userLocation!)
+        }
     }
-    
 }
 
 //MARK:- IBOutlet Functions
@@ -53,6 +61,30 @@ extension EditProfileViewController {
                 self.myShop = Shop(shop: object)
             }
             self.performSegue(withIdentifier: "goToEditShop", sender: self)
+        }
+    }
+    
+    @IBAction func goToUserMap(_ sender: Any) {
+        let query = PFQuery(className: "Address")
+        query.whereKey("userId", equalTo: self.currUser!.getObjectId())
+        query.getFirstObjectInBackground{(shopAddress, error) in
+            if let shopAddress = shopAddress {
+                let address = Address(address: shopAddress)
+                //find CLLocationDegrees of Shop Address
+                let geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(address.getFullAddress()) { (placemarks, error) in
+                    if error == nil {
+                        if let placemark = placemarks?[0] {
+                            self.userLocation = placemark.location!.coordinate
+                            self.performSegue(withIdentifier: "goToMaps", sender: self)
+                        }
+                    }
+                    else{
+                        let alert = customNetworkAlert(title: "Cannot find User Location", errorString: "The user does not have a valid location. Please talk to the user.")
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
         }
     }
     

@@ -15,7 +15,7 @@ struct Address {
     private var line_2: String?
     private var city: String?
     private var state: String?
-    private var country: String = "USA"
+    private var country: String?
     private var zip: String?
     private var phone: Int?
     
@@ -28,6 +28,7 @@ struct Address {
         self.state = addressObject!["state"] as? String
         self.zip = addressObject!["zip"] as? String
         self.phone = addressObject!["phone"] as? Int
+        self.country = addressObject!["country"] as? String
     }
     
     func getObjectId() -> String {
@@ -64,6 +65,10 @@ struct Address {
     
     func getAddressForCheckOut() -> String {
         return self.line_1! + ", " + self.city!
+    }
+    
+    func getFullAddress() -> String {
+        return self.line_1! + ", " + self.city! + ", " + self.state! + "," + self.zip! + ", " + self.country!
     }
     
     func getAddressForOrder() -> String {

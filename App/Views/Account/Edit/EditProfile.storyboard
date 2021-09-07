@@ -73,12 +73,16 @@
                                 </connections>
                             </button>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Delivery Address" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1uY-uZ-Few">
-                                <rect key="frame" x="20" y="415" width="374" height="159"/>
+                                <rect key="frame" x="20" y="415" width="374" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="S2i-QF-b6L" appends="YES" id="VxA-v3-Cch"/>
+                                </connections>
                             </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -92,6 +96,7 @@
                         <outlet property="lName" destination="jNB-4y-QLl" id="I1x-Oa-uTf"/>
                         <outlet property="updateProfileButton" destination="cOm-Ex-z4H" id="Bvg-C7-ef4"/>
                         <segue destination="Ppg-0w-LJm" kind="presentation" identifier="goToEditShop" id="pnW-lO-CPf"/>
+                        <segue destination="YAD-9k-kfp" kind="presentation" identifier="goToMaps" id="55g-Ru-E9E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,8 +105,21 @@
                         <action selector="uploadPhoto:" destination="Y6W-OH-hqX" id="ex3-ew-MRH"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="S2i-QF-b6L">
+                    <connections>
+                        <action selector="goToUserMap:" destination="Y6W-OH-hqX" id="vNT-Ai-dha"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-404.34782608695656" y="221.65178571428569"/>
+        </scene>
+        <!--map-->
+        <scene sceneID="Pt7-Ce-0ko">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyStore" referencedIdentifier="map" id="YAD-9k-kfp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jcf-8p-QHo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="433" y="171"/>
         </scene>
         <!--AddShop-->
         <scene sceneID="VPu-g1-3a7">

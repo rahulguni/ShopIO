@@ -26,6 +26,42 @@
             </objects>
             <point key="canvasLocation" x="4080" y="1115"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Hff-Nr-adq">
+            <objects>
+                <viewController storyboardIdentifier="map" id="Plc-u3-oRy" customClass="MapViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cbK-A5-AJu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-zJ-kJM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FfQ-h2-SI6">
+                                <rect key="frame" x="20" y="20" width="100" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Exit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitClicked:" destination="Plc-u3-oRy" eventType="touchUpInside" id="VTX-oo-L6R"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="n48-94-KGO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="wKb-zJ-kJM" id="tA9-1x-Sdu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FkD-lm-Dfp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2926.0869565217395" y="1579.6875"/>
+        </scene>
         <!--My Store View Controller-->
         <scene sceneID="fHS-OV-j54">
             <objects>
@@ -156,6 +192,17 @@
                                     <action selector="followClicked:" destination="uZN-a4-WEw" eventType="touchUpInside" id="ill-X2-dg6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPE-Bd-beL">
+                                <rect key="frame" x="322" y="44" width="73" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Map">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="mapButtonClicked:" destination="uZN-a4-WEw" eventType="touchUpInside" id="yX9-yj-2jP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tq9-eF-JeX"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,6 +212,7 @@
                         <outlet property="editLabel" destination="D7p-su-mc3" id="3nS-Gi-hwO"/>
                         <outlet property="editSwitch" destination="mbl-Jn-fJW" id="Xnb-cu-C4z"/>
                         <outlet property="followButton" destination="ZRW-g4-Dw3" id="Gtg-Uo-RvK"/>
+                        <outlet property="mapButton" destination="oPE-Bd-beL" id="uCg-7q-CQq"/>
                         <outlet property="noProductText" destination="XdI-oH-tbw" id="oxG-QN-ad4"/>
                         <outlet property="productsCollection" destination="Nqt-bP-vIb" id="c0Y-1J-oaH"/>
                         <outlet property="shopImage" destination="iV5-Ck-WIj" id="WI9-Sc-9lN"/>
@@ -173,6 +221,7 @@
                         <segue destination="paJ-WP-Dvl" kind="presentation" identifier="goToMyProduct" id="4eW-hB-tKo"/>
                         <segue destination="ag2-9W-HeP" kind="presentation" identifier="goToSignIn" id="I22-wO-3Gy"/>
                         <segue destination="eBk-a3-kDH" kind="unwind" identifier="goToDiscover" unwindAction="unwindToDiscoverWithSegueWithSegue:" id="uuY-7z-Y7e"/>
+                        <segue destination="Plc-u3-oRy" kind="presentation" identifier="goToMaps" id="3Dl-Rr-s7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTN-kA-4M6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -357,6 +406,7 @@
                         <outlet property="productTitle" destination="mMM-QR-2S1" id="s5R-kR-bh2"/>
                         <outlet property="quantityField" destination="OXv-SE-z9g" id="bma-vO-bWr"/>
                         <outlet property="quantityStepper" destination="HAB-Od-0OD" id="517-sS-Aef"/>
+                        <outlet property="ratingsButton" destination="sHr-rB-jbb" id="C4r-sZ-vR6"/>
                         <outlet property="requestButton" destination="CoS-sg-rEw" id="Hr1-KJ-qxc"/>
                         <outlet property="updateButton" destination="NuC-IO-Kyi" id="EyH-Of-Xbj"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyStore" unwindAction="unwindToMyStoreWithSegueWithSegue:" id="brp-9w-ipV"/>
