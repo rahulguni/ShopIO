@@ -184,19 +184,8 @@ extension MyStoreViewController {
             if let shopAddress = shopAddress {
                 let address = Address(address: shopAddress)
                 //find CLLocationDegrees of Shop Address
-                let geocoder = CLGeocoder()
-                geocoder.geocodeAddressString(address.getFullAddress()) { (placemarks, error) in
-                    if error == nil {
-                        if let placemark = placemarks?[0] {
-                            self.shopLocation = placemark.location!.coordinate
-                            self.performSegue(withIdentifier: "goToMaps", sender: self)
-                        }
-                    }
-                    else{
-                        let alert = customNetworkAlert(title: "Cannot find Shop Location", errorString: "The shop does not have a valid location. Please talk to the shop.")
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
+                self.shopLocation = CLLocationCoordinate2D(latitude: address.getGeoPoints().latitude, longitude: address.getGeoPoints().longitude)
+                self.performSegue(withIdentifier: "goToMaps", sender: self)
             }
         }
     }

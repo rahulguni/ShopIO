@@ -18,6 +18,7 @@ struct Address {
     private var country: String?
     private var zip: String?
     private var phone: Int?
+    private var geoLocation: PFGeoPoint?
     
     init(address addressObject: PFObject?){
         self.objectId = addressObject!.objectId
@@ -29,6 +30,7 @@ struct Address {
         self.zip = addressObject!["zip"] as? String
         self.phone = addressObject!["phone"] as? Int
         self.country = addressObject!["country"] as? String
+        self.geoLocation = addressObject!["geoPoints"] as? PFGeoPoint
     }
     
     func getObjectId() -> String {
@@ -74,6 +76,10 @@ struct Address {
     func getAddressForOrder() -> String {
         let address = "Ship To: " + "\n" + self.line_1! + ", " + self.line_2! + "\n" + self.city! + ", " + self.state! + "\n" + self.zip!
         return address
+    }
+    
+    func getGeoPoints() -> PFGeoPoint {
+        return self.geoLocation!
     }
     
 }

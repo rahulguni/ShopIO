@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import Parse
 
+
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
@@ -17,6 +18,7 @@ class MapViewController: UIViewController {
     private var currShop: Shop?
     private var currProfile: User?
     private var pin: AnnotationPin!
+    private var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +27,6 @@ class MapViewController: UIViewController {
         self.mapView.delegate = self
         setMap()
     }
-    
-    @IBAction func exitClicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 
@@ -59,19 +56,64 @@ extension MapViewController {
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(pin)
     }
+    
+    func determineCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+
+}
+
+//MARK:- IBOutlet Functions
+extension MapViewController {
+    @IBAction func exitClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func myLocationClicked(_ sender: Any) {
+        determineCurrentLocation()
+    }
+}
+
+//MARK:- CLLocationManagerDelegate
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let mUserLocation: CLLocation = locations[0] as CLLocation
+        
+        let center = CLLocationCoordinate2D(latitude: mUserLocation.coordinate.latitude, longitude: mUserLocation.coordinate.longitude)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        annotation.title = "Current Location"
+        let coordinateRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 100)
+        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.addAnnotation(annotation)
+        
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error - locationManager: \(error.localizedDescription)")
+    }
+
 }
 
 //MARK:- MKMapViewDelegate
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // 2
         guard let annotation = annotation as? AnnotationPin else {
             return nil
         }
-        // 3
-        let identifier = "artwork"
+
+        let identifier = "annotation"
         var view: MKMarkerAnnotationView
-        // 4
+
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
             view = dequeuedView

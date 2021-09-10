@@ -29,6 +29,7 @@ class MyProductViewController: UIViewController {
     //Get the product from shop view
     private var myProduct: Product?
     private var productImages: [ProductImage] = []
+    private var productReview: [ProductReview] = []
     private var myShop: Shop?
     var productMode: ProductMode?
     
@@ -60,6 +61,7 @@ class MyProductViewController: UIViewController {
         
         getImages()
         setProductsPage(productMode!)
+        checkReviews()
     }
     
     //Function to unwind the segue and reload view
@@ -84,6 +86,10 @@ class MyProductViewController: UIViewController {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forMyProduct
         }
+        if(segue.identifier! == "goToRatings") {
+            let destination = segue.destination as! ProductReviewViewController
+            destination.setRatings(ratings: self.productReview)
+        }
         if(segue.identifier! == "goToProductPhoto") {
             let destination = segue.destination as! ProductImageViewController
             destination.setImage(displayImage: productImages[currentImageIndex].getUIImage()!)
@@ -96,7 +102,7 @@ class MyProductViewController: UIViewController {
             }
         }
     }
-    
+
 }
 
 //MARK:- IBOutlet Functions
@@ -249,6 +255,10 @@ extension MyProductViewController {
             performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
+    
+    @IBAction func ratingsClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToRatings", sender: self)
+    }
 }
 
 //MARK:- Display Functions
@@ -283,7 +293,7 @@ extension MyProductViewController {
     }
     
     //function to send message
-    func sendMessage(currMessage: String){
+    private func sendMessage(currMessage: String){
         //search if chatroom already exists
         let query = PFQuery(className: "Messages")
         query.whereKey("senderId", equalTo: currentUser!.objectId!)
@@ -324,7 +334,24 @@ extension MyProductViewController {
         }
     }
     
-    func setProductsPage(_ editMode: ProductMode) {
+    private func checkReviews() {
+        let query = PFQuery(className: "Product_Review")
+        query.whereKey("productId", equalTo: self.myProduct!.getObjectId())
+        query.findObjectsInBackground{(reviews, errors) in
+            if let reviews = reviews {
+                var totalReview = 0.0
+                for review in reviews {
+                    let currReview = ProductReview(reviewObject: review)
+                    totalReview += Double(currReview.getRating())
+                    self.productReview.append(currReview)
+                }
+                let totalRating = ((totalReview / Double(self.productReview.count)) * 100).rounded() / 100
+                self.ratingsButton.setTitle("Rating: \(totalRating) / 5.0", for: .normal)
+            }
+        }
+    }
+    
+    private func setProductsPage(_ editMode: ProductMode) {
         if(editMode == ProductMode.forOwner || editMode == ProductMode.forUpdate || editMode == ProductMode.forRequest) {
             setOwnerDisplay()
         }

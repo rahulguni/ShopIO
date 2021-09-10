@@ -20,6 +20,9 @@
 		DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3718C02636A063001CF554 /* SignUpViewController.swift */; };
 		DE3B528B26D0853F007DF799 /* MyChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3B528A26D0853F007DF799 /* MyChatRoom.swift */; };
 		DE3E66762637A4E900128755 /* AccountTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3E66752637A4E900128755 /* AccountTableOptions.swift */; };
+		DE464BEB26EB19C1002ADA47 /* ProductReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE464BEA26EB19C1002ADA47 /* ProductReview.swift */; };
+		DE464BED26EB1C45002ADA47 /* ProductReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE464BEC26EB1C45002ADA47 /* ProductReview.storyboard */; };
+		DE464BF026EB1C73002ADA47 /* ProductReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE464BEF26EB1C73002ADA47 /* ProductReviewViewController.swift */; };
 		DE4FEFAB26C6154500BAD3E6 /* ProductImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */; };
 		DE4FEFAD26C6195800BAD3E6 /* ImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */; };
 		DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56B5BC269FF84B005E68E2 /* Product.swift */; };
@@ -109,6 +112,9 @@
 		DE3718C02636A063001CF554 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DE3B528A26D0853F007DF799 /* MyChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatRoom.swift; sourceTree = "<group>"; };
 		DE3E66752637A4E900128755 /* AccountTableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableOptions.swift; sourceTree = "<group>"; };
+		DE464BEA26EB19C1002ADA47 /* ProductReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductReview.swift; sourceTree = "<group>"; };
+		DE464BEC26EB1C45002ADA47 /* ProductReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductReview.storyboard; sourceTree = "<group>"; };
+		DE464BEF26EB1C73002ADA47 /* ProductReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductReviewViewController.swift; sourceTree = "<group>"; };
 		DE4FEFAA26C6154500BAD3E6 /* ProductImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageViewController.swift; sourceTree = "<group>"; };
 		DE4FEFAC26C6195800BAD3E6 /* ImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePageViewController.swift; sourceTree = "<group>"; };
 		DE56B5BC269FF84B005E68E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -245,6 +251,14 @@
 				DE87FE4726AD0D0800F996C7 /* Cart */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DE464BEE26EB1C5C002ADA47 /* ProductReview */ = {
+			isa = PBXGroup;
+			children = (
+				DE464BEF26EB1C73002ADA47 /* ProductReviewViewController.swift */,
+			);
+			path = ProductReview;
 			sourceTree = "<group>";
 		};
 		DE4FEFA926C6151700BAD3E6 /* ProductImage */ = {
@@ -433,6 +447,7 @@
 				DE56B5BC269FF84B005E68E2 /* Product.swift */,
 				DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */,
 				DE84039B26C4F2B500910F17 /* ImageCollectionViewCell.swift */,
+				DE464BEA26EB19C1002ADA47 /* ProductReview.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -488,6 +503,7 @@
 		DE87FE5426AD0E0D00F996C7 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				DE464BEE26EB1C5C002ADA47 /* ProductReview */,
 				DE4FEFA926C6151700BAD3E6 /* ProductImage */,
 				DE6717E226A90EA700FE60DA /* MyProductViewController.swift */,
 				DE6A506F26A3B63C008B9427 /* AddProductExtraViewController.swift */,
@@ -602,6 +618,7 @@
 		DEBBA84A26AE99E10073D33E /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				DE464BEC26EB1C45002ADA47 /* ProductReview.storyboard */,
 				DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */,
 			);
 			path = Product;
@@ -711,6 +728,7 @@
 			files = (
 				DEBBA83A26AE92F00073D33E /* Cart.storyboard in Resources */,
 				DE8358CD2636518F00E3F1A7 /* LaunchScreen.storyboard in Resources */,
+				DE464BED26EB1C45002ADA47 /* ProductReview.storyboard in Resources */,
 				DEBBA83E26AE94200073D33E /* MyShop.storyboard in Resources */,
 				DE21B56B26CCC15300B2FB42 /* Messages.storyboard in Resources */,
 				DE9978F526BD02DA0043AD8C /* UpdateProduct.storyboard in Resources */,
@@ -792,6 +810,7 @@
 				DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */,
 				DE84039C26C4F2B500910F17 /* ImageCollectionViewCell.swift in Sources */,
 				DE8358C52636518F00E3F1A7 /* AccountViewController.swift in Sources */,
+				DE464BEB26EB19C1002ADA47 /* ProductReview.swift in Sources */,
 				DECA3D7826CF12ED0081C5EF /* ChatRoom.swift in Sources */,
 				DEBB8A0A26A2A08700DED17C /* AddProductViewController.swift in Sources */,
 				DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */,
@@ -823,6 +842,7 @@
 				DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */,
 				DEBE29DA26E3073F006D9EED /* OrdersViewController.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
+				DE464BF026EB1C73002ADA47 /* ProductReviewViewController.swift in Sources */,
 				DE3718C12636A063001CF554 /* SignUpViewController.swift in Sources */,
 				DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */,
 				DE3B528B26D0853F007DF799 /* MyChatRoom.swift in Sources */,

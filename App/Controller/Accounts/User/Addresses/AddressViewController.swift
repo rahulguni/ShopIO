@@ -71,6 +71,7 @@ class AddressViewController: UIViewController {
         if(forAddNewShop) {
             subtitle.text = "Fill out the details below to add a new address"
         }
+
     }
 
 }
@@ -86,22 +87,46 @@ extension AddressViewController {
         else {
             if(forShop){
                 let address = fillForm(className: "Shop_Address")
-                address.saveInBackground {(success, error) in
-                    if(success) {
-                        self.performSegue(withIdentifier: "reloadMyShop", sender: self)
-                    } else {
-                        let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                let geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
+                    if error == nil {
+                        if let placemark = placemarks?[0] {
+                            address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                            address.saveInBackground {(success, error) in
+                                if(success) {
+                                    self.performSegue(withIdentifier: "reloadMyShop", sender: self)
+                                } else {
+                                    let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        let alert = customNetworkAlert(title: "Cannot find location", errorString: "Please enter a valid location.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
             else {
                 let address = fillForm(className: "Address")
-                address.saveInBackground {(success, error) in
-                    if(success) {
-                        self.performSegue(withIdentifier: "reloadAccount", sender: self)
-                    } else {
-                        let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                let geocoder = CLGeocoder()
+                geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
+                    if error == nil {
+                        if let placemark = placemarks?[0] {
+                            address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                            address.saveInBackground {(success, error) in
+                                if(success) {
+                                    self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                                } else {
+                                    let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        let alert = customNetworkAlert(title: "Cannot find location", errorString: "Please enter a valid location.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

@@ -50,6 +50,14 @@
                                     <action selector="exitClicked:" destination="Plc-u3-oRy" eventType="touchUpInside" id="VTX-oo-L6R"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q41-Yg-zxV">
+                                <rect key="frame" x="360" y="20" width="34" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="location.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="myLocationClicked:" destination="Plc-u3-oRy" eventType="touchUpInside" id="a1T-qA-spe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n48-94-KGO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -272,9 +280,12 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-rB-jbb">
                                                 <rect key="frame" x="20" y="440" width="374" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Rating:">
+                                                <state key="normal" title="Rating: N/A">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="ratingsClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="lg3-WL-5yT"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PI-tO-hPx">
                                                 <rect key="frame" x="20" y="605" width="374" height="204"/>
@@ -415,6 +426,7 @@
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToUpdateProducts" unwindAction="unwindToUpdateProductsWithSegueWithSegue:" id="bkF-T1-iGs"/>
                         <segue destination="X0a-MG-LYL" kind="presentation" identifier="goToProductPhoto" id="aP1-Un-LT2"/>
                         <segue destination="O8b-F0-OMg" kind="unwind" identifier="goToMyRequests" unwindAction="unwindToMyRequestsWithSegueWithSegue:" id="m7s-cp-ar0"/>
+                        <segue destination="xHt-1S-pWu" kind="presentation" identifier="goToRatings" id="Nho-mj-FHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cga-DH-3uD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -497,9 +509,18 @@
             </objects>
             <point key="canvasLocation" x="6228" y="1679"/>
         </scene>
+        <!--ProductReview-->
+        <scene sceneID="gXd-Ye-w6R">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProductReview" id="xHt-1S-pWu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mSL-1g-iMZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6240" y="1757"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Shopio" width="125" height="125"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
