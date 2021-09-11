@@ -89,6 +89,7 @@ class MyProductViewController: UIViewController {
         if(segue.identifier! == "goToRatings") {
             let destination = segue.destination as! ProductReviewViewController
             destination.setRatings(ratings: self.productReview)
+            destination.setProduct(product: self.myProduct!)
         }
         if(segue.identifier! == "goToProductPhoto") {
             let destination = segue.destination as! ProductImageViewController
@@ -339,14 +340,16 @@ extension MyProductViewController {
         query.whereKey("productId", equalTo: self.myProduct!.getObjectId())
         query.findObjectsInBackground{(reviews, errors) in
             if let reviews = reviews {
-                var totalReview = 0.0
+                var totalReview: Double = 0.0
+                var reviewCount: Int = 0
                 for review in reviews {
                     let currReview = ProductReview(reviewObject: review)
                     totalReview += Double(currReview.getRating())
+                    reviewCount += 1
                     self.productReview.append(currReview)
+                    let totalRating = ((totalReview / Double(self.productReview.count)) * 100).rounded() / 100
+                    self.ratingsButton.setTitle("Rating: \(totalRating) / 5.0 (\(reviewCount))", for: .normal)
                 }
-                let totalRating = ((totalReview / Double(self.productReview.count)) * 100).rounded() / 100
-                self.ratingsButton.setTitle("Rating: \(totalRating) / 5.0", for: .normal)
             }
         }
     }

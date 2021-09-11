@@ -17,15 +17,15 @@ class UpdateProductCollectionViewCell: UICollectionViewCell {
     
     func setParameters(product currProduct: Product) {
         productTitle.text = currProduct.getTitle()
-        productPrice.text = currProduct.getPriceAsString()
-        productDiscount.text = String(currProduct.getDiscountAmount())
+        productPrice.text = "Price: " + currProduct.getPriceAsString()
+        productDiscount.text = "Discount: " + String(currProduct.getDiscountAmount())
         if(currProduct.getQuantity() < 10) {
             self.productQuantity.textColor = UIColor.red
         }
         else {
             self.productQuantity.textColor = UIColor.black
         }
-        productQuantity.text = currProduct.getQuantityAsString()
+        productQuantity.text = "Quantity: " + currProduct.getQuantityAsString()
         
         let query = PFQuery(className: "Product_Images")
 

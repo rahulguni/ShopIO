@@ -40,6 +40,7 @@ class AddressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isModalInPresentation = true
+        self.hideKeyboardWhenTappedAround() 
         
         let statePicker = UIPickerView()
         statePicker.delegate = self

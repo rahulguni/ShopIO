@@ -9,6 +9,19 @@
 import Foundation
 import UIKit
 
+//function to make keyboard disappear when tapped around
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 //function to make an array of buttons of a single view uniform
 func modifyButtons(buttons: Array<UIButton>) {
     for button in buttons {

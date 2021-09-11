@@ -21,6 +21,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.isModalInPresentation = true
+        self.hideKeyboardWhenTappedAround() 
     }
     
     @IBAction func signIn(_ sender: UIButton) {

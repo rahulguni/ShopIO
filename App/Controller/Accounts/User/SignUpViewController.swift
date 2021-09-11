@@ -25,6 +25,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         makePictureRounded(picture: displayPicture)
+        self.hideKeyboardWhenTappedAround() 
     }
 
 }

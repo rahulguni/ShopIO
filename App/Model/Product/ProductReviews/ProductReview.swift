@@ -10,7 +10,7 @@ import Parse
 
 class ProductReview {
     private var objectId: String?
-    private var parentId: String?
+    private var userId: String?
     private var productId: String?
     private var title: String?
     private var content: String?
@@ -18,7 +18,7 @@ class ProductReview {
     
     init(reviewObject: PFObject) {
         self.objectId = reviewObject.objectId!
-        self.parentId = reviewObject["parentId"] as? String
+        self.userId = reviewObject["userId"] as? String
         self.productId = reviewObject["productId"] as? String
         self.title = reviewObject["title"] as? String
         self.content = reviewObject["content"] as? String
@@ -29,8 +29,8 @@ class ProductReview {
         return self.objectId!
     }
     
-    func getParentId() -> String {
-        return self.parentId!
+    func getUserId() -> String {
+        return self.userId!
     }
     
     func getProductId() -> String {
@@ -47,5 +47,9 @@ class ProductReview {
     
     func getRating() -> Int {
         return self.rating!
+    }
+    
+    func getRatingAsString() -> String {
+        return String((Double(self.rating!) * 100).rounded() / 100)
     }
 }
