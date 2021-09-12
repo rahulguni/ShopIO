@@ -25,6 +25,7 @@ class AddProductViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isModalInPresentation = true
+        self.dismissKeyboard()
 
         // Do any additional setup after loading the view.
         summaryField.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor

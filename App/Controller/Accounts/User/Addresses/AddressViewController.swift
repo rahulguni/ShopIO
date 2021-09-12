@@ -160,12 +160,24 @@ extension AddressViewController {
                     address["state"] = self.state.text
                     address["zip"] = self.zip.text
                     address["phone"] = Int(self.phone_sec.text!)
-                    address.saveInBackground{(success, error) in
-                        if(success) {
-                            self.dismiss(animated: true, completion: nil)
+                    
+                    let geocoder = CLGeocoder()
+                    geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
+                        if error == nil {
+                            if let placemark = placemarks?[0] {
+                                address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                address.saveInBackground {(success, error) in
+                                    if(success) {
+                                        self.performSegue(withIdentifier: "reloadAccount", sender: self)
+                                    } else {
+                                        let alert = customNetworkAlert(title: "Could not update Address", errorString: "Check connection and try again.")
+                                        self.present(alert, animated: true, completion: nil)
+                                    }
+                                }
+                            }
                         }
                         else{
-                            let alert = customNetworkAlert(title: "Error updating address.", errorString: "Error updating address. Please try later.")
+                            let alert = customNetworkAlert(title: "Cannot find location", errorString: "Please enter a valid location.")
                             self.present(alert, animated: true, completion: nil)
                         }
                     }

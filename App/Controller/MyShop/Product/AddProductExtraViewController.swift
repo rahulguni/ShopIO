@@ -22,6 +22,7 @@ class AddProductExtraViewController: UIViewController {
         self.isModalInPresentation = true
         
         // Do any additional setup after loading the view.
+        self.dismissKeyboard()
         headerLabel.text = myProduct?.getTitle()
     }
 }

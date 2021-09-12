@@ -28,6 +28,7 @@ class MyReviewViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setDisplay()
+        self.dismissKeyboard()
     }
     
 }
@@ -118,15 +119,23 @@ extension MyReviewViewController {
 //MARK:- IBOutlet Functions
 extension MyReviewViewController {
     @IBAction func addReviewClicked(_ sender: Any) {
-        if(self.addReviewButton.titleLabel!.text == "Update") {
-            updateReview()
+        if(self.reviewTitle.text!.isEmpty || self.reviewContent.text!.isEmpty) {
+            let alert = customNetworkAlert(title: "Missing Field Entry", errorString: "Please make sure you have filled out all the required fields. ")
+            self.present(alert, animated: true, completion: nil)
         }
-        else if(self.addReviewButton.titleLabel!.text == "Add Review") {
-            addReview()
+        else {
+            if(self.addReviewButton.titleLabel!.text == "Update") {
+                updateReview()
+            }
+            else if(self.addReviewButton.titleLabel!.text == "Add Review") {
+                addReview()
+            }
         }
     }
     
     @IBAction func sliderChanged(_ sender: Any) {
+        self.rateSlider.maximumValue = 5.0
+        self.rateSlider.minimumValue = 1.0
         self.rateSlider.value = round(rateSlider.value)
         self.rating = Double(round(rateSlider.value))
         self.rateLabel.text = "Rating: " + String(self.rating)

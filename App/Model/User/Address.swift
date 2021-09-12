@@ -70,7 +70,7 @@ struct Address {
     }
     
     func getFullAddress() -> String {
-        return self.line_1! + ", " + self.city! + ", " + self.state! + "," + self.zip! + ", " + self.country!
+        return self.line_1! + ", " + self.city! + ", " + self.state! + ", " + self.zip! + ", " + self.country!
     }
     
     func getAddressForOrder() -> String {

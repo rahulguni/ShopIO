@@ -163,7 +163,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveButtonPressed:" destination="pGs-ET-sB9" eventType="touchUpInside" id="wKM-Y6-91g"/>
                                     <action selector="updateButtonPressed:" destination="pGs-ET-sB9" eventType="touchUpInside" id="F4m-ni-SdS"/>
                                 </connections>
                             </button>
