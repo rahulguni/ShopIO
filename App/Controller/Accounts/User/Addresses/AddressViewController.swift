@@ -92,6 +92,19 @@ extension AddressViewController {
                 geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
                     if error == nil {
                         if let placemark = placemarks?[0] {
+                            //save shop geoPoints in Shop Database
+                            let shopQuery = PFQuery(className: "Shop")
+                            shopQuery.whereKey("objectId", equalTo: self.shopId!)
+                            shopQuery.getFirstObjectInBackground{(shop, error) in
+                                if let shop = shop {
+                                    shop["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                    shop.saveInBackground()
+                                }
+                                else {
+                                    print(error.debugDescription)
+                                }
+                            }
+                            
                             address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                             address.saveInBackground {(success, error) in
                                 if(success) {
@@ -165,6 +178,21 @@ extension AddressViewController {
                     geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
                         if error == nil {
                             if let placemark = placemarks?[0] {
+                                //update address in shop geopoints
+                                if(self.forShopEdit){
+                                    let shopQuery = PFQuery(className: "Shop")
+                                    shopQuery.whereKey("objectId", equalTo: self.shopId!)
+                                    shopQuery.getFirstObjectInBackground{(shop, error) in
+                                        if let shop = shop {
+                                            shop["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                            shop.saveInBackground()
+                                        }
+                                        else {
+                                            print(error.debugDescription)
+                                        }
+                                    }
+                                }
+                                
                                 address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                                 address.saveInBackground {(success, error) in
                                     if(success) {

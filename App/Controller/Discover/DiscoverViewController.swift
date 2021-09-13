@@ -7,8 +7,9 @@
 
 import UIKit
 import Parse
+import MapKit
 
-class DiscoverViewController: UIViewController {
+class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var shopCollection: UICollectionView!
     @IBOutlet weak var followedShops: UICollectionView!
@@ -21,6 +22,9 @@ class DiscoverViewController: UIViewController {
     private var currShop: Shop?
     //to transfer product list to shop view
     private var currProducts: [Product] = []
+    //default radius 25 miles to search for shops around
+    private var locationManager: CLLocationManager!
+    private var radius: Double = 5000
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToShop") {
@@ -36,7 +40,8 @@ class DiscoverViewController: UIViewController {
     @IBAction func unwindToDiscoverWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                self.getAllShops()
+                //self.getAllShops()
+                self.getShopsWithinRadius()
                 self.getFollowedShops()
             }
         }
@@ -56,8 +61,10 @@ class DiscoverViewController: UIViewController {
         if(currentUser != nil) {
             getFollowedShops()
         }
-        getAllShops()
+        getShopsWithinRadius()
+        //getAllShops()
     }
+    
 }
 
 //MARK:- IBOutlet Functions
@@ -67,16 +74,34 @@ extension DiscoverViewController {
 
 //MARK:- Display Functions
 extension DiscoverViewController {
-    func getAllShops(){
-        //can add to viewdidappear if reload after each view
+    
+    func getShopsWithinRadius() {
+        self.shops.removeAll()
+        //get user's current location first
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            //locationManager.startUpdatingLocation()
+            if let location : CLLocation = locationManager.location {
+                self.getShopsWithInLocation(location: location.coordinate)
+            }
+            else{
+                print("no location")
+            }
+        }
+    }
+    
+    func getShopsWithInLocation(location: CLLocationCoordinate2D){
         self.shops.removeAll()
         let shopQuery = PFQuery(className: "Shop")
-        shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
-        shopQuery.order(byAscending: "title")
-        shopQuery.findObjectsInBackground{ (objects: [PFObject]?, error: Error?) in
-            if let objects = objects {
-                for object in objects {
-                    let newShop = Shop(shop: object)
+        shopQuery.whereKey("geoPoints", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude), withinKilometers: self.radius)
+        shopQuery.findObjectsInBackground{(shops, error) in
+            if let shops = shops{
+                for shop in shops {
+                    let newShop = Shop(shop: shop)
                     let productQuery = PFQuery(className: "Product")
                     productQuery.whereKey("shopId", equalTo: newShop.getShopId())
                     productQuery.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
@@ -88,6 +113,9 @@ extension DiscoverViewController {
                         }
                     }
                 }
+            }
+            else {
+                print(error.debugDescription)
             }
             self.shopCollection.isHidden = false
         }

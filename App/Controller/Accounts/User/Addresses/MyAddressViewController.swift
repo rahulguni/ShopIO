@@ -15,6 +15,7 @@ class MyAddressViewController: UIViewController {
     
     private var addresses: [String: Address] = [:]
     private var currAddress: Address?
+    private var shopId: String?
     private var forShop: Bool = false
     private var forOrder: Bool = false
     
@@ -36,6 +37,9 @@ class MyAddressViewController: UIViewController {
             destination.forEdit = true
             destination.setAddressId(addressId: currAddress!.getObjectId()) 
             destination.forShopEdit = forShop
+            if let shopId = self.shopId {
+                destination.setShopId(shopId: shopId)
+            }
         }
         
         if(segue.identifier! == "goToCheckOut") {
@@ -120,6 +124,7 @@ extension MyAddressViewController {
                     if let address = address{
                         let tempAddress = Address(address: address)
                         self.addresses["Shop Address"] = tempAddress
+                        self.shopId = address["shopId"] as? String
                     }
                     else{
                         //write error cases

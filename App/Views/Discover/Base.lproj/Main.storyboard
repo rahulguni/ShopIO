@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHOPIO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWf-LO-gTP">
-                                <rect key="frame" x="20" y="44" width="374" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UtA-5u-fk9">
                                 <rect key="frame" x="20" y="395" width="374" height="418"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,21 +114,12 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here are your followed shops." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA0-4x-Lyd">
-                                <rect key="frame" x="20" y="103" width="374" height="28"/>
+                                <rect key="frame" x="20" y="103" width="241" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7K-HH-b6M">
-                                <rect key="frame" x="370" y="58" width="24" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button" image="magnifyingglass" catalog="system"/>
-                                <connections>
-                                    <segue destination="j3g-hP-m9r" kind="show" identifier="goToSearch" id="bx4-b6-pY8"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Discover Shops near you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNC-BV-k5g">
                                 <rect key="frame" x="20" y="366" width="300" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,11 +135,19 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5X-zC-Tk3">
+                                <rect key="frame" x="360" y="104" width="34" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
+                                <connections>
+                                    <segue destination="j3g-hP-m9r" kind="show" identifier="goToSearch" id="VeC-5N-k89"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I3S-RI-JVU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" id="MZb-Ci-Wu6"/>
+                    <navigationItem key="navigationItem" title="SHOPIO" id="zln-Mb-8Tm"/>
                     <connections>
                         <outlet property="followedShops" destination="Zyz-gL-jfg" id="vG7-tr-E4d"/>
                         <outlet property="shopCollection" destination="UtA-5u-fk9" id="zVI-jy-3e3"/>
@@ -164,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqQ-pi-cOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102.8985507246377" y="769.41964285714278"/>
+            <point key="canvasLocation" x="2013.0434782608697" y="769.41964285714278"/>
         </scene>
         <!--MyStore-->
         <scene sceneID="8lk-P1-261">
@@ -172,7 +164,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="goToShop" storyboardName="MyStore" id="bpA-eS-Fts" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7OZ-Zf-sfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2114" y="783"/>
+            <point key="canvasLocation" x="3023.913043478261" y="782.8125"/>
         </scene>
         <!--Search-->
         <scene sceneID="uLt-Yg-oXc">
@@ -182,7 +174,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHM-Xa-6md" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2108" y="751"/>
+            <point key="canvasLocation" x="3018.115942028986" y="750.66964285714278"/>
         </scene>
         <!--Entry-->
         <scene sceneID="KYV-ft-ht1">
@@ -195,7 +187,7 @@
                         <color key="selectedImageTintColor" systemColor="systemGray2Color"/>
                     </tabBar>
                     <connections>
-                        <segue destination="avQ-Yo-veJ" kind="relationship" relationship="viewControllers" id="uks-ye-Cfe"/>
+                        <segue destination="9jv-cu-oRr" kind="relationship" relationship="viewControllers" id="uks-ye-Cfe"/>
                         <segue destination="5rc-Jd-If3" kind="relationship" relationship="viewControllers" id="0Sk-uI-hGv"/>
                         <segue destination="JJ2-ec-Oqt" kind="relationship" relationship="viewControllers" id="kWk-ZW-eTG"/>
                         <segue destination="Olc-BG-6dy" kind="relationship" relationship="viewControllers" id="uyr-Hf-V79"/>
@@ -322,6 +314,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gc-nr-Nwe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1958" y="1900"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="Kkg-kU-BnJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9jv-cu-oRr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Discover" id="MZb-Ci-Wu6"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f4N-tX-EJa">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="avQ-Yo-veJ" kind="relationship" relationship="rootViewController" id="NNI-fS-VMH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJ9-d1-fdQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102.8985507246377" y="769.41964285714278"/>
         </scene>
     </scenes>
     <resources>
