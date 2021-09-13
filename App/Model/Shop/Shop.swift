@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Parse
+import MapKit
 
 class Shop {
     
@@ -17,6 +18,7 @@ class Shop {
     private var shopSlogan: String?
     private var shippingCost: Double?
     private var shopImage: PFFileObject?
+    private var geoPoints: PFGeoPoint?
     
     init(shop shopObject: PFObject?){
         self.objectId = shopObject!.objectId
@@ -25,7 +27,7 @@ class Shop {
         self.shopSlogan = shopObject!["slogan"] as? String
         self.shippingCost = shopObject!["shippingCost"] as? Double
         self.shopImage = shopObject!["shopImage"] as? PFFileObject
-
+        self.geoPoints = shopObject!["geoPoints"] as? PFGeoPoint
     }
     
     init(userId: String?) {
@@ -58,6 +60,10 @@ class Shop {
     
     func getShippingCostAsString() -> String {
         return String(getShippingCost())
+    }
+    
+    func getGeoPoints() -> PFGeoPoint {
+        return self.geoPoints!
     }
     
 }

@@ -24,7 +24,8 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
     private var currProducts: [Product] = []
     //default radius 25 miles to search for shops around
     private var locationManager: CLLocationManager!
-    private var radius: Double = 5000
+    private var radius: Double = 25
+    private var sliderAlert: UIAlertController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToShop") {
@@ -41,7 +42,6 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 //self.getAllShops()
-                self.getShopsWithinRadius()
                 self.getFollowedShops()
             }
         }
@@ -62,14 +62,53 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
             getFollowedShops()
         }
         getShopsWithinRadius()
-        //getAllShops()
     }
-    
 }
 
 //MARK:- IBOutlet Functions
 extension DiscoverViewController {
+    @IBAction func editDistance(_ sender: Any) {
+        //get the Slider values from UserDefaults
+        let defaultSliderValue = Float(round(self.radius))
+        
+        //create the Alert message with extra return spaces
+        sliderAlert = UIAlertController(title: "Edit distance to view more shops", message: "Radius: \(Int(self.radius)) miles\n\n", preferredStyle: .alert)
+        
+        //create a Slider and fit within the extra message spaces
+        //add the Slider to a Subview of the sliderAlert
+        let slider = UISlider(frame:CGRect(x: 10, y: 100, width: 250, height: 20))
+        slider.minimumValue = 1
+        slider.maximumValue = 100
+        slider.value = defaultSliderValue
+        slider.isContinuous = true
+        slider.tintColor = UIColor.blue
+        sliderAlert!.view.addSubview(slider)
+        
+        //Update message when Slider value changed
+        slider.addTarget(self, action: #selector(self.sliderValueDidChange(_:)), for: .valueChanged)
+       // slider.addTarget(self, action: #selector(self.sliderValueDidChange(_:)), for: .valueChanged)
+        
+        //OK button action
+        let sliderAction = UIAlertAction(title: "OK", style: .default, handler: { (result : UIAlertAction) -> Void in
+            UserDefaults.standard.set(slider.value, forKey: "sliderValue")
+            self.getShopsWithinRadius()
+        })
+        
+        //Cancel button action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        
+        //Add buttons to sliderAlert
+        sliderAlert!.addAction(sliderAction)
+        sliderAlert!.addAction(cancelAction)
+        
+        //present the sliderAlert message
+        self.present(sliderAlert!, animated: true, completion: nil)
+    }
     
+    @objc func sliderValueDidChange(_ slider :UISlider!){
+        self.radius = Double(round(slider.value))
+        self.sliderAlert!.message = "Radius: \(Int(self.radius)) miles\n\n"
+    }
 }
 
 //MARK:- Display Functions
@@ -97,6 +136,7 @@ extension DiscoverViewController {
     func getShopsWithInLocation(location: CLLocationCoordinate2D){
         self.shops.removeAll()
         let shopQuery = PFQuery(className: "Shop")
+        shopQuery.whereKey("userId", notEqualTo: currentUser!.objectId!)
         shopQuery.whereKey("geoPoints", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude), withinKilometers: self.radius)
         shopQuery.findObjectsInBackground{(shops, error) in
             if let shops = shops{
@@ -194,7 +234,11 @@ extension DiscoverViewController: UICollectionViewDataSource{
         if(collectionView == shopCollection) {
             var shopCell = ShopsCollectionViewCell()
             if let tempCell = shopCollection.dequeueReusableCell(withReuseIdentifier: "reusableShopCell", for: indexPath) as? ShopsCollectionViewCell {
+                let userCoordinate = CLLocation(latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude)
+                let shopCoordinate = CLLocation(latitude: shops[indexPath.row].getGeoPoints().latitude, longitude: shops[indexPath.row].getGeoPoints().longitude)
+                let distanceInMeters = userCoordinate.distance(from: shopCoordinate) // result is in meters
                 tempCell.setParameters(shop: shops[indexPath.row])
+                tempCell.setShopDistance(distance: distanceInMeters)
                 shopCell = tempCell
                 highlightCell(shopCell)
             }

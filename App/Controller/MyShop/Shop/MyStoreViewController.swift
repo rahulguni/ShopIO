@@ -102,10 +102,9 @@ class MyStoreViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        /*Add later
          if(willExit == false) {
             performSegue(withIdentifier: "goToDiscover", sender: self)
-        }*/
+        }
     }
     
     func setExit(_ bool: Bool) {

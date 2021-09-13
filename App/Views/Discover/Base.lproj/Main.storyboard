@@ -134,6 +134,9 @@
                                 <state key="normal" title="Distance">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="editDistance:" destination="avQ-Yo-veJ" eventType="touchUpInside" id="cCZ-0z-dlX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5X-zC-Tk3">
                                 <rect key="frame" x="360" y="104" width="34" height="26"/>

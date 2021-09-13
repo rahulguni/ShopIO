@@ -15,8 +15,6 @@ class ShopsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shopOwner: UILabel!
     @IBOutlet weak var shopDistance: UILabel!
     
-    
-    
     func setParameters(shop currShop: Shop){
         self.shopTitle.text = currShop.getShopTitle()
         let query = PFQuery(className: "_User")
@@ -38,6 +36,11 @@ class ShopsCollectionViewCell: UICollectionViewCell {
                 self.shopImage.image = UIImage(data: imageData)
             }
         }
+    }
+    
+    func setShopDistance(distance: Double) {
+        let roundedDistance = (distance  * 0.000621371 * 10).rounded() / 10
+        self.shopDistance.text = String(roundedDistance) + " miles"
     }
     
 }
