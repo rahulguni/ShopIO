@@ -28,6 +28,7 @@
 		DE56B5BD269FF84B005E68E2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE56B5BC269FF84B005E68E2 /* Product.swift */; };
 		DE5C235126EC74A1003890F7 /* ProductReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5C235026EC74A1003890F7 /* ProductReviewTableViewCell.swift */; };
 		DE5FDB0C26ED51B3006589B8 /* MyReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5FDB0B26ED51B3006589B8 /* MyReviewViewController.swift */; };
+		DE624A8326EEC0ED00EE77F1 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE624A8226EEC0ED00EE77F1 /* Search.storyboard */; };
 		DE6717E326A90EA700FE60DA /* MyProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6717E226A90EA700FE60DA /* MyProductViewController.swift */; };
 		DE69F92326E338260041C003 /* MyOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE69F92226E338260041C003 /* MyOrder.storyboard */; };
 		DE69F92526E339250041C003 /* MyOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69F92426E339250041C003 /* MyOrderTableViewCell.swift */; };
@@ -122,6 +123,7 @@
 		DE56B5BC269FF84B005E68E2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		DE5C235026EC74A1003890F7 /* ProductReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DE5FDB0B26ED51B3006589B8 /* MyReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewViewController.swift; sourceTree = "<group>"; };
+		DE624A8226EEC0ED00EE77F1 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DE6717E226A90EA700FE60DA /* MyProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductViewController.swift; sourceTree = "<group>"; };
 		DE69F92226E338260041C003 /* MyOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyOrder.storyboard; sourceTree = "<group>"; };
 		DE69F92426E339250041C003 /* MyOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderTableViewCell.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		DEBBA83426AE90750073D33E /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				DE624A8226EEC0ED00EE77F1 /* Search.storyboard */,
 				DE8358C62636518F00E3F1A7 /* Main.storyboard */,
 			);
 			path = Discover;
@@ -762,6 +765,7 @@
 				DE8358C82636518F00E3F1A7 /* Main.storyboard in Resources */,
 				DEBBA84C26AE99F50073D33E /* ManageShop.storyboard in Resources */,
 				DEBBA85026AE9A880073D33E /* AddProduct.storyboard in Resources */,
+				DE624A8326EEC0ED00EE77F1 /* Search.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

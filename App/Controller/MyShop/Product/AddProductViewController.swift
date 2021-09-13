@@ -25,7 +25,7 @@ class AddProductViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isModalInPresentation = true
-        self.dismissKeyboard()
+        self.hideKeyboardWhenTappedAround()
 
         // Do any additional setup after loading the view.
         summaryField.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
@@ -56,6 +56,7 @@ extension AddProductViewController {
             currProduct["quantity"] = Int(quantityField.text!)
             currProduct["summary"] = summaryField.text!
             currProduct["shopId"] = myShop?.getShopId()
+            currProduct["content"] = ""
             
             myProduct = Product(product: currProduct)
             

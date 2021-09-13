@@ -184,7 +184,6 @@ extension MyStoreViewController {
             if let shopAddress = shopAddress {
                 let address = Address(address: shopAddress)
                 //find CLLocationDegrees of Shop Address
-                print(address.getFullAddress())
                 self.shopLocation = CLLocationCoordinate2D(latitude: address.getGeoPoints().latitude, longitude: address.getGeoPoints().longitude)
                 self.performSegue(withIdentifier: "goToMaps", sender: self)
             }

@@ -11,9 +11,10 @@ import Parse
 class ShopsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var shopTitle: UILabel!
-    @IBOutlet weak var shopRating: UIButton!
-    @IBOutlet weak var shopOwner: UILabel!
     @IBOutlet weak var shopImage: UIImageView!
+    @IBOutlet weak var shopOwner: UILabel!
+    @IBOutlet weak var shopDistance: UILabel!
+    
     
     
     func setParameters(shop currShop: Shop){
