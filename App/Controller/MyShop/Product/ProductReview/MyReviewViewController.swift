@@ -31,6 +31,13 @@ class MyReviewViewController: UIViewController {
         self.dismissKeyboard()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier! == "reloadReviews") {
+            let destination = segue.destination as! ProductReviewViewController
+            destination.addRating(rating: self.currRating!)
+        }
+    }
+    
 }
 
 //MARK:- Display Functions
@@ -84,6 +91,7 @@ extension MyReviewViewController {
         
         review.saveInBackground{(success, error) in
             if(success) {
+                self.currRating = ProductReview(reviewObject: review)
                 self.performSegue(withIdentifier: "reloadReviews", sender: self)
             }
             else {

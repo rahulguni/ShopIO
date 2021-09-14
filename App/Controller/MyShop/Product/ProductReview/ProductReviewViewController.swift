@@ -65,6 +65,10 @@ extension ProductReviewViewController {
         self.currProduct = product
     }
     
+    func addRating(rating: ProductReview) {
+        self.ratings.append(rating)
+    }
+    
     private func checkProductInOrder(){
         let query = PFQuery(className: "Order")
         query.whereKey("userId", equalTo: currentUser!.objectId!)

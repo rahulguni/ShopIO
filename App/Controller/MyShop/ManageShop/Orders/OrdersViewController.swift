@@ -92,6 +92,7 @@ extension OrdersViewController {
         self.currOrderItems.removeAll()
         let query = PFQuery(className: "Order_Item")
         query.whereKey("orderId", equalTo: currOrder!.getObjectId())
+        query.order(byDescending: "createdAt")
         query.findObjectsInBackground {(orderItems, error) in
             if let orderItems = orderItems {
                 for item in orderItems {

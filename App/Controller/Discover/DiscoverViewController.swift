@@ -136,7 +136,7 @@ extension DiscoverViewController {
     func getShopsWithInLocation(location: CLLocationCoordinate2D){
         self.shops.removeAll()
         let shopQuery = PFQuery(className: "Shop")
-        shopQuery.whereKey("userId", notEqualTo: currentUser!.objectId!)
+        shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
         shopQuery.whereKey("geoPoints", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude), withinKilometers: self.radius)
         shopQuery.findObjectsInBackground{(shops, error) in
             if let shops = shops{

@@ -12,6 +12,8 @@
 		DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* AddressViewController.swift */; };
 		DE1F35982686891B005195CA /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F35972686891B005195CA /* StateModel.swift */; };
 		DE1F359A26869F89005195CA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F359926869F89005195CA /* Alerts.swift */; };
+		DE1F80F826F080C700F2E472 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F80F726F080C700F2E472 /* SearchViewController.swift */; };
+		DE1F80FA26F0810100F2E472 /* ProductSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F80F926F0810100F2E472 /* ProductSearchTableViewCell.swift */; };
 		DE21B56B26CCC15300B2FB42 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE21B56A26CCC15300B2FB42 /* Messages.storyboard */; };
 		DE21B56D26CCC96200B2FB42 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */; };
 		DE278925268D8D57009CD37C /* MyStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE278924268D8D57009CD37C /* MyStoreViewController.swift */; };
@@ -107,6 +109,8 @@
 		DE1F3595268682F3005195CA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		DE1F35972686891B005195CA /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DE1F359926869F89005195CA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		DE1F80F726F080C700F2E472 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DE1F80F926F0810100F2E472 /* ProductSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchTableViewCell.swift; sourceTree = "<group>"; };
 		DE21B56A26CCC15300B2FB42 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		DE21B56C26CCC96200B2FB42 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		DE278924268D8D57009CD37C /* MyStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreViewController.swift; sourceTree = "<group>"; };
@@ -464,6 +468,7 @@
 				DE56B5BC269FF84B005E68E2 /* Product.swift */,
 				DE9978F626BD057A0043AD8C /* UpdateProductCollectionViewCell.swift */,
 				DE84039B26C4F2B500910F17 /* ImageCollectionViewCell.swift */,
+				DE1F80F926F0810100F2E472 /* ProductSearchTableViewCell.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				DECE377326ABDBD800EB2406 /* DiscoverViewController.swift */,
+				DE1F80F726F080C700F2E472 /* SearchViewController.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				DE85144F26CE12D9009C60C3 /* MessagesViewController.swift in Sources */,
 				DE9978F926BD070A0043AD8C /* UpdateProductCollectionViewController.swift in Sources */,
 				DECB6F3126A8BC8600460EFE /* ProductsCollectionViewCell.swift in Sources */,
+				DE1F80FA26F0810100F2E472 /* ProductSearchTableViewCell.swift in Sources */,
 				DE76890726A007F300F0C888 /* Address.swift in Sources */,
 				DE916453263CFAA200312D35 /* MyShopViewController.swift in Sources */,
 				DE84039C26C4F2B500910F17 /* ImageCollectionViewCell.swift in Sources */,
@@ -858,6 +865,7 @@
 				DE69F92526E339250041C003 /* MyOrderTableViewCell.swift in Sources */,
 				DEE2C3B326BF87D000CEDE15 /* Request.swift in Sources */,
 				DE5C235126EC74A1003890F7 /* ProductReviewTableViewCell.swift in Sources */,
+				DE1F80F826F080C700F2E472 /* SearchViewController.swift in Sources */,
 				DE5FDB0C26ED51B3006589B8 /* MyReviewViewController.swift in Sources */,
 				DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */,
 				DEBE29DA26E3073F006D9EED /* OrdersViewController.swift in Sources */,

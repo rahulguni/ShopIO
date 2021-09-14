@@ -95,6 +95,7 @@ extension AccountViewController: UITableViewDelegate{
                     self.orders.removeAll()
                     let query = PFQuery(className: "Order")
                     query.whereKey("userId", equalTo: currentUser!.objectId!)
+                    query.order(byDescending: "createdAt")
                     query.findObjectsInBackground{(orders, error) in
                         if let orders = orders {
                             for order in orders {
