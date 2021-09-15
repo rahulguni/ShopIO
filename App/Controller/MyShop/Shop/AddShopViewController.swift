@@ -40,7 +40,7 @@ class AddShopViewController: UIViewController {
         //function to make address controller store address in shop database for shops
         if(segue.identifier! == "toAddress") {
             let destination = segue.destination as! AddressViewController
-            destination.forShop = true
+            destination.setEditMode(editMode: forAddress.forShop)
             destination.setShopId(shopId: myShop!.getShopId())
         }
     }

@@ -23,3 +23,10 @@ enum ProductMode {
     case forUpdate
     case forRequest
 }
+
+enum forAddress {
+    case forShop
+    case forEdit
+    case forAddNewShop
+    case forShopEdit
+}

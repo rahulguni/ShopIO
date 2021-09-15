@@ -37,6 +37,10 @@ class CheckOutViewController: UIViewController {
             let destination = segue.destination as! MyAddressViewController
             destination.setForOrder(bool: true)
         }
+        if(segue.identifier! == "reloadMyCart") {
+            let destination = segue.destination as! CartViewController
+            destination.setOrderComplete(bool: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

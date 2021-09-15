@@ -16,7 +16,7 @@ class MyAddressViewController: UIViewController {
     private var addresses: [String: Address] = [:]
     private var currAddress: Address?
     private var shopId: String?
-    private var forShop: Bool = false
+    private var forAddressEdit: forAddress?
     private var forOrder: Bool = false
     
     override func viewDidLoad() {
@@ -34,9 +34,8 @@ class MyAddressViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "goToAddressEdit") {
             let destination = segue.destination as! AddressViewController
-            destination.forEdit = true
             destination.setAddressId(addressId: currAddress!.getObjectId()) 
-            destination.forShopEdit = forShop
+            destination.setEditMode(editMode: self.forAddressEdit!)
             if let shopId = self.shopId {
                 destination.setShopId(shopId: shopId)
             }
@@ -49,7 +48,7 @@ class MyAddressViewController: UIViewController {
         
         if(segue.identifier! == "goToAddAddress") {
             let destination = segue.destination as! AddressViewController
-            destination.forAddNewShop = true
+            destination.setEditMode(editMode: forAddress.forAddNewShop)
         }
     }
     
@@ -148,7 +147,10 @@ extension MyAddressViewController: UICollectionViewDelegate{
         currAddress = Array(addresses)[indexPath.row].value
         if(!forOrder) {
             if(Array(addresses)[indexPath.row].key == "Shop Address") {
-                forShop = true
+                self.forAddressEdit = forAddress.forShopEdit
+            }
+            else{
+                self.forAddressEdit = forAddress.forEdit
             }
             performSegue(withIdentifier: "goToAddressEdit", sender: self)
         }

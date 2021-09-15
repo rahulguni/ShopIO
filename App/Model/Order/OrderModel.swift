@@ -18,6 +18,7 @@ class Order {
     private var itemDiscount: Double?
     private var pickUp: Bool?
     private var shopId: String?
+    private var createdAt: NSDate?
     
     init(order: PFObject) {
         self.objectId = order.objectId!
@@ -29,6 +30,7 @@ class Order {
         self.itemDiscount = order.value(forKey: "itemDiscount") as? Double
         self.pickUp = order.value(forKey: "pickUp") as? Bool
         self.shopId = order.value(forKey: "shopId") as? String
+        self.createdAt = order.value(forKey: "createdAt") as? NSDate
     }
     
     func getObjectId() -> String {

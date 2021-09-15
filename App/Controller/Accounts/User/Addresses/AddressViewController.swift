@@ -27,14 +27,10 @@ class AddressViewController: UIViewController {
     
     /* Since Address gets called from different places, declare a variable to perform
       segue and add address accordingly. */
-    //To save address
-    var forShop : Bool = false
-    var forEdit: Bool = false
-    var forAddNewShop: Bool = false
     private var shopId: String?
     
-    //To Update address
-    var forShopEdit: Bool = false
+    private var editMode: forAddress?
+    
     private var addressId: String?
     
     override func viewDidLoad() {
@@ -56,20 +52,20 @@ class AddressViewController: UIViewController {
             }
         }
         
-        if(forShop) {
+        if(self.editMode == forAddress.forShop) {
             subtitle.text = "Use my Primary Address for my shop."
             subtitle.textAlignment = NSTextAlignment.left
             primaryAddress.isOn = false
             primaryAddress.isHidden = false
             doThisLaterButton.isHidden = true
         }
-        if(forEdit) {
+        if(self.editMode == forAddress.forEdit || self.editMode == forAddress.forShopEdit) {
             saveButton.isHidden = true
             updateButton.isHidden = false
             subtitle.text = "Edit your address and click on update"
             fillformForEdit()
         }
-        if(forAddNewShop) {
+        if(self.editMode == forAddress.forAddNewShop) {
             subtitle.text = "Fill out the details below to add a new address"
         }
 
@@ -86,7 +82,7 @@ extension AddressViewController {
         }
         
         else {
-            if(forShop){
+            if(self.editMode == forAddress.forShop){
                 let address = fillForm(className: "Shop_Address")
                 let geocoder = CLGeocoder()
                 geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
@@ -155,7 +151,7 @@ extension AddressViewController {
         }
         else{
             let query: PFQuery<PFObject>
-            if(forShopEdit) {
+            if(self.editMode == forAddress.forShopEdit) {
                 query = PFQuery(className: "Shop_Address")
             }
             else {
@@ -179,7 +175,7 @@ extension AddressViewController {
                         if error == nil {
                             if let placemark = placemarks?[0] {
                                 //update address in shop geopoints
-                                if(self.forShopEdit){
+                                if(self.editMode == forAddress.forShopEdit){
                                     let shopQuery = PFQuery(className: "Shop")
                                     shopQuery.whereKey("objectId", equalTo: self.shopId!)
                                     shopQuery.getFirstObjectInBackground{(shop, error) in
@@ -257,6 +253,10 @@ extension AddressViewController {
 //MARK: - Display Functions
 extension AddressViewController {
     
+    func setEditMode(editMode: forAddress) {
+        self.editMode = editMode
+    }
+    
     func setShopId(shopId: String) {
         self.shopId = shopId
     }
@@ -285,7 +285,7 @@ extension AddressViewController {
         address["state"] = state.text
         address["zip"] = zip.text
         address["country"] = "USA"
-        if(!forAddNewShop) {
+        if(self.editMode != forAddress.forAddNewShop) {
             address["isDefault"] = true
         }
         else{
@@ -303,14 +303,14 @@ extension AddressViewController {
     
     private func fillformForEdit(){
         var query: PFQuery<PFObject>?
-        if(forShopEdit) {
+        if(self.editMode == forAddress.forShopEdit) {
             query = PFQuery(className: "Shop_Address")
         }
         else {
             query = PFQuery(className: "Address")
         }
         
-        query!.whereKey("objectId", contains: addressId!)
+        query!.whereKey("objectId", equalTo: self.addressId!)
         query!.getFirstObjectInBackground{(object, error) in
             if let object = object {
                 let address = Address(address: object)

@@ -22,6 +22,7 @@ class CartViewController: UIViewController {
     private var myProduct: Product?
     private var currProductImage: [ProductImage] = []
     private var myCart: Cart?
+    private var orderComplete: Bool = false
     
     let realm = try! Realm()
     
@@ -87,9 +88,15 @@ class CartViewController: UIViewController {
     @IBAction func unwindToMyCartWithSegue(segue: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                self.cartTotal.text = "Total"
-                let alert = customNetworkAlert(title: "Order Successful", errorString: "Your order has been successfully places. Please head over to my orders to know the status of your order.")
-                self.present(alert, animated: true, completion: nil)
+                if(self.orderComplete) {
+                    self.cartTotal.text = "Total"
+                    let alert = customNetworkAlert(title: "Order Successful", errorString: "Your order has been successfully places. Please head over to my orders to know the status of your order.")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else {
+                    self.myCart = Cart(cartItems: self.myItems)
+                    self.cartTotal.text = self.myCart!.getTotalAsString()
+                }
                 self.myCartItems.reloadData()
             }
         }
@@ -139,6 +146,10 @@ extension CartViewController {
             self.cartTotal.text = self.myCart!.getTotalAsString()
             self.myCartItems.reloadData()
         }
+    }
+    
+    func setOrderComplete(bool: Bool) {
+        self.orderComplete = bool
     }
 }
 
