@@ -108,10 +108,7 @@ class UpdateProductCollectionViewController: UICollectionViewController {
         let query = PFQuery(className: "Product_Images")
         query.whereKey("productId", equalTo: currProduct!.getObjectId())
         query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
-            if let error = error {
-                // Log details of the failure
-                print(error.localizedDescription)
-            } else if let objects = objects {
+            if let objects = objects {
                 for object in objects {
                     let productImage = ProductImage(image: object)
                     self.currProductImages.append(productImage)

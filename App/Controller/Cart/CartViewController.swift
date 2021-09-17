@@ -123,13 +123,15 @@ extension CartViewController {
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: myItem.productId!)
         query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
-            if let error = error {
+            if let _ = error {
                 // The query failed
-                print(error.localizedDescription)
                 try! self.realm.write{
                     self.realm.delete(myItem)
                 }
-            } else if let object = object {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+            else if let object = object {
                 let currProduct = Product(product: object)
                 try! self.realm.write {
                     myItem.productTitle = currProduct.getTitle()
@@ -163,20 +165,18 @@ extension CartViewController: UICollectionViewDelegate {
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: productId!)
         query.getFirstObjectInBackground{ (object: PFObject?, error: Error?) in
-            if let error = error {
-                let alert = customNetworkAlert(title: "Could not load item.", errorString: error.localizedDescription)
+            if let _ = error {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                 self.present(alert, animated: true, completion: nil)
-            } else if let object = object {
+            }
+            else if let object = object {
                 self.myProduct = Product(product: object)
                 //find product images and perform segue
                 self.currProductImage.removeAll()
                 let query = PFQuery(className: "Product_Images")
                 query.whereKey("productId", equalTo: self.currItem!.productId!)
                 query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
-                    if let error = error {
-                        // Log details of the failure
-                        print(error.localizedDescription)
-                    } else if let objects = objects {
+                    if let objects = objects {
                         for object in objects {
                             let productImage = ProductImage(image: object)
                             self.currProductImage.append(productImage)

@@ -51,8 +51,12 @@ class AccountViewController: UIViewController {
         }
     }
     
+}
+
+//MARK:- Regular Functions
+extension AccountViewController {
     //function to reload the view according to if a user is signed in
-    func reloadViewData(){
+    private func reloadViewData(){
         if let user = currentUser {
             if let name = user.value(forKey: "fName"){
                 accountTitle.text = "Welcome, \(name)"
@@ -67,6 +71,40 @@ class AccountViewController: UIViewController {
             let indexPath = IndexPath(row: 0, section: 0)
             accountTable.scrollToRow(at: indexPath, at: .top, animated: true)
         }
+    }
+    
+    private func searchOrder() {
+        self.orders.removeAll()
+        let query = PFQuery(className: "Order")
+        query.whereKey("userId", equalTo: currentUser!.objectId!)
+        query.order(byDescending: "createdAt")
+        query.findObjectsInBackground{(orders, error) in
+            if let orders = orders {
+                for order in orders {
+                    self.orders.append(Order(order: order))
+                }
+                self.performSegue(withIdentifier: "goToMyOrders", sender: self)
+            }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func signOut() {
+        let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Sign Out", comment: "Sign Out Button"), style: .default, handler: { _ in
+            PFUser.logOut()
+            currentUser = PFUser.current()
+            DispatchQueue.main.async{
+                self.reloadViewData()
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -92,21 +130,7 @@ extension AccountViewController: UITableViewDelegate{
                 
             case[1,2]:
                 if(currentUser != nil) {
-                    self.orders.removeAll()
-                    let query = PFQuery(className: "Order")
-                    query.whereKey("userId", equalTo: currentUser!.objectId!)
-                    query.order(byDescending: "createdAt")
-                    query.findObjectsInBackground{(orders, error) in
-                        if let orders = orders {
-                            for order in orders {
-                                self.orders.append(Order(order: order))
-                            }
-                            self.performSegue(withIdentifier: "goToMyOrders", sender: self)
-                        }
-                        else {
-                            print(error.debugDescription)
-                        }
-                    }
+                    self.searchOrder()
                 }
                 else{
                     performSegue(withIdentifier: "goToSignIn", sender: self)
@@ -123,18 +147,7 @@ extension AccountViewController: UITableViewDelegate{
                 
             //Sign out the user if Sign Out is selected
             case [4,0]:
-                let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
-                    alert.dismiss(animated: true, completion: nil)
-                }))
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Sign Out", comment: "Sign Out Button"), style: .default, handler: { _ in
-                    PFUser.logOut()
-                    currentUser = PFUser.current()
-                    DispatchQueue.main.async{
-                        self.reloadViewData()
-                    }
-                }))
-                self.present(alert, animated: true, completion: nil)
+                self.signOut()
                 
             default:
                 return;

@@ -80,9 +80,6 @@ extension ProductReviewViewController {
                     self.findProduct(orderId: currOrder.getObjectId())
                 }
             }
-            else {
-                print(error.debugDescription)
-            }
         }
     }
     
@@ -94,9 +91,6 @@ extension ProductReviewViewController {
             if let _ = product {
                 //render add review button only if order has been placed
                 self.addReviewButton.isHidden = false
-            }
-            else {
-                print(error.debugDescription)
             }
         }
     }

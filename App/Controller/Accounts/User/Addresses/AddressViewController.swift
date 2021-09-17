@@ -97,15 +97,16 @@ extension AddressViewController {
                                     shop.saveInBackground()
                                 }
                                 else {
-                                    print(error.debugDescription)
+                                    let alert = customNetworkAlert(title: "Unable to save address.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                                    self.present(alert, animated: true, completion: nil)
                                 }
                             }
-                            
                             address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                             address.saveInBackground {(success, error) in
                                 if(success) {
                                     self.performSegue(withIdentifier: "reloadMyShop", sender: self)
-                                } else {
+                                }
+                                else {
                                     let alert = customNetworkAlert(title: "Could not save Address", errorString: "Check connection and try again.")
                                     self.present(alert, animated: true, completion: nil)
                                 }
@@ -184,16 +185,17 @@ extension AddressViewController {
                                             shop.saveInBackground()
                                         }
                                         else {
-                                            print(error.debugDescription)
+                                            let alert = customNetworkAlert(title: "Unable to save address.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                                            self.present(alert, animated: true, completion: nil)
                                         }
                                     }
                                 }
-                                
                                 address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                                 address.saveInBackground {(success, error) in
                                     if(success) {
                                         self.performSegue(withIdentifier: "reloadAccount", sender: self)
-                                    } else {
+                                    }
+                                    else {
                                         let alert = customNetworkAlert(title: "Could not update Address", errorString: "Check connection and try again.")
                                         self.present(alert, animated: true, completion: nil)
                                     }

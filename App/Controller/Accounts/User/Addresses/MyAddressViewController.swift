@@ -34,7 +34,9 @@ class MyAddressViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "goToAddressEdit") {
             let destination = segue.destination as! AddressViewController
-            destination.setAddressId(addressId: currAddress!.getObjectId()) 
+            if let currAddress = self.currAddress {
+                destination.setAddressId(addressId: currAddress.getObjectId())
+            }
             destination.setEditMode(editMode: self.forAddressEdit!)
             if let shopId = self.shopId {
                 destination.setShopId(shopId: shopId)
@@ -48,7 +50,7 @@ class MyAddressViewController: UIViewController {
         
         if(segue.identifier! == "goToAddAddress") {
             let destination = segue.destination as! AddressViewController
-            destination.setEditMode(editMode: forAddress.forAddNewShop)
+            destination.setEditMode(editMode: self.forAddressEdit!)
         }
     }
     
@@ -57,6 +59,7 @@ class MyAddressViewController: UIViewController {
 //MARK:- IBOutlet Functions
 extension MyAddressViewController {
     @IBAction func addNewAddressClicked(_ sender: Any) {
+        self.forAddressEdit = forAddress.forAddNewShop
         performSegue(withIdentifier: "goToAddAddress", sender: self)
     }
 }
@@ -85,7 +88,7 @@ extension MyAddressViewController {
                 self.addresses["Primary Address"] = tempAddress
             }
             else{
-                //write error cases
+                self.forAddressEdit = forAddress.forPrimary
                 self.performSegue(withIdentifier: "goToAddAddress", sender: self)
             }
             self.addressCollection.reloadData()
@@ -98,14 +101,16 @@ extension MyAddressViewController {
         pQuery.whereKey("isDefault", equalTo: false)
         pQuery.findObjectsInBackground{(addresses, error) in
             if let addresses = addresses{
+                var counter = 1
                 for address in addresses {
                     let tempAddress = Address(address: address)
-                    self.addresses["Other"] = tempAddress
+                    self.addresses["Alternate " + String(counter)] = tempAddress
+                    counter += 1
                 }
             }
             else{
-                //write error cases
-                self.performSegue(withIdentifier: "goToAddAddress", sender: self)
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
             self.addressCollection.reloadData()
         }
@@ -116,6 +121,7 @@ extension MyAddressViewController {
         sQuery.whereKey("userId", equalTo: currentUser!.objectId!)
         sQuery.getFirstObjectInBackground{(shop, error) in
             if let shop = shop {
+                self.shopId = shop.objectId!
                 //find shop address in shop_address table
                 let saQuery = PFQuery(className: "Shop_Address")
                 saQuery.whereKey("shopId", equalTo: shop.objectId!)
@@ -124,16 +130,13 @@ extension MyAddressViewController {
                         let tempAddress = Address(address: address)
                         self.addresses["Shop Address"] = tempAddress
                         self.shopId = address["shopId"] as? String
+                        self.addressCollection.reloadData()
                     }
-                    else{
-                        //write error cases
+                    else {
+                        self.forAddressEdit = forAddress.forShop
+                        self.performSegue(withIdentifier: "goToAddressEdit", sender: self)
                     }
-                    self.addressCollection.reloadData()
                 }
-            }
-            else {
-                //error getting shops
-                print("No shops")
             }
         }
     }

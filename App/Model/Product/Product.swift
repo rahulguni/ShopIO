@@ -20,6 +20,7 @@ class Product {
     private var quantity: Int?
     private var content: String?
     private var shopId: String?
+    private var updatedAt: Date?
     
     init(product productObject: PFObject?){
         self.objectId = productObject?.objectId
@@ -31,6 +32,7 @@ class Product {
         self.shopId = productObject!["shopId"] as? String
         self.discount = productObject!["discount"] as? Double
         self.content = productObject!["content"] as? String
+        self.updatedAt = productObject!.value(forKey: "updatedAt") as? Date
     }
     
     func setProduct(product productObject: Product) {
@@ -106,6 +108,10 @@ class Product {
         let discount = getDiscount()
         let discountAmount = ((Double(discount) / 100) * self.price!)
         return (discountAmount * 100).rounded() / 100
+    }
+    
+    func getUpdateDate() -> Date {
+        return self.updatedAt!
     }
 }
 

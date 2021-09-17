@@ -101,7 +101,8 @@ extension OrdersViewController {
                 self.performSegue(withIdentifier: "goToMyOrder", sender: self)
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -118,11 +119,12 @@ extension OrdersViewController {
                     addressQuery.getFirstObjectInBackground {(address, error) in
                         if let address = address {
                             self.shippingAddress = Address(address: address)
+                            self.performSegue(withIdentifier: "goToProfile", sender: self)
                         }
                         else{
-                            print(error.debugDescription)
+                            let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                            self.present(alert, animated: true, completion: nil)
                         }
-                        self.performSegue(withIdentifier: "goToProfile", sender: self)
                     }
                 }
                 else {
@@ -130,7 +132,8 @@ extension OrdersViewController {
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -144,7 +147,8 @@ extension OrdersViewController {
                 self.currShop.goToShop(shop: self.currShop.getCurrShop() ,identifier: "goToShop")
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

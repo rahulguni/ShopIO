@@ -19,7 +19,7 @@ class AddProductViewController: UIViewController{
     
     private var myShop: Shop?
     private var myProduct: Product?
-    private var myProductPhotos: [UIImage] = [/*UIImage.init(named: "Shopio")!, UIImage.init(named: "Shopio")!, UIImage.init(named: "Shopio")!, UIImage.init(named: "Shopio")!*/]
+    private var myProductPhotos: [UIImage] = []
     private var imageCounter : Int = 0
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ extension AddProductViewController {
                     self.performSegue(withIdentifier: "goToAddProductsExtra", sender: self)
                 }
                 else{
-                    let alert = customNetworkAlert(title: "Could not save Product", errorString: "Please try again later.")
+                    let alert = customNetworkAlert(title: "Unable to save product.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                     self.present(alert, animated: true, completion: nil)
                 }
             }

@@ -12,7 +12,7 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var orderUser: UILabel!
     @IBOutlet weak var orderUserImage: UIImageView!
     @IBOutlet weak var orderTotal: UILabel!
-    @IBOutlet weak var deliveryMethod: UILabel!
+    @IBOutlet weak var orderDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,12 +27,7 @@ class OrdersTableViewCell: UITableViewCell {
     
     func setParameters(order: Order, forUser: Bool){
         self.orderTotal.text = "Total: " + String(order.getSubTotal())
-        if(order.getPickUp()) {
-            self.deliveryMethod.text = "Delivery Method: Pickup"
-        }
-        else{
-            self.deliveryMethod.text = "Delivery Method: Ship"
-        }
+        self.orderDate.text = "Order Date: \(order.getOrderDate())"
         if(forUser) {
             getOrderShop(order: order)
         }

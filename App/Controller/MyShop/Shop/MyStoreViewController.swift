@@ -243,9 +243,10 @@ extension MyStoreViewController: UICollectionViewDelegate {
         let query = PFQuery(className: "Product_Images")
         query.whereKey("productId", equalTo: currProduct!.getObjectId())
         query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
-            if let error = error {
+            if let _ = error {
                 // Log details of the failure
-                print(error.localizedDescription)
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             } else if let objects = objects {
                 for object in objects {
                     let productImage = ProductImage(image: object)

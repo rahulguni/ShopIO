@@ -38,10 +38,12 @@ extension AddProductExtraViewController {
             let query = PFQuery(className: "Product")
             query.whereKey("objectId", equalTo: myProduct!.getObjectId())
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
-                if let error = error {
+                if let _ = error {
                     // The query failed
-                    print(error.localizedDescription)
-                } else if let object = object {
+                    let alert = customNetworkAlert(title: "Unable to update review.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else if let object = object {
                     
                     if(self.discount.text != "") {
                         object["discount"] = Float(self.discount!.text!)

@@ -125,7 +125,8 @@ extension CheckOutViewController {
                     }
                 }
                 else {
-                    print(error.debugDescription)
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -156,6 +157,7 @@ extension CheckOutViewController {
                     }
                 }
                 else {
+                    //save the current products in realm to a new database and upload it when internet connects.
                     print(error!.localizedDescription)
                 }
             }
@@ -174,7 +176,8 @@ extension CheckOutViewController {
                     shipTotal = ((shipTotal + (currShop.value(forKey: "shippingCost") as! Double)) * 100).rounded() / 100
                 }
                 else {
-                    print(error.debugDescription)
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 }
                 self.shippingLabel.text = "Shipping: $" + String(shipTotal)
                 self.totalLabel.text = "SubTotal: $" + String(total)

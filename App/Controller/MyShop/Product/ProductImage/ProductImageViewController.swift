@@ -60,7 +60,8 @@ extension ProductImageViewController {
                 }
             }
             else {
-                print("No Default Image.")
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -129,7 +130,8 @@ extension ProductImageViewController {
                 }
             }
             else {
-                print("Product Not found.")
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
             
         }

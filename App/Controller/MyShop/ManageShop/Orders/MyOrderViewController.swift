@@ -125,14 +125,16 @@ extension MyOrderViewController {
                 query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
                     if let error = error {
                         // Log details of the failure
-                        print(error.localizedDescription)
-                    } else if let objects = objects {
+                        let alert = customNetworkAlert(title: "Unable to connect", errorString: error.localizedDescription)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else if let objects = objects {
                         for object in objects {
                             let productImage = ProductImage(image: object)
                             self.currProductImage.append(productImage)
                         }
+                        self.performSegue(withIdentifier: "goToMyProduct", sender: self)
                     }
-                    self.performSegue(withIdentifier: "goToMyProduct", sender: self)
                 }
             }
         }
@@ -158,7 +160,8 @@ extension MyOrderViewController {
                         
                     }
                     else {
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to order", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
@@ -175,7 +178,8 @@ extension MyOrderViewController {
                     product.saveInBackground()
                 }
                 else {
-                    print(error.debugDescription)
+                    let alert = customNetworkAlert(title: "Unable to modify product quantity", errorString: "There was an error connecting to the server. Please check your internet connection and update your product quantity from your inventory..")
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -188,9 +192,6 @@ extension MyOrderViewController {
             query.getFirstObjectInBackground{(orderItem, error) in
                 if let orderItem = orderItem{
                     orderItem.deleteEventually()
-                }
-                else {
-                    print(error.debugDescription)
                 }
             }
         }
@@ -218,7 +219,7 @@ extension MyOrderViewController {
                         self.saveChat(message: message, delete: delete)
                     }
                     else {
-                        let alert = customNetworkAlert(title: "Error", errorString: "Could not message at this time.")
+                        let alert = customNetworkAlert(title: "Error sending message to buyer.", errorString: "There was an error connecting to the server. The order has been marked confirmed. Please notify the co=ustomer manually.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

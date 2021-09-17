@@ -99,7 +99,8 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error - locationManager: \(error.localizedDescription)")
+        let alert = customNetworkAlert(title: "\(error.localizedDescription)", errorString: "Please check your internet connection and ensure location services are available.")
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

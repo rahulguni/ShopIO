@@ -29,4 +29,5 @@ enum forAddress {
     case forEdit
     case forAddNewShop
     case forShopEdit
+    case forPrimary
 }

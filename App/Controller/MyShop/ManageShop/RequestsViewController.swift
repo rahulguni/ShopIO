@@ -67,10 +67,7 @@ extension RequestsViewController {
                 let query = PFQuery(className: "Product_Images")
                 query.whereKey("productId", equalTo: self.currProduct!.getObjectId())
                 query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
-                    if let error = error {
-                        // Log details of the failure
-                        print(error.localizedDescription)
-                    } else if let objects = objects {
+                    if let objects = objects {
                         for object in objects {
                             let productImage = ProductImage(image: object)
                             self.currProductImage.append(productImage)
@@ -94,11 +91,11 @@ extension RequestsViewController {
                     }))
 
                     self.present(alert, animated: true)
-                    //
                 }
             }
             else{
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -115,12 +112,14 @@ extension RequestsViewController {
                         self.sendMessage(currRequest: currRequest, currProduct: currProduct)
                     }
                     else{
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to fulfill request.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -138,12 +137,14 @@ extension RequestsViewController {
                         self.present(alert, animated: true, completion: nil)
                     }
                     else {
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to delete request.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -191,6 +192,10 @@ extension RequestsViewController {
                     self.requests.remove(at: self.requestIndex!)
                     self.performSegue(withIdentifier: "goToMyProduct", sender: self)
                 }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                let alert = customNetworkAlert(title: "Your request has been marked fulfilled.", errorString: "Hoewever, There was an error connecting to the chat server. Please check your internet connection and notify your customer..")
                 self.present(alert, animated: true, completion: nil)
             }
         }

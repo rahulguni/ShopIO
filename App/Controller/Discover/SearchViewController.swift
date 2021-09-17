@@ -63,9 +63,9 @@ extension SearchViewController {
         let query = PFQuery(className: "Product_Images")
         query.whereKey("productId", equalTo: self.currProduct!.getObjectId())
         query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
-            if let error = error {
-                // Log details of the failure
-                print(error.localizedDescription)
+            if let _ = error {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             } else if let objects = objects {
                 for object in objects {
                     let productImage = ProductImage(image: object)
@@ -93,12 +93,14 @@ extension SearchViewController {
                         self.performSegue(withIdentifier: "goToShop", sender: self)
                     }
                     else {
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -120,7 +122,8 @@ extension SearchViewController: UISearchBarDelegate{
                     self.resultsTable.reloadData()
                 }
                 else{
-                    print(error.debugDescription)
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }

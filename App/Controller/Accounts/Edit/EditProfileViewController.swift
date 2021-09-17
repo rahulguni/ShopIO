@@ -95,10 +95,11 @@ extension EditProfileViewController {
         }
         else {
             let query = PFUser.query()
-            query?.whereKey("objectId", contains: currentUser!.objectId!)
+            query?.whereKey("objectId", equalTo: currentUser!.objectId!)
             query?.getFirstObjectInBackground{(user, error) in
-                if let error = error {
-                    print(error.localizedDescription)
+                if let _ = error {
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 } else if let user = user {
                     user["fName"] = self.fName.text!
                     user["lName"] = self.lName.text!
@@ -153,9 +154,7 @@ extension EditProfileViewController {
         
         let displayPic = currUser.getImage()
         displayPic.getDataInBackground{(imageData: Data?, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let imageData = imageData {
+            if let imageData = imageData {
                 self.displayPicture.image = UIImage(data: imageData)
             }
         }
@@ -206,6 +205,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = sourceType
+            imagePickerController.allowsEditing = true
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }

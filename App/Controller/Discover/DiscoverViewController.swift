@@ -24,7 +24,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
     private var currProducts: [Product] = []
     //default radius 25 miles to search for shops around
     private var locationManager: CLLocationManager!
-    private var radius: Double = 25
+    private var radius: Double = 2500
     private var sliderAlert: UIAlertController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -128,7 +128,8 @@ extension DiscoverViewController {
                 self.getShopsWithInLocation(location: location.coordinate)
             }
             else{
-                print("no location")
+                let alert = customNetworkAlert(title: "Unable to get current location.", errorString: "Please ensure location services are turned on.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -155,7 +156,8 @@ extension DiscoverViewController {
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
             self.shopCollection.isHidden = false
         }
@@ -176,7 +178,8 @@ extension DiscoverViewController {
                             self.followedList.append(newShop)
                         }
                         else {
-                            print("No Shop in Store")
+                            let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                            self.present(alert, animated: true, completion: nil)
                         }
                         self.followedShops.reloadData()
                     }
@@ -205,8 +208,9 @@ extension DiscoverViewController: UICollectionViewDelegate{
         query.whereKey("shopId", equalTo: currShop!.getShopId())
         query.order(byAscending: "title")
         query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
+            if let _ = error {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
             else if let products = products {
                 for currProduct in products {

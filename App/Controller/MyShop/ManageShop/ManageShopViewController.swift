@@ -71,6 +71,10 @@ extension ManageShopViewController {
                 }
                 self.performSegue(withIdentifier: "goToOrders", sender: self)
             }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }

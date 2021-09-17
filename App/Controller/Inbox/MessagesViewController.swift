@@ -20,6 +20,7 @@ class MyMessagesViewController: UIViewController{
     private var currSender: Sender?
     
     private var titleForChatRoom: String?
+    private var currChatRoomId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class MyMessagesViewController: UIViewController{
             destination.setMessages(messages: self.chatRooms)
             destination.setCurrSender(currSender: self.currSender!)
             destination.title = self.titleForChatRoom!
+            destination.setChatRoomId(chatroomId: self.currChatRoomId!)
         }
     }
 }
@@ -67,6 +69,7 @@ extension MyMessagesViewController: UITableViewDelegate {
         self.chatRooms.removeAll()
         let chatRoom: String = myMessages[indexPath.row].getChatRoomId()
         self.titleForChatRoom = myMessages[indexPath.row].getSenderName()
+        self.currChatRoomId = myMessages[indexPath.row].getChatRoomId()
         let query = PFQuery(className: "ChatRoom")
         query.whereKey("chatRoomId", equalTo: chatRoom)
         query.order(byAscending: "updatedAt")

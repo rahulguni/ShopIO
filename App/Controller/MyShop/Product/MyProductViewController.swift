@@ -109,15 +109,17 @@ class MyProductViewController: UIViewController {
 //MARK:- IBOutlet Functions
 extension MyProductViewController {
     @IBAction func updateProduct(_ sender: Any) {
+        
         if(productTitle.text!.isEmpty || priceField.text!.isEmpty || discountField.text!.isEmpty || quantityField.text!.isEmpty){
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
-        else {
+        else if(NSDate() as Date >= myProduct!.getUpdateDate().addingTimeInterval(86400)) {
             let query = PFQuery(className: "Product")
             query.getObjectInBackground(withId: myProduct!.getObjectId()) {(product: PFObject?, error: Error?) in
-                if let error = error {
-                    print(error.localizedDescription)
+                if let _ = error {
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else if let product = product {
                     product["title"] = self.productTitle.text!
@@ -147,6 +149,10 @@ extension MyProductViewController {
                     }
                 }
             }
+        }
+        else{
+            let alert = customNetworkAlert(title: "Cannot Update Product.", errorString: "It seems like you have already updated your product once in the last 24 hours.")
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -338,6 +344,7 @@ extension MyProductViewController {
     private func checkReviews() {
         let query = PFQuery(className: "Product_Review")
         query.whereKey("productId", equalTo: self.myProduct!.getObjectId())
+        query.order(byDescending: "updatedAt")
         query.findObjectsInBackground{(reviews, errors) in
             if let reviews = reviews {
                 var totalReview: Double = 0.0
@@ -427,7 +434,8 @@ extension MyProductViewController {
                         }
                     }
                     else {
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
@@ -629,7 +637,8 @@ extension MyProductViewController: ImagePickerDelegate {
                     self.productImages.append(newImage)
                 }
                 else {
-                    print(error.debugDescription)
+                    let alert = customNetworkAlert(title: "Unable to add photo.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
                 }
                 self.getImages()
             }

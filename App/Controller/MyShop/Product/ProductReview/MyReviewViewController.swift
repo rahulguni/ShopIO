@@ -95,7 +95,8 @@ extension MyReviewViewController {
                 self.performSegue(withIdentifier: "reloadReviews", sender: self)
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to add review.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -116,9 +117,14 @@ extension MyReviewViewController {
                         self.performSegue(withIdentifier: "reloadReviews", sender: self)
                     }
                     else {
-                        print(error.debugDescription)
+                        let alert = customNetworkAlert(title: "Unable to update review.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
+            }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

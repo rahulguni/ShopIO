@@ -43,7 +43,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delivery Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqE-H1-cm7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqE-H1-cm7">
                                                     <rect key="frame" x="129" y="87" width="245" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -57,7 +57,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="deliveryMethod" destination="KqE-H1-cm7" id="acj-2a-otw"/>
+                                            <outlet property="orderDate" destination="KqE-H1-cm7" id="Bzg-QF-Tko"/>
                                             <outlet property="orderTotal" destination="2dq-hR-pzq" id="Jne-Wy-F7Z"/>
                                             <outlet property="orderUser" destination="rHJ-K9-ob2" id="eGQ-WV-nlP"/>
                                             <outlet property="orderUserImage" destination="7hQ-LD-3rr" id="ICX-NV-lVx"/>

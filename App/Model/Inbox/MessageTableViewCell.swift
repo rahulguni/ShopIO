@@ -1,20 +1,25 @@
-//
-//  MessageTableViewCell.swift
-//  App
-//
-//  Created by Rahul Guni on 8/18/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class MessageTableViewCell
+
+DESCRIPTION
+        This class is a UITableViewCell class that makes up the cells for Messages Table in MessagesViewController.
+AUTHOR
+        Rahul Guni
+DATE
+        08/18/2021
+*/
+/**/
 
 class MessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var senderImage: UIImageView!
     @IBOutlet weak var senderName: UILabel!
     @IBOutlet weak var message: UILabel!
-    
-    private var forShop: Bool?
+    @IBOutlet weak var dateField: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,10 +32,42 @@ class MessageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /**/
+    /*
+    func setParameters(forShop bool: Bool, message currMessage: MessageModel)
+
+    NAME
+
+            setParameters - Sets the parameter for Message Table View Cell.
+
+    SYNOPSIS
+
+            setParameters(forShop bool: Bool, message currMessage: MessageModel)
+                forShop             --> A boolean variable to determine if the message cell is for shop inbox or user inbox
+                message             --> Message model from database to name the message sender as well as get into chatroom from the MessageModel objectId.
+
+    DESCRIPTION
+
+            This function takes a boolean variable and a MessageModel to render the right data to tableview cell. First, the Message table in database is searched by the MessageModel variable's objectId to render the message sender. Then, using the same objectId, the chatroom table is searched to render the most recent message between the two parties.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            6:27pm 8/18/2021
+
+    */
+    /**/
+    
     func setParameters(forShop bool: Bool, message currMessage: MessageModel) {
-        self.forShop = bool
         let query: PFQuery<PFObject>
-        if(forShop == false) {
+        if(!bool) {
             //look for shops
             query = PFQuery(className: "Shop")
             query.whereKey("objectId", equalTo: currMessage.getReceiverId())
@@ -44,7 +81,7 @@ class MessageTableViewCell: UITableViewCell {
         query.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
             if let object = object {
                 let displayImage: PFFileObject?
-                if(self.forShop!){
+                if(bool){
                     let newUser = User(userID: object)
                     currMessage.setSenderName(name: newUser.getName())
                     displayImage = newUser.getImage()
@@ -81,6 +118,7 @@ class MessageTableViewCell: UITableViewCell {
                         
                         let newRoom = ChatRoom(objectId: chatRoom.objectId!, chatRoomId: id, message: message, senderId: senderId, date: updateTime)
                         self.message.text = newRoom.getMessage()
+                        self.dateField.text = String(updateTime.debugDescription.prefix(10))
                     }
                     else {
                         print(error.debugDescription)
@@ -92,5 +130,6 @@ class MessageTableViewCell: UITableViewCell {
             }
         }
     }
+    /* func setParameters(forShop bool: Bool, message currMessage: MessageModel) */
 
 }

@@ -27,7 +27,6 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        myChatRoomId = self.myMessages[0].getChatRoomId()
         setMessagesArray()
         
         //For Live Query
@@ -46,6 +45,10 @@ extension ChatViewController {
     
     func setCurrSender(currSender: Sender) {
         self.currSender = currSender
+    }
+    
+    func setChatRoomId(chatroomId: String) {
+        self.myChatRoomId = chatroomId
     }
     
     func setMessagesArray() {
@@ -78,13 +81,15 @@ extension ChatViewController {
                         message["updatedAt"] = Date()
                         message.saveInBackground()
                     }
-                    else {
-                        print(error.debugDescription)
+                    else{
+                        let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
             else {
-                print(error.debugDescription)
+                let alert = customNetworkAlert(title: "Unable to send message.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

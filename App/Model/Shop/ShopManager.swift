@@ -63,11 +63,7 @@ class ShopManager {
         query.whereKey("shopId", equalTo: self.currShop!.getShopId())
         query.order(byAscending: "title")
         query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
-            if let error = error {
-                //Request failed
-                print(error.localizedDescription)
-            }
-            else if let products = products {
+            if let products = products {
                 for currProduct in products {
                     let tempProduct = Product(product: currProduct)
                     self.currProducts.append(tempProduct)

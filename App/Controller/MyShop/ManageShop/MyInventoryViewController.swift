@@ -74,9 +74,14 @@ extension MyInventoryViewController {
                         self.performSegue(withIdentifier: "goToRequests", sender: self)
                     }
                     else {
-                        print("No Requests found")
+                        let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
+            }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

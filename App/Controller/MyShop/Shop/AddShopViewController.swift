@@ -49,7 +49,7 @@ class AddShopViewController: UIViewController {
 //MARK:- IBOutlet Functions
 extension AddShopViewController {
     @IBAction func continueButtonPressed(_ sender: Any) {
-        if (shopName.text!.isEmpty || shippingLabel.text!.isEmpty){
+        if (shopName.text!.isEmpty || shippingLabel.text!.isEmpty || self.shopImage.image == nil){
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
@@ -121,7 +121,7 @@ extension AddShopViewController {
                 self.performSegue(withIdentifier: "toAddress", sender: self)
             }
             else{
-                let alert = customNetworkAlert(title: "Network Error", errorString: "Could not save shop at this time. Please try again.")
+                let alert = customNetworkAlert(title: "Unable to save shop.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -143,7 +143,7 @@ extension AddShopViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                     else{
-                        let alert = customNetworkAlert(title: "Error Updating", errorString: "Could not update shop at this time  Please try again.")
+                        let alert = customNetworkAlert(title: "Unable to update shop.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
