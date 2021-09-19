@@ -74,7 +74,7 @@ extension ProductImageViewController {
 
 // MARK:- Display Functions
 extension ProductImageViewController {
-    func loadForEdit(){
+    private func loadForEdit(){
         loadForView()
         editButton.isHidden = false
         setDisplayButton.isHidden = false

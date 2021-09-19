@@ -81,6 +81,7 @@ class CartViewController: UIViewController {
             let destination = segue.destination as! CheckOutViewController
             destination.setCart(cart: self.myCart!)
             destination.setItems(items: self.myItems)
+            destination.setFresh(bool: true)
         }
     }
 

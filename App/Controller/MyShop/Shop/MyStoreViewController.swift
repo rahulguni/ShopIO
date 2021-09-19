@@ -242,6 +242,7 @@ extension MyStoreViewController: UICollectionViewDelegate {
         currProductImage.removeAll()
         let query = PFQuery(className: "Product_Images")
         query.whereKey("productId", equalTo: currProduct!.getObjectId())
+        query.order(byDescending: "updatedAt")
         query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
             if let _ = error {
                 // Log details of the failure

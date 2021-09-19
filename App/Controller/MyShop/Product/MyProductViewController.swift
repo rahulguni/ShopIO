@@ -281,6 +281,14 @@ extension MyProductViewController {
     
     func setImages(myImages currImages: [ProductImage]) {
         self.productImages = currImages
+        var index: Int = 0
+        for image in self.productImages {
+            //swap display picture to first position
+            if (image.getDefaultStatus()){
+                self.productImages.swapAt(0, index)
+            }
+            index += 1
+        }
     }
     
     //check if item is in cart and return cartobject

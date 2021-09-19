@@ -19,6 +19,7 @@ class Order {
     private var pickUp: Bool?
     private var shopId: String?
     private var createdAt: Date?
+    private var fulfilled: Bool?
     
     init(order: PFObject) {
         self.objectId = order.objectId!
@@ -31,6 +32,7 @@ class Order {
         self.pickUp = order.value(forKey: "pickUp") as? Bool
         self.shopId = order.value(forKey: "shopId") as? String
         self.createdAt = order.value(forKey: "createdAt") as? Date
+        self.fulfilled = order.value(forKey: "fulfilled") as? Bool
     }
     
     func getObjectId() -> String {
@@ -71,5 +73,9 @@ class Order {
     
     func getOrderDate() -> String {
         return String(self.createdAt!.debugDescription.prefix(10))
+    }
+    
+    func getFulfilled() -> Bool {
+        return self.fulfilled!
     }
 }

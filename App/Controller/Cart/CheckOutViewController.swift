@@ -23,13 +23,11 @@ class CheckOutViewController: UIViewController {
     private var myItems: [CartItem] = []
     private var deliveryAddressId: String?
     private var pickUp: Bool?
+    private var fresh: Bool = false
     private let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.taxLabel.text = self.myCart!.getTaxAsString()
-        self.totalLabel.text = self.myCart!.getSubTotalAsString()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,13 +37,24 @@ class CheckOutViewController: UIViewController {
         }
         if(segue.identifier! == "reloadMyCart") {
             let destination = segue.destination as! CartViewController
-            destination.setOrderComplete(bool: true)
+            destination.setOrderComplete(bool: self.fresh)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.makeCarts()
+        if(self.fresh) {
+            self.taxLabel.text = self.myCart!.getTaxAsString()
+            self.totalLabel.text = self.myCart!.getSubTotalAsString()
+        }
+        else {
+            self.performSegue(withIdentifier: "reloadMyCart", sender: self)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.fresh = false
     }
     
     @IBAction func unwindToCheckOutWithSegue(segue: UIStoryboardSegue) {
@@ -85,6 +94,10 @@ extension CheckOutViewController {
     
     func setAddressId(address: String) {
         self.deliveryAddressId = address
+    }
+    
+    func setFresh(bool: Bool) {
+        self.fresh = bool
     }
     
     private func uploadCart() {

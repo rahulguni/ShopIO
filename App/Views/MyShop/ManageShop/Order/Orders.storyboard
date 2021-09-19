@@ -44,7 +44,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqE-H1-cm7">
-                                                    <rect key="frame" x="129" y="87" width="245" height="30"/>
+                                                    <rect key="frame" x="129" y="87" width="146" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -54,10 +54,18 @@
                                                     <rect key="frame" x="0.0" y="11" width="101" height="101"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3E-dt-6Nj">
+                                                    <rect key="frame" x="283" y="87" width="91" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="orderDate" destination="KqE-H1-cm7" id="Bzg-QF-Tko"/>
+                                            <outlet property="orderStatus" destination="x3E-dt-6Nj" id="tgy-El-Qfl"/>
                                             <outlet property="orderTotal" destination="2dq-hR-pzq" id="Jne-Wy-F7Z"/>
                                             <outlet property="orderUser" destination="rHJ-K9-ob2" id="eGQ-WV-nlP"/>
                                             <outlet property="orderUserImage" destination="7hQ-LD-3rr" id="ICX-NV-lVx"/>

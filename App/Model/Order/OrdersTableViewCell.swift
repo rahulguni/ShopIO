@@ -13,6 +13,7 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var orderUserImage: UIImageView!
     @IBOutlet weak var orderTotal: UILabel!
     @IBOutlet weak var orderDate: UILabel!
+    @IBOutlet weak var orderStatus: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,12 +28,38 @@ class OrdersTableViewCell: UITableViewCell {
     
     func setParameters(order: Order, forUser: Bool){
         self.orderTotal.text = "Total: " + String(order.getSubTotal())
-        self.orderDate.text = "Order Date: \(order.getOrderDate())"
+        self.orderDate.text = "Date: \(order.getOrderDate())"
+        setStatus(order: order)
         if(forUser) {
             getOrderShop(order: order)
         }
         else{
             getOrderUser(order: order)
+        }
+    }
+    
+    func setStatus(order: Order) {
+        if(order.getFulfilled() == false) {
+            self.orderStatus.text = "Pending"
+            self.orderStatus.isHidden = false
+        }
+        else {
+            let query = PFQuery(className: "Order_Item")
+            query.whereKey("orderId", equalTo: order.getObjectId())
+            query.findObjectsInBackground{(products, error) in
+                if let products = products {
+                    if(products.count > 0) {
+                        self.orderStatus.text = "Fulfilled"
+                    }
+                    else {
+                        self.orderStatus.text = "Deleted"
+                    }
+                    self.orderStatus.isHidden = false
+                }
+                else {
+                    self.orderStatus.isHidden = true
+                }
+            }
         }
     }
     

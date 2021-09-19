@@ -8,6 +8,12 @@
 import UIKit
 import Parse
 
+enum orderFilter {
+    case allOrders
+    case pendingOrders
+    case confirmedOrder
+}
+
 class OrdersViewController: UIViewController, shopManagerDelegate {
     
     @IBOutlet weak var ordersTable: UITableView!
@@ -22,6 +28,7 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
     
     private var currIndex: Int?
     private var forMyOrders: Bool = false
+    private var filterType: orderFilter = orderFilter.allOrders
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +37,7 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
         self.ordersTable.delegate = self
         self.ordersTable.dataSource = self
         currShop.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterChange(_:)))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,6 +74,13 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
 
 }
 
+//MARK:- IBOutlet Functions
+extension OrdersViewController {
+    @IBAction func filterChange(_ sender: UIButton) {
+        self.showFilterAlert()
+    }
+}
+
 //MARK:- Display Functions
 extension OrdersViewController {
     func setShopId(shopId: String) {
@@ -87,7 +102,7 @@ extension OrdersViewController {
     func goToViewController(identifier: String) {
         self.performSegue(withIdentifier: identifier, sender: self)
     }
-    
+
     private func getOrderItems() {
         self.currOrderItems.removeAll()
         let query = PFQuery(className: "Order_Item")
@@ -95,6 +110,7 @@ extension OrdersViewController {
         query.order(byDescending: "createdAt")
         query.findObjectsInBackground {(orderItems, error) in
             if let orderItems = orderItems {
+                print(orderItems.count)
                 for item in orderItems {
                     self.currOrderItems.append(OrderItem(orderItem: item))
                 }
@@ -153,7 +169,7 @@ extension OrdersViewController {
         }
     }
     
-    private func showAlert() {
+    private func showOrderAlert() {
         let alert = UIAlertController(title: "Order Item Details", message: "Choose what you want to do with this order.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Show Order Details", style: .default, handler: {(action: UIAlertAction) in
             self.getOrderItems()
@@ -169,6 +185,64 @@ extension OrdersViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    private func showFilterAlert() {
+        let alert = UIAlertController(title: "Filter Order Details", message: "Choose what orders you want to view..", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "All Orders", style: .default, handler: {(action: UIAlertAction) in
+            self.getFilterOptions(filterOption: orderFilter.allOrders)
+        }))
+        alert.addAction(UIAlertAction(title: "Pending Orders", style: .default, handler: {(action: UIAlertAction) in
+            self.getFilterOptions(filterOption: orderFilter.pendingOrders)
+        }))
+        alert.addAction(UIAlertAction(title: "Completed Orders", style: .default, handler: {(action: UIAlertAction) in
+            self.getFilterOptions(filterOption: orderFilter.confirmedOrder)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func getFilterOptions(filterOption: orderFilter) {
+        let query = PFQuery(className: "Order")
+        
+        if(self.forMyOrders) {
+            query.whereKey("userId", equalTo: currentUser!.objectId!)
+        }
+        else {
+            query.whereKey("shopId", equalTo: self.myShopId!)
+        }
+        
+        if(filterOption == orderFilter.allOrders) {
+            getOrders(query: query)
+        }
+        if(filterOption == orderFilter.confirmedOrder) {
+            query.whereKey("fulfilled", equalTo: true)
+            getOrders(query: query)
+        }
+        if(filterOption == orderFilter.pendingOrders) {
+            query.whereKey("fulfilled", equalTo: false)
+            getOrders(query: query)
+        }
+ 
+    }
+    
+    func getOrders(query: PFQuery<PFObject>) {
+        self.myOrders.removeAll()
+        query.order(byDescending: "createdAt")
+        query.findObjectsInBackground{(orders, error) in
+            if let orders = orders {
+                for order in orders {
+                    let thisOrder = Order(order: order)
+                    self.myOrders.append(thisOrder)
+                }
+                self.ordersTable.reloadData()
+            }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 //MARK:- UITableViewDelegate
@@ -177,7 +251,7 @@ extension OrdersViewController: UITableViewDelegate {
         self.currIndex = indexPath.row
         self.currOrder = self.myOrders[self.currIndex!]
         self.shippingAddress = nil
-        self.showAlert()
+        self.showOrderAlert()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

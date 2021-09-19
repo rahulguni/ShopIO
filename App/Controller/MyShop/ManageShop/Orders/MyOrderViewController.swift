@@ -46,7 +46,7 @@ class MyOrderViewController: UIViewController {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: currProductItem!)
             destination.setImages(myImages: currProductImage)
-            destination.productMode = ProductMode.forMyShop
+            destination.productMode = ProductMode.forPublic
         }
         
         if(segue.identifier! == "reloadOrder") {

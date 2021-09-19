@@ -166,30 +166,32 @@ extension DiscoverViewController {
     func getFollowedShops(){
         self.followedList.removeAll()
         let query = PFQuery(className: "Followings")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
-        query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
-            if let objects = objects {
-                for object in objects {
-                    let followedShop = PFQuery(className: "Shop")
-                    followedShop.order(byAscending: "createdAt")
-                    followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
-                        if shop != nil {
-                            let newShop = Shop(shop: shop)
-                            self.followedList.append(newShop)
+        if(currentUser != nil) {
+            query.whereKey("userId", equalTo: currentUser!.objectId!)
+            query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
+                if let objects = objects {
+                    for object in objects {
+                        let followedShop = PFQuery(className: "Shop")
+                        followedShop.order(byAscending: "createdAt")
+                        followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
+                            if shop != nil {
+                                let newShop = Shop(shop: shop)
+                                self.followedList.append(newShop)
+                            }
+                            else {
+                                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            self.followedShops.reloadData()
                         }
-                        else {
-                            let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                        self.followedShops.reloadData()
                     }
                 }
+                else {
+                    self.followedList.removeAll()
+                    
+                }
+                self.followedShops.reloadData()
             }
-            else {
-                self.followedList.removeAll()
-                
-            }
-            self.followedShops.reloadData()
         }
     }
 }

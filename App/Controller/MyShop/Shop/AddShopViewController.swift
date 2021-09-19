@@ -135,7 +135,7 @@ extension AddShopViewController {
                 myShop["slogan"] = self.shopSlogan.text
                 myShop["shippingCost"] = Double(self.shippingLabel.text!)
                 let imageData = self.shopImage.image!.jpegData(compressionQuality: 0.5)
-                let imageName = makeImageName(self.shopName.text!)
+                let imageName = myShop.objectId!
                 let imageFile = PFFileObject(name: imageName, data:imageData!)
                 myShop["shopImage"] = imageFile
                 myShop.saveInBackground{(success, error) in

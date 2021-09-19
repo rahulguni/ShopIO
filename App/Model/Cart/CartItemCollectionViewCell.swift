@@ -33,12 +33,30 @@ class CartItemCollectionViewCell: SwipeCollectionViewCell {
             self.productPrice.text = "$" + String(format: "%.2f", totalPrice)
         }
         
-        let query = PFQuery(className: "Product_Images")
-
-        query.whereKey("productId", equalTo: currProduct.productId!)
-        query.whereKey("isDefault", equalTo: "True")
+        //get shop
+        let productQuery = PFQuery(className: "Product")
+        productQuery.whereKey("objectId", equalTo: currProduct.productId!)
+        productQuery.getFirstObjectInBackground{(product, error) in
+            if let product = product {
+                let shopQuery = PFQuery(className: "Shop")
+                shopQuery.whereKey("objectId", equalTo: product.value(forKey: "shopId") as! String)
+                shopQuery.getFirstObjectInBackground{(shop, error) in
+                    if let shop = shop {
+                        let currShop = Shop(shop: shop)
+                        self.productShop.text = currShop.getShopTitle()
+                    }
+                }
+            }
+        }
         
-        query.getFirstObjectInBackground{(object, error) in
+        
+        //get product image
+        let imageQuery = PFQuery(className: "Product_Images")
+
+        imageQuery.whereKey("productId", equalTo: currProduct.productId!)
+        imageQuery.whereKey("isDefault", equalTo: "True")
+        
+        imageQuery.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
                 let productImage = object?.value(forKey: "productImage")
                 let tempImage = productImage as! PFFileObject
@@ -49,9 +67,6 @@ class CartItemCollectionViewCell: SwipeCollectionViewCell {
                         self.productImage.image = UIImage(data: imageData)
                     }
                 }
-            }
-            else {
-               print("No default picture")
             }
         }
 
