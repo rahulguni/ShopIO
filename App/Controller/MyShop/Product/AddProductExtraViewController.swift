@@ -11,8 +11,6 @@ import Parse
 class AddProductExtraViewController: UIViewController {
     @IBOutlet weak var headerLabel: UITextField!
     @IBOutlet weak var discount: UITextField!
-    @IBOutlet weak var startDate: UITextField!
-    @IBOutlet weak var endDate: UITextField!
     @IBOutlet weak var contents: UITextView!
     
     private var myProduct: Product?
@@ -46,7 +44,14 @@ extension AddProductExtraViewController {
                 else if let object = object {
                     
                     if(self.discount.text != "") {
-                        object["discount"] = Float(self.discount!.text!)
+                        let discountAmount = Float(self.discount.text!)
+                        if(discountAmount! > 100) {
+                            let alert = customNetworkAlert(title: "Invalid Discount Percentage", errorString: "Discount percentage must be in the range of 0-100.")
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        else {
+                            object["discount"] = Float(self.discount!.text!)
+                        }
                     }
                     else{
                         object["discount"] = Float(0.0)

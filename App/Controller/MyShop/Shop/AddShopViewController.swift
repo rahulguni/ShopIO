@@ -27,6 +27,7 @@ class AddShopViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.isModalInPresentation = true
+        self.shippingLabel.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +112,7 @@ extension AddShopViewController {
         
         //for image naming
         
-        let imageName = makeImageName(shopName.text!)
+        let imageName = makeImageName(shop.objectId!)
         let imageFile = PFFileObject(name: imageName, data:imageData!)
         shop["shopImage"] = imageFile
         
@@ -135,7 +136,7 @@ extension AddShopViewController {
                 myShop["slogan"] = self.shopSlogan.text
                 myShop["shippingCost"] = Double(self.shippingLabel.text!)
                 let imageData = self.shopImage.image!.jpegData(compressionQuality: 0.5)
-                let imageName = myShop.objectId!
+                let imageName = makeImageName(myShop.objectId!)
                 let imageFile = PFFileObject(name: imageName, data:imageData!)
                 myShop["shopImage"] = imageFile
                 myShop.saveInBackground{(success, error) in
@@ -193,6 +194,28 @@ extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK:- UITextFieldDelegate
+extension AddShopViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let r = Range(range, in: oldText) else {
+            return true
+        }
+
+        let newText = oldText.replacingCharacters(in: r, with: string)
+        let isNumeric = newText.isEmpty || (Double(newText) != nil)
+        let numberOfDots = newText.components(separatedBy: ".").count - 1
+
+        let numberOfDecimalDigits: Int
+        if let dotIndex = newText.firstIndex(of: ".") {
+            numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
+        } else {
+            numberOfDecimalDigits = 0
+        }
+
+        return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
     }
 }
 

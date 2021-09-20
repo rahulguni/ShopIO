@@ -73,10 +73,20 @@ func makeDouble(_ textField: String) -> Double? {
 //filename for database
 func makeImageName(_ name: String) -> String {
     let date = Date().description.split(separator: " ")[0].replacingOccurrences(of: "-", with: "")
-    let name = "_" + name.replacingOccurrences(of: " ", with: "_")
     
     return (date + name + ".jpeg")
 }
+
+func isValidPhone(phone: String) -> Bool{
+    if(phone.count == 10) {
+        return true
+    }
+    return false
+}
+
+//func checkPrice(price: String) -> Bool {
+//    
+//}
 
 //make picture rounded
 func makePictureRounded(picture: UIImageView) {

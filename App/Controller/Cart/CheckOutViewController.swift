@@ -221,7 +221,14 @@ extension CheckOutViewController {
             self.present(alert, animated: true, completion: nil)
         }
         else {
-            uploadCart()
+            let alert = UIAlertController(title: "Confirm Order?", message: "Please select below", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm Button"), style: .default, handler: { _ in
+                self.uploadCart()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }

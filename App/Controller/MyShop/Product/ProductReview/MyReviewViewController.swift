@@ -28,7 +28,7 @@ class MyReviewViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setDisplay()
-        self.dismissKeyboard()
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

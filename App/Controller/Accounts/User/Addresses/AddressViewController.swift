@@ -81,7 +81,7 @@ extension AddressViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        else {
+        else if(isValidPhone(phone: self.phone_sec.text!)){
             if(self.editMode == forAddress.forShop){
                 let address = fillForm(className: "Shop_Address")
                 let geocoder = CLGeocoder()
@@ -143,6 +143,10 @@ extension AddressViewController {
                 }
             }
         }
+        else {
+            let alert = customNetworkAlert(title: "Error signing up", errorString: "Invalid Phone: Phone number must be exactly 10 digits long.")
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func updateButtonPressed(_ sender: Any) {
@@ -150,7 +154,7 @@ extension AddressViewController {
             let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }
-        else{
+        else if(isValidPhone(phone: self.phone_sec.text!)){
             let query: PFQuery<PFObject>
             if(self.editMode == forAddress.forShopEdit) {
                 query = PFQuery(className: "Shop_Address")
@@ -209,6 +213,10 @@ extension AddressViewController {
                     }
                 }
             }
+        }
+        else {
+            let alert = customNetworkAlert(title: "Error signing up", errorString: "Invalid Phone: Phone number must be exactly 10 digits long.")
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

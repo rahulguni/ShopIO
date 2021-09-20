@@ -33,6 +33,7 @@ class AddProductViewController: UIViewController{
         summaryField.layer.cornerRadius = 5
         imageCollection.delegate = self
         imageCollection.dataSource = self
+        priceField.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,7 +59,7 @@ extension AddProductViewController {
             currProduct["shopId"] = myShop?.getShopId()
             currProduct["content"] = ""
             
-            myProduct = Product(product: currProduct)
+            self.myProduct = Product(product: currProduct)
             
             currProduct.saveInBackground{(success, error) in
                 if(success) {
@@ -66,7 +67,7 @@ extension AddProductViewController {
                     for image in self.myProductPhotos {
                         let productPhoto = PFObject(className: "Product_Images")
                         let imageData = image.jpegData(compressionQuality: 0.5)
-                        let imageName = makeImageName(self.titleField.text!)
+                        let imageName = makeImageName(self.myProduct!.getObjectId())
                         let imageFile = PFFileObject(name: imageName, data:imageData!)
                         
                         productPhoto["productId"] = self.myProduct!.getObjectId()
@@ -176,6 +177,28 @@ extension AddProductViewController: ImagePickerDelegate {
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK:- UITextFieldDelegate
+extension AddProductViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let r = Range(range, in: oldText) else {
+            return true
+        }
+
+        let newText = oldText.replacingCharacters(in: r, with: string)
+        let isNumeric = newText.isEmpty || (Double(newText) != nil)
+        let numberOfDots = newText.components(separatedBy: ".").count - 1
+
+        let numberOfDecimalDigits: Int
+        if let dotIndex = newText.firstIndex(of: ".") {
+            numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
+        } else {
+            numberOfDecimalDigits = 0
+        }
+
+        return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
     }
 }
 

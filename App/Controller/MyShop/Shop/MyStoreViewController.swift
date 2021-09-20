@@ -99,6 +99,12 @@ class MyStoreViewController: UIViewController {
             destination.setImages(myImages: currProductImage)
             destination.productMode = self.productMode
         }
+        
+        if(segue.identifier! == "goToSearch") {
+            let destination = segue.destination as! SearchViewController
+            destination.setForShop(bool: true)
+            destination.setShop(shop: self.currShop!)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -16,6 +16,8 @@ class UpdateProductCollectionViewController: UICollectionViewController {
     private var currProduct: Product?
     private var currShop: Shop?
     private var currProductImages: [ProductImage] = []
+    
+    lazy var searchBar: UISearchBar = UISearchBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,12 @@ class UpdateProductCollectionViewController: UICollectionViewController {
         
         //sort the list by quantity of the products.
         myProducts = myProducts.sorted(by:{$0.getQuantity() < $1.getQuantity()})
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,6 +123,34 @@ class UpdateProductCollectionViewController: UICollectionViewController {
                 }
             }
             self.performSegue(withIdentifier: "goToMyProduct", sender: self)
+        }
+    }
+}
+
+extension UpdateProductCollectionViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.myProducts.removeAll()
+        self.dismissKeyboard()
+        if(!searchBar.searchTextField.text!.isEmpty) {
+            let query = PFQuery(className: "Product")
+            query.whereKey("title", hasPrefix: searchBar.searchTextField.text!)
+            query.whereKey("shopId", equalTo: self.currShop!.getShopId())
+            query.findObjectsInBackground{(products, error) in
+                if let products = products {
+                    for product in products {
+                        self.myProducts.append(Product(product: product))
+                    }
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+                else{
+                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
 }

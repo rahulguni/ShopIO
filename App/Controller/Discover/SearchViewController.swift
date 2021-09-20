@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
     private var currProduct: Product?
     private var currShop: Shop?
     private var currShopProducts: [Product] = []
+    private var forShop: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +26,19 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         resultsTable.delegate = self
         resultsTable.dataSource = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterChange(_:)))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToProduct") {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: self.currProduct!)
-            destination.productMode = ProductMode.forPublic
+            if(self.forShop) {
+                destination.productMode = ProductMode.forMyShop
+            }
+            else {
+                destination.productMode = ProductMode.forPublic
+            }
             destination.setImages(myImages: currProductImage)
         }
         if(segue.identifier! == "goToShop") {
@@ -44,16 +51,33 @@ class SearchViewController: UIViewController {
 
 }
 
+//MARK:- IN+BOutlet Functions
+extension SearchViewController {
+    @IBAction func filterChange(_ sender: UIButton) {
+        self.showFilterAlert()
+    }
+}
+
 //MARK:- General Functions
 extension SearchViewController {
-    private func showAlert() {
+    func setForShop(bool: Bool) {
+        self.forShop = bool
+    }
+    
+    func setShop(shop: Shop) {
+        self.currShop = shop
+    }
+    
+    private func showAlert(shopName: String) {
         let alert = UIAlertController(title: "Product Details", message: "View the product or view shop directly..", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "\(self.currProduct!.getTitle())", style: .default, handler: {(action: UIAlertAction) in
             self.goToProduct()
         }))
-        alert.addAction(UIAlertAction(title: "View Shop", style: .default, handler: {(action: UIAlertAction) in
-            self.goToShop()
-        }))
+        if(!self.forShop) {
+            alert.addAction(UIAlertAction(title: "View \(shopName)", style: .default, handler: {(action: UIAlertAction) in
+                self.goToShop()
+            }))
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -104,22 +128,54 @@ extension SearchViewController {
             }
         }
     }
+    
+    private func showFilterAlert() {
+        let alert = UIAlertController(title: "Sort Products", message: "Choose sort..", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Quantity: High to Low", style: .default, handler: {(action: UIAlertAction) in
+            self.searchProducts = self.searchProducts.sorted(by:{$0.getQuantity() > $1.getQuantity()})
+            self.resultsTable.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Quantity: Low to High", style: .default, handler: {(action: UIAlertAction) in
+            self.searchProducts = self.searchProducts.sorted(by:{$0.getQuantity() < $1.getQuantity()})
+            self.resultsTable.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Price: High to Low", style: .default, handler: {(action: UIAlertAction) in
+            self.searchProducts = self.searchProducts.sorted(by:{$0.getPrice() > $1.getPrice()})
+            self.resultsTable.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Price: Low to High", style: .default, handler: {(action: UIAlertAction) in
+            self.searchProducts = self.searchProducts.sorted(by:{$0.getPrice() < $1.getPrice()})
+            self.resultsTable.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 //MARK:- UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchProducts.removeAll()
+        self.resultsTable.reloadData()
         self.dismissKeyboard()
         if(!searchBar.searchTextField.text!.isEmpty) {
             let query = PFQuery(className: "Product")
-            query.whereKey("title", matchesText: searchBar.searchTextField.text!)
+            //query.whereKey("title", matchesText: searchBar.searchTextField.text!)
+            query.whereKey("title", hasPrefix: searchBar.searchTextField.text!)
+            if(self.forShop) {
+                query.whereKey("shopId", equalTo: self.currShop!.getShopId())
+            }
             query.findObjectsInBackground{(products, error) in
                 if let products = products {
                     for product in products {
                         self.searchProducts.append(Product(product: product))
                     }
-                    self.resultsTable.reloadData()
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.resultsTable.reloadData()
+                        }
+                    }
                 }
                 else{
                     let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
@@ -134,7 +190,17 @@ extension SearchViewController: UISearchBarDelegate{
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.currProduct = self.searchProducts[indexPath.row]
-        self.showAlert()
+        let query = PFQuery(className: "Shop")
+        query.whereKey("objectId", equalTo: self.currProduct!.getShopId())
+        query.getFirstObjectInBackground{(shop, error) in
+            if let shop = shop {
+                self.showAlert(shopName: Shop(shop: shop).getShopTitle())
+            }
+            else {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -147,7 +213,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reusableProductSearchCell", for: indexPath) as! ProductSearchTableViewCell
-        cell.setParameters(product: self.searchProducts[indexPath.row])
+        cell.setParameters(product: self.searchProducts[indexPath.row], forShop: self.forShop)
         return cell
     }
 }

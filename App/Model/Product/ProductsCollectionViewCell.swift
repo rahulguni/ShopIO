@@ -17,16 +17,17 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImage: UIImageView!
     
     func setParameters(Product currProduct: Product) {
+        setPriceLabelsVisibility(forDiscount: true, forOriginal: true)
+        
         self.name.text = currProduct.getTitle()
         if(currProduct.getDiscount() != 0) {
             let attributeString = makeStrikethroughText(product: currProduct)
             self.discount.attributedText = attributeString
             self.price.text = currProduct.getPriceAsString()
+            setPriceLabelsVisibility(forDiscount: false, forOriginal: true)
         }
         else {
-            discount.isHidden = true
-            price.isHidden = true
-            originalPrice.isHidden = false
+            setPriceLabelsVisibility(forDiscount: true, forOriginal: false)
             originalPrice.text = currProduct.getOriginalPrice()
         }
         let query = PFQuery(className: "Product_Images")
@@ -50,6 +51,12 @@ class ProductsCollectionViewCell: UICollectionViewCell {
                print("No default picture")
             }
         }
+    }
+    
+    private func setPriceLabelsVisibility(forDiscount: Bool, forOriginal: Bool) {
+        self.price.isHidden = forDiscount
+        self.discount.isHidden = forDiscount
+        self.originalPrice.isHidden = forOriginal
     }
     
 }

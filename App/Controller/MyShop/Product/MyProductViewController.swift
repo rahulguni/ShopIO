@@ -41,7 +41,7 @@ class MyProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.hideKeyboardWhenTappedAround()
         //Fix Buttons
         let currentButtons: [UIButton] = [updateButton, addToCartButton, requestButton, messageShopButton]
         modifyButtons(buttons: currentButtons)
@@ -52,6 +52,8 @@ class MyProductViewController: UIViewController {
         self.productDescription.text = myProduct!.getSummary()
         self.productContent.text = myProduct!.getContent()
         self.quantityStepper.value = Double(myProduct!.getQuantity())
+        
+        self.priceField.delegate = self
         
         if(myProduct?.getDiscount() != 0) {
             discountField.isHidden = false
@@ -114,41 +116,15 @@ extension MyProductViewController {
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
-        else if(NSDate() as Date >= myProduct!.getUpdateDate().addingTimeInterval(86400)) {
-            let query = PFQuery(className: "Product")
-            query.getObjectInBackground(withId: myProduct!.getObjectId()) {(product: PFObject?, error: Error?) in
-                if let _ = error {
-                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
-                    self.present(alert, animated: true, completion: nil)
-                }
-                else if let product = product {
-                    product["title"] = self.productTitle.text!
-                    product["summary"] = self.productDescription.text!
-                    product["price"] = makeDouble(self.priceField.text!)
-                    product["discount"] = (makeDouble(self.discountField.text!))
-                    product["quantity"] = Int(self.quantityField.text!)
-                    product["content"] = self.productContent.text!
-                    product.saveInBackground{(success, error) in
-                        if(success) {
-                            let tempProd = Product(product: product)
-                            self.myProduct = tempProd
-                            if(self.productMode == ProductMode.forUpdate) {
-                                self.performSegue(withIdentifier: "goToUpdateProducts", sender: self)
-                            }
-                            if(self.productMode == ProductMode.forOwner) {
-                                self.performSegue(withIdentifier: "goToMyStore", sender: self)
-                            }
-                            if(self.productMode == ProductMode.forRequest) {
-                                self.performSegue(withIdentifier: "goToMyRequests", sender: self)
-                            }
-                        }
-                        else {
-                            let alert = customNetworkAlert(title: "Could not save object", errorString: "Connection error. Please try again later.")
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
-                }
-            }
+        else if(NSDate() as Date >= myProduct!.getUpdateDate().addingTimeInterval(86400) || true) {
+            let alert = UIAlertController(title: "Update Product?", message: "Please select below", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Confirm", comment: "Confirm Button"), style: .default, handler: { _ in
+                self.updateProduct()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         else{
             let alert = customNetworkAlert(title: "Cannot Update Product.", errorString: "It seems like you have already updated your product once in the last 24 hours.")
@@ -288,6 +264,49 @@ extension MyProductViewController {
                 self.productImages.swapAt(0, index)
             }
             index += 1
+        }
+    }
+    
+    private func updateProduct() {
+        let query = PFQuery(className: "Product")
+        query.getObjectInBackground(withId: myProduct!.getObjectId()) {(product: PFObject?, error: Error?) in
+            if let _ = error {
+                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                self.present(alert, animated: true, completion: nil)
+            }
+            else if let product = product {
+                if(makeDouble(self.discountField.text!)! > 100) {
+                    let alert = customNetworkAlert(title: "Invalid Discount Percentage", errorString: "Discount percentage must be in the range of 0-100.")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else {
+                    product["title"] = self.productTitle.text!
+                    product["summary"] = self.productDescription.text!
+                    product["price"] = makeDouble(self.priceField.text!)
+                    product["discount"] = (makeDouble(self.discountField.text!))
+                    product["quantity"] = Int(self.quantityField.text!)
+                    product["content"] = self.productContent.text!
+                    product.saveInBackground{(success, error) in
+                        if(success) {
+                            let tempProd = Product(product: product)
+                            self.myProduct = tempProd
+                            if(self.productMode == ProductMode.forUpdate) {
+                                self.performSegue(withIdentifier: "goToUpdateProducts", sender: self)
+                            }
+                            if(self.productMode == ProductMode.forOwner) {
+                                self.performSegue(withIdentifier: "goToMyStore", sender: self)
+                            }
+                            if(self.productMode == ProductMode.forRequest) {
+                                self.performSegue(withIdentifier: "goToMyRequests", sender: self)
+                            }
+                        }
+                        else {
+                            let alert = customNetworkAlert(title: "Could not save object", errorString: "Connection error. Please try again later.")
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -633,7 +652,7 @@ extension MyProductViewController: ImagePickerDelegate {
             //upload image to the database
             let newImage = PFObject(className: "Product_Images")
             let imageData = image.pngData()
-            let imageName = makeImageName(self.myProduct!.getTitle())
+            let imageName = makeImageName(self.myProduct!.getObjectId())
             let imageFile = PFFileObject(name: imageName, data: imageData!)
             
             newImage["productId"] = self.myProduct?.getObjectId()
@@ -657,4 +676,29 @@ extension MyProductViewController: ImagePickerDelegate {
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
+}
+
+//MARK:- UITextFieldDelegate
+extension MyProductViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text: NSString = textField.text! as NSString
+        let resultString = text.replacingCharacters(in: range, with: string)
+        
+        
+        //Check the specific textField
+        if textField == self.priceField {
+            let textArray = resultString.components(separatedBy: ".")
+            if textArray.count > 2 { //Allow only one "."
+                return false
+            }
+            if textArray.count == 2 {
+                let lastString = textArray.last
+                if lastString!.count > 2 { //Check number of decimal places
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
 }

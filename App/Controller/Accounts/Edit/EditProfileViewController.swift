@@ -105,7 +105,7 @@ extension EditProfileViewController {
                     user["lName"] = self.lName.text!
                     
                     let imageData = self.displayPicture.image?.pngData()
-                    let imageName = makeImageName(currentUser!.value(forKey: "email") as! String)
+                    let imageName = makeImageName(currentUser!.objectId!)
                     let imageFile = PFFileObject(name: imageName, data: imageData!)
                     user["displayImage"] = imageFile
                     

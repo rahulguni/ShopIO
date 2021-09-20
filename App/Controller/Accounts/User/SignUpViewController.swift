@@ -38,7 +38,7 @@ extension SignUpViewController {
             let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
             self.present(alert, animated: true, completion: nil)
         }
-        else{
+        else if(isValidPhone(phone: self.phone.text!) && isValidPassword(password: self.password.text!)){
             let user = PFUser()
             if(password.text == passwordRe.text){
                 //Using email as username
@@ -79,6 +79,21 @@ extension SignUpViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        else {
+            var errorMsg: String?
+            if(!isValidPassword(password: self.password.text!) && !isValidPhone(phone: self.phone.text!)) {
+                errorMsg = "Invalid password: Password should be atleast 8 characters long inlcuding a big number and a letter. \nInvalid Phone: Phone number must be exactly 10 digits long."
+            }
+            else if(!isValidPassword(password: self.password.text!)) {
+                errorMsg = "Invalid password: Password should be atleast 8 characters long inlcuding a big number and a letter."
+            }
+            else if(!isValidPhone(phone: self.phone.text!)) {
+                errorMsg = "Invalid Phone: Phone number must be exactly 10 digits long."
+            }
+            let alert = customNetworkAlert(title: "Error signing up", errorString: errorMsg!)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     //Upload Photo
@@ -89,6 +104,14 @@ extension SignUpViewController {
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK:- General functions
+extension SignUpViewController {
+    private func isValidPassword(password: String) -> Bool {
+        let securedPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{8,}$")
+        return securedPassword.evaluate(with: password)
     }
 }
 
