@@ -1,20 +1,27 @@
-//
-//  MessageModel.swift
-//  App
-//
-//  Created by Rahul Guni on 8/17/21.
-//
-
 import Foundation
 import Parse
 
+/**/
+/*
+class MessageTableViewCell
+
+DESCRIPTION
+        This class is the model to render data from Message database. This class also has all the setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        08/17/2021
+*/
+/**/
+
 class MessageModel {
-    private var senderId: String?
-    private var receiverId: String?
-    private var chatRoomId: String?
-    private var senderName: String?
-    private var senderImage: UIImage?
+    private var senderId: String? // objectId of sender (which is always the user), foreign key to objectId of user.
+    private var receiverId: String? // objectId of receiver (which is always the shop), foreign key to obejctId of shop
+    private var chatRoomId: String? // objectId of the MessageModel itself, used in ChatRoom to render correct chats.
+    private var senderName: String? // Full name of sender (Queries done in the controller because this can be both shop or user)
+    private var senderImage: UIImage? // Image of sender (Queries done in the controller because this can be both shop or user)
     
+    // Constructor
     init(sender: String, receiver: String, chatRoomId: String) {
         self.senderId = sender
         self.receiverId = receiver

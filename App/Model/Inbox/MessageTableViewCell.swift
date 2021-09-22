@@ -48,7 +48,7 @@ class MessageTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes a boolean variable and a MessageModel to render the right data to tableview cell. First, the Message table in database is searched by the MessageModel variable's objectId to render the message sender. Then, using the same objectId, the chatroom table is searched to render the most recent message between the two parties.
+            This function takes a boolean variable and a MessageModel to render the right data to tableview cell. First, the Message table in database is searched by the MessageModel model's objectId variable to render the message sender. Then, using the same objectId, the chatroom table is searched to render the most recent message between the two parties.
 
     RETURNS
 
@@ -60,7 +60,7 @@ class MessageTableViewCell: UITableViewCell {
 
     DATE
 
-            6:27pm 8/18/2021
+            8/18/2021
 
     */
     /**/

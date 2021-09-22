@@ -1,20 +1,26 @@
-//
-//  Request.swift
-//  App
-//
-//  Created by Rahul Guni on 8/7/21.
-//
-
 import Foundation
 import Parse
 
+/**/
+/*
+class Request
+
+DESCRIPTION
+        This class is the model to render data from Request database. This class also has all the setter and getter properies for the parameters.
+        Rahul Guni
+DATE
+        08/07/2021
+*/
+/**/
+
 struct Request {
-    private var objectId: String?
-    private var shopId: String?
-    private var userId: String?
-    private var productId: String?
-    private var fulfilled: Bool?
+    private var objectId: String? // objectId of the request
+    private var shopId: String? // shopId of the requested Product, foreign key to objectId of shop database
+    private var userId: String? // userId of the requested Product, foreign key to objectId of user database
+    private var productId: String? //productId of the requested Product, foreign key to objectId of product
+    private var fulfilled: Bool? // boolean variable to record whether or not the request is fulfilled.
     
+    //Constructor
     init(request myRequest: PFObject) {
         self.objectId = myRequest.objectId
         self.shopId = myRequest.value(forKey: "shopId") as? String

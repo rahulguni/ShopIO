@@ -1,12 +1,18 @@
-//
-//  RequestsTableViewCell.swift
-//  App
-//
-//  Created by Rahul Guni on 8/7/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class MessageTableViewCell
+
+DESCRIPTION
+        This class is a UITableViewCell class that makes up the cells for Requests Table in RequestsViewController.
+AUTHOR
+        Rahul Guni
+DATE
+        08/07/2021
+*/
+/**/
 
 class RequestsTableViewCell: UITableViewCell {
     @IBOutlet weak var requestUser: UILabel!
@@ -22,6 +28,38 @@ class RequestsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    /**/
+    /*
+    func setParameters(request currRequest: Request)
+
+    NAME
+
+            setParameters - Sets the parameter for Requests Table View Cell.
+
+    SYNOPSIS
+
+            setParameters(request currRequest: Request)
+                currRequest        --> A Request Model to fill the table cells with the correct parameters
+
+    DESCRIPTION
+
+            This function takes Request to render the right data to tableview cell. First, the User table in database is searched by the Request model's userId variable to render the full name of the user who has sent the request. Then, using the productId, the Product table is searched to render the requested Product.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/18/2021
+
+    */
+    /**/
     
     func setParameters(request currRequest: Request) {
         let userQuery = PFQuery(className: "_User")
@@ -41,6 +79,6 @@ class RequestsTableViewCell: UITableViewCell {
             }
         }
     }
-    
+    /* func setParameters(request currRequest: Request) */
 
 }
