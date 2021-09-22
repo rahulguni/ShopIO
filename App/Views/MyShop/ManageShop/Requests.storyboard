@@ -72,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="requestsTable" destination="PlV-FN-HCG" id="bwz-42-5fD"/>
+                        <outlet property="titleLabel" destination="XWZ-5b-k3y" id="VVH-wJ-IM8"/>
                         <segue destination="13w-M4-5Q1" kind="presentation" identifier="goToMyProduct" id="TEc-ac-xyD"/>
                     </connections>
                 </viewController>

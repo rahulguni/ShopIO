@@ -55,6 +55,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
         shopCollection.isHidden = true
         followedShops.delegate = self
         followedShops.dataSource = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(searchClicked(_:)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +68,10 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
 
 //MARK:- IBOutlet Functions
 extension DiscoverViewController {
+    @IBAction func searchClicked(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToSearch", sender: self)
+    }
+    
     @IBAction func editDistance(_ sender: Any) {
         //get the Slider values from UserDefaults
         let defaultSliderValue = Float(round(self.radius))
@@ -170,28 +175,22 @@ extension DiscoverViewController {
             query.whereKey("userId", equalTo: currentUser!.objectId!)
             query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
                 if let objects = objects {
-                    if(objects.count == 0) {
-                        self.followedShops.backgroundColor = UIColor.gray
-                    }
-                    else {
-                        for object in objects {
-                            self.followedShops.backgroundColor = UIColor.white
-                            let followedShop = PFQuery(className: "Shop")
-                            followedShop.order(byAscending: "createdAt")
-                            followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
-                                if shop != nil {
-                                    let newShop = Shop(shop: shop)
-                                    self.followedList.append(newShop)
-                                }
-                                else {
-                                    let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
-                                    self.present(alert, animated: true, completion: nil)
-                                }
-                                self.followedShops.reloadData()
+                    for object in objects {
+                        self.followedShops.backgroundColor = UIColor.white
+                        let followedShop = PFQuery(className: "Shop")
+                        followedShop.order(byAscending: "createdAt")
+                        followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
+                            if shop != nil {
+                                let newShop = Shop(shop: shop)
+                                self.followedList.append(newShop)
                             }
+                            else {
+                                let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            self.followedShops.reloadData()
                         }
                     }
-                    
                 }
                 else {
                     self.followedList.removeAll()

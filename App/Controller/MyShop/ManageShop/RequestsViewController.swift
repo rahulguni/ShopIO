@@ -11,6 +11,7 @@ import Parse
 class RequestsViewController: UIViewController {
 
     @IBOutlet weak var requestsTable: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     private var requests : [Request] = []
     private var currShop: Shop?
@@ -24,6 +25,7 @@ class RequestsViewController: UIViewController {
         // Do any additional setup after loading the view.
         requestsTable.delegate = self
         requestsTable.dataSource = self
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,7 +58,7 @@ extension RequestsViewController {
         self.currShop = currShop
     }
     
-    func getProduct(currRequest: Request){
+    private func getProduct(currRequest: Request){
         let query = PFQuery(className: "Product")
         query.whereKey("objectId", equalTo: currRequest.getProductId())
         query.getFirstObjectInBackground{(product, error) in
@@ -100,7 +102,7 @@ extension RequestsViewController {
         }
     }
     
-    func fulfillRequest(currRequest: Request, currProduct: Product) {
+    private func fulfillRequest(currRequest: Request, currProduct: Product) {
         //changed fulfilled to true
         let query = PFQuery(className: "Request")
         query.whereKey("objectId", equalTo: currRequest.getObjectId())
@@ -124,7 +126,7 @@ extension RequestsViewController {
         }
     }
     
-    func deleteRequest(currRequest: Request, currProduct: Product) {
+    private func deleteRequest(currRequest: Request, currProduct: Product) {
         let query = PFQuery(className: "Request")
         query.whereKey("objectId", equalTo: currRequest.getObjectId())
         query.getFirstObjectInBackground{(request, error) in
@@ -149,7 +151,7 @@ extension RequestsViewController {
         }
     }
     
-    func sendMessage(currRequest: Request, currProduct: Product) {
+    private func sendMessage(currRequest: Request, currProduct: Product) {
         //search if chatroom already exists
         let query = PFQuery(className: "Messages")
         query.whereKey("receiverId", equalTo: currShop!.getShopId())
@@ -180,7 +182,7 @@ extension RequestsViewController {
         }
     }
     
-    func saveChat(message: PFObject, currProduct: Product) {
+    private func saveChat(message: PFObject, currProduct: Product) {
         let chatRoom = PFObject(className: "ChatRoom")
         chatRoom["chatRoomId"] = message.objectId!
         chatRoom["senderId"] = self.currShop!.getShopId()

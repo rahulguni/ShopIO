@@ -38,6 +38,10 @@ class UpdateProductCollectionViewController: UICollectionViewController {
         searchBar.isTranslucent = false
         searchBar.delegate = self
         navigationItem.titleView = searchBar
+        
+        if(myProducts.count == 0) {
+            noProductsFound()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,6 +77,15 @@ class UpdateProductCollectionViewController: UICollectionViewController {
                 product.setProduct(product: updateProduct)
             }
         }
+    }
+    
+    private func noProductsFound() {
+        self.view.backgroundColor = UIColor.lightGray
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+        label.textAlignment = .center
+        label.text = "No Products Found."
+        self.view.addSubview(label)
     }
     /*
     // MARK: - Navigation

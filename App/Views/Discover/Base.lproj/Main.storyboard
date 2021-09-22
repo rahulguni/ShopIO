@@ -114,7 +114,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here are your followed shops." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA0-4x-Lyd">
-                                <rect key="frame" x="20" y="103" width="241" height="28"/>
+                                <rect key="frame" x="20" y="103" width="374" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -138,14 +138,6 @@
                                     <action selector="editDistance:" destination="avQ-Yo-veJ" eventType="touchUpInside" id="cCZ-0z-dlX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5X-zC-Tk3">
-                                <rect key="frame" x="360" y="104" width="34" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
-                                <connections>
-                                    <segue destination="j3g-hP-m9r" kind="show" identifier="goToSearch" id="VeC-5N-k89"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I3S-RI-JVU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,6 +147,7 @@
                         <outlet property="followedShops" destination="Zyz-gL-jfg" id="vG7-tr-E4d"/>
                         <outlet property="shopCollection" destination="UtA-5u-fk9" id="zVI-jy-3e3"/>
                         <segue destination="bpA-eS-Fts" kind="presentation" identifier="goToShop" id="odE-Xb-3tr"/>
+                        <segue destination="j3g-hP-m9r" kind="show" identifier="goToSearch" id="Xk8-mw-v8p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqQ-pi-cOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -340,7 +333,6 @@
     </scenes>
     <resources>
         <image name="Shopio" width="125" height="125"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -38,6 +38,7 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
         self.ordersTable.dataSource = self
         currShop.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterChange(_:)))
+        checkOrderExists()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,6 +69,7 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 self.ordersTable.reloadData()
+                self.checkOrderExists()
             }
         }
     }
@@ -102,7 +104,26 @@ extension OrdersViewController {
     func goToViewController(identifier: String) {
         self.performSegue(withIdentifier: identifier, sender: self)
     }
-
+    
+    private func checkOrderExists() {
+        print(myOrders.count)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        if(self.myOrders.isEmpty){
+            self.ordersTable.isHidden = true
+            self.view.backgroundColor = UIColor.lightGray
+            label.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            label.textAlignment = .center
+            label.text = "No Orderes Found."
+            self.view.addSubview(label)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.ordersTable.isHidden = false
+            label.isHidden = true
+            label.removeFromSuperview()
+        }
+    }
+    
     private func getOrderItems() {
         self.currOrderItems.removeAll()
         let query = PFQuery(className: "Order_Item")
@@ -236,6 +257,7 @@ extension OrdersViewController {
                     self.myOrders.append(thisOrder)
                 }
                 self.ordersTable.reloadData()
+                self.checkOrderExists()
             }
             else {
                 let alert = customNetworkAlert(title: "Unable to connect", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
