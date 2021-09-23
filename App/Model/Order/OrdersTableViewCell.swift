@@ -1,12 +1,18 @@
-//
-//  OrdersTableViewCell.swift
-//  App
-//
-//  Created by Rahul Guni on 9/3/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class OrdersTableViewCell
+
+DESCRIPTION
+        This class is a UITableViewCell class that makes up the cells for Order Table in OrdersViewController.
+AUTHOR
+        Rahul Guni
+DATE
+        09/03/2021
+*/
+/**/
 
 class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var orderUser: UILabel!
@@ -26,6 +32,39 @@ class OrdersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /**/
+    /*
+    func setParameters(order: Order, forUser: Bool)
+
+    NAME
+
+            setParameters - Sets the parameter for Orders Table View Cell.
+
+    SYNOPSIS
+
+            setParameters(order: Order, forUser: Bool)
+                currOrder        --> An Order Object to fill the table cells with the correct parameters
+                forUser          --> A boolean variable to fill the table cell accordingly
+
+    DESCRIPTION
+
+            This function takes an Order object to render the right data to tableview cell. First, the Order table in database is searched by the Order model's objectId variable to render the details of the order. Then, according to the boolean variable set, either the Shop name or the user Details is rendered.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            08/03/2021
+
+    */
+    /**/
+    
     func setParameters(order: Order, forUser: Bool){
         self.orderTotal.text = "Total: " + String(order.getSubTotal())
         self.orderDate.text = "Date: \(order.getOrderDate())"
@@ -37,15 +76,48 @@ class OrdersTableViewCell: UITableViewCell {
             getOrderUser(order: order)
         }
     }
+    /* func setParameters(order: Order, forUser: Bool) */
     
-    func setStatus(order: Order) {
+    /**/
+    /*
+    private func setStatus(order: Order)
+
+    NAME
+
+            setStatus - Sets the label for status of the order.
+
+    SYNOPSIS
+
+            setStatus(order: Order, forUser: Bool)
+                currOrder        --> An Order Object to extract the order's objectId
+
+    DESCRIPTION
+
+            This function takes an Order object to render the right data to tableview cell. It searches whether or not the order is fulfilled. In case the order is deleted by shop, there will be no items in the Order_Item table. So, this function searches the Order_Items table to check if the order is fulfilled ot deleted, and renders it in the completion label.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/03/2021
+
+    */
+    /**/
+    
+    private func setStatus(order: Order) {
         if(order.getFulfilled() == false) {
             self.orderStatus.text = "Pending"
             self.orderStatus.isHidden = false
         }
         else {
-            let query = PFQuery(className: "Order_Item")
-            query.whereKey("orderId", equalTo: order.getObjectId())
+            let query = PFQuery(className: ShopIO.Order_Item().tableName)
+            query.whereKey(ShopIO.Order_Item().orderId, equalTo: order.getObjectId())
             query.findObjectsInBackground{(products, error) in
                 if let products = products {
                     if(products.count > 0) {
@@ -62,10 +134,43 @@ class OrdersTableViewCell: UITableViewCell {
             }
         }
     }
+    /* private func setStatus(order: Order)*/
     
-    func getOrderUser(order: Order){
-        let query = PFQuery(className: "_User")
-        query.whereKey("objectId", equalTo: order.getUsertId())
+    /**/
+    /*
+    private func getOrderUser(order: Order)
+
+    NAME
+
+            getOrderUser - Sets the label for user of the order.
+
+    SYNOPSIS
+
+                getOrderUser(order: Order)
+                currOrder        --> An Order Object to extract the order's userId
+
+    DESCRIPTION
+
+            This function takes an Order object to render the right data to tableview cell. It searches the user's table through the userId variable and renders the user's data.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/03/2021
+
+    */
+    /**/
+    
+    private func getOrderUser(order: Order){
+        let query = PFQuery(className: ShopIO.User().tableName)
+        query.whereKey(ShopIO.User().objectId, equalTo: order.getUsertId())
         query.getFirstObjectInBackground{(user, error) in
             if let user = user {
                 let currUser = User(userID: user)
@@ -85,10 +190,43 @@ class OrdersTableViewCell: UITableViewCell {
             }
         }
     }
+    /*private func getOrderUser(order: Order)*/
     
-    func getOrderShop(order: Order) {
-        let query = PFQuery(className: "Shop")
-        query.whereKey("objectId", equalTo: order.getShopId())
+    /**/
+    /*
+    private func getOrderShop(order: Order)
+
+    NAME
+
+            getOrderShop - Sets the label for the shop of the order.
+
+    SYNOPSIS
+
+                getOrderShop(order: Order)
+                currOrder        --> An Order Object to extract the order's shopId
+
+    DESCRIPTION
+
+            This function takes an Order object to render the right data to tableview cell. It searches the shop's table through the shopId variable and renders the shop's data.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/03/2021
+
+    */
+    /**/
+    
+    private func getOrderShop(order: Order) {
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().objectId, equalTo: order.getShopId())
         query.getFirstObjectInBackground{(shop, error) in
             if let shop = shop {
                 let currShop = Shop(shop: shop)
@@ -108,5 +246,6 @@ class OrdersTableViewCell: UITableViewCell {
             }
         }
     }
+    /*private func getOrderShop(order: Order)*/
 
 }

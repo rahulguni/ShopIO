@@ -1,10 +1,3 @@
-//
-//  ShopManager.swift
-//  App
-//
-//  Created by Rahul Guni on 7/30/21.
-//
-
 import Foundation
 import Parse
 
@@ -12,10 +5,23 @@ protocol shopManagerDelegate {
     func goToViewController(identifier: String)
 }
 
+/**/
+/*
+class ShopManager
+
+DESCRIPTION
+        This class is the model to render data from Shop database and perform a segue to specified destination once the shop has been renderd. This is used in many view controllers in order to render the shop data
+AUTHOR
+        Rahul Guni
+DATE
+        07/30/2021
+*/
+/**/
+
 class ShopManager {
-    private var currShop: Shop?
-    private var currProducts: [Product] = []
-    var delegate: shopManagerDelegate?
+    private var currShop: Shop? //Shop Object
+    private var currProducts: [Product] = [] //All Products of the shop
+    var delegate: shopManagerDelegate? //protocol variable
     
     func setShop(shop: Shop) {
         self.currShop = shop
@@ -29,10 +35,41 @@ class ShopManager {
         return self.currProducts
     }
     
+    /**/
+    /*
+    func checkShop(identifier: String)
+
+    NAME
+
+            checkShop - Checks if the user has a shop in Shop Table and performs segue
+
+    SYNOPSIS
+
+            checkShop(identifier: String)
+                identifier        --> A segue identifier to perform segue to specified locations
+
+    DESCRIPTION
+
+            This function takes a segue identifier string and performs segue to the given view controller. If no shop is found, the user is directed to add shop view controller.
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/30/2021
+
+    */
+    /**/
+    
     func checkShop(identifier: String) {
         //see if user already has a shop, if not go to register shop option.
-        let query = PFQuery(className: "Shop")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().userId, equalTo: currentUser!.objectId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if object != nil {
                 self.currShop = Shop(shop: object)
@@ -43,11 +80,44 @@ class ShopManager {
             }
         }
     }
+    /*func checkShop(identifier: String)*/
+    
+    /**/
+    /*
+    func goToShop(shop: Shop, identifier: String)
+
+    NAME
+
+            goToShop - Perform segue for the given shop object.
+
+    SYNOPSIS
+
+            goToShop(shop: Shop, identifier: String)
+                shop        --> A Shop object to render shop details.
+                identifier  --> A segue identifier to perform segue to specified locations
+
+    DESCRIPTION
+
+            This function takes a segue identifier string and performs segue to the given view controller for the passed Shop object.
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/30/2021
+
+    */
+    /**/
     
     func goToShop(shop: Shop, identifier: String) {
         //see if user already has a shop, if not go to register shop option.
-        let query = PFQuery(className: "Shop")
-        query.whereKey("objectId", equalTo: shop.getShopId())
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().objectId, equalTo: shop.getShopId())
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if object != nil {
                 self.currShop = Shop(shop: object)
@@ -55,13 +125,45 @@ class ShopManager {
             }
         }
     }
+    /*func goToShop(shop: Shop, identifier: String)*/
+    
+    /**/
+    /*
+     func getProducts(identifier: String)
+
+    NAME
+
+            getProducts - Renders all products of the shop and performs segue to given view controller.
+
+    SYNOPSIS
+
+            getProducts(identifier: String)
+                identifier  --> A segue identifier to perform segue to specified locations
+
+    DESCRIPTION
+
+            This function takes a segue identifier string and performs segue to the given view controller for the passed Shop object. It also fills the products array for products of the specified shop.
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/30/2021
+
+    */
+    /**/
     
     func getProducts(identifier: String) {
         //check if the user has products to load up in the next view
         self.currProducts.removeAll()
-        let query = PFQuery(className: "Product")
-        query.whereKey("shopId", equalTo: self.currShop!.getShopId())
-        query.order(byAscending: "title")
+        let query = PFQuery(className: ShopIO.Product().tableName)
+        query.whereKey(ShopIO.Product().shopId, equalTo: self.currShop!.getShopId())
+        query.order(byAscending: ShopIO.Product().title)
         query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
             if let products = products {
                 for currProduct in products {
@@ -72,5 +174,6 @@ class ShopManager {
             }
         }
     }
+    /*func getProducts(identifier: String)*/
     
 }

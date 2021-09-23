@@ -98,9 +98,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGq-5j-Oeh">
-                                <rect key="frame" x="20" y="807" width="374" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGq-5j-Oeh">
+                                <rect key="frame" x="20" y="832" width="374" height="30"/>
                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Check Out">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -119,6 +118,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PFk-ST-sSA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aGq-5j-Oeh" firstAttribute="bottom" secondItem="PFk-ST-sSA" secondAttribute="bottom" id="ZdI-eh-41A"/>
+                            <constraint firstItem="aGq-5j-Oeh" firstAttribute="leading" secondItem="PFk-ST-sSA" secondAttribute="leading" constant="20" id="ZwE-86-se7"/>
+                            <constraint firstItem="PFk-ST-sSA" firstAttribute="trailing" secondItem="aGq-5j-Oeh" secondAttribute="trailing" constant="20" id="r5Y-69-lsX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Cart" id="5FE-BT-F5U"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

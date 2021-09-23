@@ -69,13 +69,13 @@ class MessageTableViewCell: UITableViewCell {
         let query: PFQuery<PFObject>
         if(!bool) {
             //look for shops
-            query = PFQuery(className: "Shop")
-            query.whereKey("objectId", equalTo: currMessage.getReceiverId())
+            query = PFQuery(className: ShopIO.Shop().tableName)
+            query.whereKey(ShopIO.Shop().objectId, equalTo: currMessage.getReceiverId())
         }
         else{
             //look for users
-            query = PFQuery(className: "_User")
-            query.whereKey("objectId", equalTo: currMessage.getSenderId())
+            query = PFQuery(className: ShopIO.User().tableName)
+            query.whereKey(ShopIO.User().objectId, equalTo: currMessage.getSenderId())
         }
         
         query.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
@@ -105,16 +105,16 @@ class MessageTableViewCell: UITableViewCell {
                 }
                 
                 //set sender most recent Message to display (From chatRoom database)
-                let chatRoomQuery = PFQuery(className: "ChatRoom")
-                chatRoomQuery.whereKey("chatRoomId", equalTo: currMessage.getChatRoomId())
-                chatRoomQuery.order(byDescending: "updatedAt")
+                let chatRoomQuery = PFQuery(className: ShopIO.ChatRoom().tableName)
+                chatRoomQuery.whereKey(ShopIO.ChatRoom().chatRoomId, equalTo: currMessage.getChatRoomId())
+                chatRoomQuery.order(byDescending: ShopIO.ChatRoom().updatedAt)
                 
                 chatRoomQuery.getFirstObjectInBackground{(chatRoom, error) in
                     if let chatRoom = chatRoom {
                         let id: String = chatRoom.objectId!
-                        let message: String = chatRoom.value(forKey: "message") as! String
-                        let senderId: String = chatRoom.value(forKey: "senderId") as! String
-                        let updateTime: Date = chatRoom.value(forKey: "updatedAt") as! Date
+                        let message: String = chatRoom.value(forKey: ShopIO.ChatRoom().message) as! String
+                        let senderId: String = chatRoom.value(forKey: ShopIO.ChatRoom().senderId) as! String
+                        let updateTime: Date = chatRoom.value(forKey: ShopIO.ChatRoom().updatedAt) as! Date
                         
                         let newRoom = ChatRoom(objectId: chatRoom.objectId!, chatRoomId: id, message: message, senderId: senderId, date: updateTime)
                         self.message.text = newRoom.getMessage()

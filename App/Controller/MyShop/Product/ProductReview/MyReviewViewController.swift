@@ -34,7 +34,7 @@ class MyReviewViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "reloadReviews") {
             let destination = segue.destination as! ProductReviewViewController
-            destination.addRating(rating: self.currRating!)
+            destination.updateRating(rating: self.currRating!)
         }
     }
     
@@ -111,6 +111,8 @@ extension MyReviewViewController {
                 review["content"] = self.reviewContent.text!
                 review["userId"] = currentUser!.objectId!
                 review["rating"] = self.rating
+                
+                self.currRating = ProductReview(reviewObject: review)
                 
                 review.saveInBackground{(success, error) in
                     if(success) {

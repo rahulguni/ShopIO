@@ -68,14 +68,14 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             setPriceLabelsVisibility(forDiscount: true, forOriginal: false)
             originalPrice.text = currProduct.getOriginalPrice()
         }
-        let query = PFQuery(className: "Product_Images")
+        let query = PFQuery(className: ShopIO.Product_Images().tableName)
 
-        query.whereKey("productId", equalTo: currProduct.getObjectId())
-        query.whereKey("isDefault", equalTo: "True")
+        query.whereKey(ShopIO.Product_Images().productId, equalTo: currProduct.getObjectId())
+        query.whereKey(ShopIO.Product_Images().isDefault, equalTo: "True")
         
         query.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
-                let productImage = object?.value(forKey: "productImage")
+                let productImage = object?.value(forKey: ShopIO.Product_Images().productImage)
                 let tempImage = productImage as! PFFileObject
                 tempImage.getDataInBackground{(imageData: Data?, error: Error?) in
                     if let error = error {

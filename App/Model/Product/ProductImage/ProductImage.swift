@@ -16,16 +16,16 @@ DATE
 /**/
 
 class ProductImage{
-    private var currImage: PFFileObject
-    private var objectId: String
-    private var isDefault: Bool
-    private var currUIImage: UIImage?
+    private var currImage: PFFileObject //Image of the product, rendered as a PFFileObject used in ProductReviewController
+    private var objectId: String //ObjectId of the image
+    private var isDefault: Bool //Decides the current display picture
+    private var currUIImage: UIImage? //UIImage fetched from currImage
     
     //constructor
     init(image productImage: PFObject){
         self.objectId = productImage.objectId! as String
-        self.isDefault = productImage["isDefault"] as! Bool
-        self.currImage = productImage["productImage"] as! PFFileObject
+        self.isDefault = productImage[ShopIO.Product_Images().isDefault] as! Bool
+        self.currImage = productImage[ShopIO.Product_Images().productImage] as! PFFileObject
     }
     
     func getImage() -> PFFileObject {

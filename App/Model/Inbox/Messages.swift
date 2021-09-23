@@ -20,6 +20,6 @@ class Messages: PFObject, PFSubclassing {
 
     //Returns the Parse database table where messages are stored
     class func parseClassName() -> String {
-        return "Messages"
+        return ShopIO.Messages().tableName
     }
 }

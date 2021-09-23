@@ -16,8 +16,8 @@ DATE
 /**/
 
 class Product {
-    private var objectId: String?
-    private var userId: String?
+    private var objectId: String? //objectId of the product
+    private var userId: String? //userId of the product owner, foreign key to users table
     private var title: String?
     private var summary: String?
     private var type: Int?
@@ -31,15 +31,15 @@ class Product {
     //constructor
     init(product productObject: PFObject?){
         self.objectId = productObject?.objectId
-        self.userId = productObject!["userId"] as? String
-        self.title = productObject!["title"] as? String
-        self.summary = productObject!["summary"] as? String
-        self.price = productObject!["price"] as? Double
-        self.quantity = productObject!["quantity"] as? Int
-        self.shopId = productObject!["shopId"] as? String
-        self.discount = productObject!["discount"] as? Double
-        self.content = productObject!["content"] as? String
-        self.updatedAt = productObject!.value(forKey: "updatedAt") as? Date
+        self.userId = productObject![ShopIO.Product().userId] as? String
+        self.title = productObject![ShopIO.Product().title] as? String
+        self.summary = productObject![ShopIO.Product().summary] as? String
+        self.price = productObject![ShopIO.Product().price] as? Double
+        self.quantity = productObject![ShopIO.Product().quantity] as? Int
+        self.shopId = productObject![ShopIO.Product().shopId] as? String
+        self.discount = productObject![ShopIO.Product().discount] as? Double
+        self.content = productObject![ShopIO.Product().content] as? String
+        self.updatedAt = productObject!.value(forKey: ShopIO.Product().updatedAt) as? Date
     }
     
     func setProduct(product productObject: Product) {

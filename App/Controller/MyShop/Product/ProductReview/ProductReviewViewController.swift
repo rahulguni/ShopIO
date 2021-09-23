@@ -65,8 +65,20 @@ extension ProductReviewViewController {
         self.currProduct = product
     }
     
-    func addRating(rating: ProductReview) {
-        self.ratings.append(rating)
+    func updateRating(rating: ProductReview) {
+        var counter = 0
+        var reviewFound: Bool = false
+        for currRating in ratings {
+            if currRating.getObjectId() == rating.getObjectId() {
+                ratings.remove(at: counter)
+                ratings.insert(rating, at: 0)
+                reviewFound = true
+            }
+            counter += 1
+        }
+        if(!reviewFound) {
+            self.ratings.insert(rating, at: 0)
+        }
     }
     
     private func checkProductInOrder(){

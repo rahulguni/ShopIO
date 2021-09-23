@@ -31,7 +31,7 @@ class MyOrderViewController: UIViewController {
         // Do any additional setup after loading the view.
         orderTable.delegate = self
         orderTable.dataSource = self
-        if(forMyOrders) {
+        if(forMyOrders || self.currOrder!.getFulfilled()) {
             confirmOrderButton.isHidden = true
             deleteOrderButton.isHidden = true
         }

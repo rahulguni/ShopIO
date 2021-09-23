@@ -56,25 +56,25 @@ class RequestsTableViewCell: UITableViewCell {
 
     DATE
 
-            8/18/2021
+            8/07/2021
 
     */
     /**/
     
     func setParameters(request currRequest: Request) {
-        let userQuery = PFQuery(className: "_User")
-        userQuery.whereKey("objectId", equalTo: currRequest.getUserId())
+        let userQuery = PFQuery(className: ShopIO.User().tableName)
+        userQuery.whereKey(ShopIO.User().objectId, equalTo: currRequest.getUserId())
         userQuery.getFirstObjectInBackground{(user, error) in
             if(user != nil) {
-                let name = (user?.value(forKey: "fName") as! String) + " " + (user?.value(forKey: "lName") as! String)
+                let name = (user?.value(forKey: ShopIO.User().fName) as! String) + " " + (user?.value(forKey: ShopIO.User().lName) as! String)
                 self.requestUser.text = "From: \(name)"
             }
         }
-        let productQuery = PFQuery(className: "Product")
-        productQuery.whereKey("objectId", equalTo: currRequest.getProductId())
+        let productQuery = PFQuery(className: ShopIO.Product().tableName)
+        productQuery.whereKey(ShopIO.Product().objectId, equalTo: currRequest.getProductId())
         productQuery.getFirstObjectInBackground{(product, error) in
             if(product != nil) {
-                let product = product?.value(forKey: "title") as? String
+                let product = product?.value(forKey: ShopIO.Product().title) as? String
                 self.requestProduct.text = "Product: \(product!)"
             }
         }

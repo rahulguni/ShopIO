@@ -1,22 +1,29 @@
-//
-//  CartModel.swift
-//  App
-//
-//  Created by Rahul Guni on 7/24/21.
-//
-
 import Foundation
 
+/**/
+/*
+class Cart
+
+DESCRIPTION
+        This class is the model to make an object that corresponds to the Orders Table. This class also has all the required setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        07/24//2021
+*/
+/**/
+
 class Cart {
-    private final var userId = currentUser!.objectId!
-    private var sessionId: String = currentUser!.sessionToken!
+    private final var userId = currentUser!.objectId! //userId assosciated with the order
+    private var sessionId: String = currentUser!.sessionToken! //session token of the user while ordering
     private var subTotal: Double?
     private var itemDiscount: Double?
     private var tax: Double?
     private var shipping: Double?
     private var total: Double?
-    private var addressId: String?
+    private var addressId: String? //shipment address of the order, foreign key to address table.
     
+    //constructor
     init(cartItems: [CartItem]){
         var currTotal = 0.0
         var currDiscount = 0.0

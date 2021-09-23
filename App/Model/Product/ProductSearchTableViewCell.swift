@@ -1,13 +1,19 @@
-//
-//  ProductSearchTableViewCell.swift
-//  App
-//
-//  Created by Rahul Guni on 9/14/21.
-//
-
 import UIKit
 import Parse
 import MapKit
+
+/**/
+/*
+class ProductSearchTableViewCell
+
+DESCRIPTION
+        This class is a UITableViewCell class that makes up the cells for Search Products Table view  in SearchViewController as well as from the search function in a certain store.
+AUTHOR
+        Rahul Guni
+DATE
+        09/14/2021
+*/
+/**/
 
 class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
     @IBOutlet weak var productImage: UIImageView!
@@ -33,6 +39,39 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
         // Configure the view for the selected state
     }
     
+    /**/
+    /*
+    func setParameters(product: Product, forShop: Bool)
+
+    NAME
+
+            setParameters - Sets the parameter for Search Products Table View Cell.
+
+    SYNOPSIS
+
+            setParameters(product: Product, forShop: Bool)
+                product        --> A Product Object to fill the table cells with the correct parameters
+                forShop        --> A boolean variable to determine after which view controller the table view cell is rendered.
+
+    DESCRIPTION
+
+            This function takes a Product object to render the right data to tableview cell. First, the Product table in database is searched by the Product model's objectId variable to render the details of the product. Then, using the shopId and productId, the Shop table and Product_Review table is searched to render the shop's information and product's ratings respectively.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/14/2021
+
+    */
+    /**/
+    
     func setParameters(product: Product, forShop: Bool) {
         self.title.text = product.getTitle()
         if(product.getDiscount() != 0) {
@@ -54,12 +93,45 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
         }
         getProductPhoto(productId: product.getObjectId())
     }
+    /*func setParameters(product: Product, forShop: Bool)*/
+    
+    /**/
+    /*
+     private func getRating(productId: String)
+
+    NAME
+
+            getRating - Sets the parameter for Search Products Table View Cell's Product ratings label.
+
+    SYNOPSIS
+
+            getRating(productId: String)
+                productId        --> productId string to search the Product_Review table
+
+    DESCRIPTION
+
+            This function is used inside of setParameters function to render the current product's rating
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/14/2021
+
+    */
+    /**/
     
     private func getRating(productId: String) {
         var ratings: [ProductReview] = []
-        let query = PFQuery(className: "Product_Review")
-        query.whereKey("productId", equalTo: productId)
-        query.order(byDescending: "updatedAt")
+        let query = PFQuery(className: ShopIO.Product_Review().tableName)
+        query.whereKey(ShopIO.Product_Review().productId, equalTo: productId)
+        query.order(byDescending: ShopIO.Product_Review().updatedAt)
         query.findObjectsInBackground{(reviews, errors) in
             if let reviews = reviews {
                 var totalReview: Double = 0.0
@@ -72,6 +144,7 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
                     ratings.append(currReview)
                     totalReview = ((totalReview / Double(ratings.count)) * 100).rounded() / 100
                 }
+                //If product review does not exist, set the rating label to N/A.
                 if(totalReview > 0) {
                     self.shopName.text = "Rating: \(totalReview) / 5.0 (\(reviewCount))"
                 }
@@ -81,10 +154,43 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
             }
         }
     }
+    /* private func getRating(producyId: String)*/
+    
+    /**/
+    /*
+     private func getShop(shopId: String)
+
+    NAME
+
+            getShop - Sets the parameter for Search Products Table View Cell's Shop Label.
+
+    SYNOPSIS
+
+            getShop(shopId: String)
+                shopId        --> shopId string to search the Shop table
+
+    DESCRIPTION
+
+            This function is used inside of setParameters function to render the current product's shop.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/14/2021
+
+    */
+    /**/
     
     private func getShop(shopId: String){
-        let query = PFQuery(className: "Shop")
-        query.whereKey("objectId", equalTo: shopId)
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().objectId, equalTo: shopId)
         query.getFirstObjectInBackground{(shop, error) in
             if let shop = shop {
                 let currShop = Shop(shop: shop)
@@ -99,6 +205,39 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
             }
         }
     }
+    /* private func getShop(shopId: String) */
+    
+    /**/
+    /*
+     private func getProductPhoto(productId: String)
+
+    NAME
+
+            getProductPhoto - Sets the parameter for Search Products Table View Cell's Product photo.
+
+    SYNOPSIS
+
+            getProductPhoto(productId: String)
+                productId        --> productId string to search the Product_Images table
+
+    DESCRIPTION
+
+            This function is used inside of setParameters function to render the current product's default picture.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/14/2021
+
+    */
+    /**/
     
     private func getProductPhoto(productId: String) {
         let query = PFQuery(className: "Product_Images")
@@ -123,11 +262,46 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
             }
         }
     }
+    /*private func getProductPhoto(productId: String)*/
+    
+    /**/
+    /*
+     private func setPriceLabelsVisibility(forDiscount: Bool, forOriginal: Bool)
+
+    NAME
+
+            setPriceLabelsVisibility - Sets the labels according to the discount amount- whether or not the discount amount exists.
+
+    SYNOPSIS
+
+            setPriceLabelsVisibility(forDiscount: Bool, forOriginal: Bool)
+                forDiscount     --> A boolean variable to set the visibilty of labels
+                forOriginal     --> A boolean variable to set the visibilty of labels
+
+    DESCRIPTION
+
+            This function takes two boolean variables in order to set the visibility of price, discount and originalPrice labels on the condition of whether or not discount exists for the given product.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/14/2021
+
+    */
+    /**/
     
     private func setPriceLabelsVisibility(forDiscount: Bool, forOriginal: Bool) {
         self.price.isHidden = forDiscount
         self.discount.isHidden = forDiscount
         self.originalPrice.isHidden = forOriginal
     }
+    /*private func setPriceLabelsVisibility(forDiscount: Bool, forOriginal: Bool)*/
 
 }

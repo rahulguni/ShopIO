@@ -1,33 +1,40 @@
-//
-//  Shop.swift
-//  App
-//
-//  Created by Rahul Guni on 7/1/21.
-//
-
 import Foundation
 import UIKit
 import Parse
 import MapKit
 
+/**/
+/*
+class Shop
+
+DESCRIPTION
+        This class is the model to render data from Shop database. This class also has all the required setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        07/01/2021
+*/
+/**/
+
 class Shop {
     
-    private var objectId: String?
-    private var userId: String?
+    private var objectId: String? //objectId of the shop
+    private var userId: String? //objectId of the owner of the shop, foreign key to users table
     private var shopTitle: String?
     private var shopSlogan: String?
-    private var shippingCost: Double?
+    private var shippingCost: Double? //fixed shipping cost for shops.
     private var shopImage: PFFileObject?
-    private var geoPoints: PFGeoPoint?
+    private var geoPoints: PFGeoPoint? //geoPoints of the shop location, added/updated when the shop address is added/updated.
     
+    //constructor
     init(shop shopObject: PFObject?){
         self.objectId = shopObject!.objectId
-        self.userId = shopObject!["userId"] as? String
-        self.shopTitle = shopObject!["title"] as? String
-        self.shopSlogan = shopObject!["slogan"] as? String
-        self.shippingCost = shopObject!["shippingCost"] as? Double
-        self.shopImage = shopObject!["shopImage"] as? PFFileObject
-        self.geoPoints = shopObject!["geoPoints"] as? PFGeoPoint
+        self.userId = shopObject![ShopIO.Shop().userId] as? String
+        self.shopTitle = shopObject![ShopIO.Shop().title] as? String
+        self.shopSlogan = shopObject![ShopIO.Shop().slogan] as? String
+        self.shippingCost = shopObject![ShopIO.Shop().shippingCost] as? Double
+        self.shopImage = shopObject![ShopIO.Shop().shopImage] as? PFFileObject
+        self.geoPoints = shopObject![ShopIO.Shop().geoPoints] as? PFGeoPoint
     }
     
     init(userId: String?) {

@@ -1,12 +1,18 @@
-//
-//  OrderItemModel.swift
-//  App
-//
-//  Created by Rahul Guni on 9/4/21.
-//
-
 import Foundation
 import Parse
+
+/**/
+/*
+class OrderItem
+
+DESCRIPTION
+        This class is the model to render data from Order_Item database. This class also has all the required setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        09/04/2021
+*/
+/**/
 
 class OrderItem{
     private var objectId: String?
@@ -15,12 +21,13 @@ class OrderItem{
     private var productId: String?
     private var quantity: Int?
     
+    //constructor
     init(orderItem: PFObject) {
         self.objectId = orderItem.objectId!
-        self.orderId = orderItem.value(forKey: "orderId") as? String
-        self.price = orderItem.value(forKey: "price") as? Double
-        self.productId = orderItem.value(forKey: "productId") as? String
-        self.quantity = orderItem.value(forKey: "quantity") as? Int
+        self.orderId = orderItem.value(forKey: ShopIO.Order_Item().orderId) as? String
+        self.price = orderItem.value(forKey: ShopIO.Order_Item().price) as? Double
+        self.productId = orderItem.value(forKey: ShopIO.Order_Item().productId) as? String
+        self.quantity = orderItem.value(forKey: ShopIO.Order_Item().quantity) as? Int
     }
     
     func getObjectId() -> String {

@@ -112,7 +112,7 @@ extension AddShopViewController {
         
         //for image naming
         
-        let imageName = makeImageName(shop.objectId!)
+        let imageName = makeImageName(currentUser!.objectId!)
         let imageFile = PFFileObject(name: imageName, data:imageData!)
         shop["shopImage"] = imageFile
         

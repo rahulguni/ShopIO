@@ -24,10 +24,10 @@ struct Request {
     //Constructor
     init(request myRequest: PFObject) {
         self.objectId = myRequest.objectId
-        self.shopId = myRequest.value(forKey: "shopId") as? String
-        self.userId = myRequest.value(forKey: "userId") as? String
-        self.productId = myRequest.value(forKey: "productId") as? String
-        self.fulfilled = myRequest.value(forKey: "fulfilled") as? Bool
+        self.shopId = myRequest.value(forKey: ShopIO.Request().shopId) as? String
+        self.userId = myRequest.value(forKey: ShopIO.Request().userId) as? String
+        self.productId = myRequest.value(forKey: ShopIO.Request().productId) as? String
+        self.fulfilled = myRequest.value(forKey: ShopIO.Request().fulfilled) as? Bool
     }
     
     func getObjectId() -> String {

@@ -22,9 +22,9 @@ DATE
 /**/
 
 class ProductReview {
-    private var objectId: String?
-    private var userId: String?
-    private var productId: String?
+    private var objectId: String? // objectId of the product review
+    private var userId: String? //userId of the product reveiwer, foreign key to users table
+    private var productId: String? //productId of the reviewed product, foreign key to Products table
     private var title: String?
     private var content: String?
     private var rating: Int?
@@ -32,11 +32,11 @@ class ProductReview {
     //constructor
     init(reviewObject: PFObject) {
         self.objectId = reviewObject.objectId!
-        self.userId = reviewObject["userId"] as? String
-        self.productId = reviewObject["productId"] as? String
-        self.title = reviewObject["title"] as? String
-        self.content = reviewObject["content"] as? String
-        self.rating = reviewObject["rating"] as? Int
+        self.userId = reviewObject[ShopIO.Product_Review().userId] as? String
+        self.productId = reviewObject[ShopIO.Product_Review().productId] as? String
+        self.title = reviewObject[ShopIO.Product_Review().title] as? String
+        self.content = reviewObject[ShopIO.Product_Review().content] as? String
+        self.rating = reviewObject[ShopIO.Product_Review().rating] as? Int
     }
     
     func getObjectId() -> String {

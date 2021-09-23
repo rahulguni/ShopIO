@@ -26,11 +26,11 @@ struct User {
     
     init(userID currUser: PFObject){
         self.objectId = currUser.objectId
-        self.email = currUser.value(forKey: "email") as? String
-        self.phone = currUser.value(forKey: "phone") as? Int
-        self.fName = currUser.value(forKey: "fName") as? String
-        self.lName = currUser.value(forKey: "lName") as? String
-        self.displayImage = currUser.value(forKey: "displayImage") as? PFFileObject
+        self.email = currUser.value(forKey: ShopIO.User().email) as? String
+        self.phone = currUser.value(forKey: ShopIO.User().phone) as? Int
+        self.fName = currUser.value(forKey: ShopIO.User().fName) as? String
+        self.lName = currUser.value(forKey: ShopIO.User().lName) as? String
+        self.displayImage = currUser.value(forKey: ShopIO.User().displayImage) as? PFFileObject
     }
     
     func getObjectId() -> String {

@@ -21,6 +21,6 @@ class MyChatRoom: PFObject, PFSubclassing {
 
     //Returns the Parse database table where messages are stored
     class func parseClassName() -> String {
-        return "ChatRoom"
+        return ShopIO.ChatRoom().tableName
     }
 }

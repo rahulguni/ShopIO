@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6A5B9145287AFE088DD0AB2C /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C630384B2A734E972FA5C16 /* Pods_App.framework */; };
 		DE1048F126CB9E47003F5D11 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1048F026CB9E47003F5D11 /* MessageModel.swift */; };
+		DE1933CE26FC50CF005A47E0 /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1933CD26FC50CF005A47E0 /* NameSpace.swift */; };
 		DE1F3596268682F3005195CA /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F3595268682F3005195CA /* AddressViewController.swift */; };
 		DE1F35982686891B005195CA /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F35972686891B005195CA /* StateModel.swift */; };
 		DE1F359A26869F89005195CA /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F359926869F89005195CA /* Alerts.swift */; };
@@ -78,7 +79,6 @@
 		DEBBA85026AE9A880073D33E /* AddProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */; };
 		DEBBA85226AE9AD10073D33E /* MyStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85126AE9AD10073D33E /* MyStore.storyboard */; };
 		DEBBA85426AE9B020073D33E /* AddShop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBBA85326AE9B020073D33E /* AddShop.storyboard */; };
-		DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */; };
 		DEBD448A26E2BA4F00A72FDA /* Orders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBD448926E2BA4F00A72FDA /* Orders.storyboard */; };
 		DEBE29D626E30435006D9EED /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBE29D526E30435006D9EED /* OrdersTableViewCell.swift */; };
 		DEBE29D826E30538006D9EED /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBE29D726E30538006D9EED /* OrderModel.swift */; };
@@ -106,6 +106,7 @@
 		5C630384B2A734E972FA5C16 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1EC63427575DA26D5E1497D /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		DE1048F026CB9E47003F5D11 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		DE1933CD26FC50CF005A47E0 /* NameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSpace.swift; sourceTree = "<group>"; };
 		DE1F3595268682F3005195CA /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		DE1F35972686891B005195CA /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DE1F359926869F89005195CA /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
@@ -177,7 +178,6 @@
 		DEBBA84F26AE9A880073D33E /* AddProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddProduct.storyboard; sourceTree = "<group>"; };
 		DEBBA85126AE9AD10073D33E /* MyStore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyStore.storyboard; sourceTree = "<group>"; };
 		DEBBA85326AE9B020073D33E /* AddShop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddShop.storyboard; sourceTree = "<group>"; };
-		DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartAddressTableViewCell.swift; sourceTree = "<group>"; };
 		DEBD448926E2BA4F00A72FDA /* Orders.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Orders.storyboard; sourceTree = "<group>"; };
 		DEBE29D526E30435006D9EED /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
 		DEBE29D726E30538006D9EED /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
@@ -432,7 +432,6 @@
 				DE87FE4526AD05D500F996C7 /* CartItemModel.swift */,
 				DE87FE4326AD040B00F996C7 /* CartModel.swift */,
 				DE6A6A3D26AFDC9A006B4D04 /* CartItemCollectionViewCell.swift */,
-				DEBC069326D60819004C0274 /* CartAddressTableViewCell.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -491,6 +490,7 @@
 				DE1F35972686891B005195CA /* StateModel.swift */,
 				DE3E66752637A4E900128755 /* AccountTableOptions.swift */,
 				DEC9E4F426B4BF18002891A9 /* EnumFiles.swift */,
+				DE1933CD26FC50CF005A47E0 /* NameSpace.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -867,7 +867,6 @@
 				DE5C235126EC74A1003890F7 /* ProductReviewTableViewCell.swift in Sources */,
 				DE1F80F826F080C700F2E472 /* SearchViewController.swift in Sources */,
 				DE5FDB0C26ED51B3006589B8 /* MyReviewViewController.swift in Sources */,
-				DEBC069426D60819004C0274 /* CartAddressTableViewCell.swift in Sources */,
 				DEBE29DA26E3073F006D9EED /* OrdersViewController.swift in Sources */,
 				DE1F359A26869F89005195CA /* Alerts.swift in Sources */,
 				DE464BF026EB1C73002ADA47 /* ProductReviewViewController.swift in Sources */,
@@ -892,6 +891,7 @@
 				DEC59D5926BF6BA2005EE1C5 /* RequestsTableViewCell.swift in Sources */,
 				DEBE29D826E30538006D9EED /* OrderModel.swift in Sources */,
 				DE9978F726BD057A0043AD8C /* UpdateProductCollectionViewCell.swift in Sources */,
+				DE1933CE26FC50CF005A47E0 /* NameSpace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

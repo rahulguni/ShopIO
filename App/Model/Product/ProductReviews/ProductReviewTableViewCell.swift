@@ -112,8 +112,8 @@ class ProductReviewTableViewCell: UITableViewCell {
     /**/
     
     func getReviewUser(userId: String) {
-        let query = PFQuery(className: "_User")
-        query.whereKey("objectId", equalTo: userId)
+        let query = PFQuery(className: ShopIO.User().tableName)
+        query.whereKey(ShopIO.User().objectId, equalTo: userId)
         query.getFirstObjectInBackground{(user, error) in
             if let user = user {
                 let currUser = User(userID: user)

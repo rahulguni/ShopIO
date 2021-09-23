@@ -29,15 +29,15 @@ struct Address {
     //constructor
     init(address addressObject: PFObject?){
         self.objectId = addressObject!.objectId
-        self.userId = addressObject!["userId"] as? String
-        self.line_1 = addressObject!["line_1"] as? String
-        self.line_2 = addressObject!["line_2"] as? String
-        self.city = addressObject!["city"] as? String
-        self.state = addressObject!["state"] as? String
-        self.zip = addressObject!["zip"] as? String
-        self.phone = addressObject!["phone"] as? Int
-        self.country = addressObject!["country"] as? String
-        self.geoLocation = addressObject!["geoPoints"] as? PFGeoPoint
+        self.userId = addressObject![ShopIO.Address().objectId] as? String
+        self.line_1 = addressObject![ShopIO.Address().line1] as? String
+        self.line_2 = addressObject![ShopIO.Address().line2] as? String
+        self.city = addressObject![ShopIO.Address().city] as? String
+        self.state = addressObject![ShopIO.Address().state] as? String
+        self.zip = addressObject![ShopIO.Address().zip] as? String
+        self.phone = addressObject![ShopIO.Address().phone] as? Int
+        self.country = addressObject![ShopIO.Address().country] as? String
+        self.geoLocation = addressObject![ShopIO.Address().geoPoints] as? PFGeoPoint
     }
     
     func getObjectId() -> String {
