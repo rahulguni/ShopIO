@@ -44,11 +44,11 @@ class MessageTableViewCell: UITableViewCell {
 
             setParameters(forShop bool: Bool, message currMessage: MessageModel)
                 forShop             --> A boolean variable to determine if the message cell is for shop inbox or user inbox
-                message             --> Message model from database to name the message sender as well as get into chatroom from the MessageModel objectId.
+                message             --> Message object from database to name the message sender as well as get into chatroom from the MessageModel objectId.
 
     DESCRIPTION
 
-            This function takes a boolean variable and a MessageModel to render the right data to tableview cell. First, the Message table in database is searched by the MessageModel model's objectId variable to render the message sender. Then, using the same objectId, the chatroom table is searched to render the most recent message between the two parties.
+            This function takes a boolean variable and a MessageModel object to render the right data to tableview cell. First, the Message table in database is searched by the MessageModel model's objectId variable to render the message sender. Then, using the same objectId, the chatroom table is searched to render the most recent message between the two parties.
 
     RETURNS
 

@@ -40,11 +40,11 @@ class RequestsTableViewCell: UITableViewCell {
     SYNOPSIS
 
             setParameters(request currRequest: Request)
-                currRequest        --> A Request Model to fill the table cells with the correct parameters
+                currRequest        --> A Request Object to fill the table cells with the correct parameters
 
     DESCRIPTION
 
-            This function takes Request to render the right data to tableview cell. First, the User table in database is searched by the Request model's userId variable to render the full name of the user who has sent the request. Then, using the productId, the Product table is searched to render the requested Product.
+            This function takes a Request object to render the right data to tableview cell. First, the User table in database is searched by the Request model's userId variable to render the full name of the user who has sent the request. Then, using the productId, the Product table is searched to render the requested Product.
 
     RETURNS
 

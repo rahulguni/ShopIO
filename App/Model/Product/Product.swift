@@ -1,13 +1,19 @@
-//
-//  Product.swift
-//  App
-//
-//  Created by Rahul Guni on 7/15/21.
-//
-
 import Foundation
 import UIKit
 import Parse
+
+/**/
+/*
+class Product
+
+DESCRIPTION
+        This class is the model to render data from Product database. This class also has all the setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        07/15/2021
+*/
+/**/
 
 class Product {
     private var objectId: String?
@@ -22,6 +28,7 @@ class Product {
     private var shopId: String?
     private var updatedAt: Date?
     
+    //constructor
     init(product productObject: PFObject?){
         self.objectId = productObject?.objectId
         self.userId = productObject!["userId"] as? String

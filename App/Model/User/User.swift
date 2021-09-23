@@ -1,13 +1,19 @@
-//
-//  User.swift
-//  App
-//
-//  Created by Rahul Guni on 7/14/21.
-//
-
 import Foundation
 import UIKit
 import Parse
+
+/**/
+/*
+class User
+
+DESCRIPTION
+        This class is the model to render data from User database. This class also has all the required setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        07/14/2021
+*/
+/**/
 
 struct User {
     

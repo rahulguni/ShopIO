@@ -7,6 +7,7 @@
 
 import Foundation
 
+//options for signIn
 enum forSignIn {
     case forAccount
     case forMyShop
@@ -15,6 +16,7 @@ enum forSignIn {
     case forInbox
 }
 
+//Options for Product
 enum ProductMode {
     case forMyShop
     case forCart
@@ -24,6 +26,7 @@ enum ProductMode {
     case forRequest
 }
 
+//options for address
 enum forAddress {
     case forShop
     case forEdit

@@ -1,16 +1,22 @@
-//
-//  Address.swift
-//  App
-//
-//  Created by Rahul Guni on 7/15/21.
-//
-
 import Foundation
 import Parse
 
+/**/
+/*
+class Address
+
+DESCRIPTION
+        This class is the model to render data from Address database. This class also has all the setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        07/15/2021
+*/
+/**/
+
 struct Address {
-    private var objectId: String?
-    private var userId: String?
+    private var objectId: String? //objectId of the address
+    private var userId: String? //userId of the address, foreign key to user table
     private var line_1: String?
     private var line_2: String?
     private var city: String?
@@ -18,8 +24,9 @@ struct Address {
     private var country: String?
     private var zip: String?
     private var phone: Int?
-    private var geoLocation: PFGeoPoint?
+    private var geoLocation: PFGeoPoint? //geoLocation of the address
     
+    //constructor
     init(address addressObject: PFObject?){
         self.objectId = addressObject!.objectId
         self.userId = addressObject!["userId"] as? String

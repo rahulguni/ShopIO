@@ -8,6 +8,19 @@
 import Foundation
 import Parse
 
+/**/
+/*
+class ProductReview
+
+DESCRIPTION
+        This class is the model to render data from Product_Review database. This class also has all the setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        09/10/2021
+*/
+/**/
+
 class ProductReview {
     private var objectId: String?
     private var userId: String?
@@ -16,6 +29,7 @@ class ProductReview {
     private var content: String?
     private var rating: Int?
     
+    //constructor
     init(reviewObject: PFObject) {
         self.objectId = reviewObject.objectId!
         self.userId = reviewObject["userId"] as? String

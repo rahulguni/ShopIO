@@ -1,13 +1,19 @@
-//
-//  ProductImage.swift
-//  App
-//
-//  Created by Rahul Guni on 8/14/21.
-//
-
 import Foundation
 import UIKit
 import Parse
+
+/**/
+/*
+class ProductImage
+ 
+DESCRIPTION
+        This class is the model to render data from Product_Image database. This class also has all the setter and getter properies for the parameters.
+AUTHOR
+        Rahul Guni
+DATE
+        08/14/2021
+*/
+/**/
 
 class ProductImage{
     private var currImage: PFFileObject
@@ -15,6 +21,7 @@ class ProductImage{
     private var isDefault: Bool
     private var currUIImage: UIImage?
     
+    //constructor
     init(image productImage: PFObject){
         self.objectId = productImage.objectId! as String
         self.isDefault = productImage["isDefault"] as! Bool

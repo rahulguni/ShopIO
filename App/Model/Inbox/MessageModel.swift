@@ -6,7 +6,7 @@ import Parse
 class MessageTableViewCell
 
 DESCRIPTION
-        This class is the model to render data from Message database. This class also has all the setter and getter properies for the parameters.
+        This class is the model to render data from Message database. This class also has all the required setter and getter properies for the parameters.
 AUTHOR
         Rahul Guni
 DATE

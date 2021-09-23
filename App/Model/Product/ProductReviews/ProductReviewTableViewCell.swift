@@ -8,6 +8,19 @@
 import UIKit
 import Parse
 
+/**/
+/*
+class ProductReviewTableViewCell
+ 
+DESCRIPTION
+        This class is a UITableViewCell class that makes up the cells for Reviews Table view in ProductReviewViewController.
+AUTHOR
+        Rahul Guni
+DATE
+        09/11/2021
+*/
+/**/
+
 class ProductReviewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userName: UILabel!
@@ -26,13 +39,78 @@ class ProductReviewTableViewCell: UITableViewCell {
 
     }
     
+    /**/
+    /*
+    func setParameters(productReviw: ProductReview)
+
+    NAME
+
+            setParameters - Sets the parameter for Review Table View Cell.
+
+    SYNOPSIS
+
+            setParameters(productReviw: ProductReview)
+                productReview      --> A ProductReview object to fill in the labels with correct data.
+
+    DESCRIPTION
+
+            This function takes an object from the ProductReview model and fills in the labels according to the data.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
+    
     func setParameters(productReviw: ProductReview) {
         self.productRating.text = productReviw.getRatingAsString()
         self.content.text = productReviw.getContent()
         self.title.text = productReviw.getTitle()
         getReviewUser(userId: productReviw.getUserId())
     }
+    /*func setParameters(productReviw: ProductReview)*/
 
+    /**/
+    /*
+    func getReviewUser(userId: String)
+
+    NAME
+
+            getReviewUser - Sets the label for the user who had written the review.
+
+    SYNOPSIS
+
+            getReviewUser(userId: String)
+                userId    --> userId string to query the user database
+
+    DESCRIPTION
+
+            This function takes the userId and fills the reviewer's name label.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
+    
     func getReviewUser(userId: String) {
         let query = PFQuery(className: "_User")
         query.whereKey("objectId", equalTo: userId)
@@ -43,4 +121,5 @@ class ProductReviewTableViewCell: UITableViewCell {
             }
         }
     }
+    /*func getReviewUser(userId: String)*/
 }

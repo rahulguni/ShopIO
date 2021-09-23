@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-//function to make keyboard disappear when tapped around
+// function to make keyboard disappear when tapped around
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -22,7 +22,7 @@ extension UIViewController {
     }
 }
 
-//function to make an array of buttons of a single view uniform
+// function to make an array of buttons of a single view uniform
 func modifyButtons(buttons: Array<UIButton>) {
     for button in buttons {
         button.layer.cornerRadius = 45
@@ -30,13 +30,13 @@ func modifyButtons(buttons: Array<UIButton>) {
     }
 }
 
-//function to make a single button uniform
+// function to make a single button uniform
 func modifyButton(button: UIButton) {
     button.layer.cornerRadius = 45
     button.layer.masksToBounds = true
 }
 
-//function to highlight uicollectionviewcell
+// function to highlight uicollectionviewcell
 func highlightCell(_ cell: UICollectionViewCell) {
     cell.contentView.layer.cornerRadius = 2.0
     cell.contentView.layer.borderWidth = 1.0
@@ -51,7 +51,37 @@ func highlightCell(_ cell: UICollectionViewCell) {
 //    cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
 }
 
-//function to make strikethrough text for product discount
+/**/
+/*
+ func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedString
+
+NAME
+
+        makeStrikethroughText - Display the price label as a strikethrough to display discount amount.
+
+SYNOPSIS
+
+        makeStrikethroughText(product currProduct: Product)
+            product            --> An object of Product model to get the product's original pirce.
+
+DESCRIPTION
+
+        This function takes an object of Product Model, and if the product has a discount, is called from the controller to convert the original product price to make it a strikethrough text.
+
+RETURNS
+
+        Returns a NSMutableAttributedString which has a strikethrough font
+
+AUTHOR
+
+        Rahul Guni
+
+DATE
+
+        8/18/2021
+
+*/
+/**/
 func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedString {
     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: currProduct.getOriginalPrice())
     attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
@@ -77,16 +107,13 @@ func makeImageName(_ name: String) -> String {
     return (date + name + ".jpeg")
 }
 
+//check if phone number is a valid number.
 func isValidPhone(phone: String) -> Bool{
     if(phone.count == 10) {
         return true
     }
     return false
 }
-
-//func checkPrice(price: String) -> Bool {
-//    
-//}
 
 //make picture rounded
 func makePictureRounded(picture: UIImageView) {
@@ -104,6 +131,7 @@ func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T>{
     return arr
 }
 
+//resize image for profile picture
 func resizeImage(image: UIImage) -> UIImage? {
     let size = image.size
     let targetSize = CGSize(width: 100, height: 100)
