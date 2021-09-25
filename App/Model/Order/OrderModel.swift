@@ -15,7 +15,7 @@ DATE
 /**/
 
 class Order {
-    private var objectId: String? //objectId of the order
+    private var objectId: String?       //objectId of the order
     private var subTotal: Double?
     private var total: Double?
     private var userId: String?
@@ -23,7 +23,7 @@ class Order {
     private var addressId: String?
     private var itemDiscount: Double?
     private var pickUp: Bool?
-    private var shopId: String? //shopId of the receiever of order, foreign key to Shop table 
+    private var shopId: String?         //shopId of the receiever of order, foreign key to Shop table 
     private var createdAt: Date?
     private var fulfilled: Bool?
     

@@ -15,8 +15,8 @@ DATE
 /**/
 
 struct Address {
-    private var objectId: String? //objectId of the address
-    private var userId: String? //userId of the address, foreign key to user table
+    private var objectId: String?   //objectId of the address
+    private var userId: String?     //userId of the address, foreign key to user table
     private var line_1: String?
     private var line_2: String?
     private var city: String?

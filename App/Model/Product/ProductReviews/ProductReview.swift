@@ -22,9 +22,9 @@ DATE
 /**/
 
 class ProductReview {
-    private var objectId: String? // objectId of the product review
-    private var userId: String? //userId of the product reveiwer, foreign key to users table
-    private var productId: String? //productId of the reviewed product, foreign key to Products table
+    private var objectId: String?   // objectId of the product review
+    private var userId: String?     //userId of the product reveiwer, foreign key to users table
+    private var productId: String?  //productId of the reviewed product, foreign key to Products table
     private var title: String?
     private var content: String?
     private var rating: Int?

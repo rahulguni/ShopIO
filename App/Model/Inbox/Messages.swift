@@ -15,8 +15,8 @@ DATE
 /**/
 
 class Messages: PFObject, PFSubclassing {
-    @NSManaged var senderId: String? //objectId of sender (which is always the user and never the shop)
-    @NSManaged var receiverId: String? //objectId of receiver (which is always the shop and never the user)
+    @NSManaged var senderId: String?        //objectId of sender (which is always the user and never the shop)
+    @NSManaged var receiverId: String?      //objectId of receiver (which is always the shop and never the user)
 
     //Returns the Parse database table where messages are stored
     class func parseClassName() -> String {

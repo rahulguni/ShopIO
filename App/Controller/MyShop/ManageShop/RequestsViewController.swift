@@ -1,23 +1,31 @@
-//
-//  RequestsViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 8/7/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class RequestsViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Requests.storyboard View.
+AUTHOR
+        Rahul Guni
+DATE
+        08/07/2021
+*/
+/**/
+
 class RequestsViewController: UIViewController {
 
+    //IBOutlet Elements
     @IBOutlet weak var requestsTable: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var requests : [Request] = []
-    private var currShop: Shop?
-    private var currProduct: Product?
-    private var currProductImage: [ProductImage] = []
-    private var requestIndex: Int?
+    //Controller parameters
+    private var requests : [Request] = []               //all requests, passed on from MyInventoryViewController
+    private var currShop: Shop?                         //current shop
+    private var currProduct: Product?                   //selected product
+    private var currProductImage: [ProductImage] = []   //selected product's images
+    private var requestIndex: Int?                      //for current product's array index
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,24 +58,58 @@ class RequestsViewController: UIViewController {
 //MARK:- Display Functions
 extension RequestsViewController {
     
+    //Setter function to set up current Requests, passed on from previous view controller (MyInventoryViewController)
     func setRequests(requests currRequests: [Request]) {
         self.requests = currRequests
     }
     
+    //Setter function to set up current Shop, passed on from previous view controller (InboxViewController)
     func setShop(shop currShop: Shop) {
         self.currShop = currShop
     }
     
+    /**/
+    /*
+    private func getProduct(currRequest: Request)
+
+    NAME
+
+            getProduct - Current Product for request
+     
+    SYNOPSIS
+           
+            getProduct(currRequest: Request)
+                currRequest      --> Request object to find product
+
+    DESCRIPTION
+
+            This function takes in the Request object and queries the Products table through the Request object's productId. Then it presents a .form alert for different choices for the request:- View Product, fulfill request or delete request.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/07/2021
+
+    */
+    /**/
+    
     private func getProduct(currRequest: Request){
-        let query = PFQuery(className: "Product")
-        query.whereKey("objectId", equalTo: currRequest.getProductId())
+        let query = PFQuery(className: ShopIO.Product().tableName)
+        query.whereKey(ShopIO.Product().objectId, equalTo: currRequest.getProductId())
         query.getFirstObjectInBackground{(product, error) in
             if let product = product {
                 self.currProduct = Product(product: product)
                 //find product images and perform segue
                 self.currProductImage.removeAll()
-                let query = PFQuery(className: "Product_Images")
-                query.whereKey("productId", equalTo: self.currProduct!.getObjectId())
+                let query = PFQuery(className: ShopIO.Product_Images().tableName)
+                query.whereKey(ShopIO.Product_Images().productId, equalTo: self.currProduct!.getObjectId())
                 query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
                     if let objects = objects {
                         for object in objects {
@@ -75,6 +117,8 @@ extension RequestsViewController {
                             self.currProductImage.append(productImage)
                         }
                     }
+                    
+                    //present alert after query
                     let alert = UIAlertController(title: "Request", message: "Choose what you want to do with this request.", preferredStyle: .alert)
                     
                     //view Product Option
@@ -101,14 +145,48 @@ extension RequestsViewController {
             }
         }
     }
+    /* private func getProduct(currRequest: Request) */
+    
+    /**/
+    /*
+    private func fulfillRequest(currRequest: Request, currProduct: Product)
+
+    NAME
+
+            fulfillRequest - Fulfills current request
+     
+    SYNOPSIS
+           
+            fulfillRequest(currRequest: Request, currProduct: Product)
+                currRequest      --> Request object
+                currProduct      --> Product for request
+
+    DESCRIPTION
+
+            This function queries the request table and marks the request as fulfilled. currProduct is used to send current Product and request details to customer as a message.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/07/2021
+
+    */
+    /**/
     
     private func fulfillRequest(currRequest: Request, currProduct: Product) {
         //changed fulfilled to true
-        let query = PFQuery(className: "Request")
-        query.whereKey("objectId", equalTo: currRequest.getObjectId())
+        let query = PFQuery(className: ShopIO.Request().tableName)
+        query.whereKey(ShopIO.Request().objectId, equalTo: currRequest.getObjectId())
         query.getFirstObjectInBackground{(request, error) in
             if let request = request {
-                request["fulfilled"] = true
+                request[ShopIO.Request().fulfilled] = true
                 request.saveInBackground{(success, error) in
                     if(success) {
                         self.sendMessage(currRequest: currRequest, currProduct: currProduct)
@@ -125,10 +203,45 @@ extension RequestsViewController {
             }
         }
     }
+    /* private func fulfillRequest(currRequest: Request, currProduct: Product) */
+    
+    /**/
+    /*
+    private func deleteRequest(currRequest: Request, currProduct: Product)
+
+    NAME
+
+            deleteRequest - Deletes current request
+     
+    SYNOPSIS
+           
+            fulfillRequest(currRequest: Request, currProduct: Product)
+                currRequest      --> Request object
+                currProduct      --> Product for request
+
+    DESCRIPTION
+
+            This function queries the request table and deletes the request. currProduct is used to send current Product and request details to customer as a message.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/07/2021
+
+    */
+    /**/
+    
     
     private func deleteRequest(currRequest: Request, currProduct: Product) {
-        let query = PFQuery(className: "Request")
-        query.whereKey("objectId", equalTo: currRequest.getObjectId())
+        let query = PFQuery(className: ShopIO.Request().tableName)
+        query.whereKey(ShopIO.Request().objectId, equalTo: currRequest.getObjectId())
         query.getFirstObjectInBackground{(request, error) in
             if let request = request {
                 request.deleteInBackground{(success, error) in
@@ -150,24 +263,58 @@ extension RequestsViewController {
             }
         }
     }
+    /* private func deleteRequest(currRequest: Request, currProduct: Product)*/
+    
+    /**/
+    /*
+    private func sendMessage(currRequest: Request, currProduct: Product)
+
+    NAME
+
+            sendMessage - Uploads/Updates Message to create a chatRoom.
+     
+    SYNOPSIS
+           
+            sendMessage(currRequest: Request, currProduct: Product)
+                currRequest      --> Request object
+                currProduct      --> Product for request
+
+    DESCRIPTION
+
+            This function first checks if a chatRoom already exists for the two parties to exchange messages. If not, it creates a new Message Model and open a chatRoom.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/07/2021
+
+    */
+    /**/
     
     private func sendMessage(currRequest: Request, currProduct: Product) {
         //search if chatroom already exists
-        let query = PFQuery(className: "Messages")
-        query.whereKey("receiverId", equalTo: currShop!.getShopId())
-        query.whereKey("senderId", equalTo: currRequest.getUserId())
+        let query = PFQuery(className: ShopIO.Messages().tableName)
+        query.whereKey(ShopIO.Messages().receiverId, equalTo: currShop!.getShopId())
+        query.whereKey(ShopIO.Messages().senderId, equalTo: currRequest.getUserId())
         query.getFirstObjectInBackground{(message, error) in
             if let message = message {
                 //chatRoom already exists, add to chat.
                 self.saveChat(message: message, currProduct: currProduct)
-                message["updatedAt"] = Date()
+                message[ShopIO.Messages().updatedAt] = Date()
                 message.saveInBackground()
             }
             //if not exists, create one and send message.
             else {
-                let message = PFObject(className: "Messages")
-                message["senderId"] = currRequest.getUserId()
-                message["receiverId"] = self.currShop!.getShopId()
+                let message = PFObject(className: ShopIO.Messages().tableName)
+                message[ShopIO.Messages().senderId] = currRequest.getUserId()
+                message[ShopIO.Messages().receiverId] = self.currShop!.getShopId()
                 
                 message.saveInBackground{(success, error) in
                     if(success) {
@@ -181,12 +328,46 @@ extension RequestsViewController {
             }
         }
     }
+    /* private func sendMessage(currRequest: Request, currProduct: Product)*/
+    
+    /**/
+    /*
+    private func saveChat(message: PFObject, currProduct: Product)
+
+    NAME
+
+            saveChat - Uploads message in a chatRoom.
+     
+    SYNOPSIS
+           
+            saveChat(message: PFObject, currProduct: Product)
+                message      --> Message PFObject passed on from sendMessage()
+                currProduct      --> Product for request
+
+    DESCRIPTION
+
+            This function takes in a PFObject for the objectId of the chatRoom and uploads a message including the currProduct's details and request details to the user in chatRoom table.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/07/2021
+
+    */
+    /**/
     
     private func saveChat(message: PFObject, currProduct: Product) {
-        let chatRoom = PFObject(className: "ChatRoom")
-        chatRoom["chatRoomId"] = message.objectId!
-        chatRoom["senderId"] = self.currShop!.getShopId()
-        chatRoom["message"] = "Your request for \(currProduct.getTitle()) has been accepted. Please head over to our shop and add to your cart to check out. Thank you for your patience."
+        let chatRoom = PFObject(className: ShopIO.ChatRoom().tableName)
+        chatRoom[ShopIO.ChatRoom().chatRoomId] = message.objectId!
+        chatRoom[ShopIO.ChatRoom().senderId] = self.currShop!.getShopId()
+        chatRoom[ShopIO.ChatRoom().message] = "Your request for \(currProduct.getTitle()) has been accepted. Please head over to our shop and add to your cart to check out. Thank you for your patience."
         chatRoom.saveEventually {(success, error) in
             if(success) {
                 let alert = UIAlertController(title: "Your request has been marked fulfilled.", message: "Please update your product quantity from your inventory.", preferredStyle: .alert)
@@ -202,10 +383,13 @@ extension RequestsViewController {
             }
         }
     }
+    /*  private func saveChat(message: PFObject, currProduct: Product) */
 }
 
 //MARK:- UITableViewDelegate
 extension RequestsViewController: UITableViewDelegate {
+    
+    //get Product and present alert on cell click
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.requestIndex = indexPath.row
         let currRequest = requests[requestIndex!]
@@ -217,10 +401,13 @@ extension RequestsViewController: UITableViewDelegate {
 
 //MARK:- UITableViewDataSource
 extension RequestsViewController: UITableViewDataSource {
+    
+    //function to display number of cells in TableView.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return requests.count
     }
     
+    //function to populate the tableView cells, from RequestsTableViewCell.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reusableRequestsCell") as! RequestsTableViewCell
         cell.setParameters(request: requests[indexPath.row])

@@ -12,13 +12,15 @@ import Parse
 
 class MapViewController: UIViewController {
 
+    //IBOutlet Elements
     @IBOutlet weak var mapView: MKMapView!
     
-    private var coordinates : CLLocationCoordinate2D?
-    private var currShop: Shop?
-    private var currProfile: User?
-    private var pin: AnnotationPin!
-    private var locationManager: CLLocationManager!
+    //Controller Parameters
+    private var coordinates : CLLocationCoordinate2D? //current Coordinates of location, passed on from MyStoreViewController
+    private var currShop: Shop?                       //current Shop
+    private var currProfile: User?                    //current User
+    private var pin: AnnotationPin!                   //Annotation Pin to mark location in the map
+    private var locationManager: CLLocationManager!   //Location Manager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +32,52 @@ class MapViewController: UIViewController {
 }
 
 
-//MARK:- Regular Functions
+//MARK:- General Functions
 extension MapViewController {
+    
+    //Setter function to set up current Shop's location, passed on from previous view controller (MyStoreViewController)
     func setLocation(coordinates: CLLocationCoordinate2D) {
         self.coordinates = coordinates
     }
     
+    //Setter function to set up current Shop, passed on from previous view controller (MyStoreViewController)
     func setShop(shop: Shop?) {
         self.currShop = shop
     }
     
+    //Setter function to set up the user, passed on from previous view controller (MyStoreViewController)
     func setCurrProfile(user: User) {
         self.currProfile = user
     }
     
-    func setMap() {
+    /**/
+    /*
+    private func setMap
+
+    NAME
+
+            setMap -  Function to focus the shop on Shop/User location.
+
+    DESCRIPTION
+
+            This function zooms into the shop/user location in the map.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/07/2021
+
+    */
+    /**/
+    
+    private func setMap() {
         let region = MKCoordinateRegion(center: self.coordinates!, latitudinalMeters: 1000, longitudinalMeters: 1000)
         if let currShop = currShop {
             pin = AnnotationPin(title: currShop.getShopTitle(), coordinates: self.coordinates!)
@@ -56,8 +89,10 @@ extension MapViewController {
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(pin)
     }
+    /* private func setMap() */
     
-    func determineCurrentLocation() {
+    //function to determine current location
+    private func determineCurrentLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -72,10 +107,13 @@ extension MapViewController {
 
 //MARK:- IBOutlet Functions
 extension MapViewController {
+    
+    //Action after exit button click
     @IBAction func exitClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //Action after current location button click
     @IBAction func myLocationClicked(_ sender: Any) {
         determineCurrentLocation()
     }
@@ -119,7 +157,6 @@ extension MapViewController: MKMapViewDelegate {
             dequeuedView.annotation = annotation
             view = dequeuedView
         } else {
-            // 5
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
             view.calloutOffset = CGPoint(x: -5, y: 5)
@@ -131,7 +168,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //Decode the location
-        // Add below code to get address for touch coordinates.
+        //Get address for touch coordinates.
         let geoCoder = CLGeocoder()
         let location = CLLocation(latitude: self.coordinates!.latitude, longitude: self.coordinates!.longitude)
         geoCoder.reverseGeocodeLocation(location, completionHandler:{placemarks, error -> Void in

@@ -1,26 +1,34 @@
-//
-//  MessagesViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 8/19/21.
-//
-
 import UIKit
 import Parse
 import ParseLiveQuery
 
+/**/
+/*
+class MyMessagesViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Messages.storyboard's Messages View.
+AUTHOR
+        Rahul Guni
+DATE
+        08/19/2021
+*/
+/**/
+
 class MyMessagesViewController: UIViewController{
     
+    //IBOutlet elements
     @IBOutlet weak var messagesTable: UITableView!
     
-    private var myMessages: [MessageModel] = []
-    private var chatRooms: [ChatRoom] = []
-    private var forShop: Bool = false
-    private var senderImage: UIImage?
-    private var currSender: Sender?
+    //Controller Parameters
+    private var myMessages: [MessageModel] = [] //All Messages
+    private var chatRooms: [ChatRoom] = []      //All Chats for current Messages
+    private var forShop: Bool = false           //Determines if the messageView is for shop or user
+    private var senderImage: UIImage?           //Image of the other party in chat view
+    private var currSender: Sender?             //Current Sender (shop or user determined by forShop: Bool
     
-    private var titleForChatRoom: String?
-    private var currChatRoomId: String?
+    private var titleForChatRoom: String?       //Name of sender for ChatViewController title
+    private var currChatRoomId: String?         //objectId of current Message Object
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +57,17 @@ class MyMessagesViewController: UIViewController{
 //MARK:- Display Functions
 extension MyMessagesViewController {
     
+    //Setter function to set up forShop variable, passed on from previous view controller (InboxViewController)
     func setForShop(bool: Bool) {
         self.forShop = bool
     }
     
+    //Setter function to set up current Messages, passed on from previous view controller (InboxViewController)
     func setMessages(messages: [MessageModel]) {
         self.myMessages = messages
     }
     
+    //Setter function to set up current Sender, passed on from previous view controller (InboxViewController)
     func setSender(currSender: Sender) {
         self.currSender = currSender
     }
@@ -65,20 +76,48 @@ extension MyMessagesViewController {
 
 //MARK:- UITableViewDelegate
 extension MyMessagesViewController: UITableViewDelegate {
+    
+    /**/
+    /*
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+
+    NAME
+
+           tableView - Action for TableView Cell click.
+
+    DESCRIPTION
+
+            This function records the current Message object's chatRoomId, fetches all chats from the chatroom and appends it to chatRoom array before it performs segue to ChatViewController.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/19/2021
+
+    */
+    /**/
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.chatRooms.removeAll()
         let chatRoom: String = myMessages[indexPath.row].getChatRoomId()
         self.titleForChatRoom = myMessages[indexPath.row].getSenderName()
         self.currChatRoomId = myMessages[indexPath.row].getChatRoomId()
-        let query = PFQuery(className: "ChatRoom")
-        query.whereKey("chatRoomId", equalTo: chatRoom)
-        query.order(byAscending: "updatedAt")
+        let query = PFQuery(className: ShopIO.ChatRoom().tableName)
+        query.whereKey(ShopIO.ChatRoom().chatRoomId, equalTo: chatRoom)
+        query.order(byAscending: ShopIO.ChatRoom().updatedAt)
         query.findObjectsInBackground{(messages: [PFObject]?, error: Error?) in
             if let messages = messages {
                 for message in messages {
-                    let senderId: String = message.value(forKey: "senderId") as! String
-                    let currMessage: String = message.value(forKey: "message") as! String
-                    let date: Date = message.value(forKey: "updatedAt") as! Date
+                    let senderId: String = message.value(forKey: ShopIO.ChatRoom().senderId) as! String
+                    let currMessage: String = message.value(forKey: ShopIO.ChatRoom().message) as! String
+                    let date: Date = message.value(forKey: ShopIO.ChatRoom().updatedAt) as! Date
                     let newChatRoom = ChatRoom(objectId: message.objectId! ,chatRoomId: chatRoom, message: currMessage, senderId: senderId, date: date)
                     self.chatRooms.append(newChatRoom)
                     
@@ -88,14 +127,18 @@ extension MyMessagesViewController: UITableViewDelegate {
             }
         }
     }
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)*/
 }
 
 //MARK:- UITableViewDataSource
 extension MyMessagesViewController: UITableViewDataSource{
+    
+    //function to render the number of Message Objects in TableView Cells.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.myMessages.count
     }
     
+    //function to populate the tableView Cells, from MessageTableViewCell.swift
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reusableMessageCell", for: indexPath) as! MessageTableViewCell
         cell.setParameters(forShop: forShop, message: myMessages[indexPath.row])
@@ -105,13 +148,41 @@ extension MyMessagesViewController: UITableViewDataSource{
 
 //MARK:- LiveQuery Code
 extension MyMessagesViewController {
-    func getMessageUpdate() {
+    
+    /**/
+    /*
+    private func getMessageUpdate
+
+    NAME
+
+            getMessageUpdate -  LiveQuery function to update the table view cells
+
+    DESCRIPTION
+
+            This function subscribes to the Message Table from LiveQuery feature of parse and updates the tableview cells if a message is uploaded/edited in the subscribed table.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/19/2021
+
+    */
+    /**/
+    
+    private func getMessageUpdate() {
         var query: PFQuery<Messages>
         if(forShop) {
-            query = Messages.query()!.whereKey("receiverId", equalTo: currSender!.senderId) as! PFQuery<Messages>
+            query = Messages.query()!.whereKey(ShopIO.Messages().receiverId, equalTo: currSender!.senderId) as! PFQuery<Messages>
         }
         else{
-            query = Messages.query()!.whereKey("senderId", equalTo: currSender!.senderId) as! PFQuery<Messages>
+            query = Messages.query()!.whereKey(ShopIO.Messages().senderId, equalTo: currSender!.senderId) as! PFQuery<Messages>
         }
         let subscription: Subscription<Messages> = Client.shared.subscribe(query)
         subscription.handle(Event.updated) { query, object in
@@ -130,8 +201,8 @@ extension MyMessagesViewController {
             }
         }
         subscription.handle(Event.created) { query, object in
-            let newMessage = MessageModel(sender: object.value(forKey: "senderId") as! String,
-                                          receiver: object.value(forKey: "receiverId") as! String,
+            let newMessage = MessageModel(sender: object.value(forKey: ShopIO.Messages().senderId) as! String,
+                                          receiver: object.value(forKey: ShopIO.Messages().receiverId) as! String,
                                           chatRoomId: object.objectId!)
             self.myMessages.append(newMessage)
             DispatchQueue.main.async {
@@ -141,4 +212,5 @@ extension MyMessagesViewController {
             }
         }
     }
+    /* private func getMessageUpdate() */
 }

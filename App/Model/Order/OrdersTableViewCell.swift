@@ -66,7 +66,7 @@ class OrdersTableViewCell: UITableViewCell {
     /**/
     
     func setParameters(order: Order, forUser: Bool){
-        self.orderTotal.text = "Total: " + String(order.getSubTotal())
+        self.orderTotal.text = "Total: $" + String(order.getSubTotal())
         self.orderDate.text = "Date: \(order.getOrderDate())"
         setStatus(order: order)
         if(forUser) {

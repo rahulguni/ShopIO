@@ -72,7 +72,7 @@ class MyOrderTableViewCell: UITableViewCell {
                 let currProduct = Product(product: product)
                 self.getProductImage(product: currProduct)
                 self.productTitle.text = currProduct.getTitle()
-                self.priceLabel.text = "Price: $" + String(currProduct.getPrice())
+                self.priceLabel.text = "Current Price: $" + String(currProduct.getPrice())
                 if(orderItem.getQuantity() > currProduct.getQuantity()) {
                     self.requestedQuantity.textColor = UIColor.red
                 }

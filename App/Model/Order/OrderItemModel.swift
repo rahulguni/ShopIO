@@ -18,7 +18,7 @@ class OrderItem{
     private var objectId: String?
     private var orderId: String?
     private var price: Double?
-    private var productId: String?
+    private var productId: String? //productId of the item, foreign key to Product Table.
     private var quantity: Int?
     
     //constructor

@@ -16,10 +16,10 @@ DATE
 /**/
 
 class ProductImage{
-    private var currImage: PFFileObject //Image of the product, rendered as a PFFileObject used in ProductReviewController
-    private var objectId: String //ObjectId of the image
-    private var isDefault: Bool //Decides the current display picture
-    private var currUIImage: UIImage? //UIImage fetched from currImage
+    private var currImage: PFFileObject     //Image of the product, rendered as a PFFileObject used in ProductReviewController
+    private var objectId: String            //ObjectId of the image
+    private var isDefault: Bool             //Decides the current display picture
+    private var currUIImage: UIImage?       //UIImage fetched from currImage
     
     //constructor
     init(image productImage: PFObject){

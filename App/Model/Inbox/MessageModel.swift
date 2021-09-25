@@ -15,11 +15,11 @@ DATE
 /**/
 
 class MessageModel {
-    private var senderId: String? // objectId of sender (which is always the user), foreign key to objectId of user.
-    private var receiverId: String? // objectId of receiver (which is always the shop), foreign key to obejctId of shop
-    private var chatRoomId: String? // objectId of the MessageModel itself, used in ChatRoom to render correct chats.
-    private var senderName: String? // Full name of sender (Queries done in the controller because this can be both shop or user)
-    private var senderImage: UIImage? // Image of sender (Queries done in the controller because this can be both shop or user)
+    private var senderId: String?       // objectId of sender (which is always the user), foreign key to objectId of user.
+    private var receiverId: String?     // objectId of receiver (which is always the shop), foreign key to obejctId of shop
+    private var chatRoomId: String?     // objectId of the MessageModel itself, used in ChatRoom to render correct chats.
+    private var senderName: String?     // Full name of sender (Queries done in the controller because this can be both shop or user)
+    private var senderImage: UIImage?   // Image of sender (Queries done in the controller because this can be both shop or user)
     
     // Constructor
     init(sender: String, receiver: String, chatRoomId: String) {

@@ -8,14 +8,28 @@
 import UIKit
 import Parse
 
+/**/
+/*
+class MyInventoryViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls ManageShop.storyboard's MyInvetory view.
+AUTHOR
+        Rahul Guni
+DATE
+        07/24/2021
+*/
+/**/
+
 class MyInventoryViewController: UIViewController {
 
+    //IBOutlet elements
     @IBOutlet weak var updateProducts: UIButton!
     @IBOutlet weak var finances: UIButton!
     @IBOutlet weak var requests: UIButton!
     
-    var shopManager = ShopManager()
-    var myRequests : [Request] = []
+    var shopManager = ShopManager()     //ShopManager Delegate to perform segues to specified destinations.
+    var myRequests : [Request] = []     //All requests for current Shop
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +53,10 @@ class MyInventoryViewController: UIViewController {
     }
 }
 
+//MARK:- ShopManagerDelegate
 extension MyInventoryViewController: shopManagerDelegate {
+    
+    //Function to perform segue
     func goToViewController(identifier: String) {
         self.performSegue(withIdentifier: identifier, sender: self)
     }
@@ -47,6 +64,8 @@ extension MyInventoryViewController: shopManagerDelegate {
 
 //MARK:- IBOutlet Functions
 extension MyInventoryViewController {
+    
+    //Perform segue to UpdateProductCollectionViewContoller when Update Products button is clicked
     @IBAction func updateClicked(_ sender: Any) {
         self.shopManager.checkShop(identifier: "goToUpdateProduct")
     }
@@ -54,17 +73,46 @@ extension MyInventoryViewController {
     @IBAction func financesClicked(_ sender: Any) {
     }
     
+    /**/
+    /*
+    @IBAction func requestsClicked(_ sender: Any)
+
+    NAME
+
+           requestsClicked - Action for Requests Button Click.
+
+    DESCRIPTION
+
+            This function fetches the Request Table from current shop's objectId and records it in myRequests array before performing segue to RequestViewController.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
+    
     @IBAction func requestsClicked(_ sender: Any) {
         myRequests.removeAll()
-        let query = PFQuery(className: "Shop")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
+        //Query Shop First
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().userId, equalTo: currentUser!.objectId!)
         query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
             if object != nil {
                 let currShop = Shop(shop: object)
                 self.shopManager.setShop(shop: currShop)
-                let query = PFQuery(className: "Request")
-                query.whereKey("shopId", contains: currShop.getShopId())
-                query.whereKey("fulfilled", equalTo: false)
+                //Query Shop Requests
+                let query = PFQuery(className: ShopIO.Request().tableName)
+                query.whereKey(ShopIO.Request().shopId, equalTo: currShop.getShopId())
+                query.whereKey(ShopIO.Request().fulfilled, equalTo: false)
                 query.findObjectsInBackground{(requests: [PFObject]? , error: Error?) in
                     if let requests = requests {
                         for request in requests {
@@ -85,6 +133,7 @@ extension MyInventoryViewController {
             }
         }
     }
+    /* @IBAction func requestsClicked(_ sender: Any) */
 }
 
 //MARK:- Display Functions

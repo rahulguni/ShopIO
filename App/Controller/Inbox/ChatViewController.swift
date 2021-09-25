@@ -1,24 +1,29 @@
-//
-//  ChatViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 8/20/21.
-//
-
 import UIKit
 import Parse
 import ParseLiveQuery
 import MessageKit
 import InputBarAccessoryView
 
+/**/
+/*
+class ChatViewController
+
+DESCRIPTION
+        This class is a UIViewController that extends MessagesViewController. This class controls Messages.storyboard's ChatRoom View. Link: https://github.com/MessageKit/MessageKit
+AUTHOR
+        Rahul Guni
+DATE
+        08/20/2021
+*/
+/**/
+
 class ChatViewController: MessagesViewController {
     
-    private var myMessages: [ChatRoom] = []
-    private var currSender: Sender?
-    
-    final private var myChatRoomId: String?
-    
-    var allMessages : [MyMessage] = []
+    //Controller Parameters
+    private var myMessages: [ChatRoom] = []         //All objects from ChatRoom table for current chatRoomId
+    private var allMessages : [MyMessage] = []      //MessageKit array to render individual messages.
+    private var currSender: Sender?                 // Current Sender
+    final private var myChatRoomId: String?         //Current chatRoomId
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +44,23 @@ class ChatViewController: MessagesViewController {
 //MARK:- Display Functions
 extension ChatViewController {
     
+    //Setter function to fill up myMessages array, passed on from previous view controller (MessagesViewController)
     func setMessages(messages: [ChatRoom]) {
         self.myMessages = messages
     }
     
+    //Setter function to set up current Sender, passed on from previous view controller (MessagesViewController)
     func setCurrSender(currSender: Sender) {
         self.currSender = currSender
     }
     
+    //Setter function to set up current chatRoomId, passed on from previous view controller (MessagesViewController)
     func setChatRoomId(chatroomId: String) {
         self.myChatRoomId = chatroomId
     }
     
-    func setMessagesArray() {
+    //Function to transfer data from myMessages array to MessageKit's prototype array.
+    private func setMessagesArray() {
         self.allMessages.removeAll()
         for message in myMessages {
             let newMessage = MyMessage(sender: message.getSender(),
@@ -66,19 +75,52 @@ extension ChatViewController {
         }
     }
     
-    func sendMessage(text: String) {
+    /**/
+    /*
+    private func sendMessage(text: String)
+
+    NAME
+
+            sendMessage - Uploads message to respective chatRoom and updates the Messages Table.
+     
+    SYNOPSIS
+           
+            sendMessage(text: String)
+                text        --> Message string to be sent.
+
+    DESCRIPTION
+
+            This function takes in the message string and uploads a new message in the ChatRoom table with appropriate data. After this is completed, it updates the updatedAt date in Message table for the current chatRoom.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/20/2021
+
+    */
+    /**/
+    
+    private func sendMessage(text: String) {
         //First post the message in chatroom then update messages table
-        let newMessage = PFObject(className: "ChatRoom")
-        newMessage["chatRoomId"] = myChatRoomId!
-        newMessage["senderId"] = currSender!.senderId
-        newMessage["message"] = text
+        let newMessage = PFObject(className: ShopIO.ChatRoom().tableName)
+        newMessage[ShopIO.ChatRoom().chatRoomId] = myChatRoomId!
+        newMessage[ShopIO.ChatRoom().senderId] = currSender!.senderId
+        newMessage[ShopIO.ChatRoom().message] = text
         newMessage.saveInBackground{(success, error) in
             if(success) {
                 self.messageInputBar.inputTextView.text = ""
-                let query = PFQuery(className: "Messages")
+                //Update the updatedAt date in MessagesTable
+                let query = PFQuery(className: ShopIO.Messages().tableName)
                 query.getObjectInBackground(withId: self.myChatRoomId!) {(message: PFObject?, error: Error?) in
                     if let message = message {
-                        message["updatedAt"] = Date()
+                        message[ShopIO.Messages().updatedAt] = Date()
                         message.saveInBackground()
                     }
                     else{
@@ -93,10 +135,13 @@ extension ChatViewController {
             }
         }
     }
+    /*private func sendMessage(text: String)*/
 }
 
 //MARK:- , MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
+    /* MessageKit functions */
+    
     func currentSender() -> SenderType {
         return currSender!
     }
@@ -135,21 +180,49 @@ extension ChatViewController : InputBarAccessoryViewDelegate {
 }
 
 //MARK:- Live Query Code
-//Subscribe to the current chat room and update messages accordingly.
 extension ChatViewController {
+    
+    /**/
+    /*
+    private func getMessageUpdate
+
+    NAME
+
+            getMessageUpdate -  LiveQuery function to update the table view cells
+
+    DESCRIPTION
+
+            This function subscribes to the ChatRoom Table from LiveQuery feature of parse and updates the tableview cells if a message is uploaded in the subscribed table.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/20/2021
+
+    */
+    /**/
+    
     func getMessageUpdate() {
-        let myQuery = MyChatRoom.query()!.whereKey("chatRoomId", equalTo: self.myChatRoomId!) as! PFQuery<MyChatRoom>
+        let myQuery = MyChatRoom.query()!.whereKey(ShopIO.ChatRoom().chatRoomId, equalTo: self.myChatRoomId!) as! PFQuery<MyChatRoom>
         
         let subscription: Subscription<MyChatRoom> = Client.shared.subscribe(myQuery)
         subscription.handle(Event.created) { query, object in
             let newMessage = ChatRoom(objectId: object.objectId!,
                                       chatRoomId: self.myChatRoomId! ,
-                                      message: object.value(forKey: "message") as! String,
-                                      senderId: object.value(forKey: "senderId") as! String,
+                                      message: object.value(forKey: ShopIO.ChatRoom().message) as! String,
+                                      senderId: object.value(forKey: ShopIO.ChatRoom().senderId) as! String,
                                       date: Date())
             self.myMessages.append(newMessage)
             self.setMessagesArray()
         }
     }
+    /* func getMessageUpdate() */
 }
 

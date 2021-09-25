@@ -19,9 +19,9 @@ DATE
 /**/
 
 class ShopManager {
-    private var currShop: Shop? //Shop Object
-    private var currProducts: [Product] = [] //All Products of the shop
-    var delegate: shopManagerDelegate? //protocol variable
+    private var currShop: Shop?                 //Shop Object
+    private var currProducts: [Product] = []    //All Products of the shop
+    var delegate: shopManagerDelegate?          //protocol variable
     
     func setShop(shop: Shop) {
         self.currShop = shop

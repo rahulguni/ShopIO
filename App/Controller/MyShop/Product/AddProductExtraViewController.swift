@@ -1,19 +1,27 @@
-//
-//  AddProductExtraViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/17/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class MyMessagesViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls AddProduct.storyboard's Extra View.
+AUTHOR
+        Rahul Guni
+DATE
+        07/17/2021
+*/
+/**/
+
 class AddProductExtraViewController: UIViewController {
+    
+    //IBOutlet elements
     @IBOutlet weak var headerLabel: UITextField!
     @IBOutlet weak var discount: UITextField!
     @IBOutlet weak var contents: UITextView!
     
-    private var myProduct: Product?
+    private var myProduct: Product?     //details of current Product
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +35,46 @@ class AddProductExtraViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension AddProductExtraViewController {
+    
+    /**/
+    /*
+    @IBAction func saveButtonPressed(_ sender: UIButton)
+
+    NAME
+
+           saveButtonPressed - Action for Save Button Click
+
+    DESCRIPTION
+
+            This function updates the current Product's discount and content field in Product table, initially set to 0% and an empty string in previous view controller.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if(discount.text!.isEmpty) {
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
-            let query = PFQuery(className: "Product")
-            query.whereKey("objectId", equalTo: myProduct!.getObjectId())
+            let query = PFQuery(className: ShopIO.Product().tableName)
+            query.whereKey(ShopIO.Product().objectId, equalTo: myProduct!.getObjectId())
             query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
                 if let _ = error {
                     // The query failed
-                    let alert = customNetworkAlert(title: "Unable to update review.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
+                    let alert = customNetworkAlert(title: "Unable to save product details.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                     self.present(alert, animated: true, completion: nil)
                 }
                 else if let object = object {
@@ -50,13 +86,13 @@ extension AddProductExtraViewController {
                             self.present(alert, animated: true, completion: nil)
                         }
                         else {
-                            object["discount"] = Float(self.discount!.text!)
+                            object[ShopIO.Product().discount] = Float(self.discount!.text!)
                         }
                     }
                     else{
-                        object["discount"] = Float(0.0)
+                        object[ShopIO.Product().discount] = Float(0.0)
                     }
-                    object["content"] = self.contents.text
+                    object[ShopIO.Product().content] = self.contents.text
                     object.saveInBackground {(success, error) in
                         if(success) {
                             //go to main
@@ -72,10 +108,13 @@ extension AddProductExtraViewController {
             }
         }
     }
+    /* @IBAction func saveButtonPressed(_ sender: UIButton) */
 }
 
 //MARK:- Display Functions
 extension AddProductExtraViewController {
+    
+    //setter function to set current product, passed on from previous view controller (AddProductViewController)
     func setProduct(product: Product?) {
         self.myProduct = product
     }

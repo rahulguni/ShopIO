@@ -14,14 +14,14 @@ DATE
 /**/
 
 class Cart {
-    private final var userId = currentUser!.objectId! //userId assosciated with the order
-    private var sessionId: String = currentUser!.sessionToken! //session token of the user while ordering
+    private final var userId = currentUser!.objectId!           //userId assosciated with the order
+    private var sessionId: String = currentUser!.sessionToken!  //session token of the user while ordering
     private var subTotal: Double?
     private var itemDiscount: Double?
     private var tax: Double?
     private var shipping: Double?
     private var total: Double?
-    private var addressId: String? //shipment address of the order, foreign key to address table.
+    private var addressId: String?                              //shipment address of the order, foreign key to address table.
     
     //constructor
     init(cartItems: [CartItem]){

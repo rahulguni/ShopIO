@@ -161,8 +161,7 @@ extension SearchViewController: UISearchBarDelegate{
         self.dismissKeyboard()
         if(!searchBar.searchTextField.text!.isEmpty) {
             let query = PFQuery(className: "Product")
-            //query.whereKey("title", matchesText: searchBar.searchTextField.text!)
-            query.whereKey("title", hasPrefix: searchBar.searchTextField.text!)
+            query.whereKey(ShopIO.Product().title, matchesRegex: ".*\(searchBar.searchTextField.text!).*")
             if(self.forShop) {
                 query.whereKey("shopId", equalTo: self.currShop!.getShopId())
             }

@@ -18,8 +18,8 @@ DATE
 
 class Shop {
     
-    private var objectId: String? //objectId of the shop
-    private var userId: String? //objectId of the owner of the shop, foreign key to users table
+    private var objectId: String?   //objectId of the shop
+    private var userId: String?     //objectId of the owner of the shop, foreign key to users table
     private var shopTitle: String?
     private var shopSlogan: String?
     private var shippingCost: Double? //fixed shipping cost for shops.

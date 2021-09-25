@@ -1,15 +1,22 @@
-//
-//  MyReviewViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 9/11/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class MyMessagesViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls ProductReview.storyboard's MyProductReview View.
+AUTHOR
+        Rahul Guni
+DATE
+        09/11/2021
+*/
+/**/
+
 class MyReviewViewController: UIViewController {
 
+    //IBOutlet elements
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var reviewTitle: UITextField!
     @IBOutlet weak var reviewContent: UITextView!
@@ -17,11 +24,12 @@ class MyReviewViewController: UIViewController {
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var rateSlider: UISlider!
     
-    private var rating: Double = 5.0
-    private var currProduct: Product?
-    private var currRating: ProductReview?
+    //Controller parameters
+    private var rating: Double = 5.0        //default rating
+    private var currProduct: Product?       //current Product
+    private var currRating: ProductReview?  //current Product's current Review
     
-    private var forEdit: Bool = false
+    private var forEdit: Bool = false       //determines whether the view is for edit or add.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +51,47 @@ class MyReviewViewController: UIViewController {
 //MARK:- Display Functions
 extension MyReviewViewController {
     
+    //Setter function to set up current Product, passed on from previous view controller (ProductReviewViewController)
     func setProduct(product: Product) {
         self.currProduct = product
     }
     
+    //Setter function to set up current Rating, passed on from previous view controller (ProductReviewViewController)
     func setRating(rating: ProductReview) {
         self.currRating = rating
     }
     
+    //Setter function to set up forEdit boolean, passed on from previous view controller (ProductReviewViewController)
     func setForEdit(bool: Bool) {
         self.forEdit = bool
     }
+    
+    /**/
+    /*
+    func setDisplay()
+
+    NAME
+
+           setDisplay - Sets User Interaction
+
+    DESCRIPTION
+
+            This function makes the IBOutlet elements user interaction enabled if the view is on edit mode.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
     
     private func setDisplay() {
         productTitle.text = self.currProduct!.getTitle()
@@ -71,6 +109,34 @@ extension MyReviewViewController {
             setLabels()
         }
     }
+    /* private func setDisplay()*/
+    
+    /**/
+    /*
+    func setLabels()
+
+    NAME
+
+           setLabels - Fills UILabels with Product Review details
+
+    DESCRIPTION
+
+            This function fills the labels with the data from currRating object.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
     
     private func setLabels() {
         reviewTitle.text = self.currRating!.getTitle()
@@ -80,14 +146,42 @@ extension MyReviewViewController {
         self.rateSlider.minimumValue = 1.0
         self.rateSlider.value = Float(self.currRating!.getRating())
     }
+    /* private func setLabels()*/
+    
+    /**/
+    /*
+    func addReview()
+
+    NAME
+
+           addReview - Add a new ProductReview Object
+
+    DESCRIPTION
+
+            This function uploads a new review in the Product_Review table with data from UIText Fields.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
     
     private func addReview(){
-        let review = PFObject(className: "Product_Review")
-        review["productId"] = self.currProduct!.getObjectId()
-        review["title"] = self.reviewTitle.text!
-        review["content"] = self.reviewContent.text!
-        review["userId"] = currentUser!.objectId!
-        review["rating"] = self.rating
+        let review = PFObject(className: ShopIO.Product_Review().tableName)
+        review[ShopIO.Product_Review().productId] = self.currProduct!.getObjectId()
+        review[ShopIO.Product_Review().title] = self.reviewTitle.text!
+        review[ShopIO.Product_Review().content] = self.reviewContent.text!
+        review[ShopIO.Product_Review().userId] = currentUser!.objectId!
+        review[ShopIO.Product_Review().rating] = self.rating
         
         review.saveInBackground{(success, error) in
             if(success) {
@@ -100,17 +194,45 @@ extension MyReviewViewController {
             }
         }
     }
+    /* private func addReview()*/
+    
+    /**/
+    /*
+    func updateReview()
+
+    NAME
+
+           updateReview - Updates the user's ProductReview Object
+
+    DESCRIPTION
+
+            This function first queries the Product_Review and updates the fetched object with current strings in the view's UITextFields.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            09/11/2021
+
+    */
+    /**/
     
     private func updateReview(){
-        let query = PFQuery(className: "Product_Review")
-        query.whereKey("objectId", equalTo: self.currRating!.getObjectId())
+        let query = PFQuery(className: ShopIO.Product_Review().tableName)
+        query.whereKey(ShopIO.Product_Review().objectId, equalTo: self.currRating!.getObjectId())
         query.getFirstObjectInBackground{(review, error) in
             if let review = review {
-                review["productId"] = self.currProduct!.getObjectId()
-                review["title"] = self.reviewTitle.text!
-                review["content"] = self.reviewContent.text!
-                review["userId"] = currentUser!.objectId!
-                review["rating"] = self.rating
+                review[ShopIO.Product_Review().productId] = self.currProduct!.getObjectId()
+                review[ShopIO.Product_Review().title] = self.reviewTitle.text!
+                review[ShopIO.Product_Review().content] = self.reviewContent.text!
+                review[ShopIO.Product_Review().userId] = currentUser!.objectId!
+                review[ShopIO.Product_Review().rating] = self.rating
                 
                 self.currRating = ProductReview(reviewObject: review)
                 
@@ -130,10 +252,13 @@ extension MyReviewViewController {
             }
         }
     }
+    /* private func updateReview()*/
 }
 
 //MARK:- IBOutlet Functions
 extension MyReviewViewController {
+    
+    //Action after Add Review button click
     @IBAction func addReviewClicked(_ sender: Any) {
         if(self.reviewTitle.text!.isEmpty || self.reviewContent.text!.isEmpty) {
             let alert = customNetworkAlert(title: "Missing Field Entry", errorString: "Please make sure you have filled out all the required fields. ")
@@ -149,6 +274,7 @@ extension MyReviewViewController {
         }
     }
     
+    //adjust current rating according to slider's value
     @IBAction func sliderChanged(_ sender: Any) {
         self.rateSlider.maximumValue = 5.0
         self.rateSlider.minimumValue = 1.0

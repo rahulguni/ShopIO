@@ -16,8 +16,8 @@ DATE
 /**/
 
 class Product {
-    private var objectId: String? //objectId of the product
-    private var userId: String? //userId of the product owner, foreign key to users table
+    private var objectId: String?   //objectId of the product
+    private var userId: String?     //userId of the product owner, foreign key to users table
     private var title: String?
     private var summary: String?
     private var type: Int?

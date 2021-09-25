@@ -14,12 +14,12 @@ DATE
 /**/
 
 class ChatRoom {
-    private var objectId: String // objectId of the chatRoom
-    private var chatRoomId: String //objectId of Message Model
-    private var message: String //data sent between the two parties
-    private var senderId: String //record objectId of sender
-    private var updateTime: Date //time to record the most recent message
-    private var sender: Sender //to record senderName and senderId for MessageKit.
+    private var objectId: String        // objectId of the chatRoom
+    private var chatRoomId: String      //objectId of Message Model
+    private var message: String         //data sent between the two parties
+    private var senderId: String        //record objectId of sender
+    private var updateTime: Date        //time to record the most recent message
+    private var sender: Sender          //to record senderName and senderId for MessageKit.
     
     // Constructor
     init(objectId: String, chatRoomId: String, message: String, senderId: String, date: Date) {

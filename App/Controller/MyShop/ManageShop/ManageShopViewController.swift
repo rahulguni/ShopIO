@@ -1,20 +1,26 @@
-//
-//  EditShopViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/15/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class MyMessagesViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls ManageShop.storyboard View.
+AUTHOR
+        Rahul Guni
+DATE
+        07/15/2021
+*/
+/**/
 
 class ManageShopViewController: UIViewController {
     @IBOutlet weak var addProduct: UIButton!
     @IBOutlet weak var updateInventory: UIButton!
     @IBOutlet weak var orders: UIButton!
     
-    private var currShop: Shop?
-    private var myOrders: [Order] = []
+    private var currShop: Shop?             //current Shop Object
+    private var myOrders: [Order] = []      //orders for current Shop
     
     //Function to unwind the segue and reload view
     @IBAction func unwindToEditShopWithSegue(segue: UIStoryboardSegue) {
@@ -44,7 +50,7 @@ class ManageShopViewController: UIViewController {
         modifyButtons(buttons: currentButtons)
     }
     
-    
+    //Action for Orders Button Click
     @IBAction func ordersButtonPressed(_ sender: Any) {
         self.getOrders()
     }
@@ -54,16 +60,44 @@ class ManageShopViewController: UIViewController {
 //MARK:- Display Functions
 extension ManageShopViewController {
     
+    //Setter function to set up current Shop, passed on from previous view controller (MyShopViewController)
     func setShop(shop: Shop?) {
         self.currShop = shop
     }
     
-    func getOrders(){
+    /**/
+    /*
+    private func getOrders()
+
+    NAME
+
+           getOrders - Fetches orders for current Shop.
+
+    DESCRIPTION
+
+            This function queries the Order table for current Shop using currShop's objectId/shopId, and appends the order items to myOrders array. Finally, it performs segue to OrdersViewController.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/15/2021
+
+    */
+    /**/
+    
+    private func getOrders(){
         self.myOrders.removeAll()
-        let query = PFQuery(className: "Order")
-        query.whereKey("shopId", equalTo: self.currShop!.getShopId())
-        query.whereKey("fulfilled", equalTo: false)
-        query.order(byDescending: "createdAt")
+        let query = PFQuery(className: ShopIO.Order().tableName)
+        query.whereKey(ShopIO.Order().shopId, equalTo: self.currShop!.getShopId())
+        query.whereKey(ShopIO.Order().fulfilled, equalTo: false)
+        query.order(byDescending: ShopIO.Order().createdAt)
         query.findObjectsInBackground {(orders, error) in
             if let orders = orders {
                 for order in orders {
@@ -77,4 +111,5 @@ extension ManageShopViewController {
             }
         }
     }
+    /* private func getOrder()*/
 }

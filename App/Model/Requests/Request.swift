@@ -15,11 +15,11 @@ DATE
 /**/
 
 struct Request {
-    private var objectId: String? // objectId of the request
-    private var shopId: String? // shopId of the requested Product, foreign key to objectId of shop database
-    private var userId: String? // userId of the requested Product, foreign key to objectId of user database
-    private var productId: String? //productId of the requested Product, foreign key to objectId of product
-    private var fulfilled: Bool? // boolean variable to record whether or not the request is fulfilled.
+    private var objectId: String?   // objectId of the request
+    private var shopId: String?     // shopId of the requested Product, foreign key to objectId of shop database
+    private var userId: String?     // userId of the requested Product, foreign key to objectId of user database
+    private var productId: String?  // productId of the requested Product, foreign key to objectId of product
+    private var fulfilled: Bool?    // boolean variable to record whether or not the request is fulfilled.
     
     //Constructor
     init(request myRequest: PFObject) {

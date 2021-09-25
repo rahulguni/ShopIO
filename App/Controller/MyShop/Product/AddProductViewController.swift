@@ -1,26 +1,34 @@
-//
-//  AddProductViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/17/21.
-//
-
 import UIKit
 import Parse
 import ImagePicker
 
+/**/
+/*
+class MyMessagesViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls AddProduct.storyboard's Initial View.
+AUTHOR
+        Rahul Guni
+DATE
+        07/17/2021
+*/
+/**/
+
 class AddProductViewController: UIViewController{
     
+    //IBOutlet Elements
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var quantityField: UITextField!
     @IBOutlet weak var summaryField: UITextView!
     @IBOutlet weak var imageCollection: UICollectionView!
     
-    private var myShop: Shop?
-    private var myProduct: Product?
-    private var myProductPhotos: [UIImage] = []
-    private var imageCounter : Int = 0
+    //Controller Parameters
+    private var myShop: Shop?                       //current Shop
+    private var myProduct: Product?                 //new Product
+    private var myProductPhotos: [UIImage] = []     //new Product Images
+    private var imageCounter : Int = 0              //image counter to not exceed 4 images.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,20 +52,48 @@ class AddProductViewController: UIViewController{
 
 //MARK:- IBOutlet Functions
 extension AddProductViewController {
+    
+    /**/
+    /*
+    @IBAction func saveProduct(_ sender: Any)
+
+    NAME
+
+           saveProduct - Action for Save Button click.
+
+    DESCRIPTION
+
+            This function saves the product details and images in Product and Product_Images table respectively.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     @IBAction func saveProduct(_ sender: Any) {
         if(titleField.text!.isEmpty || priceField.text!.isEmpty || quantityField.text!.isEmpty || myProductPhotos.isEmpty){
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
         else {
-            let currProduct = PFObject(className: "Product")
-            currProduct["userId"] = currentUser?.objectId
-            currProduct["title"] = titleField.text!
-            currProduct["price"] = Double(priceField.text!)
-            currProduct["quantity"] = Int(quantityField.text!)
-            currProduct["summary"] = summaryField.text!
-            currProduct["shopId"] = myShop?.getShopId()
-            currProduct["content"] = ""
+            let currProduct = PFObject(className: ShopIO.Product().tableName)
+            currProduct[ShopIO.Product().userId] = currentUser?.objectId
+            currProduct[ShopIO.Product().title] = titleField.text!
+            currProduct[ShopIO.Product().price] = Double(priceField.text!)
+            currProduct[ShopIO.Product().quantity] = Int(quantityField.text!)
+            currProduct[ShopIO.Product().summary] = summaryField.text!
+            currProduct[ShopIO.Product().shopId] = myShop?.getShopId()
+            currProduct[ShopIO.Product().content] = ""
             
             self.myProduct = Product(product: currProduct)
             
@@ -65,16 +101,16 @@ extension AddProductViewController {
                 if(success) {
                     self.myProduct?.setObjectId(product: currProduct)
                     for image in self.myProductPhotos {
-                        let productPhoto = PFObject(className: "Product_Images")
+                        let productPhoto = PFObject(className: ShopIO.Product_Images().tableName)
                         let imageData = image.jpegData(compressionQuality: 0.5)
                         let imageName = makeImageName(self.myProduct!.getObjectId())
                         let imageFile = PFFileObject(name: imageName, data:imageData!)
                         
-                        productPhoto["productId"] = self.myProduct!.getObjectId()
-                        productPhoto["productImage"] = imageFile
+                        productPhoto[ShopIO.Product_Images().productId] = self.myProduct!.getObjectId()
+                        productPhoto[ShopIO.Product_Images().productImage] = imageFile
                         //Make first picture default
                         if(image == self.myProductPhotos[0]) {
-                            productPhoto["isDefault"] = true
+                            productPhoto[ShopIO.Product_Images().isDefault] = true
                         }
                         productPhoto.saveInBackground()
                     }
@@ -86,9 +122,10 @@ extension AddProductViewController {
                 }
             }
         }
-        
     }
+    /* @IBAction func saveProduct(_ sender: Any) */
     
+    //Action for back button pressed.
     @IBAction func backPressed(_ sender: Any) {
         //segue to main
         self.dismiss(animated: true, completion: nil)
@@ -96,19 +133,45 @@ extension AddProductViewController {
 }
 
 
-//MARK:- Display Functions
+//MARK:- General Functions
 extension AddProductViewController{
+    
+    //Setter function to set up current shop, passed on from previous view controller.
     func setShop(shop: Shop?) {
         self.myShop = shop
-    }
-    
-    func setProduct(product: Product?) {
-        self.myProduct = product
     }
 }
 
 //MARK:- CollectionView Delegate
 extension AddProductViewController: UICollectionViewDelegate {
+    
+    /**/
+    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+
+    NAME
+
+           collectionView - Action for Image Cells Click
+
+    DESCRIPTION
+
+            This function presents an alert when an image cell is clicked in the CollectionViewCell. This alert has choose photo and delete photo options.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Image Selection", message: "Select one of the options below", preferredStyle: .actionSheet)
        
@@ -119,7 +182,7 @@ extension AddProductViewController: UICollectionViewDelegate {
             imagePickerController.imageLimit = 4
             self.present(imagePickerController, animated: true, completion: nil)
         }))
-        //Render delete button only if current selected item is presenet in the images array
+        //Render delete button only if current selected item is present in the images array
         if(indexPath.row < self.myProductPhotos.count) {
             alert.addAction(UIAlertAction(title: "Delete Photo", style: .destructive, handler: {(action: UIAlertAction) in
                 self.myProductPhotos.remove(at: indexPath.row)
@@ -128,16 +191,19 @@ extension AddProductViewController: UICollectionViewDelegate {
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
-        
     }
+    /* func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) */
 }
 
 //MARK:- CollectionView Datasource
 extension AddProductViewController: UICollectionViewDataSource {
+    
+    //function to return number of cells in CollectionViewCell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
+    //function to populate collectionView cell, from ImageCollectionViewCell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = ImageCollectionViewCell()
         if let tempCell = imageCollection.dequeueReusableCell(withReuseIdentifier: "reusableProductImage", for: indexPath) as? ImageCollectionViewCell {
@@ -161,6 +227,33 @@ extension AddProductViewController: ImagePickerDelegate {
         
     }
     
+    /**/
+    /*
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+
+    NAME
+
+            doneButtonDidPress - Action for done button pressed in image picker.
+
+    DESCRIPTION
+
+            This function appends the selected images to myProductPhotos array.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         for image in images {
             if(myProductPhotos.count != 4) {
@@ -174,7 +267,9 @@ extension AddProductViewController: ImagePickerDelegate {
         self.imageCollection.reloadData()
         imagePicker.dismiss(animated: true, completion: nil)
     }
+    /* func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) */
     
+    //cancel button pressed
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -182,6 +277,34 @@ extension AddProductViewController: ImagePickerDelegate {
 
 //MARK:- UITextFieldDelegate
 extension AddProductViewController: UITextFieldDelegate {
+    
+    /**/
+    /*
+            func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+
+    NAME
+
+            textField - Action for textField Change
+
+    DESCRIPTION
+
+            This function checks the price UITextField so that there is only one decimal and 2 digits after decimal.
+
+    RETURNS
+
+            True if price is in correct format, else false
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let oldText = textField.text, let r = Range(range, in: oldText) else {
             return true
@@ -200,6 +323,7 @@ extension AddProductViewController: UITextFieldDelegate {
 
         return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
     }
+    /* func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) */
 }
 
 
