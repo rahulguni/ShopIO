@@ -34,7 +34,8 @@ class FollowedShopCollectionViewCell: UICollectionViewCell {
 
     DESCRIPTION
 
-            This function takes a Shop object to render the right data to collectionview cell. First, the Shop table in database is searched by the Shop model's objectId/shopid variable to render the details of the shop.
+            This function takes a Shop object to render the right data to collectionview cell. First, the Shop table in database is
+            searched by the Shop model's objectId/shopid variable to render the details of the shop.
 
     RETURNS
 
@@ -46,7 +47,7 @@ class FollowedShopCollectionViewCell: UICollectionViewCell {
 
     DATE
 
-            8/07/2021
+            8/05/2021
 
     */
     /**/

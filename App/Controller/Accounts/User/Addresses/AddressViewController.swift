@@ -1,12 +1,21 @@
-//
-//  Address.swift
-//  App
-//
-//  Created by Rahul Guni on 6/25/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class AddressViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Address.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        06/25/2021
+ 
+*/
+/**/
 
 class AddressViewController: UIViewController {
 
@@ -23,15 +32,10 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var updateButton: UIButton!
     
-    let states = State()
-    
-    /* Since Address gets called from different places, declare a variable to perform
-      segue and add address accordingly. */
-    private var shopId: String?
-    
-    private var editMode: forAddress?
-    
-    private var addressId: String?
+    let states = State()                    //For State options in UIPicker
+    private var shopId: String?             //For Shop Address
+    private var editMode: forAddress?       //To render view for edit/add
+    private var addressId: String?          //to update address for edit
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +79,37 @@ class AddressViewController: UIViewController {
 
 //MARK: - IBOutlet Functions
 extension AddressViewController {
+    
+    /**/
+    /*
+    @IBAction func saveButtonPressed(_ sender: UIButton)
+
+    NAME
+
+            saveButtonPressed - Action for Save Button click.
+
+    DESCRIPTION
+
+            This function first checks if the required fields are typed in. According to the editMode variable,
+            a new address is saved for user/shop. Before saving address, the a geoQuery is queried to determine
+            validity of the address. After check, the address is saved to either Address table or Shop_Address
+            table depending on editMode. It also adds a geoLocation coordinate to the Shop table for faster query.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/25/2021
+
+    */
+    /**/
+    
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty) {
             let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
@@ -83,17 +118,17 @@ extension AddressViewController {
         
         else if(isValidPhone(phone: self.phone_sec.text!)){
             if(self.editMode == forAddress.forShop){
-                let address = fillForm(className: "Shop_Address")
+                let address = fillForm(className: ShopIO.Shop_Address().shopAddressTableName)
                 let geocoder = CLGeocoder()
                 geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
                     if error == nil {
                         if let placemark = placemarks?[0] {
                             //save shop geoPoints in Shop Database
-                            let shopQuery = PFQuery(className: "Shop")
-                            shopQuery.whereKey("objectId", equalTo: self.shopId!)
+                            let shopQuery = PFQuery(className: ShopIO.Shop().tableName)
+                            shopQuery.whereKey(ShopIO.Shop().objectId, equalTo: self.shopId!)
                             shopQuery.getFirstObjectInBackground{(shop, error) in
                                 if let shop = shop {
-                                    shop["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                    shop[ShopIO.Shop().geoPoints] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                                     shop.saveInBackground()
                                 }
                                 else {
@@ -101,7 +136,7 @@ extension AddressViewController {
                                     self.present(alert, animated: true, completion: nil)
                                 }
                             }
-                            address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                            address[ShopIO.Shop().geoPoints] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                             address.saveInBackground {(success, error) in
                                 if(success) {
                                     self.performSegue(withIdentifier: "reloadMyShop", sender: self)
@@ -120,12 +155,12 @@ extension AddressViewController {
                 }
             }
             else {
-                let address = fillForm(className: "Address")
+                let address = fillForm(className: ShopIO.Address().addressTableName)
                 let geocoder = CLGeocoder()
                 geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
                     if error == nil {
                         if let placemark = placemarks?[0] {
-                            address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                            address[ShopIO.Address().geoPoints] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                             address.saveInBackground {(success, error) in
                                 if(success) {
                                     self.performSegue(withIdentifier: "reloadAccount", sender: self)
@@ -148,6 +183,37 @@ extension AddressViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    /* @IBAction func saveButtonPressed(_ sender: UIButton) */
+    
+    /**/
+    /*
+    @IBAction func updateButtonPressed(_ sender: Any)
+
+    NAME
+
+            updateButtonPressed - Action for Update Button click.
+
+    DESCRIPTION
+
+            This function first checks if the required fields are typed in. According to the editMode variable,
+            an existing address is updated for user/shop. Before saving address, the a geoQuery is queried to determine
+            validity of the address. After check, the address is saved to either Address table or Shop_Address
+            table depending on editMode. It also updates the geoLocation coordinate to the Shop table for faster query.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/25/2021
+
+    */
+    /**/
     
     @IBAction func updateButtonPressed(_ sender: Any) {
         if(line_1.text!.isEmpty || city.text!.isEmpty || zip.text!.isEmpty || state.text!.isEmpty || phone_sec.text!.isEmpty) {
@@ -157,10 +223,10 @@ extension AddressViewController {
         else if(isValidPhone(phone: self.phone_sec.text!)){
             let query: PFQuery<PFObject>
             if(self.editMode == forAddress.forShopEdit) {
-                query = PFQuery(className: "Shop_Address")
+                query = PFQuery(className: ShopIO.Shop_Address().shopAddressTableName)
             }
             else {
-                query = PFQuery(className: "Address")
+                query = PFQuery(className: ShopIO.Address().addressTableName)
             }
             query.getObjectInBackground(withId: self.addressId!){(address: PFObject?, error: Error?) in
                 if let error = error {
@@ -168,12 +234,12 @@ extension AddressViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
                 else if let address = address {
-                    address["line_1"] = self.line_1.text
-                    address["line_2"] = self.line_2.text
-                    address["city"] = self.city.text
-                    address["state"] = self.state.text
-                    address["zip"] = self.zip.text
-                    address["phone"] = Int(self.phone_sec.text!)
+                    address[ShopIO.Address().line1] = self.line_1.text
+                    address[ShopIO.Address().line2] = self.line_2.text
+                    address[ShopIO.Address().city] = self.city.text
+                    address[ShopIO.Address().state] = self.state.text
+                    address[ShopIO.Address().zip] = self.zip.text
+                    address[ShopIO.Address().phone] = Int(self.phone_sec.text!)
                     
                     let geocoder = CLGeocoder()
                     geocoder.geocodeAddressString(Address(address: address).getFullAddress()) { (placemarks, error) in
@@ -181,11 +247,11 @@ extension AddressViewController {
                             if let placemark = placemarks?[0] {
                                 //update address in shop geopoints
                                 if(self.editMode == forAddress.forShopEdit){
-                                    let shopQuery = PFQuery(className: "Shop")
-                                    shopQuery.whereKey("objectId", equalTo: self.shopId!)
+                                    let shopQuery = PFQuery(className: ShopIO.Shop().tableName)
+                                    shopQuery.whereKey(ShopIO.Shop().objectId, equalTo: self.shopId!)
                                     shopQuery.getFirstObjectInBackground{(shop, error) in
                                         if let shop = shop {
-                                            shop["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                            shop[ShopIO.Shop().geoPoints] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                                             shop.saveInBackground()
                                         }
                                         else {
@@ -194,7 +260,7 @@ extension AddressViewController {
                                         }
                                     }
                                 }
-                                address["geoPoints"] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
+                                address[ShopIO.Address().geoPoints] = PFGeoPoint(latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude)
                                 address.saveInBackground {(success, error) in
                                     if(success) {
                                         self.performSegue(withIdentifier: "reloadAccount", sender: self)
@@ -219,18 +285,46 @@ extension AddressViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    /* @IBAction func updateButtonPressed(_ sender: Any) */
     
-    
+    //Action for Do this later button click
     @IBAction func doThisLaterButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "reloadAccount", sender: self)
     }
+
+    /**/
+    /*
+    @IBAction func primaryAddressSwitch(_ sender: UISwitch)
+
+    NAME
+
+            primaryAddressSwitch - Action for Primary Address switch.
+
+    DESCRIPTION
+
+            This function first queries Address table using the current user's objectId and fills in UITextfields
+            with the user's primary address if the switch is on. When turned off, it clears all field.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/25/2021
+
+    */
+    /**/
     
-    //function to fill address field with primary options if switched on
     @IBAction func primaryAddressSwitch(_ sender: UISwitch) {
         if(primaryAddress.isOn) {
-            let query = PFQuery(className: "Address")
-            query.whereKey("userId", equalTo: currentUser!.objectId!)
-            query.whereKey("isDefault", equalTo: true)
+            let query = PFQuery(className: ShopIO.Address().addressTableName)
+            query.whereKey(ShopIO.Address().userId, equalTo: currentUser!.objectId!)
+            query.whereKey(ShopIO.Address().isDefault, equalTo: true)
             query.getFirstObjectInBackground {(object: PFObject?, error: Error?) in
                 if let error = error {
                     // The query succeeded but no matching result was found
@@ -258,69 +352,136 @@ extension AddressViewController {
             zip.text = ""
         }
     }
+    /* @IBAction func primaryAddressSwitch(_ sender: UISwitch) */
 }
 
 //MARK: - Display Functions
 extension AddressViewController {
     
+    //Setter function for editMode of current view, passed on from previous view controller.
     func setEditMode(editMode: forAddress) {
         self.editMode = editMode
     }
     
+    //Setter function for shopId if address is presented for shop, passed on from previous view controller.
     func setShopId(shopId: String) {
         self.shopId = shopId
     }
     
+    //Setter function to set up current Address's objectId if the view is called for edit, passed on from previous view controller.
     func setAddressId(addressId: String) {
         self.addressId = addressId
     }
     
+    /**/
+    /*
+    private func fillForm(className forClass: String) -> PFObject
+
+    NAME
+
+            fillForm - Get all required parameters for Address object
+     
+    SYNOPSIS
+           
+            fillForm(className forClass: String)
+                forClass    --> Either Address or Shop_Address, depending on forEdit.
+
+    DESCRIPTION
+
+            This function creates a PFObject with all the UITextField parameters and returns an object ready to be inserted to
+            Address or Shop_Address table.
+
+    RETURNS
+
+            PFObject    --> Ready to be uploaded to server.
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/25/2021
+
+    */
+    /**/
+    
     private func fillForm(className forClass: String) -> PFObject {
         let address = PFObject(className: forClass)
-        if(forClass == "Shop_Address"){
-            address["shopId"] = shopId!
+        if(forClass == ShopIO.Shop_Address().shopAddressTableName){
+            address[ShopIO.Shop_Address().shopId] = shopId!
         }
         else {
-            address["userId"] = currentUser?.objectId!
+            address[ShopIO.Address().userId] = currentUser?.objectId!
         }
-        address["line_1"] = line_1.text
+        address[ShopIO.Address().line1] = line_1.text
         
         if line_2.text != "" {
-            address["line_2"] = line_2.text
+            address[ShopIO.Address().line2] = line_2.text
         } else {
-            address["line_2"] = ""
+            address[ShopIO.Address().line2] = ""
         }
         
-        address["city"] = city.text
-        address["state"] = state.text
-        address["zip"] = zip.text
-        address["country"] = "USA"
+        address[ShopIO.Address().city] = city.text
+        address[ShopIO.Address().state] = state.text
+        address[ShopIO.Address().zip] = zip.text
+        address[ShopIO.Address().country] = "USA"
         if(self.editMode != forAddress.forAddNewShop) {
-            address["isDefault"] = true
+            address[ShopIO.Address().isDefault] = true
         }
         else{
-            address["isDefault"] = false
+            address[ShopIO.Address().isDefault] = false
         }
         
         if phone_sec.text != "" {
-            address["phone"] = Int(phone_sec.text!)
+            address[ShopIO.Address().phone] = Int(phone_sec.text!)
         } else {
-            address["phone"] = currentUser?.value(forKey: "phone") as! Int
+            address[ShopIO.Address().phone] = currentUser?.value(forKey: "phone") as! Int
         }
         
         return address
     }
+    /* private func fillForm(className forClass: String) -> PFObject */
+    
+    /**/
+    /*
+    private func fillformForEdit()
+
+    NAME
+
+            fillformForEdit - Fills the UITextField with address object values.
+
+    DESCRIPTION
+
+            This function first queries the Address or Shop_Address table with addressId passed from
+            previous view controller. Then once the object is fetched, UITextField parameters are
+            filled with those values.
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/25/2021
+
+    */
+    /**/
     
     private func fillformForEdit(){
         var query: PFQuery<PFObject>?
         if(self.editMode == forAddress.forShopEdit) {
-            query = PFQuery(className: "Shop_Address")
+            query = PFQuery(className: ShopIO.Shop_Address().shopAddressTableName)
         }
         else {
-            query = PFQuery(className: "Address")
+            query = PFQuery(className: ShopIO.Address().addressTableName)
         }
         
-        query!.whereKey("objectId", equalTo: self.addressId!)
+        query!.whereKey(ShopIO.Address().objectId, equalTo: self.addressId!)
         query!.getFirstObjectInBackground{(object, error) in
             if let object = object {
                 let address = Address(address: object)
@@ -333,10 +494,10 @@ extension AddressViewController {
             }
         }
     }
+    /* private func fillformForEdit() */
 }
 
 //MARK: - Picker Functions
-
 extension AddressViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

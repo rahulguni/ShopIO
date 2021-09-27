@@ -10,11 +10,15 @@ protocol shopManagerDelegate {
 class ShopManager
 
 DESCRIPTION
-        This class is the model to render data from Shop database and perform a segue to specified destination once the shop has been renderd. This is used in many view controllers in order to render the shop data
+        This class is the model to render data from Shop database and perform a segue to specified destination once the shop
+        has been renderd. This is used in many view controllers in order to render the shop data
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/30/2021
+ 
 */
 /**/
 
@@ -50,7 +54,9 @@ class ShopManager {
 
     DESCRIPTION
 
-            This function takes a segue identifier string and performs segue to the given view controller. If no shop is found, the user is directed to add shop view controller.
+            This function takes a segue identifier string and performs segue to the given view controller. If no shop is found,
+            the user is directed to add shop view controller.
+     
     RETURNS
 
             Void
@@ -142,7 +148,8 @@ class ShopManager {
 
     DESCRIPTION
 
-            This function takes a segue identifier string and performs segue to the given view controller for the passed Shop object. It also fills the products array for products of the specified shop.
+            This function takes a segue identifier string and performs segue to the given view controller for the passed Shop object.
+            It also fills the products array for products of the specified shop.
     RETURNS
 
             Void

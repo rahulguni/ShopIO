@@ -7,10 +7,13 @@ class InboxViewController
 
 DESCRIPTION
         This class is a UIViewController that controls Inbox.storyboard view.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/16/2021
+ 
 */
 /**/
 
@@ -75,7 +78,8 @@ extension InboxViewController {
 
     DESCRIPTION
 
-            This function first checks if the user is signed in. If true, it fetches all messages for the user and performs segue to MessagesViewController. If the user is not signed in, the sign in view appears.
+            This function first checks if the user is signed in. If true, it fetches all messages for the user and performs
+            segue to MessagesViewController. If the user is not signed in, the sign in view appears.
 
     RETURNS
 
@@ -115,7 +119,8 @@ extension InboxViewController {
 
     DESCRIPTION
 
-            This function first checks if the user has a shop registered in the Shop table. If true, it fetches all the messages for shop and segues to MessagesViewController. If false, AddShop View Controller is loaded.
+            This function first checks if the user has a shop registered in the Shop table. If true, it fetches all
+            the messages for shop and segues to MessagesViewController. If false, AddShop View Controller is loaded.
 
     RETURNS
 
@@ -175,7 +180,9 @@ extension InboxViewController{
 
     DESCRIPTION
 
-            This function takes in the objectId for which messages is to be fetched. The forShop boolean variable determines this when passed on from the IBOutlet functions. After the search in Message Table in database is completed, the objects are appeneded to myMessages array and the controller is segued to MessagesViewController.
+            This function takes in the objectId for which messages is to be fetched. The forShop boolean variable determines
+            this when passed on from the IBOutlet functions. After the search in Message Table in database is completed, the
+            objects are appeneded to myMessages array and the controller is segued to MessagesViewController.
 
     RETURNS
 

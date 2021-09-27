@@ -1,30 +1,38 @@
-//
-//  CheckOutViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 8/23/21.
-//
-
 import UIKit
 import Parse
 import RealmSwift
 
+/**/
+/*
+class CheckOutViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Cart.storyboard's CheckOut view.
+AUTHOR
+        Rahul Guni
+DATE
+        08/23/2021
+*/
+/**/
+
 class CheckOutViewController: UIViewController {
     
+    //IBOutlet Elements
     @IBOutlet weak var taxLabel: UILabel!
     @IBOutlet weak var shippingLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
-    
     @IBOutlet weak var pickupButton: UIButton!
     @IBOutlet weak var shipButton: UIButton!
     
-    private var myCart: Cart?
-    private var allCarts: [String: [CartItem]] = [:]
-    private var myItems: [CartItem] = []
-    private var deliveryAddressId: String?
-    private var pickUp: Bool?
-    private var fresh: Bool = false
-    private let realm = try! Realm()
+    //Controller parameters
+    private var myCart: Cart?                               //current Cart
+    private var allCarts: [String: [CartItem]] = [:]        //List to separate cartItems according to shop
+    private var myItems: [CartItem] = []                    //all items in cart
+    private var deliveryAddressId: String?                  //objectId of address if delivery option is chosen
+    private var pickUp: Bool?                               //determines if the order is for pickup or delivery
+    private var fresh: Bool = false                         //to exit checkOut view if the view is exited before checking out.
+    
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,48 +92,80 @@ extension CheckOutViewController {
         }
     }
     
+    //setter function to set current cart, passed on from previous viewcontroller (CartViewController)
     func setCart(cart: Cart) {
         self.myCart = cart
     }
     
+    //setter function to set current cart items, passed on from previous viewcontroller (CartViewController)
     func setItems(items: [CartItem]) {
         self.myItems = items
     }
     
+    //setter function to set shipping address for the order, passed on from next viewcontroller (AddressViewController)
     func setAddressId(address: String) {
         self.deliveryAddressId = address
     }
     
+    //setter function to set fresh boolean, only true if previous view controller is AddressViewController.
     func setFresh(bool: Bool) {
         self.fresh = bool
     }
     
+    /**/
+    /*
+    private func uploadCart()
+
+    NAME
+
+           uploadCart - Uploads Cart to Cart Table
+
+    DESCRIPTION
+
+            This function loops through all the Order objects according to their shop and uplaods invidiual orders to Orders table.
+            After the order is completed, it also uploads all the cartItem objects to Order_Items table according to the order's objectId.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/23/2021
+
+    */
+    /**/
+    
     private func uploadCart() {
         //make cart objects first
         for (shop, items) in self.allCarts {
-            let query = PFQuery(className: "Shop")
-            query.whereKey("objectId", equalTo: shop)
+            let query = PFQuery(className: ShopIO.Shop().tableName)
+            query.whereKey(ShopIO.Shop().objectId, equalTo: shop)
             query.getFirstObjectInBackground{(shop, error) in
                 if let shop = shop {
-                    let shippingPrice = shop.value(forKey: "shippingCost") as? Double
+                    let shippingPrice = shop.value(forKey: ShopIO.Shop().shippingCost) as? Double
                     let myCart = Cart(cartItems: items)
-                    let newCart = PFObject(className: "Order")
-                    newCart["shopId"] = shop.objectId!
-                    newCart["total"] = myCart.getTotal()
-                    newCart["tax"] = myCart.getTax()
-                    newCart["userId"] = currentUser!.objectId!
+                    let newCart = PFObject(className: ShopIO.Order().tableName)
+                    newCart[ShopIO.Order().shopId] = shop.objectId!
+                    newCart[ShopIO.Order().total] = myCart.getTotal()
+                    newCart[ShopIO.Order().tax] = myCart.getTax()
+                    newCart[ShopIO.Order().userId] = currentUser!.objectId!
                     if(!self.pickUp!) {
                         myCart.setShippingPrice(shipping: shippingPrice!)
-                        newCart["addressId"] = self.deliveryAddressId!
-                        newCart["shipping"] = myCart.getShippingPrice()
+                        newCart[ShopIO.Order().addressId] = self.deliveryAddressId!
+                        newCart[ShopIO.Order().shipping] = myCart.getShippingPrice()
                     }
                     else{
-                        newCart["shipping"] = 0.0
+                        newCart[ShopIO.Order().shipping] = 0.0
                     }
-                    newCart["itemDiscount"] = myCart.getItemDiscount()
-                    newCart["pickUp"] = self.pickUp!
-                    newCart["sessionId"] = myCart.getSessionId()
-                    newCart["subTotal"] = myCart.getSubTotal()
+                    newCart[ShopIO.Order().itemDiscount] = myCart.getItemDiscount()
+                    newCart[ShopIO.Order().pickUp] = self.pickUp!
+                    newCart[ShopIO.Order().sessionId] = myCart.getSessionId()
+                    newCart[ShopIO.Order().subTotal] = myCart.getSubTotal()
                     newCart.saveInBackground{(success, error) in
                         if(success) {
                             //upload order products
@@ -144,15 +184,50 @@ extension CheckOutViewController {
             }
         }
     }
+    /* private func uploadCart() */
+    
+    /**/
+    /*
+    private func uploadCartItems(items: [CartItem], cartId: String)
+
+    NAME
+
+            uploadCartItems - Uploads all items in cart
+     
+    SYNOPSIS
+           
+            uploadCartItems(items: [CartItem], cartId: String)
+                items      --> items in cart
+                cartId     --> objectId of cart after cart is uploaded
+
+    DESCRIPTION
+
+            This function takes in the cart items and objectId of a cart and inserts them in Order_Items table.
+            At the same time, it also deletes the cartItem from Realm database as it is uplaoded in server.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/23/2021
+
+    */
+    /**/
     
     private func uploadCartItems(items: [CartItem], cartId: String) {
         for item in items {
-            let newItem = PFObject(className: "Order_Item")
-            newItem["discount"] = item.discount
-            newItem["orderId"] = cartId
-            newItem["price"] = item.price
-            newItem["productId"] = item.productId
-            newItem["quantity"] = item.quantity
+            let newItem = PFObject(className: ShopIO.Order_Item().tableName)
+            newItem[ShopIO.Order_Item().discount] = item.discount
+            newItem[ShopIO.Order_Item().orderId] = cartId
+            newItem[ShopIO.Order_Item().price] = item.price
+            newItem[ShopIO.Order_Item().productId] = item.productId
+            newItem[ShopIO.Order_Item().quantity] = item.quantity
             newItem.saveInBackground {(success, error) in
                 if(success) {
                     //clear all cartItems from local database
@@ -176,17 +251,46 @@ extension CheckOutViewController {
             }
         }
     }
+    /* private func uploadCartItems(items: [CartItem], cartId: String) */
+    
+    /**/
+    /*
+    private func getShippingPrices()
+
+    NAME
+
+            getShippingPrices - Fetches shipping price for each shop
+
+    DESCRIPTION
+
+            This function checks shipping price for each shop if pickUp is false. It then changes the UILabel fields
+            according to total shipping cost.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/23/2021
+
+    */
+    /**/
     
     private func getShippingPrices(){
         var total = self.myCart!.getSubTotal()
         var shipTotal = 0.0
         for(shop, _) in self.allCarts {
-            let query = PFQuery(className: "Shop")
-            query.whereKey("objectId", equalTo: shop)
+            let query = PFQuery(className: ShopIO.Shop().tableName)
+            query.whereKey(ShopIO.Shop().objectId, equalTo: shop)
             query.getFirstObjectInBackground{(currShop, error) in
                 if let currShop = currShop {
-                    total = ((total + (currShop.value(forKey: "shippingCost") as! Double)) * 100).rounded() / 100
-                    shipTotal = ((shipTotal + (currShop.value(forKey: "shippingCost") as! Double)) * 100).rounded() / 100
+                    total = ((total + (currShop.value(forKey: ShopIO.Shop().shippingCost) as! Double)) * 100).rounded() / 100
+                    shipTotal = ((shipTotal + (currShop.value(forKey: ShopIO.Shop().shippingCost) as! Double)) * 100).rounded() / 100
                 }
                 else {
                     let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
@@ -197,10 +301,12 @@ extension CheckOutViewController {
             }
         }
     }
+    /* private func getShippingPrices() */
 }
 
 //MARK:- IBOutlet Functions
 extension CheckOutViewController {
+    //Function to set shipping cost to $0 if pick up is selected.
     @IBAction func selectPickUp(_ sender: Any) {
         self.pickUp = true
         self.pickupButton.layer.borderWidth = 1.0
@@ -211,10 +317,12 @@ extension CheckOutViewController {
         self.shippingLabel.text = "Shipping: $0"
     }
     
+    //function to segue to MyAddressViewController to select shipping address
     @IBAction func selectShip(_ sender: Any) {
         self.performSegue(withIdentifier: "goToMyAddresses", sender: self)
     }
     
+    //Action for Order Button Click, upload current cart in Order Table.
     @IBAction func orderButtonPressed(_ sender: Any) {
         if(self.pickUp == nil) {
             let alert = customNetworkAlert(title: "Missing Delivery Option", errorString: "Please select pickup or delivery for your order.")

@@ -7,10 +7,13 @@ class RequestsViewController
 
 DESCRIPTION
         This class is a UIViewController that controls Requests.storyboard View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/07/2021
+ 
 */
 /**/
 
@@ -83,7 +86,9 @@ extension RequestsViewController {
 
     DESCRIPTION
 
-            This function takes in the Request object and queries the Products table through the Request object's productId. Then it presents a .form alert for different choices for the request:- View Product, fulfill request or delete request.
+            This function takes in the Request object and queries the Products table through the Request object's
+            productId. Then it presents a .form alert for different choices for the request:- View Product, fulfill
+            request or delete request.
 
     RETURNS
 
@@ -163,7 +168,8 @@ extension RequestsViewController {
 
     DESCRIPTION
 
-            This function queries the request table and marks the request as fulfilled. currProduct is used to send current Product and request details to customer as a message.
+            This function queries the request table and marks the request as fulfilled. currProduct is used to
+            send current Product and request details to customer as a message.
 
     RETURNS
 
@@ -221,7 +227,8 @@ extension RequestsViewController {
 
     DESCRIPTION
 
-            This function queries the request table and deletes the request. currProduct is used to send current Product and request details to customer as a message.
+            This function queries the request table and deletes the request. currProduct is used to send current
+            Product and request details to customer as a message.
 
     RETURNS
 
@@ -281,7 +288,8 @@ extension RequestsViewController {
 
     DESCRIPTION
 
-            This function first checks if a chatRoom already exists for the two parties to exchange messages. If not, it creates a new Message Model and open a chatRoom.
+            This function first checks if a chatRoom already exists for the two parties to exchange messages.
+            If not, it creates a new Message Model and open a chatRoom.
 
     RETURNS
 
@@ -346,7 +354,8 @@ extension RequestsViewController {
 
     DESCRIPTION
 
-            This function takes in a PFObject for the objectId of the chatRoom and uploads a message including the currProduct's details and request details to the user in chatRoom table.
+            This function takes in a PFObject for the objectId of the chatRoom and uploads a message including the
+            currProduct's details and request details to the user in chatRoom table.
 
     RETURNS
 

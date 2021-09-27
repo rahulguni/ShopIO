@@ -7,11 +7,15 @@ import MapKit
 class ProductSearchTableViewCell
 
 DESCRIPTION
-        This class is a UITableViewCell class that makes up the cells for Search Products Table view  in SearchViewController as well as from the search function in a certain store.
+        This class is a UITableViewCell class that makes up the cells for Search Products Table view  in SearchViewController
+        as well as from the search function in a certain store.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/14/2021
+ 
 */
 /**/
 
@@ -55,7 +59,10 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
 
     DESCRIPTION
 
-            This function takes a Product object to render the right data to tableview cell. First, the Product table in database is searched by the Product model's objectId variable to render the details of the product. Then, using the shopId and productId, the Shop table and Product_Review table is searched to render the shop's information and product's ratings respectively.
+            This function takes a Product object to render the right data to tableview cell. First, the Product table in database
+            is searched by the Product model's objectId variable to render the details of the product. Then, using the shopId and
+            productId, the Shop table and Product_Review table is searched to render the shop's information and product's ratings
+            respectively.
 
     RETURNS
 
@@ -280,7 +287,8 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
 
     DESCRIPTION
 
-            This function takes two boolean variables in order to set the visibility of price, discount and originalPrice labels on the condition of whether or not discount exists for the given product.
+            This function takes two boolean variables in order to set the visibility of price, discount and originalPrice labels on
+            the condition of whether or not discount exists for the given product.
 
     RETURNS
 

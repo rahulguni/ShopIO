@@ -3,14 +3,18 @@ import Parse
 
 /**/
 /*
-class Message
+class MyChatRoom
 
 DESCRIPTION
-        This class is a PFObject class that is used for LiveQuery when rendering the chatRoom. link:- https://docs.parseplatform.org/parse-server/guide/#live-queries
+        This class is a PFObject class that is used for LiveQuery when rendering the chatRoom.
+        link:- https://docs.parseplatform.org/parse-server/guide/#live-queries
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/20/2021
+ 
 */
 /**/
 

@@ -8,11 +8,15 @@ import SwipeCellKit
 class CartItemCollectionViewCell
 
 DESCRIPTION
-        This class is a SwipeCollectionView class that makes up the cells for Cart Collection View in CartViewController. link: https://github.com/SwipeCellKit/SwipeCellKit
+        This class is a SwipeCollectionView class that makes up the cells for Cart Collection View in CartViewController.
+        link: https://github.com/SwipeCellKit/SwipeCellKit
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/27/2021
+ 
 */
 /**/
 
@@ -39,7 +43,11 @@ class CartItemCollectionViewCell: SwipeCollectionViewCell {
 
     DESCRIPTION
 
-            This function takes a CartItem object to render the right data to tableview cell. First, the Product table in database is searched by the CartItem model's productId variable to render the necessary details of the product. Then, using the productId, the Product_Images table is searched to render the Product's display image. Finally, using the shopId, the Shop table is searched to render the product's shop details.
+            This function takes a CartItem object to render the right data to tableview cell. First, the Product
+            table in database is searched by the CartItem model's productId variable to render the necessary
+            details of the product. Then, using the productId, the Product_Images table is searched to render the
+            Product's display image. Finally, using the shopId, the Shop table is searched to render the product's
+            shop details.
 
     RETURNS
 

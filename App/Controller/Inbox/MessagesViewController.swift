@@ -8,10 +8,13 @@ class MyMessagesViewController
 
 DESCRIPTION
         This class is a UIViewController that controls Messages.storyboard's Messages View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/19/2021
+ 
 */
 /**/
 
@@ -87,7 +90,8 @@ extension MyMessagesViewController: UITableViewDelegate {
 
     DESCRIPTION
 
-            This function records the current Message object's chatRoomId, fetches all chats from the chatroom and appends it to chatRoom array before it performs segue to ChatViewController.
+            This function records the current Message object's chatRoomId, fetches all chats from the chatroom
+            and appends it to chatRoom array before it performs segue to ChatViewController.
 
     RETURNS
 
@@ -159,7 +163,8 @@ extension MyMessagesViewController {
 
     DESCRIPTION
 
-            This function subscribes to the Message Table from LiveQuery feature of parse and updates the tableview cells if a message is uploaded/edited in the subscribed table.
+            This function subscribes to the Message Table from LiveQuery feature of parse and updates
+            the tableview cells if a message is uploaded/edited in the subscribed table.
 
     RETURNS
 

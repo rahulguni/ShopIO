@@ -5,11 +5,15 @@ import Foundation
 class Cart
 
 DESCRIPTION
-        This class is the model to make an object that corresponds to the Orders Table. This class also has all the required setter and getter properies for the parameters.
+        This class is the model to make an object that corresponds to the Orders Table. This class also has all the
+        required setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/24//2021
+ 
 */
 /**/
 

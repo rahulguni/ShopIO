@@ -9,11 +9,15 @@ import InputBarAccessoryView
 class ChatViewController
 
 DESCRIPTION
-        This class is a UIViewController that extends MessagesViewController. This class controls Messages.storyboard's ChatRoom View. Link: https://github.com/MessageKit/MessageKit
+        This class is a UIViewController that extends MessagesViewController. This class controls Messages.storyboard's ChatRoom View.
+        Link: https://github.com/MessageKit/MessageKit
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/20/2021
+ 
 */
 /**/
 
@@ -90,7 +94,8 @@ extension ChatViewController {
 
     DESCRIPTION
 
-            This function takes in the message string and uploads a new message in the ChatRoom table with appropriate data. After this is completed, it updates the updatedAt date in Message table for the current chatRoom.
+            This function takes in the message string and uploads a new message in the ChatRoom table with appropriate data.
+            After this is completed, it updates the updatedAt date in Message table for the current chatRoom.
 
     RETURNS
 
@@ -192,7 +197,8 @@ extension ChatViewController {
 
     DESCRIPTION
 
-            This function subscribes to the ChatRoom Table from LiveQuery feature of parse and updates the tableview cells if a message is uploaded in the subscribed table.
+            This function subscribes to the ChatRoom Table from LiveQuery feature of parse and updates the tableview cells
+            if a message is uploaded in the subscribed table.
 
     RETURNS
 

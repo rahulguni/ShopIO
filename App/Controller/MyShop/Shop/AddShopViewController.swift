@@ -1,15 +1,25 @@
-//
-//  AddShop.swift
-//  App
-//
-//  Created by Rahul Guni on 6/29/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class AddShopViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls AddShop.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        06/29/2021
+ 
+*/
+/**/
+
 class AddShopViewController: UIViewController {
 
+    //IBOutlet Elements
     @IBOutlet weak var shopName: UITextField!
     @IBOutlet weak var shopSlogan: UITextField!
     @IBOutlet weak var shopImage: UIImageView!
@@ -18,8 +28,8 @@ class AddShopViewController: UIViewController {
     @IBOutlet weak var shippingLabel: UITextField!
     @IBOutlet weak var continueButton: UIButton!
     
-    private var myShop: Shop?
-    var forEdit: Bool = false
+    private var myShop: Shop?       //New Shop Object
+    var forEdit: Bool = false       //boolean to render view for edit or add new shop.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +59,8 @@ class AddShopViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension AddShopViewController {
+    
+    //Action for Continue button click
     @IBAction func continueButtonPressed(_ sender: Any) {
         if (shopName.text!.isEmpty || shippingLabel.text!.isEmpty || self.shopImage.image == nil){
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
@@ -65,10 +77,12 @@ extension AddShopViewController {
         }
     }
     
+    //Action for back button click
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //Action for add photo click
     @IBAction func addPhoto(_ sender: Any) {
         self.showAlert()
     }
@@ -76,9 +90,38 @@ extension AddShopViewController {
 
 //MARK: - Display Functions
 extension AddShopViewController {
+    
+    //setter function to set up current shop for edit, passed from previous view controller.
     func setShop(shop myShop: Shop) {
         self.myShop = myShop
     }
+    
+    /**/
+    /*
+    private func loadEditShop()
+
+    NAME
+
+           loadEditShop - Load View if forEdit is true
+
+    DESCRIPTION
+
+            This function fills the UITextFields with current Shop's parameters and allows user to update the shop
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/29/2021
+
+    */
+    /**/
     
     private func loadEditShop(){
         titleLabel.text = "Welcome"
@@ -100,21 +143,49 @@ extension AddShopViewController {
         self.shippingLabel.text = shippingCost
         self.continueButton.setTitle("Update", for: .normal)
     }
+    /* private func loadEditShop() */
+    
+    /**/
+    /*
+    private func saveShop()
+
+    NAME
+
+           saveShop - Adds new shop
+
+    DESCRIPTION
+
+            This function saves a new shop in Shop table with parameters from UITextfields.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/29/2021
+
+    */
+    /**/
     
     private func saveShop(){
-        let shop = PFObject(className: "Shop")
+        let shop = PFObject(className: ShopIO.Shop().tableName)
 
-        shop["userId"] = currentUser!.objectId!
-        shop["title"] = shopName.text
-        shop["slogan"] = shopSlogan.text
-        shop["shippingCost"] = Double(shippingLabel.text!)
+        shop[ShopIO.Shop().userId] = currentUser!.objectId!
+        shop[ShopIO.Shop().title] = shopName.text
+        shop[ShopIO.Shop().slogan] = shopSlogan.text
+        shop[ShopIO.Shop().shippingCost] = Double(shippingLabel.text!)
         let imageData = shopImage.image!.jpegData(compressionQuality: 0.5)
         
         //for image naming
         
         let imageName = makeImageName(currentUser!.objectId!)
         let imageFile = PFFileObject(name: imageName, data:imageData!)
-        shop["shopImage"] = imageFile
+        shop[ShopIO.Shop().shopImage] = imageFile
         
         shop.saveInBackground{(success, error) in
             if(success) {
@@ -127,18 +198,46 @@ extension AddShopViewController {
             }
         }
     }
+    /* private func saveShop() */
+    
+    /**/
+    /*
+    private func updateShop()
+
+    NAME
+
+           updateShop - Adds new shop
+
+    DESCRIPTION
+
+            This function first fetches the shop from current user's objectId and updates it according to current UITextFields parameteres.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            06/29/2021
+
+    */
+    /**/
     
     private func updateShop() {
-        let query = PFQuery(className: "Shop")
+        let query = PFQuery(className: ShopIO.Shop().tableName)
         query.getObjectInBackground(withId: myShop!.getShopId()) { (shop: PFObject?, error: Error?) in
             if let myShop = shop {
-                myShop["title"] = self.shopName.text
-                myShop["slogan"] = self.shopSlogan.text
-                myShop["shippingCost"] = Double(self.shippingLabel.text!)
+                myShop[ShopIO.Shop().title] = self.shopName.text
+                myShop[ShopIO.Shop().slogan] = self.shopSlogan.text
+                myShop[ShopIO.Shop().shippingCost] = Double(self.shippingLabel.text!)
                 let imageData = self.shopImage.image!.jpegData(compressionQuality: 0.5)
                 let imageName = makeImageName(myShop.objectId!)
                 let imageFile = PFFileObject(name: imageName, data:imageData!)
-                myShop["shopImage"] = imageFile
+                myShop[ShopIO.Shop().shopImage] = imageFile
                 myShop.saveInBackground{(success, error) in
                     if(success) {
                         self.dismiss(animated: true, completion: nil)
@@ -151,6 +250,7 @@ extension AddShopViewController {
             }
         }
     }
+    /* private func updateShop() */
 }
 
 //MARK:- UIImagePickerViewDelegate
@@ -172,7 +272,7 @@ extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationCo
     //get image from source type
     private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
         
-        //Check is source type available
+        //Check if source type available
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             
             let imagePickerController = UIImagePickerController()
@@ -199,6 +299,34 @@ extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 //MARK:- UITextFieldDelegate
 extension AddShopViewController: UITextFieldDelegate {
+    
+    /**/
+    /*
+            func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+
+    NAME
+
+            textField - Action for textField Change
+
+    DESCRIPTION
+
+            This function checks the price UITextField so that there is only one decimal and 2 digits after decimal.
+
+    RETURNS
+
+            True if price is in correct format, else false
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/17/2021
+
+    */
+    /**/
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let oldText = textField.text, let r = Range(range, in: oldText) else {
             return true
@@ -217,5 +345,6 @@ extension AddShopViewController: UITextFieldDelegate {
 
         return isNumeric && numberOfDots <= 1 && numberOfDecimalDigits <= 2
     }
+    /* func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool*/
 }
 

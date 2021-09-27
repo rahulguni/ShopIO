@@ -1,10 +1,3 @@
-//
-//  ProductReview.swift
-//  App
-//
-//  Created by Rahul Guni on 9/10/21.
-//
-
 import Foundation
 import Parse
 
@@ -14,10 +7,13 @@ class ProductReview
 
 DESCRIPTION
         This class is the model to render data from Product_Review database. This class also has all the setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/10/2021
+ 
 */
 /**/
 

@@ -10,7 +10,7 @@ import Parse
 
 /**/
 /*
-class MessageTableViewCell
+class ShopsCollectionViewCell
 
 DESCRIPTION
         This class is a UICollectionViewCell class that makes up the cells for Shops Collection View in DiscoverViewController.
@@ -44,7 +44,9 @@ class ShopsCollectionViewCell: UICollectionViewCell {
 
     DESCRIPTION
 
-            This function takes a Shop object to render the right data to collectionview cell. First, the Shop table in database is searched by the Shop model's objectId/shopid variable to render the details of the shop. Then, the distance to ths shop from current location is rendered using geoLocations
+            This function takes a Shop object to render the right data to collectionview cell. First, the Shop table in database
+            is searched by the Shop model's objectId/shopid variable to render the details of the shop. Then, the distance to ths
+            shop from current location is rendered using geoLocations
 
     RETURNS
 
@@ -84,6 +86,7 @@ class ShopsCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    /* func setParameters(shop currShop: Shop) */
     
     //function to set shop distance, passed on from view controller.
     func setShopDistance(distance: Double) {

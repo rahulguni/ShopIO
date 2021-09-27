@@ -1,31 +1,36 @@
-//
-//  DiscoverViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/24/21.
-//
-
 import UIKit
 import Parse
 import MapKit
 
+/**/
+/*
+class DiscoverViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Discover.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        07/24/2021
+ 
+*/
+/**/
+
 class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
 
+    //IBOutlet Elements
     @IBOutlet weak var shopCollection: UICollectionView!
     @IBOutlet weak var followedShops: UICollectionView!
     
-    //a list to store followed Shops
-    private var followedList: [Shop] = []
-    //a list to store all shops
-    private var shops: [Shop] = []
-    //to record selected shop
-    private var currShop: Shop?
-    //to transfer product list to shop view
-    private var currProducts: [Product] = []
-    //default radius 25 miles to search for shops around
+    private var followedList: [Shop] = []               //a list to store followed Shops
+    private var shops: [Shop] = []                      //a list to store all shops
+    private var currShop: Shop?                         //to record selected shop
+    private var currProducts: [Product] = []            //to transfer product list to shop view
     private var locationManager: CLLocationManager!
-    private var radius: Double = 2500
-    private var sliderAlert: UIAlertController?
+    private var radius: Double = 2500                   //default radius 25 miles to search for shops around
+    private var sliderAlert: UIAlertController?         //Alert for location Filter.
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToShop") {
@@ -68,9 +73,38 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
 
 //MARK:- IBOutlet Functions
 extension DiscoverViewController {
+    
+    //Action for search Button Click, segue to SearchViewController.
     @IBAction func searchClicked(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToSearch", sender: self)
     }
+    
+    /**/
+    /*
+    @IBAction func editDistance(_ sender: Any)
+
+    NAME
+
+           editDistance - Presents an alert to choose shop distance filter.
+
+    DESCRIPTION
+
+            This function gets all shops within the set radius and displays them on the collectionview.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
     
     @IBAction func editDistance(_ sender: Any) {
         //get the Slider values from UserDefaults
@@ -109,7 +143,9 @@ extension DiscoverViewController {
         //present the sliderAlert message
         self.present(sliderAlert!, animated: true, completion: nil)
     }
+    /* @IBAction func editDistance(_ sender: Any) */
     
+    //Action for slider value change, record it in radius and set labels
     @objc func sliderValueDidChange(_ slider :UISlider!){
         self.radius = Double(round(slider.value))
         self.sliderAlert!.message = "Radius: \(Int(self.radius)) miles\n\n"
@@ -119,7 +155,35 @@ extension DiscoverViewController {
 //MARK:- Display Functions
 extension DiscoverViewController {
     
-    func getShopsWithinRadius() {
+    /**/
+    /*
+    private func getShopsWithinRadius()
+
+    NAME
+
+            getShopsWithinRadius - Fetches shops in the set radius
+
+    DESCRIPTION
+
+            This function first checks user's current location and gets all shops within the set radius and displays
+            them on the collectionview.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
+    
+    private func getShopsWithinRadius() {
         self.shops.removeAll()
         //get user's current location first
         locationManager = CLLocationManager()
@@ -138,18 +202,52 @@ extension DiscoverViewController {
             }
         }
     }
+    /* private func getShopsWithinRadius()*/
     
-    func getShopsWithInLocation(location: CLLocationCoordinate2D){
+    /**/
+    /*
+    private func getShopsWithInLocation(location: CLLocationCoordinate2D)
+
+    NAME
+
+            getShopsWithInLocation- Get all shops within location
+     
+    SYNOPSIS
+           
+            getShopsWithInLocation(location: CLLocationCoordinate2D)
+                location      --> a CLLocationCoordinate2d object to filter shops according to this geopoint
+
+    DESCRIPTION
+
+            This function takes in current user's location and fetches shops in Shop table with Parse's geopoints filter
+            feature. The shops are appended to shops array. link:  https://docs.parseplatform.org/ios/guide/#geopoints
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
+    
+    private func getShopsWithInLocation(location: CLLocationCoordinate2D){
         self.shops.removeAll()
-        let shopQuery = PFQuery(className: "Shop")
-        shopQuery.whereKey("userId", notEqualTo: currentUser?.objectId ?? "")
-        shopQuery.whereKey("geoPoints", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude), withinKilometers: self.radius)
+        let shopQuery = PFQuery(className: ShopIO.Shop().tableName)
+        shopQuery.whereKey(ShopIO.Shop().userId, notEqualTo: currentUser?.objectId ?? "")
+        shopQuery.whereKey(ShopIO.Shop().geoPoints, nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude), withinKilometers: self.radius)
         shopQuery.findObjectsInBackground{(shops, error) in
             if let shops = shops{
                 for shop in shops {
                     let newShop = Shop(shop: shop)
-                    let productQuery = PFQuery(className: "Product")
-                    productQuery.whereKey("shopId", equalTo: newShop.getShopId())
+                    let productQuery = PFQuery(className: ShopIO.Product().tableName)
+                    productQuery.whereKey(ShopIO.Product().shopId, equalTo: newShop.getShopId())
                     productQuery.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
                         if(object != nil) {
                             self.shops.append(newShop)
@@ -167,19 +265,48 @@ extension DiscoverViewController {
             self.shopCollection.isHidden = false
         }
     }
+    /* private func getShopsWithInLocation(location: CLLocationCoordinate2D)*/
     
-    func getFollowedShops(){
+    /**/
+    /*
+    private func getFollowedShops()
+
+    NAME
+
+           getFollowedShops - Fetch current user's Followed shops.
+
+    DESCRIPTION
+
+            This function queries the Followings table to get the shopIds of all shops current user follows. Then, the Shop
+            table is queried using the same shopIds and rendered on collectionview.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
+    
+    private func getFollowedShops(){
         self.followedList.removeAll()
-        let query = PFQuery(className: "Followings")
+        let query = PFQuery(className: ShopIO.Followings().tableName)
         if(currentUser != nil) {
-            query.whereKey("userId", equalTo: currentUser!.objectId!)
+            query.whereKey(ShopIO.Followings().userId, equalTo: currentUser!.objectId!)
             query.findObjectsInBackground{(objects: [PFObject]?, error: Error?) in
                 if let objects = objects {
                     for object in objects {
                         self.followedShops.backgroundColor = UIColor.white
-                        let followedShop = PFQuery(className: "Shop")
-                        followedShop.order(byAscending: "createdAt")
-                        followedShop.getObjectInBackground(withId: object["shopId"] as! String){(shop, error) in
+                        let followedShop = PFQuery(className: ShopIO.Shop().tableName)
+                        followedShop.order(byAscending: ShopIO.Shop().createdAt)
+                        followedShop.getObjectInBackground(withId: object[ShopIO.Followings().shopId] as! String){(shop, error) in
                             if shop != nil {
                                 let newShop = Shop(shop: shop)
                                 self.followedList.append(newShop)
@@ -200,10 +327,45 @@ extension DiscoverViewController {
             }
         }
     }
+    /* private func getFollowedShops() */
 }
 
 //MARK:- UICollectionViewDelegate
 extension DiscoverViewController: UICollectionViewDelegate{
+    
+    /**/
+    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+
+    NAME
+
+            collectionView - Action for collection view cell click.
+     
+    SYNOPSIS
+           
+            getAllUserMessages(id userId: String, forShop: Bool)
+                userId      --> objectId of user if messages fetched for user, objectId of shop if messages fetched for shop.
+                forShop     --> Determines if messages to be fetched is for user or shop
+
+    DESCRIPTION
+
+            This function fetched all products for the selected shop in Product table and segues to MyStoreViewController.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/24/2021
+
+    */
+    /**/
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == shopCollection {
             currShop = shops[indexPath.row]
@@ -212,9 +374,9 @@ extension DiscoverViewController: UICollectionViewDelegate{
             currShop = followedList[indexPath.row]
         }
         currProducts.removeAll()
-        let query = PFQuery(className: "Product")
-        query.whereKey("shopId", equalTo: currShop!.getShopId())
-        query.order(byAscending: "title")
+        let query = PFQuery(className: ShopIO.Product().tableName)
+        query.whereKey(ShopIO.Product().shopId, equalTo: currShop!.getShopId())
+        query.order(byAscending: ShopIO.Product().title)
         query.findObjectsInBackground{(products: [PFObject]?, error: Error?) in
             if let _ = error {
                 let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
@@ -229,10 +391,13 @@ extension DiscoverViewController: UICollectionViewDelegate{
             }
         }
     }
+    /* func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) */
 }
 
 //MARK:- UICollectionViewDataSource
 extension DiscoverViewController: UICollectionViewDataSource{
+    
+    //Function to return number of collectionview cells.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if(collectionView == shopCollection){
             return shops.count
@@ -242,6 +407,7 @@ extension DiscoverViewController: UICollectionViewDataSource{
         }
     }
     
+    //Function to populate collectionview cell, from either ShopsCollectionViewCell.swift or FollowedShopCollectionViewCell.swift
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if(collectionView == shopCollection) {
             var shopCell = ShopsCollectionViewCell()
@@ -265,7 +431,6 @@ extension DiscoverViewController: UICollectionViewDataSource{
             }
             return shopCell
         }
-        
     }
     
     

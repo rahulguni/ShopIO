@@ -1,16 +1,27 @@
-//
-//  MyProductViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/21/21.
-//
-
 import UIKit
 import Parse
 import RealmSwift
 import ImagePicker
 
+/**/
+/*
+class InboxViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls MyStore.storyboard's MyProduct view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        07/21/2021
+ 
+*/
+/**/
+
 class MyProductViewController: UIViewController {
+    
+    //IBOutlet Elements
     @IBOutlet weak var productTitle: UITextField!
     @IBOutlet weak var productDescription: UITextField!
     @IBOutlet weak var productContent: UITextField!
@@ -26,17 +37,13 @@ class MyProductViewController: UIViewController {
     @IBOutlet weak var messageShopButton: UIButton!
     @IBOutlet weak var ratingsButton: UIButton!
     
-    //Get the product from shop view
-    private var myProduct: Product?
-    private var productImages: [ProductImage] = []
-    private var productReview: [ProductReview] = []
-    private var myShop: Shop?
-    var productMode: ProductMode?
-    
+    private var myProduct: Product?                     //Get the product from shop view
+    private var productImages: [ProductImage] = []      //current Product images
+    private var productReview: [ProductReview] = []     //current Product Reviews
+    private var myShop: Shop?                           //current Shop
+    var productMode: ProductMode?                       //productMode to render view for public/shop/edit etc.
     let realm = try! Realm()
-    
-    //keep track of imageview
-    var currentImageIndex = 0
+    var currentImageIndex = 0                           //keep track of imageview
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +117,35 @@ class MyProductViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension MyProductViewController {
+    
+    /**/
+    /*
+    @IBAction func updateProduct(_ sender: Any)
+
+    NAME
+
+            updateProduct - Action for button Update click.
+
+    DESCRIPTION
+
+            This function first checks all the required product field is filled. Then it presents an alert to confirm the update. If
+            confirmed, it updates the product.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
+    
     @IBAction func updateProduct(_ sender: Any) {
         
         if(productTitle.text!.isEmpty || priceField.text!.isEmpty || discountField.text!.isEmpty || quantityField.text!.isEmpty){
@@ -131,6 +167,35 @@ extension MyProductViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    /* @IBAction func updateProduct(_ sender: Any) */
+    
+    /**/
+    /*
+    @IBAction func addToCart(_ sender: Any)
+
+    NAME
+
+            addToCart - Action for button Add to cart click.
+
+    DESCRIPTION
+
+            This function first checks if the product is aleady in user's cart. If true, then only the quantity is updated. Otherwise,
+            the product is added to user's cart in Realm.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     @IBAction func addToCart(_ sender: Any) {
         if(currentUser != nil) {
@@ -171,6 +236,35 @@ extension MyProductViewController {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
+    /* @IBAction func addToCart(_ sender: Any) */
+    
+    /**/
+    /*
+    @IBAction func requestClicked(_ sender: Any)
+
+    NAME
+
+            requestClicked - Action for button Request click.
+
+    DESCRIPTION
+
+            Requests button is only available if the quantity of product in store is 0. This funcction presents an alert and uploads
+            a new Request object in Requests table with the current product's objectId and current shop's objectId.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     @IBAction func requestClicked(_ sender: Any) {
         if(currentUser != nil) {
@@ -179,11 +273,11 @@ extension MyProductViewController {
                 alert.dismiss(animated: true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: NSLocalizedString("Request", comment: "Request Button"), style: .default, handler: { _ in
-                let newRequest = PFObject(className: "Request")
-                newRequest["shopId"] = self.myShop!.getShopId()
-                newRequest["userId"] = currentUser!.objectId
-                newRequest["productId"] = self.myProduct!.getObjectId()
-                newRequest["fulfilled"] = false
+                let newRequest = PFObject(className: ShopIO.Request().tableName)
+                newRequest[ShopIO.Request().shopId] = self.myShop!.getShopId()
+                newRequest[ShopIO.Request().userId] = currentUser!.objectId
+                newRequest[ShopIO.Request().productId] = self.myProduct!.getObjectId()
+                newRequest[ShopIO.Request().fulfilled] = false
                 newRequest.saveInBackground{(success, error) in
                     if(success) {
                         let alert = customNetworkAlert(title: "Request Sent!", errorString: "Wait for the shop to proceed with your request.")
@@ -203,11 +297,14 @@ extension MyProductViewController {
             self.performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
+    /* @IBAction func requestClicked(_ sender: Any) */
     
+    //Function to update quantity when stepper is changed
     @IBAction func amountStepperChange(_ sender: UIStepper) {
         self.quantityField.text = (Int)(sender.value).description
     }
     
+    //Action for image click
     @IBAction func goToProductPhoto(_ sender: Any) {
         if(productMode == ProductMode.forOwner || productMode == ProductMode.forUpdate) {
             imageOptions()
@@ -216,6 +313,33 @@ extension MyProductViewController {
             self.performSegue(withIdentifier: "goToProductPhoto", sender: self)
         }
     }
+    
+    /**/
+    /*
+    @IBAction func messageShopClicked(_ sender: Any)
+
+    NAME
+
+            messageShopClicked - Action for button Message Shop click.
+
+    DESCRIPTION
+
+            This function presents an alert with user input to send a message to the shop.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     @IBAction func messageShopClicked(_ sender: Any) {
         if(currentUser != nil) {
@@ -238,7 +362,9 @@ extension MyProductViewController {
             performSegue(withIdentifier: "goToSignIn", sender: self)
         }
     }
+    /*@IBAction func messageShopClicked(_ sender: Any)*/
     
+    //Action for ratings button clicked
     @IBAction func ratingsClicked(_ sender: Any) {
         self.performSegue(withIdentifier: "goToRatings", sender: self)
     }
@@ -247,14 +373,17 @@ extension MyProductViewController {
 //MARK:- Display Functions
 extension MyProductViewController {
     
+    //Setter function to set current product
     func setMyProduct(product myProduct: Product) {
         self.myProduct = myProduct
     }
     
+    //Setter function to set current shop
     func setMyShop(shop myShop: Shop) {
         self.myShop = myShop
     }
     
+    //Setter function to set current product's images
     func setImages(myImages currImages: [ProductImage]) {
         self.productImages = currImages
         var index: Int = 0
@@ -267,8 +396,36 @@ extension MyProductViewController {
         }
     }
     
+    /**/
+    /*
+    private func updateProduct()
+
+    NAME
+
+            updateProduct - Updates current product.
+
+    DESCRIPTION
+
+            This function first queries the Product table and updates the fetched object. This function also checks validity of
+            discount percentage.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
+    
     private func updateProduct() {
-        let query = PFQuery(className: "Product")
+        let query = PFQuery(className: ShopIO.Product().tableName)
         query.getObjectInBackground(withId: myProduct!.getObjectId()) {(product: PFObject?, error: Error?) in
             if let _ = error {
                 let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
@@ -280,12 +437,12 @@ extension MyProductViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
                 else {
-                    product["title"] = self.productTitle.text!
-                    product["summary"] = self.productDescription.text!
-                    product["price"] = makeDouble(self.priceField.text!)
-                    product["discount"] = (makeDouble(self.discountField.text!))
-                    product["quantity"] = Int(self.quantityField.text!)
-                    product["content"] = self.productContent.text!
+                    product[ShopIO.Product().title] = self.productTitle.text!
+                    product[ShopIO.Product().summary] = self.productDescription.text!
+                    product[ShopIO.Product().price] = makeDouble(self.priceField.text!)
+                    product[ShopIO.Product().discount] = (makeDouble(self.discountField.text!))
+                    product[ShopIO.Product().quantity] = Int(self.quantityField.text!)
+                    product[ShopIO.Product().content] = self.productContent.text!
                     product.saveInBackground{(success, error) in
                         if(success) {
                             let tempProd = Product(product: product)
@@ -309,14 +466,42 @@ extension MyProductViewController {
             }
         }
     }
+    /* private func updateProduct() */
     
-    //check if item is in cart and return cartobject
+    /**/
+    /*
+     private func isInCart() -> CartItem?
+
+    NAME
+
+            isInCart - Checks if current product is already in user's cart
+
+    DESCRIPTION
+
+            This function loops through all items in current user's cart and checks if current product is already
+            in cart by comparing objectId's of products. If it already exists, this function returns the CartItem object
+            in order to update it in Realm.
+
+    RETURNS
+
+            CartItem? -> Returns an optional CartItem object, nil if product is not found in current user's cart.
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
+    
     private func isInCart() -> CartItem? {
         var myItem: CartItem?
         //search if this product already exists in cart
         let myCartItems = realm.objects(CartItem.self)
         for item in myCartItems {
-            //return true if item already in cart
             if(item["productId"] as! String == myProduct!.getObjectId()) {
                 if((item["userId"] as! String) == currentUser?.objectId) {
                     myItem = item
@@ -325,37 +510,71 @@ extension MyProductViewController {
         }
         return myItem
     }
+    /* private func isInCart() -> CartItem? */
+    
+    /**/
+    /*
+    private func sendMessage(text: String)
+
+    NAME
+
+            sendMessage - Uploads message to respective chatRoom and updates the Messages Table.
+     
+    SYNOPSIS
+           
+            sendMessage(currMessage: String)
+                currMessage        --> Message string to be sent.
+
+    DESCRIPTION
+
+            This function takes in the message string and uploads a new message in the ChatRoom table with appropriate data.
+            After this is completed, it updates the updatedAt date in Message table for the current chatRoom.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/20/2021
+
+    */
+    /**/
     
     //function to send message
     private func sendMessage(currMessage: String){
         //search if chatroom already exists
-        let query = PFQuery(className: "Messages")
-        query.whereKey("senderId", equalTo: currentUser!.objectId!)
-        query.whereKey("receiverId", equalTo: self.myShop!.getShopId())
+        let query = PFQuery(className: ShopIO.Messages().tableName)
+        query.whereKey(ShopIO.Messages().senderId, equalTo: currentUser!.objectId!)
+        query.whereKey(ShopIO.Messages().receiverId, equalTo: self.myShop!.getShopId())
         query.getFirstObjectInBackground{(message, error) in
             if let message = message {
                 //chatRoom already exists, add to chat.
-                let chatRoom = PFObject(className: "ChatRoom")
-                chatRoom["chatRoomId"] = message.objectId!
-                chatRoom["senderId"] = currentUser?.objectId!
-                chatRoom["message"] = currMessage
+                let chatRoom = PFObject(className: ShopIO.ChatRoom().tableName)
+                chatRoom[ShopIO.ChatRoom().chatRoomId] = message.objectId!
+                chatRoom[ShopIO.ChatRoom().senderId] = currentUser?.objectId!
+                chatRoom[ShopIO.ChatRoom().message] = currMessage
                 
-                message["updatedAt"] = Date()
+                message[ShopIO.ChatRoom().updatedAt] = Date()
                 message.saveEventually()
                 chatRoom.saveEventually()
             }
             //if not exists, create one and send message.
             else {
-                let message = PFObject(className: "Messages")
-                message["senderId"] = currentUser!.objectId!
-                message["receiverId"] = self.myShop!.getShopId()
+                let message = PFObject(className: ShopIO.Messages().tableName)
+                message[ShopIO.Messages().senderId] = currentUser!.objectId!
+                message[ShopIO.Messages().receiverId] = self.myShop!.getShopId()
                 
                 message.saveInBackground{(success, error) in
                     if(success) {
-                        let chatRoom = PFObject(className: "ChatRoom")
-                        chatRoom["chatRoomId"] = message.objectId!
-                        chatRoom["senderId"] = currentUser?.objectId!
-                        chatRoom["message"] = currMessage
+                        let chatRoom = PFObject(className: ShopIO.ChatRoom().tableName)
+                        chatRoom[ShopIO.ChatRoom().chatRoomId] = message.objectId!
+                        chatRoom[ShopIO.ChatRoom().senderId] = currentUser?.objectId!
+                        chatRoom[ShopIO.ChatRoom().message] = currMessage
                         
                         chatRoom.saveEventually()
                     }
@@ -367,11 +586,40 @@ extension MyProductViewController {
             }
         }
     }
+    /* private func sendMessage(currMessage: String) */
+    
+    /**/
+    /*
+    private func checkReviews()
+
+    NAME
+
+            checkReviews - Checks current Product's reviews.
+
+    DESCRIPTION
+
+            This function first queries the Product_Reviews table and fetches review objects for current object. Then, it updates
+            the review button's title to average rating followed by number of users who rated.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     private func checkReviews() {
-        let query = PFQuery(className: "Product_Review")
-        query.whereKey("productId", equalTo: self.myProduct!.getObjectId())
-        query.order(byDescending: "updatedAt")
+        let query = PFQuery(className: ShopIO.Product_Review().tableName)
+        query.whereKey(ShopIO.Product_Review().productId, equalTo: self.myProduct!.getObjectId())
+        query.order(byDescending: ShopIO.Product_Review().updatedAt)
         query.findObjectsInBackground{(reviews, errors) in
             if let reviews = reviews {
                 var totalReview: Double = 0.0
@@ -387,7 +635,9 @@ extension MyProductViewController {
             }
         }
     }
+    /* private func checkReviews() */
     
+    //Function to set current view according to productMode
     private func setProductsPage(_ editMode: ProductMode) {
         if(editMode == ProductMode.forOwner || editMode == ProductMode.forUpdate || editMode == ProductMode.forRequest) {
             setOwnerDisplay()
@@ -410,6 +660,34 @@ extension MyProductViewController {
         }
     }
     
+    /**/
+    /*
+    private func imageOptions()
+
+    NAME
+
+            imageOptions - Presents image options
+
+    DESCRIPTION
+
+            This function presents an alert that have three choices for the selected product image:- Edit, Add (if total
+            images < 4) or Delete photo.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
+    
     private func imageOptions() {
         let alert = UIAlertController(title: "Edit Image", message: "Choose what you want to do with this image.", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Edit Photo", style: .default, handler: {(action: UIAlertAction) in
@@ -426,13 +704,44 @@ extension MyProductViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    /* private func imageOptions() */
     
+    //Function to present image picker
     private func addPhoto() {
         let imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.imageLimit = 4 - productImages.count
         self.present(imagePickerController, animated: true, completion: nil)
     }
+    
+    /**/
+    /*
+    private func deletePhoto()
+
+    NAME
+
+            deletePhoto - Delete selected image
+
+    DESCRIPTION
+
+            This function first queries the Product_Images table for selected image using its objectId. If the selected picture
+            is the product's default picture, an alert is presented to the user informing the image cannot be deleted. Otherwise,
+            the image is removed both from the table and productImages array.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     private func deletePhoto(){
         let alert = UIAlertController(title: "Are you sure you want to delete this image?", message: "Please select below", preferredStyle: .alert)
@@ -442,8 +751,8 @@ extension MyProductViewController {
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Delete Image"), style: .default, handler: { _ in
             if(self.productImages[self.currentImageIndex].getDefaultStatus() == false) {
-                let query = PFQuery(className: "Product_Images")
-                query.whereKey("objectId", contains: self.productImages[self.currentImageIndex].getObjectId())
+                let query = PFQuery(className: ShopIO.Product_Images().tableName)
+                query.whereKey(ShopIO.Product_Images().objectId, contains: self.productImages[self.currentImageIndex].getObjectId())
                 query.getFirstObjectInBackground{(object, error) in
                     if(object != nil) {
                         object?.deleteInBackground{(success, error) in
@@ -475,6 +784,34 @@ extension MyProductViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    /* private func deletePhoto() */
+    
+    /**/
+    /*
+    private func getImages()
+
+    NAME
+
+            getImages - Delete selected image
+
+    DESCRIPTION
+
+            This function loops through the productImages array and puts the images in PageView.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
     
     private func getImages() {
         for image in productImages {
@@ -490,13 +827,12 @@ extension MyProductViewController {
             }
         }
     }
+    /* private func getImages() */
     
     private func configurePageViewController() {
         guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "ImagePageViewController") as? ImagePageViewController else {
-            print("pageViewController")
             return
         }
-        
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
@@ -506,16 +842,11 @@ extension MyProductViewController {
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.addSubview(pageViewController.view)
-        
         let views: [String: Any] = ["pageView" : pageViewController.view!]
-
         imageView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
-
         imageView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[pageView]-0-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: views))
         
         guard let startingViewController = detailViewControllerAt(index: currentImageIndex) else {
-            //2. error
-            print("startingViewController")
             return
         }
         
@@ -523,26 +854,21 @@ extension MyProductViewController {
     }
     
     func detailViewControllerAt(index: Int) -> ProductImageViewController? {
-        
-        print(index)
-        
         if(index >= productImages.count || productImages.count == 0) {
             //1. error
             print("Index error")
             return nil
         }
-        
         guard let productImageViewController = storyboard?.instantiateViewController(withIdentifier: "ProductImageViewController") as? ProductImageViewController else {
             print("productImageViewController")
             return nil
         }
-        
         productImageViewController.setIndex(index: index)
         productImageViewController.setImage(displayImage: productImages[index].getUIImage())
-
         return productImageViewController
     }
     
+    //Function to set the view as ShopOwner
     private func setOwnerDisplay() {
         self.productTitle.isUserInteractionEnabled = true
         self.productDescription.isUserInteractionEnabled = true
@@ -562,6 +888,7 @@ extension MyProductViewController {
         self.discountPerLabel.isHidden = false
     }
     
+    //Function to set the view as Cart (the product is already in cart)
     private func setCartDisplay(_ cartObject: CartItem) {
         self.addToCartButton.isHidden = false
         self.addToCartButton.setTitle("Update Cart", for: .normal)
@@ -572,6 +899,7 @@ extension MyProductViewController {
         self.quantityStepper.maximumValue = Double(myProduct!.getQuantity())
     }
     
+    //Function to set the view for public
     private func setPublicDisplay(){
         self.quantityStepper.isHidden = false
         self.quantityStepper.value = 1.0
@@ -647,16 +975,43 @@ extension MyProductViewController: ImagePickerDelegate {
         
     }
     
+    /**/
+    /*
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+
+    NAME
+
+            doneButtonDidPress - Done button pressed in image picker
+
+    DESCRIPTION
+
+            This function uploads the selected images to Product_Images table and appends them to productImages array.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/21/2021
+
+    */
+    /**/
+    
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         for image in images {
             //upload image to the database
-            let newImage = PFObject(className: "Product_Images")
+            let newImage = PFObject(className: ShopIO.Product_Images().tableName)
             let imageData = image.pngData()
             let imageName = makeImageName(self.myProduct!.getObjectId())
             let imageFile = PFFileObject(name: imageName, data: imageData!)
             
-            newImage["productId"] = self.myProduct?.getObjectId()
-            newImage["productImage"] = imageFile
+            newImage[ShopIO.Product_Images().productId] = self.myProduct?.getObjectId()
+            newImage[ShopIO.Product_Images().productImage] = imageFile
             
             newImage.saveInBackground{(success, error) in
                 if(success) {
@@ -672,7 +1027,9 @@ extension MyProductViewController: ImagePickerDelegate {
         }
         imagePicker.dismiss(animated: true, completion: nil)
     }
+    /* func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) */
     
+    //Action for cancel button click
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -680,6 +1037,8 @@ extension MyProductViewController: ImagePickerDelegate {
 
 //MARK:- UITextFieldDelegate
 extension MyProductViewController: UITextFieldDelegate {
+    
+    //Function to not allow more than 2 digits after decimal in price field.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let text: NSString = textField.text! as NSString
         let resultString = text.replacingCharacters(in: range, with: string)

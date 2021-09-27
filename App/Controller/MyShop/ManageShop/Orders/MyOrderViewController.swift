@@ -7,10 +7,13 @@ class MyOrderViewController
 
 DESCRIPTION
         This class is a UIViewController that controls Order.storyboard's MyOrder View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/03/2021
+ 
 */
 /**/
 
@@ -83,7 +86,8 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function presents an alert to confirm the order. The button is only available if the Order view is segued from ManageShopViewController. The users can only view the order.
+            This function presents an alert to confirm the order. The button is only available if the Order view
+            is segued from ManageShopViewController. The users can only view the order.
 
     RETURNS
 
@@ -122,7 +126,8 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function presents an alert to delete the order. The button is only available if the Order view is segued from ManageShopViewController. The users can only view the order.
+            This function presents an alert to delete the order. The button is only available if the Order view is
+            segued from ManageShopViewController. The users can only view the order.
 
     RETURNS
 
@@ -221,7 +226,8 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function queries the Product table from the productId of current Order Item. Once the product is found, it searches the Product_Images table to render the product's image and segues to MyProductViewController.
+            This function queries the Product table from the productId of current Order Item. Once the product is found,
+            it searches the Product_Images table to render the product's image and segues to MyProductViewController.
 
     RETURNS
 
@@ -286,7 +292,9 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function takes in a boolean variable to decide what to do with the order. If false, the order items in Order_Items tables get deleted. In both cases, the order is marked fulfilled and a message is sent to the user who placed an order regarding the status of the order.
+            This function takes in a boolean variable to decide what to do with the order. If false, the order items in
+            Order_Items tables get deleted. In both cases, the order is marked fulfilled and a message is sent to the
+            user who placed an order regarding the status of the order.
 
     RETURNS
 
@@ -342,7 +350,9 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function queries the Product table from the productId of current Order Item in orderItems array. Once the product is found, it modifies the product quantity by subtracting current quantity with ordered Items. If in any case the query fails, it alerts the user to update the product manually in their inventory.
+            This function queries the Product table from the productId of current Order Item in orderItems array.
+            Once the product is found, it modifies the product quantity by subtracting current quantity with ordered Items.
+            If in any case the query fails, it alerts the user to update the product manually in their inventory.
 
     RETURNS
 
@@ -432,7 +442,9 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function takes in a boolean variable that states the completion status of order. If a chatroom already exists between the two parties, it simply updates the updatedAt time in Message Table. Otherwise, it creates a new entry in the table and sends message. In other words, a new Message object is created and uploaded.
+            This function takes in a boolean variable that states the completion status of order. If a chatroom already exists
+            between the two parties, it simply updates the updatedAt time in Message Table. Otherwise, it creates a new entry in
+            the table and sends message. In other words, a new Message object is created and uploaded.
 
     RETURNS
 
@@ -496,7 +508,8 @@ extension MyOrderViewController {
 
     DESCRIPTION
 
-            This function queries the ChatRoom table using the PFObject's objectId which is also the chatRoomId for two parties. A message is sent to user according to order completion status.
+            This function queries the ChatRoom table using the PFObject's objectId which is also the chatRoomId for two parties.
+            A message is sent to user according to order completion status.
 
     RETURNS
 

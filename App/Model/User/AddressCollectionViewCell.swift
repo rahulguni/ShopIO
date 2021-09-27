@@ -6,10 +6,13 @@ class AddressCollectionViewCell
 
 DESCRIPTION
         This class is a UICollectionViewCell class that makes up the cells for Address Collection view in MyAddressController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/02/2021
+ 
 */
 /**/
 
@@ -34,7 +37,8 @@ class AddressCollectionViewCell: UICollectionViewCell {
 
     DESCRIPTION
 
-            This function takes an object from the Address model and fills in the labels according to the data. The string 'type' is passed on from the controller according to the address type.
+            This function takes an object from the Address model and fills in the labels according to the data. The string 'type'
+            is passed on from the controller according to the address type.
 
     RETURNS
 

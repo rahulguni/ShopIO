@@ -6,11 +6,15 @@ import Parse
 class Message
 
 DESCRIPTION
-        This class is a PFObject class that is used for LiveQuery when rendering the messages. link:- https://docs.parseplatform.org/parse-server/guide/#live-queries
+        This class is a PFObject class that is used for LiveQuery when rendering the messages.
+        link:- https://docs.parseplatform.org/parse-server/guide/#live-queries
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/18/2021
+ 
 */
 /**/
 

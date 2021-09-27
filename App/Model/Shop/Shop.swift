@@ -9,10 +9,13 @@ class Shop
 
 DESCRIPTION
         This class is the model to render data from Shop database. This class also has all the required setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/01/2021
+ 
 */
 /**/
 

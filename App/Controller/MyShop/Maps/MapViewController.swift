@@ -1,14 +1,22 @@
-//
-//  MapViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 9/7/21.
-//
-
 import UIKit
 import MapKit
 import Parse
 
+/**/
+/*
+class InboxViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls MapView.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        09/07/2021
+ 
+*/
+/**/
 
 class MapViewController: UIViewController {
 

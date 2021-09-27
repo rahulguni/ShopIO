@@ -1,20 +1,30 @@
-//
-//  MyShop.swift
-//  App
-//
-//  Created by Rahul Guni on 4/30/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class MyShopViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls MyShop.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        04/30/2021
+ 
+*/
+/**/
+
 class MyShopViewController: UIViewController{
     
+    //IBOutlet Elements
     @IBOutlet weak var myShopButton: UIButton!
     @IBOutlet weak var editMyShopButton: UIButton!
     @IBOutlet weak var AddNewShop: UIButton!
     
-    var shopManager = ShopManager()
+    var shopManager = ShopManager()         //shopManager Delegate to perform segues accordingly.
     
     override func viewDidLoad() {
         let currentButtons: [UIButton] = [myShopButton, editMyShopButton, AddNewShop]
@@ -69,6 +79,7 @@ class MyShopViewController: UIViewController{
 
 extension MyShopViewController: shopManagerDelegate {
     
+    //Function to perform segue
     func goToViewController(identifier: String) {
         self.performSegue(withIdentifier: identifier, sender: self)
     }
@@ -77,6 +88,8 @@ extension MyShopViewController: shopManagerDelegate {
 
 //MARK:- IBOutlet Functions
 extension MyShopViewController {
+    
+    //Action for Manage Shop Button Click.
     @IBAction func manageShopButton(_ sender: UIButton) {
         if currentUser != nil{
             self.shopManager.checkShop(identifier: "goToManageShop")
@@ -86,6 +99,7 @@ extension MyShopViewController {
         }
     }
     
+    //Action for My Shop Button Click.
     @IBAction func myShopButton(_ sender: UIButton) {
         if currentUser != nil {
             self.shopManager.checkShop(identifier: "goTomyShopView")
@@ -95,7 +109,7 @@ extension MyShopViewController {
         }
     }
     
-    
+    //Action for Add New Shop Button Click.
     @IBAction func AddNewShop(_ sender: UIButton) {
         performSegue(withIdentifier: "toSignIn", sender: self)
     }
@@ -103,6 +117,7 @@ extension MyShopViewController {
 
 //MARK:- Display Functions
 extension MyShopViewController {
+    //Action to alter buttons according to user sign in status.
     private func alterButtons(loggedIn bool: Bool) {
         AddNewShop.isHidden = bool;
         myShopButton.isHidden = !bool;

@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MessageTableViewCell
+class MyOrderTableViewCell
 
 DESCRIPTION
         This class is a UITableViewCell class that makes up the cells for Products Table in MyOrdersViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/04/2021
+ 
 */
 /**/
 
@@ -99,7 +102,8 @@ class MyOrderTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes a Product object and searches through the Product_Images table using the Product object's objectId variable and renders the default display picture.
+            This function takes a Product object and searches through the Product_Images table using the Product object's
+            objectId variable and renders the default display picture.
 
     RETURNS
 

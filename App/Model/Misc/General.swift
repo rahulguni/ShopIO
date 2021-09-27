@@ -66,7 +66,8 @@ SYNOPSIS
 
 DESCRIPTION
 
-        This function takes an object of Product Model, and if the product has a discount, is called from the controller to convert the original product price to make it a strikethrough text.
+        This function takes an object of Product Model, and if the product has a discount, is called
+        from the controller to convert the original product price to make it a strikethrough text.
 
 RETURNS
 
@@ -90,6 +91,7 @@ func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedS
     
     return attributeString
 }
+/* func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedString   */
 
 //make double from textfield
 func makeDouble(_ textField: String) -> Double? {

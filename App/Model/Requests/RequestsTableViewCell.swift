@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MessageTableViewCell
+class RequestsTableViewCell
 
 DESCRIPTION
         This class is a UITableViewCell class that makes up the cells for Requests Table in RequestsViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/07/2021
+ 
 */
 /**/
 
@@ -44,7 +47,10 @@ class RequestsTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes a Request object to render the right data to tableview cell. First, the User table in database is searched by the Request model's userId variable to render the full name of the user who has sent the request. Then, using the productId, the Product table is searched to render the requested Product.
+            This function takes a Request object to render the right data to tableview cell. First, the User
+            table in database is searched by the Request model's userId variable to render the full name of
+            the user who has sent the request. Then, using the productId, the Product table is searched to render
+            the requested Product.
 
     RETURNS
 

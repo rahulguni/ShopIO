@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MyMessagesViewController
+class MyReviewViewController
 
 DESCRIPTION
         This class is a UIViewController that controls ProductReview.storyboard's MyProductReview View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/11/2021
+ 
 */
 /**/
 

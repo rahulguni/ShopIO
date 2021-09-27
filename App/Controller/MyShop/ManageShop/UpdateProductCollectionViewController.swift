@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MyMessagesViewController
-
+class UpdateProductCollectionViewController
+ 
 DESCRIPTION
         This class is a UICollectionViewController that controls UpdateProduct Storyboard View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/06/2021
+ 
 */
 /**/
 
@@ -108,7 +111,8 @@ extension UpdateProductCollectionViewController {
 
     DESCRIPTION
 
-            This function queries the Product table from current shop's shopId/objectId. The Product objects are appended to the myProducts array and the collection view is reloaded.
+            This function queries the Product table from current shop's shopId/objectId. The Product objects are
+            appended to the myProducts array and the collection view is reloaded.
 
     RETURNS
 
@@ -158,7 +162,9 @@ extension UpdateProductCollectionViewController {
 
     DESCRIPTION
 
-            This function records the current Product object in currProduct variable, queries the Product_Images table by currProduct's objectId and appends it to currProductImages array. Finally, a segue to MyProductViewController is performed.
+            This function records the current Product object in currProduct variable, queries the Product_Images
+            table by currProduct's objectId and appends it to currProductImages array. Finally, a segue to
+            MyProductViewController is performed.
 
     RETURNS
 
@@ -234,7 +240,8 @@ extension UpdateProductCollectionViewController: UISearchBarDelegate {
 
     DESCRIPTION
 
-            This function searches the Product Table and renders the products that matches searched title. It uses regex to perform the search operation.
+            This function searches the Product Table and renders the products that matches searched title.
+            It uses regex to perform the search operation.
 
     RETURNS
 

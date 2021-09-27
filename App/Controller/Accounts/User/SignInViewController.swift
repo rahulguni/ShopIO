@@ -1,13 +1,21 @@
-//
-//  Sign-In.swift
-//  App
-//
-//  Created by Rahul Guni on 4/26/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class SignInViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls SignIn.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        04/26/2021
+ 
+*/
+/**/
 
 class SignInViewController: UIViewController {
     @IBOutlet weak var email: UITextField!
@@ -24,6 +32,7 @@ class SignInViewController: UIViewController {
         self.hideKeyboardWhenTappedAround() 
     }
     
+    //Action for sign in button click.
     @IBAction func signIn(_ sender: UIButton) {
         if(self.email.text!.isEmpty || self.password.text!.isEmpty) {
             let alert = customNetworkAlert(title: "Missing Fields", errorString: "Please fill out email and password to log in.")

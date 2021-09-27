@@ -6,11 +6,15 @@ import Parse
 class Request
 
 DESCRIPTION
-        This class is the model to render data from Request database. This class also has all the required setter and getter properies for the parameters.
+        This class is the model to render data from Request database. This class also has all the required setter
+        and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/07/2021
+ 
 */
 /**/
 

@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MyMessagesViewController
+class ManageShopViewController
 
 DESCRIPTION
         This class is a UIViewController that controls ManageShop.storyboard View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/15/2021
+ 
 */
 /**/
 
@@ -75,7 +78,8 @@ extension ManageShopViewController {
 
     DESCRIPTION
 
-            This function queries the Order table for current Shop using currShop's objectId/shopId, and appends the order items to myOrders array. Finally, it performs segue to OrdersViewController.
+            This function queries the Order table for current Shop using currShop's objectId/shopId, and appends
+            the order items to myOrders array. Finally, it performs segue to OrdersViewController.
 
     RETURNS
 

@@ -8,10 +8,13 @@ class User
 
 DESCRIPTION
         This class is the model to render data from User database. This class also has all the required setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/14/2021
+ 
 */
 /**/
 

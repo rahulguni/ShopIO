@@ -1,15 +1,26 @@
-//
-//  Sign-Up.swift
-//  App
-//
-//  Created by Rahul Guni on 4/26/21.
-//
-
 import UIKit
 import Foundation
 import Parse
 
+/**/
+/*
+class SignUpViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls SignUp.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        04/26/2021
+ 
+*/
+/**/
+
 class SignUpViewController: UIViewController {
+    
+    //IBOutlet Elements
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var email: UITextField!
@@ -17,9 +28,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordRe: UITextField!
     @IBOutlet weak var phone: UITextField!
     @IBOutlet weak var displayPicture: UIImageView!
-    
-    private var forEdit: Bool = false
-    private var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +40,36 @@ class SignUpViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension SignUpViewController {
-    //Add user to table
+    
+    /**/
+    /*
+    @IBAction func signUp(_ sender: UIButton)
+
+    NAME
+
+           signUp - Adds a new user to User's table
+
+    DESCRIPTION
+
+            This function first checks if all required fields are filled up. Then, it adds the user to User's table and segues to
+            AddressViewController to add a primary address for the user. This function also checks if the password and phone number
+            typed passes the criteria.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            04/26/2021
+
+    */
+    /**/
+    
     @IBAction func signUp(_ sender: UIButton) {
         if(lastName.text!.isEmpty || email.text!.isEmpty || password.text!.isEmpty || phone.text!.isEmpty || self.displayPicture.image == nil){
             let alert = customNetworkAlert(title: "Error signing in", errorString: "One or more entry field missing. Please fill out all the details.")
@@ -45,16 +82,16 @@ extension SignUpViewController {
                 user.username = email.text
                 user.email = email.text
                 user.password = password.text
-                user["fName"] = firstName.text
-                user["lName"] = lastName.text
-                user["phone"] = Int(phone.text!)
-                user["lastLogin"] = NSDate()
+                user[ShopIO.User().fName] = firstName.text
+                user[ShopIO.User().lName] = lastName.text
+                user[ShopIO.User().phone] = Int(phone.text!)
+                user[ShopIO.User().lastLogin] = NSDate()
                 
                 //for display image
                 let imageData = displayPicture.image!.jpegData(compressionQuality: 0.5)
                 let imageName = makeImageName(self.email.text!)
                 let imageFile = PFFileObject(name: imageName, data: imageData!)
-                user["displayImage"] = imageFile
+                user[ShopIO.User().displayImage] = imageFile
                 
                 user.signUpInBackground {
                     (succeeded: Bool, error: Error?) -> Void in
@@ -95,13 +132,14 @@ extension SignUpViewController {
         }
         
     }
+    /* @IBAction func signUp(_ sender: UIButton) */
     
-    //Upload Photo
+    //Action for click on photo to add a new one
     @IBAction func choosePhoto(_ sender: Any) {
         showAlert()
     }
     
-    
+    //Action for back button click
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -109,10 +147,41 @@ extension SignUpViewController {
 
 //MARK:- General functions
 extension SignUpViewController {
+    
+    /**/
+    /*
+    private func isValidPassword(password: String) -> Bool
+
+    NAME
+
+           isValidPassword - Checks password strength
+
+    DESCRIPTION
+
+            This function checks if the string passed from password textfield matches the following criteria:
+            Contains atleast one big letter, a number and is of length of a minimum 8 characters.
+
+    RETURNS
+
+            True    -> Password matches regex
+            False   -> Password does not match regex
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            04/26/2021
+
+    */
+    /**/
+    
     private func isValidPassword(password: String) -> Bool {
         let securedPassword = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{8,}$")
         return securedPassword.evaluate(with: password)
     }
+    /* private func isValidPassword(password: String) -> Bool */
 }
 
 

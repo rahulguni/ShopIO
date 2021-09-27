@@ -7,10 +7,13 @@ class Order
 
 DESCRIPTION
         This class is the model to render data from Order database. This class also has all the required setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/03/2021
+ 
 */
 /**/
 

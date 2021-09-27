@@ -7,10 +7,13 @@ class UpdateProductCollectionViewCell
 
 DESCRIPTION
         This class is a UICollectionViewCell class that makes up the cells for Products collection view  in UpdateProductCollectionViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/06/2021
+ 
 */
 /**/
 
@@ -38,7 +41,8 @@ class UpdateProductCollectionViewCell: UICollectionViewCell {
 
     DESCRIPTION
 
-            This function takes a Proudct object to render the right data to collectionview cell. First, the product is searched in the Products table and its corresponding images is searched in the Product_Images table to render the current default picture.
+            This function takes a Proudct object to render the right data to collectionview cell. First, the product is searched in the Products
+            table and its corresponding images is searched in the Product_Images table to render the current default picture.
 
     RETURNS
 

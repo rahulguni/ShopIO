@@ -1,10 +1,3 @@
-//
-//  ManageShopViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/24/21.
-//
-
 import UIKit
 import Parse
 
@@ -14,10 +7,13 @@ class MyInventoryViewController
 
 DESCRIPTION
         This class is a UIViewController that controls ManageShop.storyboard's MyInvetory view.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/24/2021
+ 
 */
 /**/
 
@@ -83,7 +79,8 @@ extension MyInventoryViewController {
 
     DESCRIPTION
 
-            This function fetches the Request Table from current shop's objectId and records it in myRequests array before performing segue to RequestViewController.
+            This function fetches the Request Table from current shop's objectId and records it in myRequests
+            array before performing segue to RequestViewController.
 
     RETURNS
 

@@ -7,10 +7,13 @@ class ProductsCollectionViewCell
 
 DESCRIPTION
         This class is a UICollectionView class that makes up the collection view of Products in MyStoreViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/24/2021
+ 
 */
 /**/
 
@@ -108,7 +111,8 @@ class ProductsCollectionViewCell: UICollectionViewCell {
 
     DESCRIPTION
 
-            This function takes two boolean variables in order to set the visibility of price, discount and originalPrice labels on the condition of whether or not discount exists for the given product.
+            This function takes two boolean variables in order to set the visibility of price, discount and originalPrice labels on
+            the condition of whether or not discount exists for the given product.
 
     RETURNS
 

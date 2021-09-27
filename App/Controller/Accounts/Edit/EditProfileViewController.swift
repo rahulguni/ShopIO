@@ -1,14 +1,25 @@
-//
-//  EditProfileViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 8/2/21.
-//
-
 import UIKit
 import Parse
 
+/**/
+/*
+class EditProfileViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls EditProfile.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        08/02/2021
+ 
+*/
+/**/
+
 class EditProfileViewController: UIViewController {
+    
+    //IBOutlet elements
     @IBOutlet weak var editShopButton: UIButton!
     @IBOutlet weak var updateProfileButton: UIButton!
     @IBOutlet weak var displayPicture: UIImageView!
@@ -16,13 +27,12 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var lName: UITextField!
     @IBOutlet weak var deliveryAddressLabel: UITextView!
     
-    private var myShop: Shop?
-    private var currUser: User?
-    
-    //For Orders
-    private var forOrder: Bool = false
-    private var deliveryAddress: Address?
-    private var userLocation: CLLocationCoordinate2D?
+    //controller variables
+    private var myShop: Shop?                           //current user's shop
+    private var currUser: User?                         //current user
+    private var forOrder: Bool = false                  //to determine if view is presented from edit profile or order view
+    private var deliveryAddress: Address?               //address object is delivery is true for order, only available when view is presented from Order view.
+    private var userLocation: CLLocationCoordinate2D?   //geoLocation to track user's location to view customer in map if view is called from Order view.
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +62,38 @@ class EditProfileViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension EditProfileViewController {
+    
+    /**/
+    /*
+    @IBAction func editShopPressed(_ sender: Any)
+
+    NAME
+
+            editShopPressed - Action for edit shop button click
+
+    DESCRIPTION
+
+            This function checks for shop of the current user and segues to AddShopViewController. If the user has a shop,
+            the next view is rendered for edit otherwise, it is rendered for add new shop/
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/02/2021
+
+    */
+    /**/
+    
     @IBAction func editShopPressed(_ sender: Any) {
-        let query = PFQuery(className: "Shop")
-        query.whereKey("userId", contains: currentUser!.objectId)
+        let query = PFQuery(className: ShopIO.Shop().tableName)
+        query.whereKey(ShopIO.Shop().userId, contains: currentUser!.objectId)
         query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
             if let object = object {
                 // The query succeeded with a matching result
@@ -63,10 +102,39 @@ extension EditProfileViewController {
             self.performSegue(withIdentifier: "goToEditShop", sender: self)
         }
     }
+    /* @IBAction func editShopPressed(_ sender: Any)*/
+    
+    /**/
+    /*
+    @IBAction func goToUserMap(_ sender: Any)
+
+    NAME
+
+            goToUserMap - Action for user's delivery location label click.
+
+    DESCRIPTION
+
+            This function queries the Address table for current order's delivery address and segues to MapViewController
+            flying right into user's delivery location.
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/02/2021
+
+    */
+    /**/
     
     @IBAction func goToUserMap(_ sender: Any) {
-        let query = PFQuery(className: "Address")
-        query.whereKey("userId", equalTo: self.currUser!.getObjectId())
+        let query = PFQuery(className: ShopIO.Address().addressTableName)
+        query.whereKey(ShopIO.Address().userId, equalTo: self.currUser!.getObjectId())
         query.getFirstObjectInBackground{(shopAddress, error) in
             if let shopAddress = shopAddress {
                 let address = Address(address: shopAddress)
@@ -87,6 +155,34 @@ extension EditProfileViewController {
             }
         }
     }
+    /* @IBAction func goToUserMap(_ sender: Any) */
+    
+    /**/
+    /*
+    @IBAction func updateProfilePressed(_ sender: Any)
+
+    NAME
+
+            updateProfilePressed - Action for update Profile button click.
+
+    DESCRIPTION
+
+            This function queries the User table and updates the fetched object with updated parameters from UITextFields along with image update.
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/02/2021
+
+    */
+    /**/
     
     @IBAction func updateProfilePressed(_ sender: Any) {
         if(self.fName.text == nil || self.lName.text == nil) {
@@ -95,25 +191,25 @@ extension EditProfileViewController {
         }
         else {
             let query = PFUser.query()
-            query?.whereKey("objectId", equalTo: currentUser!.objectId!)
+            query?.whereKey(ShopIO.User().objectId, equalTo: currentUser!.objectId!)
             query?.getFirstObjectInBackground{(user, error) in
                 if let _ = error {
                     let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                     self.present(alert, animated: true, completion: nil)
                 } else if let user = user {
-                    user["fName"] = self.fName.text!
-                    user["lName"] = self.lName.text!
+                    user[ShopIO.User().fName] = self.fName.text!
+                    user[ShopIO.User().lName] = self.lName.text!
                     
                     let imageData = self.displayPicture.image?.pngData()
                     let imageName = makeImageName(currentUser!.objectId!)
                     let imageFile = PFFileObject(name: imageName, data: imageData!)
-                    user["displayImage"] = imageFile
+                    user[ShopIO.User().displayImage] = imageFile
                     
                     user.saveInBackground {(success, error) in
                         if(success) {
-                            currentUser!["fName"] = self.fName.text!
-                            currentUser!["lName"] = self.lName.text!
-                            currentUser!["displayImage"] = imageFile
+                            currentUser![ShopIO.User().fName] = self.fName.text!
+                            currentUser![ShopIO.User().lName] = self.lName.text!
+                            currentUser![ShopIO.User().displayImage] = imageFile
                             let alert = customNetworkAlert(title: "Successfully updated profile", errorString: "Your profile has been updated")
                             self.present(alert, animated: true, completion: nil)
                             self.fillForm()
@@ -127,7 +223,9 @@ extension EditProfileViewController {
             }
         }
     }
+    /* @IBAction func updateProfilePressed(_ sender: Any) */
     
+    //Action for upload photo button click
     @IBAction func uploadPhoto(_ sender: Any) {
         showAlert()
     }
@@ -136,17 +234,53 @@ extension EditProfileViewController {
 //MARK:- Display Functions
 extension EditProfileViewController {
     
+    //Setter function that sets up current user, passed on from previous view controller (OrderViewController/AccountViewController)
     func setUser(currUser: User) {
         self.currUser = currUser
     }
     
+    //Setter function for myOrders boolean, passed on from previous view controller (OrderViewController)
     func setForOrder(bool: Bool) {
         self.forOrder = bool
     }
     
+    //Setter function for delivery address if pickUp is false for order, passed on from previous view controller (OrderViewController)
     func setDeliveryAddress(address: Address) {
         self.deliveryAddress = address
     }
+    
+    /**/
+    /*
+    private func getUser(currUser: User)
+
+    NAME
+
+            getUser - Gets current User's details
+     
+    SYNOPSIS
+           
+            getUser(currUser: User)
+                currUser      --> User object to find full name
+
+    DESCRIPTION
+
+            This function takes in a user object and sets name labels according to user's name. It also performs a query to get current
+            user's display picture on the view.
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/02/2021
+
+    */
+    /**/
     
     private func getUser(currUser: User) {
         self.fName.text = currUser.getFname()
@@ -159,6 +293,34 @@ extension EditProfileViewController {
             }
         }
     }
+    /* private func getUser(currUser: User) */
+    
+    /**/
+    /*
+    private func fillForm()
+
+    NAME
+
+            fillForm - Edits the view for edit/order
+
+    DESCRIPTION
+
+            This function checks the forOrder boolean and renders the view for order if it is true and for edit if it is false.
+     
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            8/02/2021
+
+    */
+    /**/
     
     private func fillForm() {
         makePictureRounded(picture: self.displayPicture)
@@ -178,6 +340,7 @@ extension EditProfileViewController {
             getUser(currUser: User(userID: currentUser!))
         }
     }
+    /* private func fillForm() */
 }
 
 //MARK:- UIImagePickerViewDelegate

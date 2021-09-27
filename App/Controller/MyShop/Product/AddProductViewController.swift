@@ -4,14 +4,17 @@ import ImagePicker
 
 /**/
 /*
-class MyMessagesViewController
+class AddProductViewController
 
 DESCRIPTION
         This class is a UIViewController that controls AddProduct.storyboard's Initial View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/17/2021
+ 
 */
 /**/
 

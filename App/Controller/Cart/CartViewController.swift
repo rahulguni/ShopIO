@@ -1,28 +1,39 @@
-//
-//  CartViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 7/27/21.
-//
-
 import UIKit
 import RealmSwift
 import Parse
 import SwipeCellKit
 
+/**/
+/*
+class CartViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Cart.storyboard's initial view.
+        It extends from SwipCellKit to make cells swipeable. Link:- https://github.com/SwipeCellKit/SwipeCellKit
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        07/27/2021
+ 
+*/
+/**/
+
 class CartViewController: UIViewController {
 
+    //IBOutlet Elements
     @IBOutlet weak var myCartItems: UICollectionView!
     @IBOutlet weak var checkOut: UIButton!
     @IBOutlet weak var cartTotal: UILabel!
     
-    //A list to hold all cart items
-    private var myItems: [CartItem] = []
-    private var currItem: CartItem?
-    private var myProduct: Product?
-    private var currProductImage: [ProductImage] = []
-    private var myCart: Cart?
-    private var orderComplete: Bool = false
+    //Controller Parameters
+    private var myItems: [CartItem] = []                    //A list to hold all cart items
+    private var currItem: CartItem?                         //selected cart item
+    private var myProduct: Product?                         //selected cart item to Product object
+    private var currProductImage: [ProductImage] = []       //selected cart item's product photos
+    private var myCart: Cart?                               //Cart Object to upload to Order Table
+    private var orderComplete: Bool = false                 //determines if order is complete
     
     let realm = try! Realm()
     
@@ -106,6 +117,8 @@ class CartViewController: UIViewController {
 
 //MARK:- IBOutlet Functions
 extension CartViewController {
+    
+    //Action for check out button click, segue to CheckOutViewController.
     @IBAction func checkOutButtonClick(_ sender: Any) {
         //continue forming the cart to put it in orders database and push it to next view
         if self.myCart != nil && self.myCart?.getTotal() != 0 {
@@ -120,9 +133,45 @@ extension CartViewController {
 
 //MARK:- Display Function
 extension CartViewController {
+    
+    /**/
+    /*
+    private func checkProduct(_ myItem: CartItem)
+
+    NAME
+
+            checkProduct - Checks
+     
+    SYNOPSIS
+           
+            private func checkProduct(_ myItem: CartItem)
+                myItem      --> CartItem object to perform Product query
+
+    DESCRIPTION
+
+            This function takes in the current cartItem object and performs a query in Products table using the item's productId.
+            It updates the Product according to current data in the table in any case parameters such as price, quantity etc. is
+            modified by the shop owner. At the same time, additional parameters of the item such as name, price, etc. are added
+            to the object in realm database.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/27/2021
+
+    */
+    /**/
+    
     private func checkProduct(_ myItem: CartItem){
-        let query = PFQuery(className: "Product")
-        query.whereKey("objectId", equalTo: myItem.productId!)
+        let query = PFQuery(className: ShopIO.Product().tableName)
+        query.whereKey(ShopIO.Product().objectId, equalTo: myItem.productId!)
         query.getFirstObjectInBackground { (object: PFObject?, error: Error?) in
             if let _ = error {
                 // The query failed
@@ -150,7 +199,9 @@ extension CartViewController {
             self.myCartItems.reloadData()
         }
     }
+    /* private func checkProduct(_ myItem: CartItem) */
     
+    //setter function to set current order as complete to present success alert.
     func setOrderComplete(bool: Bool) {
         self.orderComplete = bool
     }
@@ -159,12 +210,39 @@ extension CartViewController {
 //MARK:- UICollectionViewDelegate
 extension CartViewController: UICollectionViewDelegate {
     
+    /**/
+    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+
+    NAME
+
+           collectionView - Action for cartItem object in CollectionView cell click.
+
+    DESCRIPTION
+
+            This function queries the Product of cartItem using its productId and segues to MyProductViewController after fetching the product images.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            07/27/2021
+
+    */
+    /**/
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currItem = myItems[indexPath.row]
         let productId = currItem?.productId!
         
-        let query = PFQuery(className: "Product")
-        query.whereKey("objectId", equalTo: productId!)
+        let query = PFQuery(className: ShopIO.Product().tableName)
+        query.whereKey(ShopIO.Product().objectId, equalTo: productId!)
         query.getFirstObjectInBackground{ (object: PFObject?, error: Error?) in
             if let _ = error {
                 let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
@@ -174,8 +252,8 @@ extension CartViewController: UICollectionViewDelegate {
                 self.myProduct = Product(product: object)
                 //find product images and perform segue
                 self.currProductImage.removeAll()
-                let query = PFQuery(className: "Product_Images")
-                query.whereKey("productId", equalTo: self.currItem!.productId!)
+                let query = PFQuery(className: ShopIO.Product_Images().tableName)
+                query.whereKey(ShopIO.Product_Images().productId, equalTo: self.currItem!.productId!)
                 query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
                     if let objects = objects {
                         for object in objects {
@@ -188,15 +266,19 @@ extension CartViewController: UICollectionViewDelegate {
             }
         }
     }
+    /* func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) */
     
 }
 
 //MARK:- UICollectionViewDataSource
 extension CartViewController: UICollectionViewDataSource {
+    
+    //function to return number of cartItem in UICollectionView.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myItems.count
     }
     
+    //function to populate the CollectionView cell, from CartItemCollectionViewCell.swift
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var itemCell = CartItemCollectionViewCell()
         if let tempCell = myCartItems.dequeueReusableCell(withReuseIdentifier: "reusableItemCell", for: indexPath) as? CartItemCollectionViewCell {
@@ -212,6 +294,8 @@ extension CartViewController: UICollectionViewDataSource {
 }
 
 extension CartViewController: SwipeCollectionViewCellDelegate{
+    
+    //Function to render swipe cell action when a collectionview cell is swiped. It extends from SwipeCellKit.
     func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
 

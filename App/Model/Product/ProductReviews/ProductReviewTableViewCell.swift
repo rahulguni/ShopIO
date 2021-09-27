@@ -14,10 +14,13 @@ class ProductReviewTableViewCell
  
 DESCRIPTION
         This class is a UITableViewCell class that makes up the cells for Reviews Table view in ProductReviewViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/11/2021
+ 
 */
 /**/
 

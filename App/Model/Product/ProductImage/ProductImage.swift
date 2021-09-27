@@ -8,10 +8,13 @@ class ProductImage
  
 DESCRIPTION
         This class is the model to render data from Product_Image database. This class also has all the setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/14/2021
+ 
 */
 /**/
 

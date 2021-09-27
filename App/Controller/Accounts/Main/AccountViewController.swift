@@ -1,20 +1,30 @@
-//
-//  ViewController.swift
-//  App
-//
-//  Created by Rahul Guni on 4/25/21.
-//
-
 import UIKit
 import Parse
+
+/**/
+/*
+class AccountViewController
+
+DESCRIPTION
+        This class is a UIViewController that controls Account.storyboard view.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        04/25/2021
+ 
+*/
+/**/
 
 // MARK: - UIView
 class AccountViewController: UIViewController {
     
+    //IBOutlet elements
     @IBOutlet weak var accountTable: UITableView!
     @IBOutlet weak var accountTitle: UITextField!
     
-    let headers = AccountTableOptions()
+    let headers = AccountTableOptions()             //To load account options in tableviewcell.
     var orders: [Order] = []
     
     override func viewDidLoad() {
@@ -55,10 +65,37 @@ class AccountViewController: UIViewController {
 
 //MARK:- Regular Functions
 extension AccountViewController {
-    //function to reload the view according to if a user is signed in
+
+    /**/
+    /*
+    private func reloadViewData()
+
+    NAME
+
+           reloadViewData - Reloads current view with appropriate labels.
+
+    DESCRIPTION
+
+            This function reloads current View's title label if a user is signed in.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            04/25/2021
+
+    */
+    /**/
+    
     private func reloadViewData(){
         if let user = currentUser {
-            if let name = user.value(forKey: "fName"){
+            if let name = user.value(forKey: ShopIO.User().fName){
                 accountTitle.text = "Welcome, \(name)"
             }
         }
@@ -72,12 +109,41 @@ extension AccountViewController {
             accountTable.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
+    /* private func reloadViewData() */
+    
+    /**/
+    /*
+    private func searchOrder()
+
+    NAME
+
+           searchOrder - Search for current user's orders
+
+    DESCRIPTION
+
+            This function queries the Orders table using current user's objectId and appends the order objects to orders array.
+            Then. it performs segue to OrderViewController.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            04/25/2021
+
+    */
+    /**/
     
     private func searchOrder() {
         self.orders.removeAll()
-        let query = PFQuery(className: "Order")
-        query.whereKey("userId", equalTo: currentUser!.objectId!)
-        query.order(byDescending: "createdAt")
+        let query = PFQuery(className: ShopIO.Order().tableName)
+        query.whereKey(ShopIO.Order().userId, equalTo: currentUser!.objectId!)
+        query.order(byDescending: ShopIO.Order().createdAt)
         query.findObjectsInBackground{(orders, error) in
             if let orders = orders {
                 for order in orders {
@@ -91,6 +157,34 @@ extension AccountViewController {
             }
         }
     }
+    /* private func searchOrder() */
+    
+    /**/
+    /*
+    private func signOut()
+
+    NAME
+
+           signOut - Sign Off the user
+
+    DESCRIPTION
+
+            This function signs the user off by deleting current user's sessionId in session table, and reloading the tableview.
+
+    RETURNS
+
+            Void
+
+    AUTHOR
+
+            Rahul Guni
+
+    DATE
+
+            04/25/2021
+
+    */
+    /**/
     
     private func signOut() {
         let alert = UIAlertController(title: "Are you sure you want to sign off?", message: "Please select below", preferredStyle: .alert)
@@ -106,11 +200,13 @@ extension AccountViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
+    /* private func signOut() */
 }
 
 //MARK: - UITableDelegate
 extension AccountViewController: UITableViewDelegate{
+    
+    //Action for tableview cell click.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -158,6 +254,7 @@ extension AccountViewController: UITableViewDelegate{
 //MARK: - UITableDataSource
 extension AccountViewController: UITableViewDataSource{
     
+    //function to set header heights for cells
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if(section == 0){
             return CGFloat.leastNormalMagnitude
@@ -165,15 +262,18 @@ extension AccountViewController: UITableViewDataSource{
         return 20.0;
     }
     
+    //function to set number of headers
     func numberOfSections(in tableView: UITableView) -> Int {
         return headers.cells.count
     }
     
+    //function to render number of cells under each header.
     func tableView(_ tableView: UITableView, titleForHeaderInSection
                                 section: Int) -> String? {
         return headers.headers[section]
     }
     
+    //function to populate table cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
         cell.textLabel?.text = headers.cells[indexPath.section][indexPath.row]

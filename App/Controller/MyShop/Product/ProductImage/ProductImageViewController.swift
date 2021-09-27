@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MyMessagesViewController
+class ProductImageViewController
 
 DESCRIPTION
         This class is a UIViewController that controls MyStore.storyboard's ProductImage View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/12/2021
+ 
 */
 /**/
 
@@ -60,7 +63,8 @@ extension ProductImageViewController {
 
     DESCRIPTION
 
-            This function queries the Product_Images table and changes the current display picture's isDefault boolean to false and changes current picture's isDefault boolean to true.
+            This function queries the Product_Images table and changes the current display picture's isDefault boolean
+            to false and changes current picture's isDefault boolean to true.
 
     RETURNS
 

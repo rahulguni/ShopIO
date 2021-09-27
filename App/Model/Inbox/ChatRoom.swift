@@ -5,11 +5,16 @@ import Foundation
 class ChatRoom
 
 DESCRIPTION
-        This class is the model to render data from ChatRoom database. This class has private variables chatRoomId, message, senderId, updateTime and sender. Sender is a MessageKit class that helps render the correct sender and receiever in the MessageTableView. This class also has all the setter and getter properies for the parameters.
+        This class is the model to render data from ChatRoom database. This class has private variables chatRoomId, message,
+        senderId, updateTime and sender. Sender is a MessageKit class that helps render the correct sender and receiever in
+        he MessageTableView. This class also has all the setter and getter properies for the parameters.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         08/19/2021
+ 
 */
 /**/
 

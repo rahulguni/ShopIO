@@ -11,14 +11,17 @@ enum orderFilter {
 
 /**/
 /*
-class InboxViewController
+class OrdersViewController
 
 DESCRIPTION
         This class is a UIViewController that controls Orders.storyboard view.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/03/2021
+ 
 */
 /**/
 
@@ -152,7 +155,8 @@ extension OrdersViewController {
 
     DESCRIPTION
 
-            This function fetches the objects in Order_Item table for current Order using the order's objectId. Then it appends the objects in currOrderItems array. Finally, it performs a segue to MyOrderViewController.
+            This function fetches the objects in Order_Item table for current Order using the order's objectId.
+            Then it appends the objects in currOrderItems array. Finally, it performs a segue to MyOrderViewController.
 
     RETURNS
 
@@ -200,7 +204,10 @@ extension OrdersViewController {
 
     DESCRIPTION
 
-            This function fetches the user's data in User table and record it in currProfile User object. Then it performs a segue to EditProfileViewController. If the order is to be shipped, it also fetches the data for Address using the addressId and records it in shippingAddress variable before performing segue.
+            This function fetches the user's data in User table and record it in currProfile User object.
+            Then it performs a segue to EditProfileViewController. If the order is to be shipped, it also
+            fetches the data for Address using the addressId and records it in shippingAddress variable
+            before performing segue.
 
     RETURNS
 
@@ -260,7 +267,10 @@ extension OrdersViewController {
 
     DESCRIPTION
 
-            This function fetches the user's data in User table and record it in currProfile User object. Then it performs a segue to EditProfileViewController. If the order is to be shipped, it also fetches the data for Address using the addressId and records it in shippingAddress variable before performing segue.
+            This function fetches the user's data in User table and record it in currProfile User object.
+            Then it performs a segue to EditProfileViewController. If the order is to be shipped, it also
+            fetches the data for Address using the addressId and records it in shippingAddress variable before
+            performing segue.
 
     RETURNS
 
@@ -303,7 +313,9 @@ extension OrdersViewController {
 
     DESCRIPTION
 
-            This function presents an alert in form format in order to choose what to do with the product. The options are:- Order Details, User Profile and Shop Profile. However, Shop Profile is available according to forMyOrders boolean variable.
+            This function presents an alert in form format in order to choose what to do with the product.
+            The options are:- Order Details, User Profile and Shop Profile. However, Shop Profile is available
+            according to forMyOrders boolean variable.
 
     RETURNS
 
@@ -348,7 +360,9 @@ extension OrdersViewController {
 
     DESCRIPTION
 
-            This function presents an alert in form format in order to filter the orders. The options are:- All Orders, Pending Orders and Completed Orders. Both deleted and confirmed orders are under Completed category.
+            This function presents an alert in form format in order to filter the orders. The options are:-
+            All Orders, Pending Orders and Completed Orders. Both deleted and confirmed orders are under
+            Completed category.
 
     RETURNS
 
@@ -505,7 +519,8 @@ extension OrdersViewController: UITableViewDelegate {
 
     DESCRIPTION
 
-            This function records the current Order details and presents the order alerts from showAlertOptions and performs segue to MyOrderViewController.
+            This function records the current Order details and presents the order alerts from showAlertOptions and
+            performs segue to MyOrderViewController.
 
     RETURNS
 

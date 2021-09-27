@@ -7,10 +7,13 @@ class OrdersTableViewCell
 
 DESCRIPTION
         This class is a UITableViewCell class that makes up the cells for Order Table in OrdersViewController.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         09/03/2021
+ 
 */
 /**/
 
@@ -48,7 +51,9 @@ class OrdersTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes an Order object to render the right data to tableview cell. First, the Order table in database is searched by the Order model's objectId variable to render the details of the order. Then, according to the boolean variable set, either the Shop name or the user Details is rendered.
+            This function takes an Order object to render the right data to tableview cell. First, the Order table
+            in database is searched by the Order model's objectId variable to render the details of the order. Then,
+            according to the boolean variable set, either the Shop name or the user Details is rendered.
 
     RETURNS
 
@@ -60,7 +65,7 @@ class OrdersTableViewCell: UITableViewCell {
 
     DATE
 
-            08/03/2021
+            09/03/2021
 
     */
     /**/
@@ -93,7 +98,10 @@ class OrdersTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes an Order object to render the right data to tableview cell. It searches whether or not the order is fulfilled. In case the order is deleted by shop, there will be no items in the Order_Item table. So, this function searches the Order_Items table to check if the order is fulfilled ot deleted, and renders it in the completion label.
+            This function takes an Order object to render the right data to tableview cell. It searches whether or not
+            the order is fulfilled. In case the order is deleted by shop, there will be no items in the Order_Item table.
+            So, this function searches the Order_Items table to check if the order is fulfilled ot deleted, and renders
+            it in the completion label.
 
     RETURNS
 
@@ -151,7 +159,8 @@ class OrdersTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes an Order object to render the right data to tableview cell. It searches the user's table through the userId variable and renders the user's data.
+            This function takes an Order object to render the right data to tableview cell. It searches the user's table
+            through the userId variable and renders the user's data.
 
     RETURNS
 
@@ -207,7 +216,8 @@ class OrdersTableViewCell: UITableViewCell {
 
     DESCRIPTION
 
-            This function takes an Order object to render the right data to tableview cell. It searches the shop's table through the shopId variable and renders the shop's data.
+            This function takes an Order object to render the right data to tableview cell. It searches the shop's table through
+            the shopId variable and renders the shop's data.
 
     RETURNS
 

@@ -3,14 +3,17 @@ import Parse
 
 /**/
 /*
-class MyMessagesViewController
+class AddProductExtraViewController
 
 DESCRIPTION
         This class is a UIViewController that controls AddProduct.storyboard's Extra View.
+ 
 AUTHOR
         Rahul Guni
+ 
 DATE
         07/17/2021
+ 
 */
 /**/
 
@@ -46,7 +49,8 @@ extension AddProductExtraViewController {
 
     DESCRIPTION
 
-            This function updates the current Product's discount and content field in Product table, initially set to 0% and an empty string in previous view controller.
+            This function updates the current Product's discount and content field in Product table, initially
+            set to 0% and an empty string in previous view controller.
 
     RETURNS
 
