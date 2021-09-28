@@ -17,33 +17,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-6k-OeW">
-                                <rect key="frame" x="81" y="315" width="253" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="My Inbox">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="myInboxClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iPc-yc-8yK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iY-qC-Opu">
-                                <rect key="frame" x="81" y="464" width="253" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Shop Inbox">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="shopInboxClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="uQ9-sy-fak"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="7S4-we-fYW">
+                                <rect key="frame" x="40" y="298" width="334" height="300"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKv-6k-OeW">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="135"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="My Inbox">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="myInboxClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iPc-yc-8yK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iY-qC-Opu">
+                                        <rect key="frame" x="0.0" y="165" width="334" height="135"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Shop Inbox">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="shopInboxClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="uQ9-sy-fak"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="fA8-hs-rkQ"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7S4-we-fYW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="4sx-xe-pzI"/>
+                            <constraint firstItem="7S4-we-fYW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="5BV-hq-Zsk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7S4-we-fYW" secondAttribute="trailing" constant="40" id="Ghf-RA-RUd"/>
+                            <constraint firstItem="7S4-we-fYW" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="QlB-Ld-QLi"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Inbox" id="Jb5-6o-Je8"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="myInboxButton" destination="kKv-6k-OeW" id="hUP-YP-2Fo"/>
                         <outlet property="shopInboxButton" destination="0iY-qC-Opu" id="7Dh-Ba-2nv"/>

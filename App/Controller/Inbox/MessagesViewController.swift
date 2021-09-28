@@ -33,6 +33,9 @@ class MyMessagesViewController: UIViewController{
     private var titleForChatRoom: String?       //Name of sender for ChatViewController title
     private var currChatRoomId: String?         //objectId of current Message Object
     
+    //Declare a label to render in case there is no message.
+    private let noMessagesLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //messagesTable.isHidden = true
@@ -40,6 +43,7 @@ class MyMessagesViewController: UIViewController{
         messagesTable.dataSource = self
         Messages.registerSubclass()
         getMessageUpdate()
+        checkMessageExists()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +77,23 @@ extension MyMessagesViewController {
     //Setter function to set up current Sender, passed on from previous view controller (InboxViewController)
     func setSender(currSender: Sender) {
         self.currSender = currSender
+    }
+    
+    //Function to render noMessageLabel if messages do not exist.
+    private func checkMessageExists() {
+        if(self.myMessages.isEmpty){
+            self.messagesTable.isHidden = true
+            self.view.backgroundColor = UIColor.lightGray
+            noMessagesLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noMessagesLabel.textAlignment = .center
+            noMessagesLabel.text = "No Messages Found."
+            self.view.addSubview(noMessagesLabel)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.messagesTable.isHidden = false
+            noMessagesLabel.removeFromSuperview()
+        }
     }
     
 }

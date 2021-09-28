@@ -25,42 +25,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uy-xI-6o3">
-                                <rect key="frame" x="86" y="396" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="My Inventory">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="nNR-7R-JOi" kind="show" identifier="goToMyInventory" id="bsk-iC-YZT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5G-Lu-GcQ">
-                                <rect key="frame" x="86" y="566" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Orders">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="ordersButtonPressed:" destination="TUy-wL-grH" eventType="touchUpInside" id="yIl-dN-NoW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGk-4M-ciS">
-                                <rect key="frame" x="86" y="223" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Add New Product">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="iQj-hn-5Jt" kind="presentation" identifier="toAddProduct" id="Fgt-7l-mj5"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zdu-9V-bXT">
+                                <rect key="frame" x="40" y="240" width="334" height="416"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGk-4M-ciS">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="125.5"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Add New Product">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="iQj-hn-5Jt" kind="presentation" identifier="toAddProduct" id="Fgt-7l-mj5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uy-xI-6o3">
+                                        <rect key="frame" x="0.0" y="145.5" width="334" height="125"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="My Inventory">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="nNR-7R-JOi" kind="show" identifier="goToMyInventory" id="bsk-iC-YZT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5G-Lu-GcQ">
+                                        <rect key="frame" x="0.0" y="290.5" width="334" height="125.5"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Orders">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ordersButtonPressed:" destination="TUy-wL-grH" eventType="touchUpInside" id="yIl-dN-NoW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="416" id="OKL-wY-hiX"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A5T-mz-EW9"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="A5T-mz-EW9" firstAttribute="trailing" secondItem="zdu-9V-bXT" secondAttribute="trailing" constant="40" id="4sX-aK-ajp"/>
+                            <constraint firstItem="zdu-9V-bXT" firstAttribute="leading" secondItem="A5T-mz-EW9" secondAttribute="leading" constant="40" id="7L3-ce-G01"/>
+                            <constraint firstItem="zdu-9V-bXT" firstAttribute="centerY" secondItem="o8E-M1-eND" secondAttribute="centerY" id="PiG-Le-giI"/>
+                            <constraint firstItem="A5T-mz-EW9" firstAttribute="trailing" secondItem="zdu-9V-bXT" secondAttribute="trailing" constant="40" id="Qhm-lb-5IW"/>
+                            <constraint firstItem="zdu-9V-bXT" firstAttribute="centerX" secondItem="o8E-M1-eND" secondAttribute="centerX" id="RYR-ai-tLD"/>
+                            <constraint firstItem="zdu-9V-bXT" firstAttribute="leading" secondItem="A5T-mz-EW9" secondAttribute="leading" constant="40" id="UuY-2Z-b7W"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Manage My Shop" id="o6Q-9e-2EC"/>
                     <connections>
@@ -87,47 +100,59 @@
         <!--My Inventory-->
         <scene sceneID="fvQ-Fn-2DM">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uhX-XZ-muj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="nNR-7R-JOi" customClass="MyInventoryViewController" customModule="App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K1v-LQ-MK2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKr-b3-dvb">
-                                <rect key="frame" x="86" y="396" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Finances">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="financesClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="Kxf-hR-yzM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-O2-ecL">
-                                <rect key="frame" x="86" y="223" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Update Products">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="PSc-gc-LWV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-S1-Lbn">
-                                <rect key="frame" x="86" y="566" width="243" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Requests">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="requestsClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="nwM-tp-sai"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7ZM-Oo-Jww">
+                                <rect key="frame" x="40" y="240" width="334" height="416"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WX-O2-ecL">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="125.5"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Update Products">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updateClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="PSc-gc-LWV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKr-b3-dvb">
+                                        <rect key="frame" x="0.0" y="145.5" width="334" height="125"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Finances">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="financesClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="Kxf-hR-yzM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-S1-Lbn">
+                                        <rect key="frame" x="0.0" y="290.5" width="334" height="125.5"/>
+                                        <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Requests">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="requestsClicked:" destination="nNR-7R-JOi" eventType="touchUpInside" id="nwM-tp-sai"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="416" id="PUn-Dw-IBV"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6P3-NE-6tw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7ZM-Oo-Jww" firstAttribute="leading" secondItem="6P3-NE-6tw" secondAttribute="leading" constant="40" id="UBE-tp-R5A"/>
+                            <constraint firstItem="7ZM-Oo-Jww" firstAttribute="centerX" secondItem="K1v-LQ-MK2" secondAttribute="centerX" id="WL9-wB-Ua4"/>
+                            <constraint firstItem="7ZM-Oo-Jww" firstAttribute="centerY" secondItem="K1v-LQ-MK2" secondAttribute="centerY" id="b1k-7s-0We"/>
+                            <constraint firstItem="6P3-NE-6tw" firstAttribute="trailing" secondItem="7ZM-Oo-Jww" secondAttribute="trailing" constant="40" id="uDH-Y5-0ln"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Inventory" id="Zm4-zi-mPu"/>
                     <connections>
@@ -138,7 +163,6 @@
                         <segue destination="amw-KR-r2r" kind="show" identifier="goToRequests" id="X7A-x5-NEN"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uhX-XZ-muj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6105.7971014492759" y="612.72321428571422"/>
         </scene>

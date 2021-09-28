@@ -80,6 +80,7 @@
                             <outlet property="delegate" destination="rnw-jq-Haw" id="Zxs-ZI-fOw"/>
                         </connections>
                     </collectionView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="lBd-sC-YQ0" kind="presentation" identifier="goToMyProduct" id="5Sd-FD-sdJ"/>
                     </connections>

@@ -16,39 +16,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hq-Dm-lnt">
-                                <rect key="frame" x="81" y="457" width="253" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Manage My Shop"/>
-                                <connections>
-                                    <action selector="manageShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="MHG-S9-lvu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-yV-uwy">
-                                <rect key="frame" x="81" y="656" width="253" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Open A New Shop"/>
-                                <connections>
-                                    <action selector="AddNewShop:" destination="81j-wy-KfD" eventType="touchUpInside" id="x4x-5j-eEm"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX3-fv-sFQ">
-                                <rect key="frame" x="81" y="307" width="253" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="My Shop"/>
-                                <connections>
-                                    <action selector="myShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="g53-Nq-qRf"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="yee-ex-8We">
+                                <rect key="frame" x="40" y="191" width="334" height="514"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pX3-fv-sFQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="0.0"/>
+                                        <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="My Shop"/>
+                                        <connections>
+                                            <action selector="myShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="g53-Nq-qRf"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hq-Dm-lnt">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="0.0"/>
+                                        <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Manage My Shop"/>
+                                        <connections>
+                                            <action selector="manageShopButton:" destination="81j-wy-KfD" eventType="touchUpInside" id="MHG-S9-lvu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-yV-uwy">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="514"/>
+                                        <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Open A New Shop"/>
+                                        <connections>
+                                            <action selector="AddNewShop:" destination="81j-wy-KfD" eventType="touchUpInside" id="x4x-5j-eEm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jbr-Lv-4Ic"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jbr-Lv-4Ic" firstAttribute="bottom" secondItem="yee-ex-8We" secondAttribute="bottom" constant="157" id="egf-1f-dij"/>
+                            <constraint firstItem="yee-ex-8We" firstAttribute="leading" secondItem="Jbr-Lv-4Ic" secondAttribute="leading" constant="40" id="fmz-xh-tFq"/>
+                            <constraint firstItem="yee-ex-8We" firstAttribute="centerY" secondItem="Klg-sR-pMz" secondAttribute="centerY" id="qZw-Y2-e81"/>
+                            <constraint firstItem="yee-ex-8We" firstAttribute="top" secondItem="Jbr-Lv-4Ic" secondAttribute="top" constant="147" id="tvh-1J-QME"/>
+                            <constraint firstItem="yee-ex-8We" firstAttribute="centerX" secondItem="Klg-sR-pMz" secondAttribute="centerX" id="x8i-Ah-TsB"/>
+                            <constraint firstItem="Jbr-Lv-4Ic" firstAttribute="trailing" secondItem="yee-ex-8We" secondAttribute="trailing" constant="40" id="zXz-cc-KSp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Shop" id="q9G-r8-ciD"/>
                     <connections>
@@ -63,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yif-oF-ZRx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2880" y="613"/>
+            <point key="canvasLocation" x="2879.7101449275365" y="612.72321428571422"/>
         </scene>
         <!--AddShop-->
         <scene sceneID="taj-vM-ffY">

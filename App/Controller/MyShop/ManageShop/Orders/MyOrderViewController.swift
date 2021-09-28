@@ -203,15 +203,15 @@ extension MyOrderViewController {
     /**/
     
     private func setLabels(){
-        self.totalLabel.text = "Total: " + String(currOrder!.getTotal())
-        self.discountLabel.text = "Discount: " + String(currOrder!.getItemDiscount())
-        self.taxLabel.text = "Tax: " + String(currOrder!.getTax())
+        self.totalLabel.text = "Total: $" + String(currOrder!.getTotal())
+        self.discountLabel.text = "Discount: $" + String(currOrder!.getItemDiscount())
+        self.taxLabel.text = "Tax: $" + String(currOrder!.getTax())
         let shippingCost = ((currOrder!.getSubTotal() - currOrder!.getTotal() - currOrder!.getTax())*100).rounded() / 100
         if(shippingCost > 0) {
-            self.subTotalLabel.text = "Subtotal (inc. $\(shippingCost) shipping): " + String(currOrder!.getSubTotal())
+            self.subTotalLabel.text = "Subtotal (inc. $\(shippingCost) shipping): $" + String(currOrder!.getSubTotal())
         }
         else {
-            self.subTotalLabel.text = "Subtotal: " + String(currOrder!.getSubTotal())
+            self.subTotalLabel.text = "Subtotal: $" + String(currOrder!.getSubTotal())
         }
     }
     /* private func setLabels() */
@@ -371,11 +371,11 @@ extension MyOrderViewController {
     
     private func modifyProductQuantity(){
         for item in self.orderItems {
-            let query = PFQuery(className: "Product")
-            query.whereKey("objectId", equalTo: item.getProductId())
+            let query = PFQuery(className: ShopIO.Product().tableName)
+            query.whereKey(ShopIO.Product().objectId, equalTo: item.getProductId())
             query.getFirstObjectInBackground{(product, error) in
                 if let product = product {
-                    product["quantity"] = Product(product: product).getQuantity() - item.getQuantity()
+                    product[ShopIO.Product().quantity] = Product(product: product).getQuantity() - item.getQuantity()
                     product.saveInBackground()
                 }
                 else {
@@ -462,21 +462,21 @@ extension MyOrderViewController {
     /**/
     
     private func sendMessage(delete: Bool){
-        let query = PFQuery(className: "Messages")
-        query.whereKey("receiverId", equalTo: currOrder!.getShopId())
-        query.whereKey("senderId", equalTo: currOrder!.getUsertId())
+        let query = PFQuery(className: ShopIO.Messages().tableName)
+        query.whereKey(ShopIO.Messages().receiverId, equalTo: currOrder!.getShopId())
+        query.whereKey(ShopIO.Messages().senderId, equalTo: currOrder!.getUsertId())
         query.getFirstObjectInBackground{(message, error) in
             if let message = message {
                 //chatRoom already exists, add to chat.
-                message["updatedAt"] = Date()
+                message[ShopIO.Messages().updatedAt] = Date()
                 message.saveInBackground()
                 self.saveChat(message: message, delete: delete)
             }
             //if not exists, create one and send message.
             else {
-                let message = PFObject(className: "Messages")
-                message["senderId"] = self.currOrder!.getUsertId()
-                message["receiverId"] = self.currOrder!.getShopId()
+                let message = PFObject(className: ShopIO.Messages().tableName)
+                message[ShopIO.Messages().senderId] = self.currOrder!.getUsertId()
+                message[ShopIO.Messages().receiverId] = self.currOrder!.getShopId()
                 
                 message.saveInBackground{(success, error) in
                     if(success) {
@@ -527,14 +527,14 @@ extension MyOrderViewController {
     /**/
     
     private func saveChat(message: PFObject, delete: Bool) {
-        let chatRoom = PFObject(className: "ChatRoom")
-        chatRoom["chatRoomId"] = message.objectId!
-        chatRoom["senderId"] = self.currOrder!.getShopId()
+        let chatRoom = PFObject(className: ShopIO.ChatRoom().tableName)
+        chatRoom[ShopIO.ChatRoom().chatRoomId] = message.objectId!
+        chatRoom[ShopIO.ChatRoom().senderId] = self.currOrder!.getShopId()
         if(!delete) {
-            chatRoom["message"] = "Your order has been confirmed. Thank you for choosing us."
+            chatRoom[ShopIO.ChatRoom().message] = "Your order has been confirmed. Thank you for choosing us."
         }
         else {
-            chatRoom["message"] = "We cannot process your order at this time. Apologies!."
+            chatRoom[ShopIO.ChatRoom().message] = "We cannot process your order at this time. Apologies!."
         }
         chatRoom.saveInBackground()
     }

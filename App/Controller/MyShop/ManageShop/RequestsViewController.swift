@@ -29,6 +29,9 @@ class RequestsViewController: UIViewController {
     private var currProduct: Product?                   //selected product
     private var currProductImage: [ProductImage] = []   //selected product's images
     private var requestIndex: Int?                      //for current product's array index
+    
+    //Declare a label to render in case there is no orders for selected filter.
+    private let noRequestssLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +39,7 @@ class RequestsViewController: UIViewController {
         // Do any additional setup after loading the view.
         requestsTable.delegate = self
         requestsTable.dataSource = self
-
+        checkOrderExists()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,6 +72,25 @@ extension RequestsViewController {
     //Setter function to set up current Shop, passed on from previous view controller (InboxViewController)
     func setShop(shop currShop: Shop) {
         self.currShop = currShop
+    }
+    
+    //Function to render noRequestssLabel if requests do not exist.
+    private func checkOrderExists() {
+        if(self.requests.isEmpty){
+            self.requestsTable.isHidden = true
+            self.titleLabel.isHidden = true
+            self.view.backgroundColor = UIColor.lightGray
+            noRequestssLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noRequestssLabel.textAlignment = .center
+            noRequestssLabel.text = "No Request Found."
+            self.view.addSubview(noRequestssLabel)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.requestsTable.isHidden = false
+            self.titleLabel.isHidden = false
+            noRequestssLabel.removeFromSuperview()
+        }
     }
     
     /**/

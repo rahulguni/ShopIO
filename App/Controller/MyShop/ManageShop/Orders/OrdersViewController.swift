@@ -43,6 +43,9 @@ class OrdersViewController: UIViewController, shopManagerDelegate {
     private var forMyOrders: Bool = false           //To disable buttons if the next view is called from other places than ManageShop.
     private var filterType: orderFilter = orderFilter.allOrders //current Filter to view orders.
     
+    //Declare a label to render in case there is no orders for selected filter.
+    private let noOrdersLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -127,21 +130,20 @@ extension OrdersViewController {
         self.performSegue(withIdentifier: identifier, sender: self)
     }
     
+    //Function to render noOrdersLabel if orders do not exist.
     private func checkOrderExists() {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         if(self.myOrders.isEmpty){
             self.ordersTable.isHidden = true
             self.view.backgroundColor = UIColor.lightGray
-            label.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
-            label.textAlignment = .center
-            label.text = "No Orderes Found."
-            self.view.addSubview(label)
+            noOrdersLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noOrdersLabel.textAlignment = .center
+            noOrdersLabel.text = "No Orderes Found."
+            self.view.addSubview(noOrdersLabel)
         }
         else {
             self.view.backgroundColor = UIColor.white
             self.ordersTable.isHidden = false
-            label.isHidden = true
-            label.removeFromSuperview()
+            noOrdersLabel.removeFromSuperview()
         }
     }
     

@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AIT-dv-CFA">
-                                <rect key="frame" x="0.0" y="268" width="414" height="545"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AIT-dv-CFA">
+                                <rect key="frame" x="0.0" y="270" width="414" height="592"/>
                                 <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -32,9 +31,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Welcome" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Nu-qd-hC9" userLabel="AccountTitle">
-                                <rect key="frame" x="0.0" y="204" width="414" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Welcome" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Nu-qd-hC9" userLabel="AccountTitle">
+                                <rect key="frame" x="0.0" y="204" width="414" height="53.5"/>
                                 <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -43,13 +41,24 @@
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-u0-EYC">
-                                <rect key="frame" x="150" y="88" width="114" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="XvO-u0-EYC">
+                                <rect key="frame" x="150" y="88" width="114" height="125"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="L3N-2j-qa7"/>
                         <color key="backgroundColor" red="0.90648245810000005" green="0.9521872401" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="AIT-dv-CFA" firstAttribute="top" secondItem="XvO-u0-EYC" secondAttribute="bottom" constant="57" id="0Pe-IZ-TLg"/>
+                            <constraint firstItem="XvO-u0-EYC" firstAttribute="leading" secondItem="L3N-2j-qa7" secondAttribute="leading" constant="150" id="5nb-a1-q0I"/>
+                            <constraint firstItem="2Nu-qd-hC9" firstAttribute="trailing" secondItem="L3N-2j-qa7" secondAttribute="trailing" id="RSo-mF-W59"/>
+                            <constraint firstItem="2Nu-qd-hC9" firstAttribute="top" secondItem="L3N-2j-qa7" secondAttribute="top" constant="160" id="ZJx-EK-OUi"/>
+                            <constraint firstItem="XvO-u0-EYC" firstAttribute="top" secondItem="L3N-2j-qa7" secondAttribute="top" constant="44" id="kD4-dR-hCc"/>
+                            <constraint firstItem="AIT-dv-CFA" firstAttribute="trailing" secondItem="L3N-2j-qa7" secondAttribute="trailing" id="nRP-iA-Vid"/>
+                            <constraint firstItem="L3N-2j-qa7" firstAttribute="bottom" secondItem="AIT-dv-CFA" secondAttribute="bottom" id="tVf-of-dn8"/>
+                            <constraint firstItem="L3N-2j-qa7" firstAttribute="trailing" secondItem="XvO-u0-EYC" secondAttribute="trailing" constant="150" id="yW2-0b-B6M"/>
+                            <constraint firstItem="AIT-dv-CFA" firstAttribute="leading" secondItem="L3N-2j-qa7" secondAttribute="leading" id="zJ7-P5-sCA"/>
+                            <constraint firstItem="2Nu-qd-hC9" firstAttribute="leading" secondItem="L3N-2j-qa7" secondAttribute="leading" id="zZe-pz-glz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shopio" id="HSN-bT-6fI"/>
                     <connections>
@@ -64,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkj-v5-bVU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="-895"/>
+            <point key="canvasLocation" x="1373.913043478261" y="-895.3125"/>
         </scene>
         <!--MyAddresses-->
         <scene sceneID="tuy-uk-4QO">

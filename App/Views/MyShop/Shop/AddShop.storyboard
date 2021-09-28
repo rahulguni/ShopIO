@@ -17,21 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Open a new Shop today!" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bp5-mj-DR3">
-                                <rect key="frame" x="43" y="58" width="330" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Open a new Shop today!" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bp5-mj-DR3">
+                                <rect key="frame" x="41" y="58" width="332" height="35"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="28"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Just a few more information to set up your shop." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OjN-XR-4u6">
-                                <rect key="frame" x="43" y="131" width="330" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Just a few more information to set up your shop." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OjN-XR-4u6">
+                                <rect key="frame" x="41" y="101" width="332" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHOP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEa-Pc-xjy">
-                                <rect key="frame" x="43" y="184" width="330" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOP NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEa-Pc-xjy">
+                                <rect key="frame" x="41" y="139.5" width="332" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -39,15 +36,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Give your shop a name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="v1p-j2-rkS">
-                                <rect key="frame" x="43" y="213" width="330" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Give your shop a name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="v1p-j2-rkS">
+                                <rect key="frame" x="41" y="168.5" width="332" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="6ZW-hz-Ofq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SLOGAN (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvR-Rf-LxO">
-                                <rect key="frame" x="43" y="279" width="330" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLOGAN (Optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvR-Rf-LxO">
+                                <rect key="frame" x="41" y="231.5" width="332" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -55,16 +53,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Add a slogan (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SA-P6-Apj">
-                                <rect key="frame" x="43" y="308" width="330" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Add a slogan (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SA-P6-Apj">
+                                <rect key="frame" x="41" y="260.5" width="332" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="MAL-1M-unb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AA-te-qqn">
-                                <rect key="frame" x="43" y="664" width="330" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0AA-te-qqn">
+                                <rect key="frame" x="41" y="599" width="332" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Zex-v3-Zoh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,9 +75,41 @@
                                     <action selector="continueButtonPressed:" destination="lKa-Sa-BQ2" eventType="touchUpInside" id="tuH-Pi-7vQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xol-if-87n">
-                                <rect key="frame" x="174" y="730" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-BG-Vwg" userLabel="shopImage">
+                                <rect key="frame" x="40" y="394" width="334" height="200"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="MVN-IV-m96"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZUR-nq-Pe9" appends="YES" id="qvc-ea-L7z"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your shop's display picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RL-94-Kxi">
+                                <rect key="frame" x="41" y="365" width="332" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYG-Fy-hGr">
+                                <rect key="frame" x="156.5" y="323" width="72.5" height="28.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Cost:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X08-gL-6Mc">
+                                <rect key="frame" x="40" y="330" width="111.5" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xol-if-87n">
+                                <rect key="frame" x="172" y="665" width="68" height="30"/>
                                 <state key="normal" title="Back">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
@@ -83,43 +117,47 @@
                                     <action selector="backButtonPressed:" destination="lKa-Sa-BQ2" eventType="touchUpInside" id="uK6-DM-Cwf"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-BG-Vwg" userLabel="shopImage">
-                                <rect key="frame" x="43" y="459" width="330" height="197"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ZUR-nq-Pe9" appends="YES" id="qvc-ea-L7z"/>
-                                </connections>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your shop's display picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RL-94-Kxi">
-                                <rect key="frame" x="43" y="430" width="330" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYG-Fy-hGr">
-                                <rect key="frame" x="163" y="381" width="90" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shipping Cost:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X08-gL-6Mc">
-                                <rect key="frame" x="43" y="388" width="116" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jc7-7C-iqG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fvR-Rf-LxO" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="08L-rC-ufr"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="vYG-Fy-hGr" secondAttribute="trailing" constant="185" id="1xe-m7-g3D"/>
+                            <constraint firstItem="fvR-Rf-LxO" firstAttribute="top" secondItem="v1p-j2-rkS" secondAttribute="bottom" constant="8" id="2XN-v5-XLf"/>
+                            <constraint firstItem="0AA-te-qqn" firstAttribute="top" secondItem="Emi-BG-Vwg" secondAttribute="bottom" constant="5" id="3da-B3-41R"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="0AA-te-qqn" secondAttribute="trailing" constant="41" id="3r2-gX-7UC"/>
+                            <constraint firstItem="EEa-Pc-xjy" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="Akr-lq-iT4"/>
+                            <constraint firstItem="bp5-mj-DR3" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="Dqq-lt-3bA"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="EEa-Pc-xjy" secondAttribute="trailing" constant="41" id="EdH-Qu-NPR"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="4SA-P6-Apj" secondAttribute="trailing" constant="41" id="GzK-iN-lbv"/>
+                            <constraint firstItem="OjN-XR-4u6" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="H2O-WC-57u"/>
+                            <constraint firstItem="v1p-j2-rkS" firstAttribute="top" secondItem="EEa-Pc-xjy" secondAttribute="bottom" constant="8" id="HdF-x1-zqm"/>
+                            <constraint firstItem="Emi-BG-Vwg" firstAttribute="top" secondItem="5RL-94-Kxi" secondAttribute="bottom" constant="8" id="JGM-EV-lQ0"/>
+                            <constraint firstItem="EEa-Pc-xjy" firstAttribute="top" secondItem="OjN-XR-4u6" secondAttribute="bottom" constant="20" id="KJi-p0-THh"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="xol-if-87n" secondAttribute="trailing" constant="174" id="N8k-1C-kNt"/>
+                            <constraint firstItem="xol-if-87n" firstAttribute="top" secondItem="0AA-te-qqn" secondAttribute="bottom" constant="11" id="Qg5-3t-KZZ"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="v1p-j2-rkS" secondAttribute="trailing" constant="41" id="TkL-Y4-CSy"/>
+                            <constraint firstItem="X08-gL-6Mc" firstAttribute="top" secondItem="4SA-P6-Apj" secondAttribute="bottom" constant="14.5" id="XZU-VG-ShD"/>
+                            <constraint firstItem="v1p-j2-rkS" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="Z7v-fv-4AZ"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="Emi-BG-Vwg" secondAttribute="trailing" constant="40" id="a4N-Oc-eVE"/>
+                            <constraint firstItem="vYG-Fy-hGr" firstAttribute="top" secondItem="4SA-P6-Apj" secondAttribute="bottom" constant="7.5" id="aj6-7B-vda"/>
+                            <constraint firstItem="X08-gL-6Mc" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="40" id="coz-8a-km2"/>
+                            <constraint firstItem="xol-if-87n" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="172" id="eXZ-6F-D4i"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="fvR-Rf-LxO" secondAttribute="trailing" constant="41" id="fr9-pD-vas"/>
+                            <constraint firstItem="4SA-P6-Apj" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="hVr-KB-iIW"/>
+                            <constraint firstItem="0AA-te-qqn" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="kSD-Jg-Uek"/>
+                            <constraint firstItem="vYG-Fy-hGr" firstAttribute="leading" secondItem="X08-gL-6Mc" secondAttribute="trailing" constant="5" id="lze-60-eSh"/>
+                            <constraint firstItem="4SA-P6-Apj" firstAttribute="top" secondItem="fvR-Rf-LxO" secondAttribute="bottom" constant="8" id="mmt-ya-980"/>
+                            <constraint firstItem="vYG-Fy-hGr" firstAttribute="leading" secondItem="X08-gL-6Mc" secondAttribute="trailing" constant="5" id="naZ-Z6-7J4"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="OjN-XR-4u6" secondAttribute="trailing" constant="41" id="o4K-AB-bop"/>
+                            <constraint firstItem="Emi-BG-Vwg" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="40" id="pfr-jQ-L3n"/>
+                            <constraint firstItem="5RL-94-Kxi" firstAttribute="top" secondItem="vYG-Fy-hGr" secondAttribute="bottom" constant="13.5" id="rdg-TC-J0y"/>
+                            <constraint firstItem="bp5-mj-DR3" firstAttribute="top" secondItem="jc7-7C-iqG" secondAttribute="top" constant="14" id="rdk-mo-XqW"/>
+                            <constraint firstItem="5RL-94-Kxi" firstAttribute="leading" secondItem="jc7-7C-iqG" secondAttribute="leading" constant="41" id="tSo-wz-03q"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="bp5-mj-DR3" secondAttribute="trailing" constant="41" id="uIj-io-7Ah"/>
+                            <constraint firstItem="jc7-7C-iqG" firstAttribute="trailing" secondItem="5RL-94-Kxi" secondAttribute="trailing" constant="41" id="wNA-bb-suc"/>
+                            <constraint firstItem="OjN-XR-4u6" firstAttribute="top" secondItem="bp5-mj-DR3" secondAttribute="bottom" constant="8" id="z0A-yA-REc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jrb-6V-92p"/>
                     <connections>

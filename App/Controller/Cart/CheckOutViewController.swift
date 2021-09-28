@@ -23,6 +23,7 @@ class CheckOutViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var pickupButton: UIButton!
     @IBOutlet weak var shipButton: UIButton!
+    @IBOutlet weak var orderButton: UIButton!
     
     //Controller parameters
     private var myCart: Cart?                               //current Cart
@@ -36,6 +37,7 @@ class CheckOutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        modifyButtons(buttons: [pickupButton, shipButton, orderButton])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
