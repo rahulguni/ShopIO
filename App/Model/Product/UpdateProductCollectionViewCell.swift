@@ -71,8 +71,8 @@ class UpdateProductCollectionViewCell: UICollectionViewCell {
         }
         productQuantity.text = "Quantity: " + currProduct.getQuantityAsString()
         
+        //Get product default image
         let query = PFQuery(className: ShopIO.Product_Images().tableName)
-
         query.whereKey(ShopIO.Product_Images().productId, equalTo: currProduct.getObjectId())
         query.whereKey(ShopIO.Product_Images().isDefault, equalTo: "True")
         

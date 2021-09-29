@@ -62,6 +62,7 @@ class MyProductViewController: UIViewController {
         
         self.priceField.delegate = self
         
+        //Hide discount field if current product has no discount
         if(myProduct?.getDiscount() != 0) {
             discountField.isHidden = false
             let attributeString = makeStrikethroughText(product: myProduct!)
@@ -87,19 +88,23 @@ class MyProductViewController: UIViewController {
             let destination = segue.destination as! MyStoreViewController
             destination.replaceProduct(with: myProduct!)
         }
+        
         if(segue.identifier! == "goToUpdateProducts") {
             let destination = segue.destination as! UpdateProductCollectionViewController
             destination.replaceProduct(with: myProduct!)
         }
+        
         if(segue.identifier! == "goToSignIn") {
             let destination = segue.destination as! SignInViewController
             destination.dismiss = forSignIn.forMyProduct
         }
+        
         if(segue.identifier! == "goToRatings") {
             let destination = segue.destination as! ProductReviewViewController
             destination.setRatings(ratings: self.productReview)
             destination.setProduct(product: self.myProduct!)
         }
+        
         if(segue.identifier! == "goToProductPhoto") {
             let destination = segue.destination as! ProductImageViewController
             destination.setImage(displayImage: productImages[currentImageIndex].getUIImage()!)
@@ -152,6 +157,7 @@ extension MyProductViewController {
             let alert = customNetworkAlert(title: "Mising Entry Field", errorString: "Please make sure you have filled all the required fields.")
             self.present(alert, animated: true, completion: nil)
         }
+        //Remove 'or true' to restrict from updating the product if it was modified within the last 24 hours.
         else if(NSDate() as Date >= myProduct!.getUpdateDate().addingTimeInterval(86400) || true) {
             let alert = UIAlertController(title: "Update Product?", message: "Please select below", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel Button"), style: .default, handler: { _ in
@@ -432,6 +438,7 @@ extension MyProductViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             else if let product = product {
+                //check discount percentage
                 if(makeDouble(self.discountField.text!)! > 100) {
                     let alert = customNetworkAlert(title: "Invalid Discount Percentage", errorString: "Discount percentage must be in the range of 0-100.")
                     self.present(alert, animated: true, completion: nil)
@@ -855,12 +862,9 @@ extension MyProductViewController {
     
     func detailViewControllerAt(index: Int) -> ProductImageViewController? {
         if(index >= productImages.count || productImages.count == 0) {
-            //1. error
-            print("Index error")
             return nil
         }
         guard let productImageViewController = storyboard?.instantiateViewController(withIdentifier: "ProductImageViewController") as? ProductImageViewController else {
-            print("productImageViewController")
             return nil
         }
         productImageViewController.setIndex(index: index)
@@ -938,13 +942,10 @@ extension MyProductViewController: UIPageViewControllerDataSource {
         guard var currentIndex = productImageViewController?.getIndex() else {
             return nil
         }
-        
         currentImageIndex = currentIndex
-        
         if(currentIndex == 0) {
             return nil
         }
-        
         currentIndex -= 1
         return detailViewControllerAt(index: currentIndex)
     }
@@ -955,12 +956,9 @@ extension MyProductViewController: UIPageViewControllerDataSource {
         guard var currentIndex = productImageViewController?.getIndex() else {
             return nil
         }
-        
         if(currentIndex == productImages.count) {
             return nil
         }
-        
-        
         currentImageIndex = currentIndex
         currentIndex += 1
         

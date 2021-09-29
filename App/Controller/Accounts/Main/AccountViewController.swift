@@ -216,6 +216,7 @@ extension AccountViewController: UITableViewDelegate{
             case [0,0]:
                 performSegue(withIdentifier: "goToSignIn", sender: self);
                 
+            //Perform Segue to Address if My Addresses is clicked.
             case[1,0]:
                 if(currentUser != nil) {
                     performSegue(withIdentifier: "goToMyAddresses", sender: self)
@@ -224,6 +225,7 @@ extension AccountViewController: UITableViewDelegate{
                     performSegue(withIdentifier: "goToSignIn", sender: self)
                 }
                 
+            //Perform segue to Orders if Order History is clicked.
             case[1,2]:
                 if(currentUser != nil) {
                     self.searchOrder()
@@ -231,7 +233,8 @@ extension AccountViewController: UITableViewDelegate{
                 else{
                     performSegue(withIdentifier: "goToSignIn", sender: self)
                 }
-                
+            
+            //Perform segue to Edit Profile if Edit Profile is clicked.
             case[2,2]:
                 if(currentUser != nil) {
                     performSegue(withIdentifier: "goToEditProfile", sender: self)

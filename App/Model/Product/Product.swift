@@ -91,6 +91,7 @@ class Product {
         return self.price!
     }
     
+    //Function to get the price after discount
     func getPrice() -> Double {
         let discount = getDiscount()
         var newPrice = self.price! - ((Double(discount) / 100) * self.price!)
@@ -111,6 +112,7 @@ class Product {
         return self.quantity!
     }
     
+    //Function to get discount amount from discount percentage.
     func getDiscountAmount() -> Double {
         let discount = getDiscount()
         let discountAmount = ((Double(discount) / 100) * self.price!)

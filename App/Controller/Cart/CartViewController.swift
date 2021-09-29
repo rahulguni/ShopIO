@@ -35,6 +35,9 @@ class CartViewController: UIViewController {
     private var myCart: Cart?                               //Cart Object to upload to Order Table
     private var orderComplete: Bool = false                 //determines if order is complete
     
+    //Declare a label to render in case there is no cart items.
+    private let noCartItemsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    
     let realm = try! Realm()
     
     override func viewDidLoad() {
@@ -72,6 +75,7 @@ class CartViewController: UIViewController {
             myItems.removeAll()
         }
         self.myCartItems.reloadData()
+        checkItemsExist()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,6 +114,7 @@ class CartViewController: UIViewController {
                     self.cartTotal.text = self.myCart!.getTotalAsString()
                 }
                 self.myCartItems.reloadData()
+                self.checkItemsExist()
             }
         }
     }
@@ -197,6 +202,7 @@ extension CartViewController {
             self.myCart = Cart(cartItems: self.myItems)
             self.cartTotal.text = self.myCart!.getTotalAsString()
             self.myCartItems.reloadData()
+            self.checkItemsExist()
         }
     }
     /* private func checkProduct(_ myItem: CartItem) */
@@ -204,6 +210,28 @@ extension CartViewController {
     //setter function to set current order as complete to present success alert.
     func setOrderComplete(bool: Bool) {
         self.orderComplete = bool
+    }
+    
+    //Function to render noCartItemsLabel
+    private func checkItemsExist() {
+        print(myItems.count)
+        if(self.myItems.isEmpty){
+            self.myCartItems.isHidden = true
+            self.cartTotal.isHidden = true
+            self.checkOut.isHidden = true
+            self.view.backgroundColor = UIColor.lightGray
+            noCartItemsLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noCartItemsLabel.textAlignment = .center
+            noCartItemsLabel.text = "Empty Cart"
+            self.view.addSubview(noCartItemsLabel)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.myCartItems.isHidden = false
+            self.cartTotal.isHidden = false
+            self.checkOut.isHidden = false
+            noCartItemsLabel.removeFromSuperview()
+        }
     }
 }
 
@@ -318,7 +346,7 @@ extension CartViewController: SwipeCollectionViewCellDelegate{
                     self.myCart = Cart(cartItems: self.myItems)
                     self.cartTotal.text = self.myCart!.getTotalAsString()
                     self.myCartItems.reloadData()
-                    
+                    self.checkItemsExist()
                 }))
                 self.present(alert, animated: true, completion: nil)
                 

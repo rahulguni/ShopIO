@@ -1,11 +1,20 @@
-//
-//  NameSpace.swift
-//  App
-//
-//  Created by Rahul Guni on 9/23/21.
-//
-
 import Foundation
+
+/**/
+/*
+struct ShopIO
+
+DESCRIPTION
+        This struct holds all strings for PFObject keys to avoid name pollution.
+ 
+AUTHOR
+        Rahul Guni
+ 
+DATE
+        09/23/2021
+ 
+*/
+/**/
 
 struct ShopIO {
     //Default variables

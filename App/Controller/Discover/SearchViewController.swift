@@ -31,6 +31,9 @@ class SearchViewController: UIViewController {
     private var currShopProducts: [Product] = []            //all products of currShop
     private var forShop: Bool = false                       //determines if search within a shop
     
+    //Declare a label to render in case there is no result for searched item.
+    private let noResultLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 21))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -82,6 +85,22 @@ extension SearchViewController {
     //setter function for current shop, passed from previous view controller (MyStoreViewController)
     func setShop(shop: Shop) {
         self.currShop = shop
+    }
+    
+    //Function to render noResultsLabel
+    private func checkResultsExist() {
+        if(self.searchProducts.isEmpty){
+            self.resultsTable.isHidden = true
+            noResultLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noResultLabel.textAlignment = .center
+            noResultLabel.text = "No Products Found. Try a different search."
+            self.view.addSubview(noResultLabel)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.resultsTable.isHidden = false
+            noResultLabel.removeFromSuperview()
+        }
     }
     
     /**/
@@ -335,6 +354,7 @@ extension SearchViewController: UISearchBarDelegate{
                     for product in products {
                         self.searchProducts.append(Product(product: product))
                     }
+                    self.checkResultsExist()
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
                             self.resultsTable.reloadData()

@@ -133,7 +133,3 @@ extension MyInventoryViewController {
     /* @IBAction func requestsClicked(_ sender: Any) */
 }
 
-//MARK:- Display Functions
-extension MyInventoryViewController {
-    
-}

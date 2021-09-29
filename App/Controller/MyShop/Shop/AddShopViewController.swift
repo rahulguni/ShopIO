@@ -278,6 +278,7 @@ extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationCo
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = sourceType
+            imagePickerController.allowsEditing = true
             self.present(imagePickerController, animated: true, completion: nil)
         }
     }
@@ -285,7 +286,7 @@ extension AddShopViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         self.dismiss(animated: true) { [weak self] in
-            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+            guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
             //Setting image to your image view
             self?.shopImage.image = image
         }

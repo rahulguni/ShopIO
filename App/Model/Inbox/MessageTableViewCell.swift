@@ -84,6 +84,7 @@ class MessageTableViewCell: UITableViewCell {
             query.whereKey(ShopIO.User().objectId, equalTo: currMessage.getSenderId())
         }
         
+        //Set sender name according to MessageViewController loaded for shop or user
         query.getFirstObjectInBackground{(object: PFObject?, error: Error?) in
             if let object = object {
                 let displayImage: PFFileObject?
@@ -124,6 +125,7 @@ class MessageTableViewCell: UITableViewCell {
                         
                         let newRoom = ChatRoom(objectId: chatRoom.objectId!, chatRoomId: id, message: message, senderId: senderId, date: updateTime)
                         self.message.text = newRoom.getMessage()
+                        //Set current date for the cell.
                         self.dateField.text = String(updateTime.debugDescription.prefix(10))
                     }
                     else {

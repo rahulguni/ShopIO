@@ -27,14 +27,17 @@ class ShopManager {
     private var currProducts: [Product] = []    //All Products of the shop
     var delegate: shopManagerDelegate?          //protocol variable
     
+    //Set funnction to set current Shop, passed on from controller
     func setShop(shop: Shop) {
         self.currShop = shop
     }
     
+    //Get function to return current Shop
     func getCurrShop() -> Shop {
         return self.currShop!
     }
     
+    //Get function to return current shop products
     func getCurrProducts() -> [Product] {
         return self.currProducts
     }

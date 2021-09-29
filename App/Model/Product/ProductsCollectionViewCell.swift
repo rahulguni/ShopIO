@@ -60,6 +60,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
     func setParameters(Product currProduct: Product) {
         setPriceLabelsVisibility(forDiscount: true, forOriginal: true)
         
+        //Set labels to data from currProduct
         self.name.text = currProduct.getTitle()
         if(currProduct.getDiscount() != 0) {
             let attributeString = makeStrikethroughText(product: currProduct)
@@ -71,8 +72,9 @@ class ProductsCollectionViewCell: UICollectionViewCell {
             setPriceLabelsVisibility(forDiscount: true, forOriginal: false)
             originalPrice.text = currProduct.getOriginalPrice()
         }
+        
+        //Find product default image
         let query = PFQuery(className: ShopIO.Product_Images().tableName)
-
         query.whereKey(ShopIO.Product_Images().productId, equalTo: currProduct.getObjectId())
         query.whereKey(ShopIO.Product_Images().isDefault, equalTo: "True")
         
@@ -89,6 +91,7 @@ class ProductsCollectionViewCell: UICollectionViewCell {
                 }
             }
             else {
+                //Should not reach here, every user must have default picture.
                print("No default picture")
             }
         }

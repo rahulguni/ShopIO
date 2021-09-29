@@ -68,6 +68,7 @@ class RequestsTableViewCell: UITableViewCell {
     /**/
     
     func setParameters(request currRequest: Request) {
+        //get user first
         let userQuery = PFQuery(className: ShopIO.User().tableName)
         userQuery.whereKey(ShopIO.User().objectId, equalTo: currRequest.getUserId())
         userQuery.getFirstObjectInBackground{(user, error) in
@@ -76,6 +77,7 @@ class RequestsTableViewCell: UITableViewCell {
                 self.requestUser.text = "From: \(name)"
             }
         }
+        //get product next
         let productQuery = PFQuery(className: ShopIO.Product().tableName)
         productQuery.whereKey(ShopIO.Product().objectId, equalTo: currRequest.getProductId())
         productQuery.getFirstObjectInBackground{(product, error) in

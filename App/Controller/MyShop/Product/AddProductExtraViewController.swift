@@ -82,7 +82,7 @@ extension AddProductExtraViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
                 else if let object = object {
-                    
+                    //Check discount field and default it to zero.
                     if(self.discount.text != "") {
                         let discountAmount = Float(self.discount.text!)
                         if(discountAmount! > 100) {

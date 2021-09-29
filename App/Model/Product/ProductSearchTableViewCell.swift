@@ -81,6 +81,8 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
     
     func setParameters(product: Product, forShop: Bool) {
         self.title.text = product.getTitle()
+        
+        //Make attributed string if discount found on the product.
         if(product.getDiscount() != 0) {
             let attributeString = makeStrikethroughText(product: product)
             self.discount.attributedText = attributeString
@@ -91,6 +93,7 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
             setPriceLabelsVisibility(forDiscount: true, forOriginal: false)
             self.originalPrice.text = product.getOriginalPrice()
         }
+        
         self.quantity.text = "Available Quantity: \(product.getQuantity())"
         if(!forShop) {
             getShop(shopId: product.getShopId())
@@ -136,13 +139,15 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
     
     private func getRating(productId: String) {
         var ratings: [ProductReview] = []
+        
+        //Find all reviews for productId
         let query = PFQuery(className: ShopIO.Product_Review().tableName)
         query.whereKey(ShopIO.Product_Review().productId, equalTo: productId)
         query.order(byDescending: ShopIO.Product_Review().updatedAt)
         query.findObjectsInBackground{(reviews, errors) in
             if let reviews = reviews {
-                var totalReview: Double = 0.0
-                var reviewCount: Int = 0
+                var totalReview: Double = 0.0   //Average rating to print in label.
+                var reviewCount: Int = 0        //keep count of users that rated the product
                 
                 for review in reviews {
                     let currReview = ProductReview(reviewObject: review)
@@ -196,15 +201,20 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
     /**/
     
     private func getShop(shopId: String){
+        
+        //Find shop
         let query = PFQuery(className: ShopIO.Shop().tableName)
         query.whereKey(ShopIO.Shop().objectId, equalTo: shopId)
         query.getFirstObjectInBackground{(shop, error) in
             if let shop = shop {
                 let currShop = Shop(shop: shop)
+                
+                //Find current user's location
                 let userCoordinate = CLLocation(latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude)
                 let shopCoordinate = CLLocation(latitude: currShop.getGeoPoints().latitude, longitude: currShop.getGeoPoints().longitude)
                 let distanceInMeters = userCoordinate.distance(from: shopCoordinate) // result is in meters
                 let roundedDistance = (distanceInMeters  * 0.000621371 * 10).rounded() / 10
+                
                 self.shopName.text = currShop.getShopTitle() + " (" + String(roundedDistance) + " miles)"
             }
             else {
@@ -247,14 +257,14 @@ class ProductSearchTableViewCell: UITableViewCell, CLLocationManagerDelegate {
     /**/
     
     private func getProductPhoto(productId: String) {
-        let query = PFQuery(className: "Product_Images")
+        let query = PFQuery(className: ShopIO.Product_Images().tableName)
 
-        query.whereKey("productId", equalTo: productId)
-        query.whereKey("isDefault", equalTo: "True")
+        query.whereKey(ShopIO.Product_Images().productId, equalTo: productId)
+        query.whereKey(ShopIO.Product_Images().isDefault, equalTo: "True")
         
         query.getFirstObjectInBackground{(object, error) in
             if(object != nil) {
-                let productImage = object?.value(forKey: "productImage")
+                let productImage = object?.value(forKey: ShopIO.Product_Images().productImage)
                 let tempImage = productImage as! PFFileObject
                 tempImage.getDataInBackground{(imageData: Data?, error: Error?) in
                     if let error = error {

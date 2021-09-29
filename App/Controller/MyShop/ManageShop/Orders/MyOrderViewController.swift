@@ -314,6 +314,7 @@ extension MyOrderViewController {
     private func confirmOrder(delete: Bool){
         let query = PFQuery(className: ShopIO.Order().tableName)
         query.whereKey(ShopIO.Order().objectId, equalTo: currOrder!.getObjectId())
+        //Get order and mark it fulfilled
         query.getFirstObjectInBackground{(order, error) in
             if let order = order {
                 order[ShopIO.Order().fulfilled] = true

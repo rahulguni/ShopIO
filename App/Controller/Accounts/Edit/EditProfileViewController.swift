@@ -196,7 +196,8 @@ extension EditProfileViewController {
                 if let _ = error {
                     let alert = customNetworkAlert(title: "Unable to connect.", errorString: "There was an error connecting to the server. Please check your internet connection and try again.")
                     self.present(alert, animated: true, completion: nil)
-                } else if let user = user {
+                }
+                else if let user = user {
                     user[ShopIO.User().fName] = self.fName.text!
                     user[ShopIO.User().lName] = self.lName.text!
                     
@@ -376,7 +377,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         self.dismiss(animated: true) { [weak self] in
-            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+            guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
             //Setting image to your image view
             self?.displayPicture.image = image
         }

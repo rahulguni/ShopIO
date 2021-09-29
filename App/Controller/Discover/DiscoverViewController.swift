@@ -32,6 +32,9 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
     private var radius: Double = 2500                   //default radius 25 miles to search for shops around
     private var sliderAlert: UIAlertController?         //Alert for location Filter.
     
+    //Declare a label to render in case there is no followed shops.
+    private let noFollowedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier! == "goToShop") {
             let destination = segue.destination as! MyStoreViewController
@@ -50,6 +53,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
                 self.getFollowedShops()
             }
         }
+        self.checkFollowedShopsExist()
     }
     
     override func viewDidLoad() {
@@ -68,6 +72,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
             getFollowedShops()
         }
         getShopsWithinRadius()
+        self.checkFollowedShopsExist()
     }
 }
 
@@ -316,6 +321,7 @@ extension DiscoverViewController {
                                 self.present(alert, animated: true, completion: nil)
                             }
                             self.followedShops.reloadData()
+                            self.checkFollowedShopsExist()
                         }
                     }
                 }
@@ -328,6 +334,23 @@ extension DiscoverViewController {
         }
     }
     /* private func getFollowedShops() */
+    
+    //Function to render noFollowedLabel if orders do not exist.
+    private func checkFollowedShopsExist() {
+        print(self.followedList.count)
+        if(self.followedList.isEmpty){
+            self.followedShops.backgroundColor = UIColor.lightGray
+            noFollowedLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noFollowedLabel.textAlignment = .center
+            noFollowedLabel.text = "No Followed Shops."
+            self.followedShops.backgroundView = noFollowedLabel
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.followedShops.backgroundView = nil
+            noFollowedLabel.removeFromSuperview()
+        }
+    }
 }
 
 //MARK:- UICollectionViewDelegate

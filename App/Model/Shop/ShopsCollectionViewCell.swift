@@ -65,8 +65,10 @@ class ShopsCollectionViewCell: UICollectionViewCell {
     
     func setParameters(shop currShop: Shop){
         self.shopTitle.text = currShop.getShopTitle()
+        
+        //Get shop owner's name
         let query = PFQuery(className: ShopIO.User().tableName)
-        query.whereKey(ShopIO.User().objectId, contains: currShop.getShopUserid())
+        query.whereKey(ShopIO.User().objectId, equalTo: currShop.getShopUserid())
         query.getFirstObjectInBackground{ (shop, error) in
             if let myShop = shop {
                 let fname = myShop.value(forKey: ShopIO.User().fName) as! String + " "

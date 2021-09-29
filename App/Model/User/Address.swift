@@ -83,6 +83,7 @@ struct Address {
         return self.line_1! + ", " + self.city! + ", " + self.state! + ", " + self.zip! + ", " + self.country!
     }
     
+    //Function to print address for Order
     func getAddressForOrder() -> String {
         let address = "Ship To: " + "\n" + self.line_1! + ", " + self.line_2! + "\n" + self.city! + ", " + self.state! + "\n" + self.zip!
         return address

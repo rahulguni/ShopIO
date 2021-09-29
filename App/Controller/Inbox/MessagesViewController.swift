@@ -131,7 +131,7 @@ extension MyMessagesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.chatRooms.removeAll()
-        let chatRoom: String = myMessages[indexPath.row].getChatRoomId()
+        let chatRoom: String = myMessages[indexPath.row].getChatRoomId() //chatRoomId to perform query below
         self.titleForChatRoom = myMessages[indexPath.row].getSenderName()
         self.currChatRoomId = myMessages[indexPath.row].getChatRoomId()
         let query = PFQuery(className: ShopIO.ChatRoom().tableName)

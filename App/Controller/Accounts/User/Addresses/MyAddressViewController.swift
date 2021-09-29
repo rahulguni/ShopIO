@@ -306,6 +306,7 @@ extension MyAddressViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var addressCell = AddressCollectionViewCell()
         if let tempCell = addressCollection.dequeueReusableCell(withReuseIdentifier: "reusableAddressCell", for: indexPath) as? AddressCollectionViewCell {
+            //Convert addresses dictionary to arrays or keys and values each
             let type = Array(addresses)[indexPath.row].key
             let address = Array(addresses)[indexPath.row].value
             tempCell.setParameters(address: address, type: type)
