@@ -214,7 +214,6 @@ extension CartViewController {
     
     //Function to render noCartItemsLabel
     private func checkItemsExist() {
-        print(myItems.count)
         if(self.myItems.isEmpty){
             self.myCartItems.isHidden = true
             self.cartTotal.isHidden = true

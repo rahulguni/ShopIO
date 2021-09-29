@@ -33,6 +33,7 @@ class AddProductExtraViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
         headerLabel.text = myProduct?.getTitle()
+        textViewBordered([contents])
     }
 }
 

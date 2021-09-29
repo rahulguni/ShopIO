@@ -39,9 +39,7 @@ class AddProductViewController: UIViewController{
         self.hideKeyboardWhenTappedAround()
 
         // Do any additional setup after loading the view.
-        summaryField.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
-        summaryField.layer.borderWidth = 1.0
-        summaryField.layer.cornerRadius = 5
+        textViewBordered([summaryField])
         imageCollection.delegate = self
         imageCollection.dataSource = self
         priceField.delegate = self

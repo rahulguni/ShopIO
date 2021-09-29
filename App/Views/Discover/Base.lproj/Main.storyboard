@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UtA-5u-fk9">
-                                <rect key="frame" x="20" y="395" width="374" height="418"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UtA-5u-fk9">
+                                <rect key="frame" x="20" y="377" width="374" height="436"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2jc-qG-F0e">
                                     <size key="itemSize" width="373" height="247"/>
@@ -36,32 +35,52 @@
                                             <rect key="frame" x="0.0" y="0.0" width="373" height="247"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shop Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp7-4L-1NS">
-                                                    <rect key="frame" x="8" y="213" width="365" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jp7-4L-1NS">
+                                                    <rect key="frame" x="8" y="216.5" width="365" height="26.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26.5" id="hJb-YH-Msd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="LE0-gG-PhC">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="LE0-gG-PhC">
                                                     <rect key="frame" x="8" y="8" width="357" height="168"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iq-nd-2U3">
-                                                    <rect key="frame" x="163" y="184" width="202" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iq-nd-2U3">
+                                                    <rect key="frame" x="163" y="184" width="202" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shop Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJG-FQ-kGU">
-                                                    <rect key="frame" x="8" y="189" width="147" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJG-FQ-kGU">
+                                                    <rect key="frame" x="8" y="192.5" width="147" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="147" id="cHd-4o-glP"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LE0-gG-PhC" firstAttribute="top" secondItem="x1Y-Ub-fsx" secondAttribute="top" constant="8" id="0sx-xO-UH3"/>
+                                                <constraint firstItem="Jp7-4L-1NS" firstAttribute="leading" secondItem="x1Y-Ub-fsx" secondAttribute="leading" constant="8" id="7Tc-zO-XQw"/>
+                                                <constraint firstItem="Jp7-4L-1NS" firstAttribute="top" secondItem="GJG-FQ-kGU" secondAttribute="bottom" constant="3" id="DRk-XY-iwR"/>
+                                                <constraint firstItem="GJG-FQ-kGU" firstAttribute="leading" secondItem="x1Y-Ub-fsx" secondAttribute="leading" constant="8" id="EeV-af-Rpf"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jp7-4L-1NS" secondAttribute="bottom" constant="4" id="F8v-g1-VVA"/>
+                                                <constraint firstItem="Jp7-4L-1NS" firstAttribute="top" secondItem="GJG-FQ-kGU" secondAttribute="bottom" constant="3" id="Ke0-Ah-DXq"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jp7-4L-1NS" secondAttribute="trailing" id="Lrv-e5-ayq"/>
+                                                <constraint firstItem="7iq-nd-2U3" firstAttribute="top" secondItem="LE0-gG-PhC" secondAttribute="bottom" constant="8" id="PWV-D0-LuE"/>
+                                                <constraint firstItem="GJG-FQ-kGU" firstAttribute="top" secondItem="LE0-gG-PhC" secondAttribute="bottom" constant="16.5" id="QUy-qP-71M"/>
+                                                <constraint firstAttribute="trailing" secondItem="7iq-nd-2U3" secondAttribute="trailing" constant="8" id="Wed-tf-VpW"/>
+                                                <constraint firstItem="Jp7-4L-1NS" firstAttribute="top" secondItem="GJG-FQ-kGU" secondAttribute="bottom" constant="3" id="ahX-of-Gxb"/>
+                                                <constraint firstItem="Jp7-4L-1NS" firstAttribute="top" secondItem="7iq-nd-2U3" secondAttribute="bottom" constant="12" id="ck5-Ph-X2K"/>
+                                                <constraint firstItem="7iq-nd-2U3" firstAttribute="top" secondItem="LE0-gG-PhC" secondAttribute="bottom" constant="8" id="i4w-HP-cBO"/>
+                                                <constraint firstAttribute="trailing" secondItem="LE0-gG-PhC" secondAttribute="trailing" constant="8" id="jNB-PK-aEz"/>
+                                                <constraint firstItem="LE0-gG-PhC" firstAttribute="leading" secondItem="x1Y-Ub-fsx" secondAttribute="leading" constant="8" id="q22-uc-beb"/>
+                                                <constraint firstItem="7iq-nd-2U3" firstAttribute="leading" secondItem="GJG-FQ-kGU" secondAttribute="trailing" constant="8" id="vo7-3T-5Sn"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <gestureRecognizers/>
                                         <size key="customSize" width="373" height="247"/>
@@ -74,10 +93,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zyz-gL-jfg">
-                                <rect key="frame" x="20" y="139" width="374" height="215"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zyz-gL-jfg">
+                                <rect key="frame" x="20" y="116" width="374" height="215"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="Yxd-eV-4cN"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cd3-vn-bs8">
                                     <size key="itemSize" width="256" height="210"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -92,18 +113,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="256" height="210"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-Yu-aVB">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="3pZ-Yu-aVB">
                                                     <rect key="frame" x="8" y="8" width="240" height="155"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="155" id="gGz-LI-PKX"/>
+                                                        <constraint firstAttribute="width" constant="240" id="j8P-xz-2QQ"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shop Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to4-KL-Bxh">
-                                                    <rect key="frame" x="8" y="171" width="240" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to4-KL-Bxh">
+                                                    <rect key="frame" x="8" y="171" width="240" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="to4-KL-Bxh" firstAttribute="leading" secondItem="jf2-2z-430" secondAttribute="leading" constant="8" id="3PJ-bW-kRu"/>
+                                                <constraint firstAttribute="trailing" secondItem="to4-KL-Bxh" secondAttribute="trailing" constant="8" id="Yeu-xd-Xhe"/>
+                                                <constraint firstItem="3pZ-Yu-aVB" firstAttribute="top" secondItem="jf2-2z-430" secondAttribute="top" constant="8" id="cDd-H7-0pD"/>
+                                                <constraint firstAttribute="trailing" secondItem="3pZ-Yu-aVB" secondAttribute="trailing" constant="8" id="fqV-qd-Srk"/>
+                                                <constraint firstItem="to4-KL-Bxh" firstAttribute="top" secondItem="3pZ-Yu-aVB" secondAttribute="bottom" constant="8" id="kuL-Pk-Rcl"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="256" height="210"/>
                                         <connections>
@@ -113,23 +143,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Here are your followed shops." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA0-4x-Lyd">
-                                <rect key="frame" x="20" y="103" width="374" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here are your followed shops." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA0-4x-Lyd">
+                                <rect key="frame" x="20" y="88" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Discover Shops near you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNC-BV-k5g">
-                                <rect key="frame" x="20" y="366" width="300" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover Shops near you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNC-BV-k5g">
+                                <rect key="frame" x="20" y="339" width="300" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="oi8-Nh-4QX"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-w2-St0">
-                                <rect key="frame" x="328" y="362" width="66" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-w2-St0">
+                                <rect key="frame" x="334" y="339" width="60" height="30"/>
                                 <color key="backgroundColor" red="0.90256100890000002" green="0.94826561210000004" blue="0.99608594179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Distance">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,6 +171,25 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I3S-RI-JVU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mA0-4x-Lyd" firstAttribute="top" secondItem="I3S-RI-JVU" secondAttribute="top" id="3sc-IO-jRT"/>
+                            <constraint firstItem="UtA-5u-fk9" firstAttribute="top" secondItem="NR9-w2-St0" secondAttribute="bottom" constant="8" id="CPa-1A-eoC"/>
+                            <constraint firstItem="Zyz-gL-jfg" firstAttribute="leading" secondItem="I3S-RI-JVU" secondAttribute="leading" constant="20" id="Dvv-vk-9I6"/>
+                            <constraint firstItem="I3S-RI-JVU" firstAttribute="trailing" secondItem="mA0-4x-Lyd" secondAttribute="trailing" constant="20" id="KOZ-By-TlW"/>
+                            <constraint firstItem="I3S-RI-JVU" firstAttribute="trailing" secondItem="NR9-w2-St0" secondAttribute="trailing" constant="20" id="Rc5-JR-aUM"/>
+                            <constraint firstItem="I3S-RI-JVU" firstAttribute="trailing" secondItem="UtA-5u-fk9" secondAttribute="trailing" constant="20" id="Xj8-JT-SgZ"/>
+                            <constraint firstItem="UtA-5u-fk9" firstAttribute="bottom" secondItem="I3S-RI-JVU" secondAttribute="bottom" id="cBd-IK-cK2"/>
+                            <constraint firstItem="UtA-5u-fk9" firstAttribute="leading" secondItem="I3S-RI-JVU" secondAttribute="leading" constant="20" id="dRR-2L-n44"/>
+                            <constraint firstItem="mA0-4x-Lyd" firstAttribute="leading" secondItem="I3S-RI-JVU" secondAttribute="leading" constant="20" id="fPr-nR-PH5"/>
+                            <constraint firstItem="Zyz-gL-jfg" firstAttribute="top" secondItem="mA0-4x-Lyd" secondAttribute="bottom" constant="7.5" id="jxg-2h-6gO"/>
+                            <constraint firstItem="NR9-w2-St0" firstAttribute="leading" secondItem="WNC-BV-k5g" secondAttribute="trailing" constant="14" id="kyA-OU-4Pu"/>
+                            <constraint firstItem="WNC-BV-k5g" firstAttribute="leading" secondItem="I3S-RI-JVU" secondAttribute="leading" constant="20" id="nwu-aJ-NgP"/>
+                            <constraint firstItem="WNC-BV-k5g" firstAttribute="top" secondItem="NR9-w2-St0" secondAttribute="top" id="oRJ-2h-8EX"/>
+                            <constraint firstItem="I3S-RI-JVU" firstAttribute="trailing" secondItem="Zyz-gL-jfg" secondAttribute="trailing" constant="20" id="p0x-gh-YSI"/>
+                            <constraint firstItem="NR9-w2-St0" firstAttribute="top" secondItem="Zyz-gL-jfg" secondAttribute="bottom" constant="8" id="uHk-Dd-62q"/>
+                            <constraint firstItem="NR9-w2-St0" firstAttribute="leading" secondItem="WNC-BV-k5g" secondAttribute="trailing" constant="14" id="x1f-oL-nWB"/>
+                            <constraint firstItem="UtA-5u-fk9" firstAttribute="top" secondItem="NR9-w2-St0" secondAttribute="bottom" constant="8" id="ygh-uu-MkG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SHOPIO" id="zln-Mb-8Tm"/>
                     <connections>

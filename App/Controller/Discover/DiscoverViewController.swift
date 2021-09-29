@@ -337,7 +337,6 @@ extension DiscoverViewController {
     
     //Function to render noFollowedLabel if orders do not exist.
     private func checkFollowedShopsExist() {
-        print(self.followedList.count)
         if(self.followedList.isEmpty){
             self.followedShops.backgroundColor = UIColor.lightGray
             noFollowedLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)

@@ -23,8 +23,8 @@ class MyProductViewController: UIViewController {
     
     //IBOutlet Elements
     @IBOutlet weak var productTitle: UITextField!
-    @IBOutlet weak var productDescription: UITextField!
-    @IBOutlet weak var productContent: UITextField!
+    @IBOutlet weak var productDescription: UITextView!
+    @IBOutlet weak var productContent: UITextView!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var discountField: UITextField!
     @IBOutlet weak var quantityField: UITextField!
@@ -50,8 +50,8 @@ class MyProductViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
         //Fix Buttons
-        let currentButtons: [UIButton] = [updateButton, addToCartButton, requestButton, messageShopButton]
-        modifyButtons(buttons: currentButtons)
+        modifyButtons(buttons: [updateButton, addToCartButton, requestButton, messageShopButton])
+        textViewBordered([productDescription, productContent])
         
         self.productTitle.text = myProduct!.getTitle()
         self.priceField.text = myProduct!.getPriceAsString()

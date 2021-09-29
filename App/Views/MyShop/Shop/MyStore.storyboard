@@ -158,7 +158,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elb-bY-bK7">
                                                     <rect key="frame" x="8" y="143" width="160" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -331,15 +331,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQU-vo-iQ3">
-                                                <rect key="frame" x="20" y="478" width="374" height="119"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-rB-jbb">
                                                 <rect key="frame" x="20" y="440" width="374" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.90196073060000004" green="0.95686274770000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <state key="normal" title="Rating: N/A">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -347,12 +342,6 @@
                                                     <action selector="ratingsClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="lg3-WL-5yT"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9PI-tO-hPx">
-                                                <rect key="frame" x="20" y="605" width="374" height="204"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dux-R1-5I0">
                                                 <rect key="frame" x="20" y="817" width="374" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -438,6 +427,22 @@
                                                     <action selector="messageShopClicked:" destination="paJ-WP-Dvl" eventType="touchUpInside" id="iAR-9K-scj"/>
                                                 </connections>
                                             </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v7I-TW-0ck">
+                                                <rect key="frame" x="20" y="478" width="374" height="119"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v2i-TA-YX1">
+                                                <rect key="frame" x="20" y="605" width="374" height="204"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -472,8 +477,8 @@
                         <outlet property="imageView" destination="Hlt-Xp-nkd" id="she-Rh-X58"/>
                         <outlet property="messageShopButton" destination="WiC-Yy-0ab" id="l5U-Xo-Kpp"/>
                         <outlet property="priceField" destination="igL-UJ-FKV" id="zom-Uk-Bri"/>
-                        <outlet property="productContent" destination="9PI-tO-hPx" id="t0I-9s-8lR"/>
-                        <outlet property="productDescription" destination="gQU-vo-iQ3" id="Iq1-8d-L50"/>
+                        <outlet property="productContent" destination="v2i-TA-YX1" id="RlG-nX-zV9"/>
+                        <outlet property="productDescription" destination="v7I-TW-0ck" id="s43-Vb-cbh"/>
                         <outlet property="productTitle" destination="mMM-QR-2S1" id="s5R-kR-bh2"/>
                         <outlet property="quantityField" destination="OXv-SE-z9g" id="bma-vO-bWr"/>
                         <outlet property="quantityStepper" destination="HAB-Od-0OD" id="517-sS-Aef"/>
@@ -510,7 +515,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E03-2K-kUe">
                                 <rect key="frame" x="8" y="8" width="398" height="280"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="fAt-Vl-qYG"/>
+                                    <constraint firstAttribute="height" constant="280" id="tw0-v0-BSS"/>
                                 </constraints>
                             </imageView>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xdG-h1-2HY">
@@ -545,16 +550,16 @@
                         <viewLayoutGuide key="safeArea" id="hPy-Gb-eXT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xdG-h1-2HY" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="4iH-6a-jMw"/>
-                            <constraint firstItem="E03-2K-kUe" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="HCD-BL-7e0"/>
-                            <constraint firstItem="E03-2K-kUe" firstAttribute="top" secondItem="hPy-Gb-eXT" secondAttribute="top" constant="8" id="Jxo-1V-dx7"/>
-                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="trailing" secondItem="hVD-jU-tui" secondAttribute="trailing" constant="8" id="KrB-su-CyV"/>
-                            <constraint firstItem="hVD-jU-tui" firstAttribute="top" secondItem="xdG-h1-2HY" secondAttribute="bottom" constant="8" id="Mve-kP-PbE"/>
-                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="trailing" secondItem="xdG-h1-2HY" secondAttribute="trailing" constant="8" id="T2z-ju-K3v"/>
-                            <constraint firstItem="xdG-h1-2HY" firstAttribute="top" secondItem="hPy-Gb-eXT" secondAttribute="top" constant="20" id="UHP-kv-mrE"/>
-                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="bottom" secondItem="hVD-jU-tui" secondAttribute="bottom" id="fhz-zN-41P"/>
-                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="trailing" secondItem="E03-2K-kUe" secondAttribute="trailing" constant="8" id="ijn-5O-kW7"/>
-                            <constraint firstItem="hVD-jU-tui" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="t9e-Nr-Rg6"/>
+                            <constraint firstItem="hVD-jU-tui" firstAttribute="bottom" secondItem="hPy-Gb-eXT" secondAttribute="bottom" id="60G-zp-JM6"/>
+                            <constraint firstItem="E03-2K-kUe" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="6xN-Q0-mqf"/>
+                            <constraint firstItem="hVD-jU-tui" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="aNT-g1-tmS"/>
+                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="bottom" secondItem="xdG-h1-2HY" secondAttribute="bottom" constant="8" id="bcD-GX-nuV"/>
+                            <constraint firstItem="xdG-h1-2HY" firstAttribute="top" secondItem="hPy-Gb-eXT" secondAttribute="top" constant="20" id="cKN-ZV-Ve5"/>
+                            <constraint firstItem="xdG-h1-2HY" firstAttribute="leading" secondItem="hPy-Gb-eXT" secondAttribute="leading" constant="8" id="dmF-Cs-L08"/>
+                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="trailing" secondItem="E03-2K-kUe" secondAttribute="trailing" constant="8" id="ed6-kS-ZMK"/>
+                            <constraint firstItem="xdG-h1-2HY" firstAttribute="trailing" secondItem="hVD-jU-tui" secondAttribute="trailing" id="gHC-nE-GdO"/>
+                            <constraint firstItem="hPy-Gb-eXT" firstAttribute="trailing" secondItem="hVD-jU-tui" secondAttribute="trailing" constant="8" id="mxc-Jy-lAf"/>
+                            <constraint firstItem="E03-2K-kUe" firstAttribute="top" secondItem="hPy-Gb-eXT" secondAttribute="top" constant="8" id="pd8-SX-S2c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PRv-V0-Kfn"/>
@@ -596,8 +601,8 @@
     </scenes>
     <resources>
         <image name="Shopio" width="125" height="125"/>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="location.fill" catalog="system" width="32" height="32"/>
+        <image name="magnifyingglass" catalog="system" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

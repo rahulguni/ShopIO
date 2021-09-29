@@ -75,7 +75,7 @@
                                     <action selector="continueButtonPressed:" destination="lKa-Sa-BQ2" eventType="touchUpInside" id="tuH-Pi-7vQ"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-BG-Vwg" userLabel="shopImage">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shopio" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-BG-Vwg" userLabel="shopImage">
                                 <rect key="frame" x="40" y="394" width="334" height="200"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -190,6 +190,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Shopio" width="125" height="125"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -182,7 +182,6 @@ extension OrdersViewController {
         query.order(byDescending: ShopIO.Order_Item().createdAt)
         query.findObjectsInBackground {(orderItems, error) in
             if let orderItems = orderItems {
-                print(orderItems.count)
                 for item in orderItems {
                     self.currOrderItems.append(OrderItem(orderItem: item))
                 }

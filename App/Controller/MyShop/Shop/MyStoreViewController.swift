@@ -106,6 +106,7 @@ class MyStoreViewController: UIViewController {
             let destination = segue.destination as! SearchViewController
             destination.setForShop(bool: true)
             destination.setShop(shop: self.currShop!)
+            destination.forProduct = self.productMode!
         }
     }
     

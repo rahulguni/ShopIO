@@ -24,12 +24,13 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var resultsTable: UITableView!
     
     //Controller Parameters
-    private var searchProducts: [Product] = []              //list of all products from search
-    private var currProductImage: [ProductImage] = []       //images of current product
-    private var currProduct: Product?                       //selected product
-    private var currShop: Shop?                             //shop of selected product
-    private var currShopProducts: [Product] = []            //all products of currShop
-    private var forShop: Bool = false                       //determines if search within a shop
+    private var searchProducts: [Product] = []                          //list of all products from search
+    private var currProductImage: [ProductImage] = []                   //images of current product
+    private var currProduct: Product?                                   //selected product
+    private var currShop: Shop?                                         //shop of selected product
+    private var currShopProducts: [Product] = []                        //all products of currShop
+    private var forShop: Bool = false                                   //determines if search within a shop
+    var forProduct: ProductMode = ProductMode.forPublic         //to render product accordingly
     
     //Declare a label to render in case there is no result for searched item.
     private let noResultLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 500, height: 21))
@@ -47,12 +48,7 @@ class SearchViewController: UIViewController {
         if(segue.identifier! == "goToProduct") {
             let destination = segue.destination as! MyProductViewController
             destination.setMyProduct(product: self.currProduct!)
-            if(self.forShop) {
-                destination.productMode = ProductMode.forMyShop
-            }
-            else {
-                destination.productMode = ProductMode.forPublic
-            }
+            destination.productMode = self.forProduct
             destination.setImages(myImages: currProductImage)
         }
         

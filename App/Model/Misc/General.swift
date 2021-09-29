@@ -51,6 +51,15 @@ func highlightCell(_ cell: UICollectionViewCell) {
 //    cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
 }
 
+//function to border UITextView
+func textViewBordered(_ texts: [UITextView]) {
+    for text in texts {
+        text.layer.borderColor = UIColor.black.cgColor
+        text.layer.borderWidth = 1.0;
+        text.layer.cornerRadius = 8;
+    }
+}
+
 /**/
 /*
  func makeStrikethroughText(product currProduct: Product) -> NSMutableAttributedString

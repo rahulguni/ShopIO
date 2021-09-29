@@ -26,6 +26,9 @@ class ProductReviewViewController: UIViewController {
     private var currProduct: Product?           //current Product
     private var currRating: ProductReview?      //selected review
     private var forEdit: Bool = false           //if true, present next view on edit mode. True only if review already done for currProduct
+    
+    //Declare a label to render in case there is no review for the product
+    private let noRatingsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,7 @@ class ProductReviewViewController: UIViewController {
         productReviewTable.dataSource = self
         
         checkProductInOrder()
+        checkReviewExists()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,6 +59,7 @@ class ProductReviewViewController: UIViewController {
                 self.productReviewTable.reloadData()
             }
         }
+        self.checkReviewExists()
     }
 
     //action for add review button click
@@ -93,6 +98,23 @@ extension ProductReviewViewController {
         }
         if(!reviewFound) {
             self.ratings.insert(rating, at: 0)
+        }
+    }
+    
+    //Function to render noRatingsLabel if orders do not exist.
+    private func checkReviewExists() {
+        if(self.ratings.isEmpty){
+            self.productReviewTable.isHidden = true
+            self.view.backgroundColor = UIColor.lightGray
+            noRatingsLabel.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            noRatingsLabel.textAlignment = .center
+            noRatingsLabel.text = "No Ratings Found."
+            self.view.addSubview(noRatingsLabel)
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            self.productReviewTable.isHidden = false
+            noRatingsLabel.removeFromSuperview()
         }
     }
     
