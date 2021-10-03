@@ -6,7 +6,7 @@ import Parse
 class Address
 
 DESCRIPTION
-        This class is the model to render data from Address database. This class also has all the setter and getter properies for the parameters.
+        This class is the model to render data from Address table in the database. This class also has all the setter and getter properties for the parameters.
  
 AUTHOR
         Rahul Guni

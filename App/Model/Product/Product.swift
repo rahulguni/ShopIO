@@ -7,7 +7,7 @@ import Parse
 class Product
 
 DESCRIPTION
-        This class is the model to render data from Product database. This class also has all the setter and getter properies for the parameters.
+        This class is the model to render data from Product table in database. This class also has all the setter and getter properties for the parameters.
 AUTHOR
         Rahul Guni
 DATE
@@ -20,7 +20,6 @@ class Product {
     private var userId: String?     //userId of the product owner, foreign key to users table
     private var title: String?
     private var summary: String?
-    private var type: Int?
     private var price: Double?
     private var discount: Double?
     private var quantity: Int?

@@ -31,7 +31,7 @@ class EditProfileViewController: UIViewController {
     private var myShop: Shop?                           //current user's shop
     private var currUser: User?                         //current user
     private var forOrder: Bool = false                  //to determine if view is presented from edit profile or order view
-    private var deliveryAddress: Address?               //address object is delivery is true for order, only available when view is presented from Order view.
+    private var deliveryAddress: Address?               //address object if delivery is true for order, only available when view is presented from Order view.
     private var userLocation: CLLocationCoordinate2D?   //geoLocation to track user's location to view customer in map if view is called from Order view.
     
     override func viewDidLoad() {
@@ -74,7 +74,7 @@ extension EditProfileViewController {
     DESCRIPTION
 
             This function checks for shop of the current user and segues to AddShopViewController. If the user has a shop,
-            the next view is rendered for edit otherwise, it is rendered for add new shop/
+            the next view is rendered for edit otherwise, it is rendered for add new shop.
      
     RETURNS
 

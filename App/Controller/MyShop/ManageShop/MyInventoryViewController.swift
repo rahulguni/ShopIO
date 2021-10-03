@@ -6,7 +6,7 @@ import Parse
 class MyInventoryViewController
 
 DESCRIPTION
-        This class is a UIViewController that controls ManageShop.storyboard's MyInvetory view.
+        This class is a UIViewController that controls ManageShop.storyboard's MyInventory view.
  
 AUTHOR
         Rahul Guni
@@ -24,8 +24,8 @@ class MyInventoryViewController: UIViewController {
     @IBOutlet weak var finances: UIButton!
     @IBOutlet weak var requests: UIButton!
     
-    var shopManager = ShopManager()     //ShopManager Delegate to perform segues to specified destinations.
-    var myRequests : [Request] = []     //All requests for current Shop
+    private var shopManager = ShopManager()     //ShopManager Delegate to perform segues to specified destinations.
+    private var myRequests : [Request] = []     //All requests for current Shop
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class MyInventoryViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier! == "goToUpdateProduct" {
+        if(segue.identifier! == "goToUpdateProduct") {
             let destination = segue.destination as! UpdateProductCollectionViewController
             destination.setShop(shop: shopManager.getCurrShop())
             destination.setProducts(products: shopManager.getCurrProducts())

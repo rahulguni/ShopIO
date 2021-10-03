@@ -210,7 +210,7 @@ extension AddShopViewController {
 
     DESCRIPTION
 
-            This function first fetches the shop from current user's objectId and updates it according to current UITextFields parameteres.
+            This function first fetches the shop from current user's objectId and updates it according to current UITextFields parameters.
 
     RETURNS
 

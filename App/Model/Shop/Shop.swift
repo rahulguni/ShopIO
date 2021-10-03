@@ -8,7 +8,7 @@ import MapKit
 class Shop
 
 DESCRIPTION
-        This class is the model to render data from Shop database. This class also has all the required setter and getter properies for the parameters.
+        This class is the model to render data from Shop table in the database. This class also has all the required setter and getter properies for the parameters.
  
 AUTHOR
         Rahul Guni

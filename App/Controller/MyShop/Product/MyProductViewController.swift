@@ -185,7 +185,7 @@ extension MyProductViewController {
 
     DESCRIPTION
 
-            This function first checks if the product is aleady in user's cart. If true, then only the quantity is updated. Otherwise,
+            This function first checks if the product is already in user's cart. If true, then only the quantity is updated. Otherwise,
             the product is added to user's cart in Realm.
 
     RETURNS
@@ -254,7 +254,7 @@ extension MyProductViewController {
 
     DESCRIPTION
 
-            Requests button is only available if the quantity of product in store is 0. This funcction presents an alert and uploads
+            Requests button is only available if the quantity of product in store is 0. This function presents an alert and uploads
             a new Request object in Requests table with the current product's objectId and current shop's objectId.
 
     RETURNS

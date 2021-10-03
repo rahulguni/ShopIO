@@ -6,7 +6,7 @@ import Parse
 class Order
 
 DESCRIPTION
-        This class is the model to render data from Order database. This class also has all the required setter and getter properies for the parameters.
+        This class is the model to render data from Order table in database. This class also has all the required setter and getter properties for the parameters.
  
 AUTHOR
         Rahul Guni

@@ -24,8 +24,8 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var accountTable: UITableView!
     @IBOutlet weak var accountTitle: UITextField!
     
-    let headers = AccountTableOptions()             //To load account options in tableviewcell.
-    var orders: [Order] = []
+    private let headers = AccountTableOptions()             //To load account options in tableviewcell.
+    private var orders: [Order] = []                        //To pass orders to next view
     
     override func viewDidLoad() {
         super.viewDidLoad()

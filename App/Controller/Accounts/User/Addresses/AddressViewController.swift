@@ -91,7 +91,7 @@ extension AddressViewController {
     DESCRIPTION
 
             This function first checks if the required fields are typed in. According to the editMode variable,
-            a new address is saved for user/shop. Before saving address, the a geoQuery is queried to determine
+            a new address is saved for user/shop. Before saving address, a geoQuery is queried to determine
             validity of the address. After check, the address is saved to either Address table or Shop_Address
             table depending on editMode. It also adds a geoLocation coordinate to the Shop table for faster query.
 
@@ -196,7 +196,7 @@ extension AddressViewController {
     DESCRIPTION
 
             This function first checks if the required fields are typed in. According to the editMode variable,
-            an existing address is updated for user/shop. Before saving address, the a geoQuery is queried to determine
+            an existing address is updated for user/shop. Before saving address, a geoQuery is queried to determine
             validity of the address. After check, the address is saved to either Address table or Shop_Address
             table depending on editMode. It also updates the geoLocation coordinate to the Shop table for faster query.
 

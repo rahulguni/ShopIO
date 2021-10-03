@@ -185,8 +185,8 @@ extension UpdateProductCollectionViewController {
         currProduct = myProducts[indexPath.row]
         currProductImages.removeAll()
         
-        let query = PFQuery(className: "Product_Images")
-        query.whereKey("productId", equalTo: currProduct!.getObjectId())
+        let query = PFQuery(className: ShopIO.Product_Images().tableName)
+        query.whereKey(ShopIO.Product_Images().productId, equalTo: currProduct!.getObjectId())
         query.findObjectsInBackground {(objects: [PFObject]?, error: Error?) in
             if let objects = objects {
                 for object in objects {
@@ -262,9 +262,9 @@ extension UpdateProductCollectionViewController: UISearchBarDelegate {
         self.myProducts.removeAll()
         self.dismissKeyboard()
         if(!searchBar.searchTextField.text!.isEmpty) {
-            let query = PFQuery(className: "Product")
-            query.whereKey("title", matchesRegex: ".*\(searchBar.searchTextField.text!).*")
-            query.whereKey("shopId", equalTo: self.currShop!.getShopId())
+            let query = PFQuery(className: ShopIO.Product().tableName)
+            query.whereKey(ShopIO.Product().title, matchesRegex: ".*\(searchBar.searchTextField.text!).*")
+            query.whereKey(ShopIO.Product().shopId, equalTo: self.currShop!.getShopId())
             query.findObjectsInBackground{(products, error) in
                 if let products = products {
                     for product in products {

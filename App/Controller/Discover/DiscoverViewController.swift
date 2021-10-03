@@ -29,7 +29,7 @@ class DiscoverViewController: UIViewController, CLLocationManagerDelegate {
     private var currShop: Shop?                         //to record selected shop
     private var currProducts: [Product] = []            //to transfer product list to shop view
     private var locationManager: CLLocationManager!
-    private var radius: Double = 2500                   //default radius 25 miles to search for shops around
+    private var radius: Double = 25                   //default radius 25 miles to search for shops around
     private var sliderAlert: UIAlertController?         //Alert for location Filter.
     
     //Declare a label to render in case there is no followed shops.

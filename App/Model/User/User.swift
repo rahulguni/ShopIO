@@ -4,10 +4,10 @@ import Parse
 
 /**/
 /*
-class User
+struct User
 
 DESCRIPTION
-        This class is the model to render data from User database. This class also has all the required setter and getter properies for the parameters.
+        This struct is the model to render data from User table in the database. This class also has all the required setter and getter properties for the parameters.
  
 AUTHOR
         Rahul Guni

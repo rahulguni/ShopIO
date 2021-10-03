@@ -124,7 +124,7 @@ extension CheckOutViewController {
 
     DESCRIPTION
 
-            This function loops through all the Order objects according to their shop and uplaods invidiual orders to Orders table.
+            This function loops through all the Order objects according to their shop and uploads individual orders to Orders table.
             After the order is completed, it also uploads all the cartItem objects to Order_Items table according to the order's objectId.
 
     RETURNS
@@ -205,7 +205,7 @@ extension CheckOutViewController {
     DESCRIPTION
 
             This function takes in the cart items and objectId of a cart and inserts them in Order_Items table.
-            At the same time, it also deletes the cartItem from Realm database as it is uplaoded in server.
+            At the same time, it also deletes the cartItem from Realm database as it is uploaded in server.
 
     RETURNS
 
